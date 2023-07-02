@@ -1,0 +1,4 @@
+class_name Hazard
+extends Area2D
+
+@export var damage = 0.0
