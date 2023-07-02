@@ -14,7 +14,11 @@ func _play_animation() -> void:
 
 
 func _on_attack_machine_transitioned(state_name) -> void:
-	_animation_root = "attack"
+	match state_name:
+		"Attack":
+			_animation_root = "attack"
+		"Ready":
+			_animation_root = "idle"
 	_play_animation()
 
 

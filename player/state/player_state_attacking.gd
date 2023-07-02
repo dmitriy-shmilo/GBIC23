@@ -8,6 +8,7 @@ var _current_attack_duration = 0.0
 
 func enter() -> void:
 	hit_box.monitorable = true
+	_current_attack_duration = 0.0
 
 
 func exit() -> void:

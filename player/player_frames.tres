@@ -177,7 +177,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jkv4l")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 8.0
 }, {
@@ -194,7 +194,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8jbk2")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
 "speed": 8.0
 }, {
@@ -211,7 +211,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_elmdd")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 8.0
 }, {
@@ -228,7 +228,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rq768")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 8.0
 }, {
