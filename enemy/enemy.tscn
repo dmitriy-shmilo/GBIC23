@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://5dkaog5aw2nb"]
+
+[ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
+[ext_resource type="Script" path="res://base/components/movement_component.gd" id="3_e6jfp"]
+[ext_resource type="Script" path="res://base/state/state_machine.gd" id="4_cggsa"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_idle.gd" id="5_gwmtk"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_knocked_back.gd" id="6_28jua"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmlcq"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4koq"]
+radius = 7.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cmlcq")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_pr55l")
+animation = &"idle_down"
+autoplay = "idle_down"
+frame_progress = 0.30703
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("3_e6jfp")
+max_speed = 150.0
+acceleration = 600.0
+decelration = 1200.0
+
+[node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_cggsa")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
+script = ExtResource("5_gwmtk")
+body = NodePath("../..")
+movement = NodePath("../../MovementComponent")
+
+[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body")]
+script = ExtResource("6_28jua")
+hurt_box = NodePath("../../HurtBox")
+body = NodePath("../..")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_k4koq")
