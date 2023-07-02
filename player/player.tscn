@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://btailb80t6j47"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
+[ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
+[ext_resource type="Script" path="res://base/state/state_machine.gd" id="3_1gawu"]
+[ext_resource type="Script" path="res://player/state/player_state_idle.gd" id="4_xumsq"]
+[ext_resource type="Script" path="res://player/state/player_state_move.gd" id="5_b3qoq"]
+[ext_resource type="Script" path="res://base/components/movement_component.gd" id="6_7oms2"]
+[ext_resource type="Script" path="res://player/state/player_state_attack_ready.gd" id="6_cxw04"]
+[ext_resource type="Script" path="res://player/state/player_state_attacking.gd" id="7_sinek"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
+radius = 5.09902
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1oqg"]
+radius = 5.0
+height = 20.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_pkpuu")
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+sprite_frames = ExtResource("2_660pc")
+animation = &"idle_down"
+autoplay = "idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_dnrgw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_1gawu")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
+script = ExtResource("4_xumsq")
+body = NodePath("../..")
+movement = NodePath("../../MovementComponent")
+
+[node name="Move" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
+script = ExtResource("5_b3qoq")
+body = NodePath("../..")
+movement = NodePath("../../MovementComponent")
+
+[node name="AttackMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_1gawu")
+initial_state = NodePath("Ready")
+
+[node name="Ready" type="Node" parent="AttackMachine"]
+script = ExtResource("6_cxw04")
+
+[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
+script = ExtResource("7_sinek")
+hit_box = NodePath("../../HitBox")
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("6_7oms2")
+max_speed = 250.0
+acceleration = 900.0
+decelration = 1500.0
+
+[node name="HitBox" type="Area2D" parent="."]
+rotation = 1.5708
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 5)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_g1oqg")
+
+[connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
+[connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
+[connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
