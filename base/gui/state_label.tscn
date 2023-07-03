@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d06ni5uesoo2n"]
+
+[ext_resource type="Script" path="res://base/gui/state_label.gd" id="1_e7drg"]
+
+[node name="StateLabel" type="Label"]
+script = ExtResource("1_e7drg")
