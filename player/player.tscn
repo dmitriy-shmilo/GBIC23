@@ -62,9 +62,9 @@ hit_box = NodePath("../../HitBox")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("6_7oms2")
-max_speed = 250.0
-acceleration = 900.0
-decelration = 1500.0
+max_speed = 150.0
+acceleration = 750.0
+decelration = 1200.0
 
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 1.5708

@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
+@onready var _movement_machine: StateMachine = $"MovementMachine"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -18,7 +19,7 @@ func _on_attack_machine_transitioned(state_name) -> void:
 		"Attack":
 			_animation_root = "attack"
 		"Ready":
-			_animation_root = "idle"
+			_animation_root = _movement_machine.current_state.name.to_lower()
 	_play_animation()
 
 
