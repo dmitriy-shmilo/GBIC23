@@ -1,11 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=21 format=3 uid="uid://5dkaog5aw2nb"]
 
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="2_vqokq"]
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="3_e6jfp"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="4_cggsa"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_idle.gd" id="5_gwmtk"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_knocked_back.gd" id="6_28jua"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_chase.gd" id="6_m2ea2"]
+[ext_resource type="Script" path="res://base/gui/state_label.gd" id="7_86lk8"]
+[ext_resource type="Script" path="res://base/hazard.gd" id="7_em3gh"]
+[ext_resource type="PackedScene" uid="uid://keatv53646t8" path="res://base/components/aggro_area.tscn" id="7_ty5rc"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_wonder.gd" id="9_o7mje"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_attack_ready.gd" id="11_00jjv"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_attack_charging.gd" id="12_xjak5"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_attacking.gd" id="13_t655m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmlcq"]
 radius = 6.0
@@ -13,9 +22,40 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4koq"]
 radius = 7.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3bvy"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_thfnp"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vhoef"]
+radius = 96.0
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 8
+collision_mask = 10
+script = ExtResource("1_mjvj0")
+
+[node name="MoveStateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -58.0
+offset_top = -23.0
+offset_right = 60.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+script = ExtResource("7_86lk8")
+state_machine = NodePath("../MovementMachine")
+
+[node name="AttackStateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -58.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+script = ExtResource("7_86lk8")
+state_machine = NodePath("../AttackMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_cmlcq")
@@ -24,28 +64,19 @@ shape = SubResource("CircleShape2D_cmlcq")
 sprite_frames = ExtResource("1_pr55l")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame_progress = 0.16917
+frame_progress = 0.899467
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("3_e6jfp")
-max_speed = 150.0
+max_speed = 70.0
+acceleration = 420.0
+decelration = 900.0
+
+[node name="WonderMovementComponent" type="Node" parent="."]
+script = ExtResource("3_e6jfp")
+max_speed = 40.0
 acceleration = 600.0
 decelration = 1200.0
-
-[node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_cggsa")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
-script = ExtResource("5_gwmtk")
-body = NodePath("../..")
-movement = NodePath("../../MovementComponent")
-
-[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body", "vitals")]
-script = ExtResource("6_28jua")
-hurt_box = NodePath("../../HurtBox")
-body = NodePath("../..")
-vitals = NodePath("../../VitalsComponent")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -59,3 +90,81 @@ shape = SubResource("CircleShape2D_k4koq")
 script = ExtResource("2_vqokq")
 max_health = 3.0
 current_health = 3.0
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("7_em3gh")
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u3bvy")
+
+[node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_cggsa")
+initial_state = NodePath("Wonder")
+
+[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement", "aggro_area")]
+script = ExtResource("5_gwmtk")
+body = NodePath("../..")
+movement = NodePath("../../MovementComponent")
+aggro_area = NodePath("../../AggroArea")
+time_to_wonder = 1.5
+
+[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body", "vitals", "aggro_area", "own_hit_box")]
+script = ExtResource("6_28jua")
+hurt_box = NodePath("../../HurtBox")
+body = NodePath("../..")
+vitals = NodePath("../../VitalsComponent")
+aggro_area = NodePath("../../AggroArea")
+own_hit_box = NodePath("../../HitBox")
+
+[node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "body", "movement")]
+script = ExtResource("6_m2ea2")
+aggro_area = NodePath("../../AggroArea")
+body = NodePath("../..")
+movement = NodePath("../../MovementComponent")
+
+[node name="Wonder" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "next_state", "body", "movement")]
+script = ExtResource("9_o7mje")
+aggro_area = NodePath("../../AggroArea")
+next_state = NodePath("../Idle")
+body = NodePath("../..")
+movement = NodePath("../../WonderMovementComponent")
+
+[node name="AttackMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_cggsa")
+initial_state = NodePath("Ready")
+
+[node name="Ready" type="Node" parent="AttackMachine" node_paths=PackedStringArray("target_area")]
+script = ExtResource("11_00jjv")
+target_area = NodePath("../../Target")
+
+[node name="Telegraph" type="Node" parent="AttackMachine" node_paths=PackedStringArray("sprite")]
+script = ExtResource("12_xjak5")
+telegraph_time = 0.2
+sprite = NodePath("../../BodySprite")
+
+[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
+script = ExtResource("13_t655m")
+attack_duration = 0.5
+hit_box = NodePath("../../HitBox")
+
+[node name="Target" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+shape = SubResource("CircleShape2D_thfnp")
+
+[node name="AggroArea" parent="." instance=ExtResource("7_ty5rc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
+shape = SubResource("CircleShape2D_vhoef")
+debug_color = Color(0.827451, 0.360784, 0.443137, 0.419608)
+
+[connection signal="transitioned" from="MovementMachine" to="." method="_on_movement_machine_transitioned"]
+[connection signal="direction_changed" from="MovementMachine/Chase" to="." method="_on_move_direction_changed"]
+[connection signal="direction_changed" from="MovementMachine/Wonder" to="." method="_on_move_direction_changed"]
+[connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
