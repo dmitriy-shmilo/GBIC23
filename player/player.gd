@@ -54,5 +54,7 @@ func _on_move_direction_changed(direction) -> void:
 	_play_animation()
 
 
-
-
+func _on_vitals_component_health_changed(vitals) -> void:
+	if vitals.current_health <= 0:
+		# TODO: exit the level
+		visible = false

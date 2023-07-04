@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcsij2ymvcr1x"]
+
+[ext_resource type="Script" path="res://gui/hud.gd" id="1_tlkf4"]
+[ext_resource type="Texture2D" uid="uid://b0v3k4tusthhg" path="res://gui/hud_health.tres" id="2_ftoaj"]
+[ext_resource type="Texture2D" uid="uid://bb5jw57l32lrb" path="res://gui/hud_food.tres" id="2_vx6fv"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tlkf4")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 24.0
+
+[node name="HealthIconTemplate" type="TextureRect" parent="HealthContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_ftoaj")
+stretch_mode = 4
+
+[node name="ExtraHealthLabel" type="Label" parent="HealthContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 8
+text = " "
+
+[node name="FoodContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 48.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="FoodContainer"]
+layout_mode = 2
+texture = ExtResource("2_vx6fv")
+stretch_mode = 2

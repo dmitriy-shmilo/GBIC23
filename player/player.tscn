@@ -26,6 +26,8 @@ height = 20.0
 collision_mask = 8
 script = ExtResource("1_pkpuu")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = ExtResource("2_660pc")
@@ -35,9 +37,6 @@ autoplay = "idle_down"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_dnrgw")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -32)
 
 [node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1gawu")
@@ -81,6 +80,8 @@ decelration = 1200.0
 
 [node name="VitalsComponent" type="Node" parent="."]
 script = ExtResource("9_iw2ky")
+max_health = 5.0
+current_health = 5.0
 needs_food = true
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -117,3 +118,4 @@ state_machine = NodePath("../MovementMachine")
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
+[connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
