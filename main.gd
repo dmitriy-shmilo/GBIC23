@@ -6,7 +6,6 @@ extends Node2D
 
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
-var _temperature = FastNoiseLite.new()
 
 func _ready() -> void:
 	_moisture.seed = randi()
@@ -21,5 +20,5 @@ func _ready() -> void:
 			if altitude > 0:
 				_tilemap.set_cell(0, Vector2i(x, y), 1, Vector2i(round(moisture), 0))
 			else:
-				altitude = (altitude + 1.0) * 3.0
+				altitude = int((altitude + 1.0) * 3.0)
 				_tilemap.set_cell(0, Vector2i(x, y), 1, Vector2i(altitude, 3))

@@ -37,9 +37,9 @@ func _refresh_closest_body() -> void:
 			_closest_distance = d
 
 
-func _on_aggro_area_body_entered(body: CharacterBody2D) -> void:
+func _on_aggro_area_body_entered(_body: CharacterBody2D) -> void:
 	_refresh_closest_body()
 
 
-func _on_aggro_area_body_exited(body: CharacterBody2D) -> void:
+func _on_aggro_area_body_exited(_body: CharacterBody2D) -> void:
 	_refresh_closest_body()
