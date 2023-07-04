@@ -167,6 +167,7 @@ shape = SubResource("CircleShape2D_thfnp")
 shape = SubResource("CircleShape2D_vhoef")
 debug_color = Color(0.827451, 0.360784, 0.443137, 0.419608)
 
+[connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_movement_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Chase" to="." method="_on_move_direction_changed"]
 [connection signal="direction_changed" from="MovementMachine/Wonder" to="." method="_on_move_direction_changed"]

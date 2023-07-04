@@ -27,7 +27,5 @@ func _on_hurt_box_area_entered(area: Hazard) -> void:
 	_knockback_vector = (body.global_position - area.global_position).normalized() * area.knockback_force
 	body.velocity = _knockback_vector
 
-	# TODO: this should probably be handled in a separate machine
+	# TODO: movement state shouldn't really know about health
 	vitals.current_health -= area.damage
-	if vitals.current_health <= 0:
-		body.queue_free()
