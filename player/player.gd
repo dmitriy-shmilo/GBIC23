@@ -19,13 +19,17 @@ func _on_attack_machine_transitioned(state_name) -> void:
 		"Attack":
 			_animation_root = "attack"
 		"Ready":
-			_animation_root = _movement_machine.current_state.name.to_lower()
+			match _movement_machine.current_state.name:
+				"Idle", "KnockBack":
+					_animation_root = "idle"
+				"Move":
+					_animation_root = "move"
 	_play_animation()
 
 
 func _on_state_machine_transitioned(state_name) -> void:
 	match state_name:
-		"Idle":
+		"Idle", "KnockBack":
 			_animation_root = "idle"
 		"Move":
 			_animation_root = "move"

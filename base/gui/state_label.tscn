@@ -3,4 +3,7 @@
 [ext_resource type="Script" path="res://base/gui/state_label.gd" id="1_e7drg"]
 
 [node name="StateLabel" type="Label"]
+offset_right = 1.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 8
 script = ExtResource("1_e7drg")

@@ -94,6 +94,8 @@ current_health = 3.0
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
+monitoring = false
+monitorable = false
 script = ExtResource("7_em3gh")
 damage = 1.0
 
@@ -113,12 +115,13 @@ movement = NodePath("../../MovementComponent")
 aggro_area = NodePath("../../AggroArea")
 time_to_wonder = 1.5
 
-[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body", "vitals", "aggro_area", "own_hit_box")]
+[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "hurt_box", "body", "vitals", "movement", "own_hit_box")]
 script = ExtResource("6_28jua")
+aggro_area = NodePath("../../AggroArea")
 hurt_box = NodePath("../../HurtBox")
 body = NodePath("../..")
 vitals = NodePath("../../VitalsComponent")
-aggro_area = NodePath("../../AggroArea")
+movement = NodePath("../../MovementComponent")
 own_hit_box = NodePath("../../HitBox")
 
 [node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "body", "movement")]
@@ -144,7 +147,7 @@ target_area = NodePath("../../Target")
 
 [node name="Telegraph" type="Node" parent="AttackMachine" node_paths=PackedStringArray("sprite")]
 script = ExtResource("12_xjak5")
-telegraph_time = 0.2
+telegraph_time = 0.3
 sprite = NodePath("../../BodySprite")
 
 [node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]

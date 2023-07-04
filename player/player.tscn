@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=16 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -7,8 +7,11 @@
 [ext_resource type="Script" path="res://player/state/player_state_move.gd" id="5_b3qoq"]
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="6_7oms2"]
 [ext_resource type="Script" path="res://player/state/player_state_attack_ready.gd" id="6_cxw04"]
+[ext_resource type="Script" path="res://player/state/player_state_knocked_back.gd" id="6_ni6g4"]
 [ext_resource type="Script" path="res://player/state/player_state_attacking.gd" id="7_sinek"]
 [ext_resource type="Script" path="res://base/hazard.gd" id="9_78mq6"]
+[ext_resource type="Script" path="res://base/components/vitals_component.gd" id="9_iw2ky"]
+[ext_resource type="PackedScene" uid="uid://d06ni5uesoo2n" path="res://base/gui/state_label.tscn" id="12_xi5ew"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
@@ -16,6 +19,8 @@ radius = 5.09902
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1oqg"]
 radius = 5.0
 height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fsh7a"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 8
@@ -48,6 +53,14 @@ script = ExtResource("5_b3qoq")
 body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
 
+[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body", "vitals", "movement", "own_hit_box")]
+script = ExtResource("6_ni6g4")
+hurt_box = NodePath("../../HurtBox")
+body = NodePath("../..")
+vitals = NodePath("../../VitalsComponent")
+movement = NodePath("../../MovementComponent")
+own_hit_box = NodePath("../../HitBox")
+
 [node name="AttackMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1gawu")
 initial_state = NodePath("Ready")
@@ -66,6 +79,10 @@ max_speed = 150.0
 acceleration = 750.0
 decelration = 1200.0
 
+[node name="VitalsComponent" type="Node" parent="."]
+script = ExtResource("9_iw2ky")
+needs_food = true
+
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 1.5708
 collision_layer = 4
@@ -79,6 +96,22 @@ damage = 1.0
 position = Vector2(0, 5)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_g1oqg")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_fsh7a")
+
+[node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
+offset_left = -46.0
+offset_top = -21.0
+offset_right = 46.0
+offset_bottom = -6.0
+horizontal_alignment = 1
+state_machine = NodePath("../MovementMachine")
 
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
