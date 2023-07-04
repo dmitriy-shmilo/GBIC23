@@ -10,3 +10,6 @@ extends Node
 
 ## Body deceleration in px/s2.
 @export var decelration := 0.0
+
+## Counter acceleration in px/s2 to apply when the body is being knocked back.
+@export var knock_back_resistance := 150.0
