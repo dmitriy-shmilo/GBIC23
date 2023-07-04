@@ -91,6 +91,7 @@ monitoring = false
 monitorable = false
 script = ExtResource("9_78mq6")
 damage = 1.0
+knockback_force = 350.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 5)
