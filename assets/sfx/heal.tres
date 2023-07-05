@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=5 format=3 uid="uid://c8xxmoa81x442"]
+
+[ext_resource type="AudioStream" uid="uid://c1yu4p3dey6m1" path="res://assets/sfx/heal1.wav" id="1_brdn8"]
+[ext_resource type="AudioStream" uid="uid://nyrysmjfx3lk" path="res://assets/sfx/heal2.wav" id="2_6o1vx"]
+[ext_resource type="AudioStream" uid="uid://c0ouba3ud3fr0" path="res://assets/sfx/heal3.wav" id="3_kclu1"]
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="7_48img"]
+
+[resource]
+script = ExtResource("7_48img")
+items = Array[AudioStream]([ExtResource("1_brdn8"), ExtResource("2_6o1vx"), ExtResource("3_kclu1")])

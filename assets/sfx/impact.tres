@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=8 format=3 uid="uid://bm2jg28072fae"]
+
+[ext_resource type="AudioStream" uid="uid://dro54lpscgs6e" path="res://assets/sfx/impact1.wav" id="1_565o5"]
+[ext_resource type="AudioStream" uid="uid://dootapac5krfk" path="res://assets/sfx/impact2.wav" id="2_olcrt"]
+[ext_resource type="AudioStream" uid="uid://cnk7u80vvmodv" path="res://assets/sfx/impact3.wav" id="3_pu2h7"]
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="4_0rrhi"]
+[ext_resource type="AudioStream" uid="uid://c7tlh2jm8p4v1" path="res://assets/sfx/impact4.wav" id="4_bqxxg"]
+[ext_resource type="AudioStream" uid="uid://g3kynhgw8y8o" path="res://assets/sfx/impact5.wav" id="5_2soph"]
+[ext_resource type="AudioStream" uid="uid://cfusysrp5dqvi" path="res://assets/sfx/impact6.wav" id="6_v5md1"]
+
+[resource]
+script = ExtResource("4_0rrhi")
+items = Array[AudioStream]([ExtResource("1_565o5"), ExtResource("2_olcrt"), ExtResource("3_pu2h7"), ExtResource("4_bqxxg"), ExtResource("5_2soph"), ExtResource("6_v5md1")])

@@ -1,10 +1,13 @@
 class_name Enemy
 extends CharacterBody2D
 
+const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
+const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
 @onready var _movement_machine: StateMachine = $"MovementMachine"
+@onready var _audio_player: AudioStreamPlayer2D = $"AudioPlayer"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -55,7 +58,13 @@ func _on_move_direction_changed(direction) -> void:
 	_play_animation()
 
 
+func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool) -> void:
+	if positive:
+		_audio_player.stream = heal_sfx.items.pick_random()
+	else:
+		_audio_player.stream = impact_sfx.items.pick_random()
+	_audio_player.play()
 
-func _on_vitals_component_health_changed(vitals: VitalsComponent) -> void:
+	# TODO: death state
 	if vitals.current_health <= 0:
 		queue_free()
