@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=19 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -10,17 +10,23 @@
 [ext_resource type="Script" path="res://player/state/player_state_knocked_back.gd" id="6_ni6g4"]
 [ext_resource type="Script" path="res://player/state/player_state_attacking.gd" id="7_sinek"]
 [ext_resource type="Script" path="res://base/hazard.gd" id="9_78mq6"]
+[ext_resource type="Script" path="res://player/state/player_state_looting.gd" id="9_eu408"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="9_iw2ky"]
 [ext_resource type="PackedScene" uid="uid://d06ni5uesoo2n" path="res://base/gui/state_label.tscn" id="12_xi5ew"]
+[ext_resource type="PackedScene" uid="uid://dhcki0w17a8m1" path="res://base/components/looter_component.tscn" id="13_8pska"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pfks"]
+radius = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1oqg"]
 radius = 5.0
 height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsh7a"]
+radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 8
@@ -64,13 +70,17 @@ own_hit_box = NodePath("../../HitBox")
 script = ExtResource("3_1gawu")
 initial_state = NodePath("Ready")
 
-[node name="Ready" type="Node" parent="AttackMachine"]
+[node name="Ready" type="Node" parent="AttackMachine" node_paths=PackedStringArray("looter")]
 script = ExtResource("6_cxw04")
+looter = NodePath("../../LooterComponent")
 
 [node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
 script = ExtResource("7_sinek")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
+
+[node name="Loot" type="Node" parent="AttackMachine"]
+script = ExtResource("9_eu408")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("6_7oms2")
@@ -83,6 +93,12 @@ script = ExtResource("9_iw2ky")
 max_health = 5.0
 current_health = 5.0
 needs_food = true
+
+[node name="LooterComponent" parent="." instance=ExtResource("13_8pska")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LooterComponent"]
+shape = SubResource("CircleShape2D_4pfks")
+debug_color = Color(0, 0.631373, 0.45098, 0.14902)
 
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 1.5708
@@ -98,6 +114,7 @@ knockback_force = 350.0
 position = Vector2(0, 5)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_g1oqg")
+debug_color = Color(0.878431, 0.294118, 0.435294, 0.180392)
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -106,6 +123,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_fsh7a")
+debug_color = Color(0.686275, 0.478431, 0.419608, 0.419608)
 
 [node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
 offset_left = -46.0
@@ -114,6 +132,14 @@ offset_right = 46.0
 offset_bottom = -6.0
 horizontal_alignment = 1
 state_machine = NodePath("../MovementMachine")
+
+[node name="AttackStateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
+offset_left = -46.0
+offset_top = 7.0
+offset_right = 46.0
+offset_bottom = 22.0
+horizontal_alignment = 1
+state_machine = NodePath("../AttackMachine")
 
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]

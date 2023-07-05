@@ -5,6 +5,7 @@ extends Node2D
 @export var is_highlighted = false: set = _set_is_highlighted
 
 @onready var _body_sprite: Sprite2D = $"BodySprite"
+@onready var _animation_player: AnimationPlayer = $"AnimationPlayer"
 
 const chest_texture = preload("res://map/chest_normal.tres")
 const rare_chest_texture = preload("res://map/chest_rare.tres")
@@ -12,6 +13,12 @@ const rare_chest_texture = preload("res://map/chest_rare.tres")
 func _ready() -> void:
 	_set_is_rare(is_rare)
 	_set_is_highlighted(is_highlighted)
+
+
+func loot() -> void:
+	_animation_player.play("loot")
+	await _animation_player.animation_finished
+	queue_free()
 
 
 func _set_is_rare(rare) -> void:

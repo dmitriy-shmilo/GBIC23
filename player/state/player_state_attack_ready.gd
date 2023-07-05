@@ -9,4 +9,4 @@ func physics_process(_delta: float) -> void:
 		return
 
 	if looter.has_loot() and Input.is_action_just_pressed("interact"):
-		state_machine.transition("Loot")
+		state_machine.transition("Loot", { "loot": looter.current_interactive })

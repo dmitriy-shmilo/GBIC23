@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx6pihteqs2dx"]
+[gd_scene load_steps=7 format=3 uid="uid://cx6pihteqs2dx"]
 
 [ext_resource type="Script" path="res://map/chest.gd" id="1_e8g4p"]
 [ext_resource type="Texture2D" uid="uid://hvi0dx0ujtja" path="res://map/chest_normal.tres" id="1_l2fsm"]
@@ -6,6 +6,67 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nbh0p"]
 radius = 5.0
 height = 14.0
+
+[sub_resource type="Animation" id="Animation_7bnri"]
+resource_name = "loot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i5lyn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifh1w"]
+_data = {
+"RESET": SubResource("Animation_i5lyn"),
+"loot": SubResource("Animation_7bnri")
+}
 
 [node name="Chest" type="CharacterBody2D"]
 collision_layer = 24
@@ -19,3 +80,8 @@ texture = ExtResource("1_l2fsm")
 position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nbh0p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ifh1w")
+}
