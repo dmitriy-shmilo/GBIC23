@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	current_state.physics_process(delta)
 
 
-func transition(state: String) -> void:
+func transition(state: String, args: Dictionary = {}) -> void:
 	# TODO: cache state nodes
 	var new_state: State = get_node(state)
 	if not new_state:
@@ -30,5 +30,5 @@ func transition(state: String) -> void:
 
 	current_state.exit()
 	current_state = new_state
-	current_state.enter()
+	current_state.enter(args)
 	emit_signal("transitioned", state)

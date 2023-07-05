@@ -5,7 +5,7 @@ extends State
 @export var target_area: Area2D = null
 
 
-func enter() -> void:
+func enter(args: Dictionary = {}) -> void:
 	target_area.monitoring = true
 
 

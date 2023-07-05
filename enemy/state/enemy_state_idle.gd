@@ -9,7 +9,7 @@ extends State
 
 var _current_idle_time = 0.0
 
-func enter() -> void:
+func enter(args: Dictionary = {}) -> void:
 	_current_idle_time = 0.0
 
 

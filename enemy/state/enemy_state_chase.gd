@@ -11,7 +11,7 @@ func _ready() -> void:
 	aggro_area.connect("body_exited", _on_aggro_area_body_exited)
 
 
-func enter() -> void:
+func enter(args: Dictionary = {}) -> void:
 	_refresh_closest_body()
 
 

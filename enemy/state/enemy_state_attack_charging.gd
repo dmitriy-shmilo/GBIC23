@@ -6,7 +6,7 @@ extends State
 
 var _current_telegraph_time: float = 0.0
 
-func enter() -> void:
+func enter(args: Dictionary = {}) -> void:
 	_current_telegraph_time = 0.0
 	sprite.modulate = Color.ORANGE_RED
 
