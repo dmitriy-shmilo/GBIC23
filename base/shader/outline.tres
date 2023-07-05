@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brk2s8qs2e4sa"]
+
+[sub_resource type="Shader" id="Shader_xuevn"]
+code = "shader_type canvas_item;
+
+uniform vec4 line_color: source_color = vec4(1.0);
+
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE;
+	vec4 color = texture(TEXTURE, UV);
+	float has_pixel = ceil(color.a);
+	float has_neightbor = texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+	has_neightbor *= texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+	has_neightbor *= texture(TEXTURE, UV - vec2(size.x, 0.0)).a;
+	has_neightbor *= texture(TEXTURE, UV - vec2(0.0, size.y)).a;
+	has_neightbor = mix(1.0, 0.0, has_neightbor);
+	float should_draw = has_pixel * has_neightbor;
+	COLOR = mix(color, line_color, should_draw);
+}
+"
+
+[resource]
+shader = SubResource("Shader_xuevn")
+shader_parameter/line_color = Color(1, 1, 1, 1)

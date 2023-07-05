@@ -11,6 +11,7 @@ const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 @onready var _body_sprite: Sprite2D = $"BodySprite"
 @onready var _animation_player: AnimationPlayer = $"AnimationPlayer"
 @onready var _audio_player: AudioStreamPlayer2D = $"AudioPlayer"
+@onready var _hint_label: Label = $"Hint"
 
 func _ready() -> void:
 	_set_is_rare(is_rare)
@@ -35,5 +36,4 @@ func _set_is_rare(rare) -> void:
 func _set_is_highlighted(value) -> void:
 	is_highlighted = value
 	if is_inside_tree():
-		# TODO: outline shader
-		_body_sprite.modulate = Color.GREEN if value else Color.WHITE
+		_animation_player.play("highlight" if value else "RESET")
