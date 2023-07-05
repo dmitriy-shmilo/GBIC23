@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=5 format=3 uid="uid://hp8asq3o3p85"]
+
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="1_neoys"]
+[ext_resource type="AudioStream" uid="uid://cw6hgb6ebnshn" path="res://assets/sfx/pickup1.wav" id="1_v3bhd"]
+[ext_resource type="AudioStream" uid="uid://ccei8jwei1a2g" path="res://assets/sfx/pickup2.wav" id="2_v28vb"]
+[ext_resource type="AudioStream" uid="uid://bsvdignp5w6s3" path="res://assets/sfx/pickup3.wav" id="3_awob2"]
+
+[resource]
+script = ExtResource("1_neoys")
+items = Array[AudioStream]([ExtResource("1_v3bhd"), ExtResource("2_v28vb"), ExtResource("3_awob2")])
