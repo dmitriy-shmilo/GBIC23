@@ -8,6 +8,7 @@ extends Control
 @onready var _health_icon_template = $"%HealthIconTemplate"
 
 const MAX_ICONS = 3
+
 func _ready() -> void:
 	vitals.connect("health_changed", _on_vitals_health_changed)
 	for i in range(MAX_ICONS):
@@ -16,6 +17,7 @@ func _ready() -> void:
 		_health_container.add_child(heart_rect)
 	_extra_health_label.move_to_front()
 	_refresh_health(vitals)
+
 
 func _refresh_health(new_vitals: VitalsComponent) -> void:
 	var extra_health = new_vitals.current_health - MAX_ICONS
@@ -29,5 +31,5 @@ func _refresh_health(new_vitals: VitalsComponent) -> void:
 		icon.visible = i < new_vitals.current_health
 
 
-func _on_vitals_health_changed(new_vitals) -> void:
+func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> void:
 	_refresh_health(new_vitals)

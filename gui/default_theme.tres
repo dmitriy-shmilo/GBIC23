@@ -1,3 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://owk3ykubwdkx"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://owk3ykubwdkx"]
+
+[ext_resource type="FontFile" uid="uid://cmar5lcfsxpun" path="res://assets/font/monogram-extended.ttf" id="1_kxall"]
 
 [resource]
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_kxall")

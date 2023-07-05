@@ -34,15 +34,15 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 24
 text = " "
 
 [node name="FoodContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 8.0
-offset_top = 24.0
+offset_top = 28.0
 offset_right = 48.0
-offset_bottom = 40.0
+offset_bottom = 44.0
 
 [node name="TextureRect" type="TextureRect" parent="FoodContainer"]
 layout_mode = 2
