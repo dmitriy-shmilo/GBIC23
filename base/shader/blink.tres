@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4kjl3nswv6la"]
+
+[sub_resource type="Shader" id="Shader_xuevn"]
+code = "shader_type canvas_item;
+
+uniform vec4 blink_color: source_color = vec4(1.0);
+
+void fragment() {
+	float has_pixel = COLOR.a;
+	float phase = sin(TIME * 20.0) / 2.0 + 0.5;
+	COLOR = mix(COLOR, blink_color,  phase * has_pixel);
+}
+"
+
+[resource]
+shader = SubResource("Shader_xuevn")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
