@@ -13,12 +13,8 @@ var _direction: Vector2 = Vector2.ZERO
 
 const DISTANCE_THRESHOLD = 64.0
 
-
 func physics_process(delta: float) -> void:
-	var direction = target - body.global_position
-	direction.x = sign(direction.x)
-	direction.y = sign(direction.y)
-	direction = direction.normalized()
+	var direction = (target - body.global_position).normalized()
 
 	if _direction != direction:
 		_direction = direction
@@ -30,6 +26,6 @@ func physics_process(delta: float) -> void:
 		return
 
 	body.velocity = body.velocity.move_toward(
-		_direction * movement.max_speed,
+		direction * movement.max_speed,
 		movement.acceleration * delta)
 	body.move_and_slide()

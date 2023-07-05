@@ -38,16 +38,17 @@ func _on_movement_machine_transitioned(state_name) -> void:
 
 
 func _on_move_direction_changed(direction) -> void:
-	if direction.x > 0:
+	var is_vertical = abs(direction.y) > abs(direction.x)
+	if !is_vertical and direction.x >= 0:
 		_direction_suffix = "right"
 		_hit_box.rotation_degrees = -90
-	elif direction.x < 0:
+	elif !is_vertical and direction.x < 0:
 		_direction_suffix = "left"
 		_hit_box.rotation_degrees = 90
-	elif direction.y > 0:
+	elif is_vertical and direction.y >= 0:
 		_direction_suffix = "down"
 		_hit_box.rotation_degrees = 0
-	elif direction.y < 0:
+	elif is_vertical and direction.y < 0:
 		_direction_suffix = "up"
 		_hit_box.rotation_degrees = 180
 
