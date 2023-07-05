@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx6pihteqs2dx"]
+
+[ext_resource type="Script" path="res://map/chest.gd" id="1_e8g4p"]
+[ext_resource type="Texture2D" uid="uid://hvi0dx0ujtja" path="res://map/chest_normal.tres" id="1_l2fsm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nbh0p"]
+radius = 5.0
+height = 14.0
+
+[node name="Chest" type="CharacterBody2D"]
+collision_layer = 24
+collision_mask = 0
+script = ExtResource("1_e8g4p")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_l2fsm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nbh0p")

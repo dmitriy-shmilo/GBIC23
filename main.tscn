@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=9 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="Texture2D" uid="uid://ywhkccg72uyq" path="res://assets/img/terrain.png" id="2_sp50l"]
 [ext_resource type="PackedScene" uid="uid://btailb80t6j47" path="res://player/player.tscn" id="3_y7d5t"]
 [ext_resource type="PackedScene" uid="uid://5dkaog5aw2nb" path="res://enemy/enemy.tscn" id="4_pgsah"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
+[ext_resource type="PackedScene" uid="uid://cx6pihteqs2dx" path="res://map/chest.tscn" id="6_crm3n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02pu7"]
 texture = ExtResource("2_sp50l")
@@ -33,7 +34,7 @@ tile_set = SubResource("TileSet_u1q38")
 format = 2
 
 [node name="Player" parent="." instance=ExtResource("3_y7d5t")]
-position = Vector2(46, 37)
+position = Vector2(290, 262)
 
 [node name="Enemy" parent="." instance=ExtResource("4_pgsah")]
 position = Vector2(203, 119)
@@ -48,5 +49,9 @@ position = Vector2(79, 318)
 
 [node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("vitals") instance=ExtResource("5_q1vmy")]
 vitals = NodePath("../../Player/VitalsComponent")
+
+[node name="Chest" parent="." instance=ExtResource("6_crm3n")]
+position = Vector2(336, 226)
+is_rare = true
 
 [editable path="Player"]
