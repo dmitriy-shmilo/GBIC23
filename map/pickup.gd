@@ -11,18 +11,18 @@ const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 @onready var _audio_player: AudioStreamPlayer2D = $"AudioPlayer"
 @onready var _hint_label: Label = $"Hint"
 
+var _picked_up = false
+
 func _ready() -> void:
 	_set_item(item)
 	_set_is_highlighted(is_highlighted)
 
 
 func loot() -> void:
-	_animation_player.play("loot")
+	_picked_up = true
 	_audio_player.stream = pickup_sfx.items.pick_random()
 	_audio_player.play()
-	await _audio_player.finished
-	await _animation_player.animation_finished
-	queue_free()
+	_animation_player.play("loot")
 
 
 func _set_item(i: Item) -> void:
@@ -32,6 +32,8 @@ func _set_item(i: Item) -> void:
 
 
 func _set_is_highlighted(value) -> void:
+	if _picked_up:
+		return
 	is_highlighted = value
 	if is_inside_tree():
 		_animation_player.play("highlight" if value else "RESET")
