@@ -1,8 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+# TODO: consider playing sounds within the state
 const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
 const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
+const swoosh_sfx: SfxCollection = preload("res://assets/sfx/swoosh.tres")
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
@@ -20,6 +22,8 @@ func _play_animation() -> void:
 func _on_attack_machine_transitioned(state_name) -> void:
 	match state_name:
 		"Attack":
+			_audio_player.stream = swoosh_sfx.items.pick_random()
+			_audio_player.play()
 			_animation_root = "attack"
 		"Ready":
 			match _movement_machine.current_state.name:

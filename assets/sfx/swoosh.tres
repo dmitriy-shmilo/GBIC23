@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=6 format=3 uid="uid://c08veedpnrmy4"]
+
+[ext_resource type="AudioStream" uid="uid://bbqjrc64hx1sp" path="res://assets/sfx/swoosh1.wav" id="1_8mf1h"]
+[ext_resource type="AudioStream" uid="uid://t5y7tqxugxfh" path="res://assets/sfx/swoosh2.wav" id="2_t8aop"]
+[ext_resource type="AudioStream" uid="uid://cln756dy3i3te" path="res://assets/sfx/swoosh3.wav" id="3_nudjy"]
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="4_0uufc"]
+[ext_resource type="AudioStream" uid="uid://drdhwgjorhdwf" path="res://assets/sfx/swoosh4.wav" id="4_rrv2o"]
+
+[resource]
+script = ExtResource("4_0uufc")
+items = Array[AudioStream]([ExtResource("1_8mf1h"), ExtResource("2_t8aop"), ExtResource("3_nudjy"), ExtResource("4_rrv2o")])
