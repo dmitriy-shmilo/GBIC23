@@ -39,30 +39,69 @@ script = ExtResource("1_mjvj0")
 
 [node name="MoveStateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -58.0
-offset_top = -23.0
+offset_top = -30.0
 offset_right = 60.0
-offset_bottom = -8.0
+offset_bottom = -15.0
 horizontal_alignment = 1
 script = ExtResource("7_86lk8")
 state_machine = NodePath("../MovementMachine")
 
 [node name="AttackStateLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -58.0
-offset_top = 8.0
+offset_top = 1.0
 offset_right = 60.0
-offset_bottom = 23.0
+offset_bottom = 16.0
 horizontal_alignment = 1
 script = ExtResource("7_86lk8")
 state_machine = NodePath("../AttackMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_cmlcq")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
 sprite_frames = ExtResource("1_pr55l")
 animation = &"idle_down"
 autoplay = "idle_down"
 frame_progress = 0.899467
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_k4koq")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("7_em3gh")
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_u3bvy")
+
+[node name="Target" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+shape = SubResource("CircleShape2D_thfnp")
+
+[node name="AggroArea" parent="." instance=ExtResource("7_ty5rc")]
+position = Vector2(0, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
+shape = SubResource("CircleShape2D_vhoef")
+debug_color = Color(0.827451, 0.360784, 0.443137, 0.419608)
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("3_e6jfp")
@@ -76,31 +115,10 @@ max_speed = 40.0
 acceleration = 600.0
 decelration = 1200.0
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_k4koq")
-
 [node name="VitalsComponent" type="Node" parent="."]
 script = ExtResource("2_vqokq")
 max_health = 3.0
 current_health = 3.0
-
-[node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("7_em3gh")
-damage = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 6)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_u3bvy")
 
 [node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_cggsa")
@@ -152,18 +170,6 @@ sprite = NodePath("../../BodySprite")
 script = ExtResource("13_t655m")
 attack_duration = 0.5
 hit_box = NodePath("../../HitBox")
-
-[node name="Target" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
-shape = SubResource("CircleShape2D_thfnp")
-
-[node name="AggroArea" parent="." instance=ExtResource("7_ty5rc")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
-shape = SubResource("CircleShape2D_vhoef")
-debug_color = Color(0.827451, 0.360784, 0.443137, 0.419608)
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 

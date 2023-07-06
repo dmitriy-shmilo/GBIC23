@@ -19,6 +19,8 @@ func _ready() -> void:
 
 
 func loot() -> void:
+	if _picked_up:
+		return
 	_picked_up = true
 	_audio_player.stream = pickup_sfx.items.pick_random()
 	_audio_player.play()
@@ -27,7 +29,7 @@ func loot() -> void:
 
 func _set_item(i: Item) -> void:
 	item = i
-	if is_inside_tree():
+	if is_inside_tree() and i != null:
 		_body_sprite.texture = i.icon
 
 

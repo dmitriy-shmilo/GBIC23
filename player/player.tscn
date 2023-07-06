@@ -30,20 +30,83 @@ height = 20.0
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_pkpuu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -6)
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
+position = Vector2(0, -6)
 sprite_frames = ExtResource("2_660pc")
 animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_dnrgw")
+
+[node name="LooterComponent" parent="." instance=ExtResource("13_8pska")]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LooterComponent"]
+shape = SubResource("CircleShape2D_4pfks")
+debug_color = Color(0, 0.631373, 0.45098, 0.14902)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, -6)
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("9_78mq6")
+damage = 1.0
+knockback_force = 350.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 5)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_g1oqg")
+debug_color = Color(0.878431, 0.294118, 0.435294, 0.180392)
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -6)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_fsh7a")
+debug_color = Color(0.686275, 0.478431, 0.419608, 0.419608)
+
+[node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
+offset_left = -46.0
+offset_top = -27.0
+offset_right = 46.0
+offset_bottom = -12.0
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+state_machine = NodePath("../MovementMachine")
+metadata/_edit_use_anchors_ = true
+
+[node name="AttackStateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
+offset_left = -46.0
+offset_top = 1.0
+offset_right = 46.0
+offset_bottom = 16.0
+theme = ExtResource("15_6g6xd")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+state_machine = NodePath("../AttackMachine")
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+position = Vector2(0, -6)
+current = true
 
 [node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1gawu")
@@ -94,59 +157,6 @@ script = ExtResource("9_iw2ky")
 max_health = 5.0
 current_health = 5.0
 needs_food = true
-
-[node name="LooterComponent" parent="." instance=ExtResource("13_8pska")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LooterComponent"]
-shape = SubResource("CircleShape2D_4pfks")
-debug_color = Color(0, 0.631373, 0.45098, 0.14902)
-
-[node name="HitBox" type="Area2D" parent="."]
-rotation = 1.5708
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("9_78mq6")
-damage = 1.0
-knockback_force = 350.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0, 5)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_g1oqg")
-debug_color = Color(0.878431, 0.294118, 0.435294, 0.180392)
-
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CircleShape2D_fsh7a")
-debug_color = Color(0.686275, 0.478431, 0.419608, 0.419608)
-
-[node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
-offset_left = -46.0
-offset_top = -21.0
-offset_right = 46.0
-offset_bottom = -6.0
-theme_override_font_sizes/font_size = 16
-horizontal_alignment = 1
-state_machine = NodePath("../MovementMachine")
-
-[node name="AttackStateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
-offset_left = -46.0
-offset_top = 7.0
-offset_right = 46.0
-offset_bottom = 22.0
-theme = ExtResource("15_6g6xd")
-theme_override_font_sizes/font_size = 16
-horizontal_alignment = 1
-state_machine = NodePath("../AttackMachine")
-
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 

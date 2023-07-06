@@ -1,7 +1,7 @@
 class_name EnemyStateWonder
 extends EnemyStateMove
 
-@export var radius: float = 100.0
+@export var radius: float = 48.0
 @export var aggro_area: AggroArea = null
 
 var _anchor_point: Vector2 = Vector2.ZERO
