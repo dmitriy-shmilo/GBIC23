@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx6pihteqs2dx"]
+[gd_scene load_steps=10 format=3 uid="uid://cx6pihteqs2dx"]
 
-[ext_resource type="Script" path="res://map/chest.gd" id="1_e8g4p"]
-[ext_resource type="Texture2D" uid="uid://hvi0dx0ujtja" path="res://map/chest_normal.tres" id="1_l2fsm"]
+[ext_resource type="Script" path="res://map/pickup.gd" id="1_mhjl1"]
 [ext_resource type="Material" uid="uid://brk2s8qs2e4sa" path="res://base/shader/outline.tres" id="2_adgeq"]
+[ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="2_jl3ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe28b"]
+atlas = ExtResource("2_jl3ks")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nbh0p"]
 radius = 5.0
@@ -181,13 +185,13 @@ _data = {
 "loot": SubResource("Animation_7bnri")
 }
 
-[node name="Chest" type="CharacterBody2D"]
+[node name="Pickup" type="CharacterBody2D"]
 collision_layer = 24
 collision_mask = 0
-script = ExtResource("1_e8g4p")
+script = ExtResource("1_mhjl1")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_l2fsm")
+texture = SubResource("AtlasTexture_oe28b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

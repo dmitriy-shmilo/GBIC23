@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=13 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="Texture2D" uid="uid://ywhkccg72uyq" path="res://assets/img/terrain.png" id="2_sp50l"]
 [ext_resource type="PackedScene" uid="uid://btailb80t6j47" path="res://player/player.tscn" id="3_y7d5t"]
 [ext_resource type="PackedScene" uid="uid://5dkaog5aw2nb" path="res://enemy/enemy.tscn" id="4_pgsah"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
-[ext_resource type="PackedScene" uid="uid://cx6pihteqs2dx" path="res://map/chest.tscn" id="6_crm3n"]
+[ext_resource type="PackedScene" uid="uid://cx6pihteqs2dx" path="res://map/pickup.tscn" id="6_crm3n"]
+[ext_resource type="Resource" uid="uid://dqwnqahncd31d" path="res://items/chest_normal.tres" id="7_6bv2w"]
+[ext_resource type="Resource" uid="uid://xqlubc3spyso" path="res://items/chest_rare.tres" id="8_h3k4m"]
+[ext_resource type="Resource" uid="uid://cybn5ohny8owi" path="res://items/consumables/ration.tres" id="9_kekc5"]
+[ext_resource type="Resource" uid="uid://bdq6u0wynep1d" path="res://items/consumables/big_health.tres" id="10_6d7s8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02pu7"]
 texture = ExtResource("2_sp50l")
@@ -50,8 +54,20 @@ position = Vector2(79, 318)
 [node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("vitals") instance=ExtResource("5_q1vmy")]
 vitals = NodePath("../../Player/VitalsComponent")
 
-[node name="Chest" parent="." instance=ExtResource("6_crm3n")]
-position = Vector2(336, 226)
-is_rare = true
+[node name="Pickup" parent="." instance=ExtResource("6_crm3n")]
+position = Vector2(378, 338)
+item = ExtResource("7_6bv2w")
+
+[node name="Pickup2" parent="." instance=ExtResource("6_crm3n")]
+position = Vector2(264, 362)
+item = ExtResource("8_h3k4m")
+
+[node name="Pickup3" parent="." instance=ExtResource("6_crm3n")]
+position = Vector2(232, 300)
+item = ExtResource("9_kekc5")
+
+[node name="Pickup4" parent="." instance=ExtResource("6_crm3n")]
+position = Vector2(381, 253)
+item = ExtResource("10_6d7s8")
 
 [editable path="Player"]

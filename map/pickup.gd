@@ -1,11 +1,9 @@
-class_name Chest
+class_name Pickup
 extends Node2D
 
-const chest_texture = preload("res://map/chest_normal.tres")
-const rare_chest_texture = preload("res://map/chest_rare.tres")
 const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 
-@export var is_rare = false: set = _set_is_rare
+@export var item: Item: set = _set_item
 @export var is_highlighted = false: set = _set_is_highlighted
 
 @onready var _body_sprite: Sprite2D = $"BodySprite"
@@ -14,7 +12,7 @@ const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 @onready var _hint_label: Label = $"Hint"
 
 func _ready() -> void:
-	_set_is_rare(is_rare)
+	_set_item(item)
 	_set_is_highlighted(is_highlighted)
 
 
@@ -27,10 +25,10 @@ func loot() -> void:
 	queue_free()
 
 
-func _set_is_rare(rare) -> void:
-	is_rare = rare
+func _set_item(i: Item) -> void:
+	item = i
 	if is_inside_tree():
-		_body_sprite.texture = rare_chest_texture if rare else chest_texture
+		_body_sprite.texture = i.icon
 
 
 func _set_is_highlighted(value) -> void:

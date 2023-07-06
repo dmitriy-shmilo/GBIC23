@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Consumable" load_steps=4 format=3 uid="uid://cybn5ohny8owi"]
+
+[ext_resource type="Script" path="res://items/consumable.gd" id="1_0jtf4"]
+[ext_resource type="Texture2D" uid="uid://dqntcvnmaw2in" path="res://assets/img/healing.png" id="1_a6ba2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl25u"]
+atlas = ExtResource("1_a6ba2")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_0jtf4")
+strength = 1.0
+loc_name = "item_ration"
+icon = SubResource("AtlasTexture_pl25u")

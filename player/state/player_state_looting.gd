@@ -5,7 +5,7 @@ extends State
 var _current_looting_period = 0.0
 
 # TODO: Must be a component
-var _loot: Chest = null
+var _loot: Pickup = null
 
 func enter(args: Dictionary = {}) -> void:
 	_current_looting_period = 0.0
