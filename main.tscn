@@ -1,22 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=7 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="Texture2D" uid="uid://ywhkccg72uyq" path="res://assets/img/terrain.png" id="2_sp50l"]
 [ext_resource type="PackedScene" uid="uid://btailb80t6j47" path="res://player/player.tscn" id="3_y7d5t"]
-[ext_resource type="PackedScene" uid="uid://5dkaog5aw2nb" path="res://enemy/enemy.tscn" id="4_pgsah"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
-[ext_resource type="PackedScene" uid="uid://cx6pihteqs2dx" path="res://map/pickup.tscn" id="6_crm3n"]
-[ext_resource type="Resource" uid="uid://dqwnqahncd31d" path="res://items/chest_normal.tres" id="7_6bv2w"]
-[ext_resource type="Resource" uid="uid://xqlubc3spyso" path="res://items/chest_rare.tres" id="8_h3k4m"]
-[ext_resource type="Resource" uid="uid://cybn5ohny8owi" path="res://items/consumables/ration.tres" id="9_kekc5"]
-[ext_resource type="Resource" uid="uid://bdq6u0wynep1d" path="res://items/consumables/big_health.tres" id="10_6d7s8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02pu7"]
 texture = ExtResource("2_sp50l")
+0:0/next_alternative_id = 5
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
+0:1/next_alternative_id = 2
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -30,44 +26,20 @@ texture = ExtResource("2_sp50l")
 sources/1 = SubResource("TileSetAtlasSource_02pu7")
 
 [node name="Main" type="Node2D"]
-y_sort_enabled = true
 script = ExtResource("1_t5h54")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_u1q38")
 format = 2
 
-[node name="Player" parent="." instance=ExtResource("3_y7d5t")]
-position = Vector2(290, 262)
-
-[node name="Enemy" parent="." instance=ExtResource("4_pgsah")]
-position = Vector2(203, 119)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_pgsah")]
-position = Vector2(522, 254)
-
-[node name="Enemy3" parent="." instance=ExtResource("4_pgsah")]
-position = Vector2(79, 318)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("vitals") instance=ExtResource("5_q1vmy")]
-vitals = NodePath("../../Player/VitalsComponent")
+vitals = NodePath("../../Objects/Player/VitalsComponent")
 
-[node name="Pickup" parent="." instance=ExtResource("6_crm3n")]
-position = Vector2(378, 338)
-item = ExtResource("7_6bv2w")
+[node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
 
-[node name="Pickup2" parent="." instance=ExtResource("6_crm3n")]
-position = Vector2(264, 362)
-item = ExtResource("8_h3k4m")
+[node name="Player" parent="Objects" instance=ExtResource("3_y7d5t")]
 
-[node name="Pickup3" parent="." instance=ExtResource("6_crm3n")]
-position = Vector2(232, 300)
-item = ExtResource("9_kekc5")
-
-[node name="Pickup4" parent="." instance=ExtResource("6_crm3n")]
-position = Vector2(381, 253)
-item = ExtResource("10_6d7s8")
-
-[editable path="Player"]
+[editable path="Objects/Player"]
