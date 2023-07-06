@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bqk4ev0vv02gf"
+
+[deps]
+
+files=["res://assets/text/BagelQuest - tr_items.en.translation", "res://assets/text/BagelQuest - tr_items.ru.translation", "res://assets/text/BagelQuest - tr_items.ua.translation"]
+
+source_file="res://assets/text/BagelQuest - tr_items.csv"
+dest_files=["res://assets/text/BagelQuest - tr_items.en.translation", "res://assets/text/BagelQuest - tr_items.ru.translation", "res://assets/text/BagelQuest - tr_items.ua.translation"]
+
+[params]
+
+compress=true
+delimiter=0

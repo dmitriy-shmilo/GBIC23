@@ -16,6 +16,8 @@ var _picked_up = false
 func _ready() -> void:
 	_set_item(item)
 	_set_is_highlighted(is_highlighted)
+	var key: InputEvent = InputMap.action_get_events("interact")[0]
+	_hint_label.text = tr("ui_pickup_hint") % key.as_text()
 
 
 func loot() -> void:
