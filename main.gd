@@ -2,6 +2,20 @@ class_name Level
 extends Node2D
 
 const TILE_SIZE = 16
+const MIN_SPAWN_DISTANCE = 8
+
+const TERRAIN_LAND = [
+	0, # Grass Lush
+	1, # Grass
+	2, # Sand
+]
+
+const TERRAIN_WATER = [
+	2, # Sand (Beach)
+	3, # Shallow Water
+	4, # Water
+	5, # Deep Water
+]
 
 const CHEST_NORMAL = preload("res://items/chest_normal.tres")
 const CHEST_RARE = preload("res://items/chest_rare.tres")
@@ -15,11 +29,13 @@ const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
 
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
+var _enemies = FastNoiseLite.new()
 var _radius = 128
 
 func _ready() -> void:
 	_moisture.seed = randi()
 	_altitude.seed = randi()
+	_enemies.seed = randi()
 	_moisture.frequency *= 4
 	_altitude.frequency *= 4
 	_generate_terrain()
@@ -33,30 +49,48 @@ func _place_player() -> void:
 	pass
 
 
+func _is_land(x, y) -> bool:
+	var data: TileData = _tilemap.get_cell_tile_data(0, Vector2i(x, y))
+	if data == null:
+		return true
+	var depth = data.get_custom_data("depth")
+	return depth <= 0
+
+
+@warning_ignore("integer_division")
 func _place_loot() -> void:
+	var retry_count = 10
+	var dx = 0
+	var dy = 0
+
 	# TODO: determine by difficulty and randomize
 	var extra_chest_count = 4
 
-	# guarantee a chest nearby
-	var dx = randi_range(_radius / 8, _radius / 4) * [-1, 1].pick_random()
-	var dy = randi_range(_radius / 8, _radius / 4) * [-1, 1].pick_random()
-	var chest = PICKUP_SCENE.instantiate() as Pickup
-	# TODO: check if on a solid terrain
-	chest.global_position = Vector2(dx, dy) * TILE_SIZE
-	chest.item = CHEST_NORMAL
-	add_child(chest)
-
-	_place_guards(Vector2(dx, dy))
+	for r in range(retry_count):
+		# guarantee a chest nearby
+		dx = randi_range(MIN_SPAWN_DISTANCE, _radius / 6) * [-1, 1].pick_random()
+		dy = randi_range(MIN_SPAWN_DISTANCE, _radius / 6) * [-1, 1].pick_random()
+		if not _is_land(dx, dy) and r < retry_count - 1:
+			continue
+		_place_chest(dx, dy, false)
+		break
 
 	for i in range(extra_chest_count):
-		dx = randi_range(_radius / 4, _radius / 4 * 3) * [-1, 1].pick_random()
-		dy = randi_range(_radius / 4, _radius / 4 * 3) * [-1, 1].pick_random()
-		print(dx, dy)
-		chest = PICKUP_SCENE.instantiate() as Pickup
-		chest.item = CHEST_NORMAL if randi() % 4 > 0 else CHEST_RARE
-		chest.global_position = Vector2(dx, dy) * TILE_SIZE
-		_objects.add_child(chest)
-		_place_guards(Vector2(dx, dy))
+		for r in range(retry_count):
+			dx = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+			dy = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+			if not _is_land(dx, dy) and r < retry_count - 1:
+				continue
+			_place_chest(dx, dy, randi() % 4 > 0)
+			break
+
+
+func _place_chest(x, y, is_rare) -> void:
+	var chest = PICKUP_SCENE.instantiate() as Pickup
+	chest.item = CHEST_NORMAL if is_rare else CHEST_RARE
+	chest.global_position = Vector2(x, y) * TILE_SIZE
+	_objects.add_child(chest)
+	_place_guards(Vector2(x, y))
 
 
 func _place_guards(center: Vector2i) -> void:
@@ -72,6 +106,7 @@ func _place_guards(center: Vector2i) -> void:
 		_objects.add_child(guard)
 
 
+@warning_ignore("integer_division")
 func _generate_terrain() -> void:
 	var rsq = _radius * _radius
 	for x in range(-_radius, _radius):
@@ -88,18 +123,18 @@ func _generate_terrain() -> void:
 				altitude_mod = 0.6
 			elif distance <= rsq / 2:
 				altitude_mod = 0.0
-			elif distance <= rsq / 4:
-				altitude_mod = -0.3
-			elif distance < rsq / 1.5:
+			elif distance <= rsq / 1.2:
 				altitude_mod = -0.6
+			elif distance < rsq / 1.5:
+				altitude_mod = -0.1
 			else:
 				altitude_mod = -2.0
 
-			var altitude = clampf(_altitude.get_noise_2d(x / 2.0, y / 2.0) * 2 + altitude_mod, -1.0, 1.0)
-			var moisture = round((_moisture.get_noise_2d(x / 2.0, y / 2.0) + 1.0) / 2.0 * 3.0)
+			var altitude = clampf(_altitude.get_noise_2d(x / 4.0, y / 4.0) * 2 + altitude_mod, -1.0, 1.0)
+			var moisture = round((_moisture.get_noise_2d(x / 4.0, y / 4.0) + 1.0) / 2.0 * 2.0)
 
 			if altitude > 0:
-				_tilemap.set_cell(0, Vector2i(x, y), 1, Vector2i(round(moisture), 0))
+				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_LAND[moisture])
 			else:
-				altitude = int(round((altitude + 1.0) * 3.0))
-				_tilemap.set_cell(0, Vector2i(x, y), 1, Vector2i(altitude, 3))
+				altitude = 3 - int(round((altitude + 1.0) * 3.0))
+				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_WATER[altitude])
