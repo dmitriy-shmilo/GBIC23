@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=21 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d06ni5uesoo2n" path="res://base/gui/state_label.tscn" id="12_xi5ew"]
 [ext_resource type="PackedScene" uid="uid://dhcki0w17a8m1" path="res://base/components/looter_component.tscn" id="13_8pska"]
 [ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="15_6g6xd"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="16_rhoiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
@@ -144,8 +145,9 @@ script = ExtResource("7_sinek")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
-[node name="Loot" type="Node" parent="AttackMachine"]
+[node name="Loot" type="Node" parent="AttackMachine" node_paths=PackedStringArray("inventory")]
 script = ExtResource("9_eu408")
+inventory = NodePath("../../InventoryComponent")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("6_7oms2")
@@ -158,6 +160,10 @@ script = ExtResource("9_iw2ky")
 max_health = 5.0
 current_health = 5.0
 needs_food = true
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("16_rhoiw")
+max_items = 2
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 

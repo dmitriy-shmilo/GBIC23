@@ -15,8 +15,9 @@ format = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("vitals") instance=ExtResource("5_q1vmy")]
+[node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("vitals", "inventory") instance=ExtResource("5_q1vmy")]
 vitals = NodePath("../../Objects/Player/VitalsComponent")
+inventory = NodePath("../../Objects/Player/InventoryComponent")
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -25,5 +26,11 @@ y_sort_enabled = true
 
 [node name="Pickup" parent="Objects" instance=ExtResource("5_3jfs2")]
 position = Vector2(65, 34)
+
+[node name="Pickup2" parent="Objects" instance=ExtResource("5_3jfs2")]
+position = Vector2(-38, 71)
+
+[node name="Pickup3" parent="Objects" instance=ExtResource("5_3jfs2")]
+position = Vector2(63, 73)
 
 [editable path="Objects/Player"]

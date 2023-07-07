@@ -2,21 +2,27 @@ class_name Hud
 extends Control
 
 @export var vitals: VitalsComponent = null
+@export var inventory: InventoryComponent = null
 
 @onready var _health_container: HBoxContainer = $"%HealthContainer"
 @onready var _extra_health_label = $"%HealthContainer/ExtraHealthLabel"
 @onready var _health_icon_template = $"%HealthIconTemplate"
+@onready var _inventory_capacity_label = $"InventoryCapacityLabel"
 
 const MAX_ICONS = 3
 
 func _ready() -> void:
 	vitals.connect("health_changed", _on_vitals_health_changed)
+	inventory.connect("item_added", _on_inventory_changed)
+	inventory.connect("item_dropped", _on_inventory_changed)
+
 	for i in range(MAX_ICONS):
 		var heart_rect = _health_icon_template.duplicate(0)
 		heart_rect.visible = true
 		_health_container.add_child(heart_rect)
 	_extra_health_label.move_to_front()
 	_refresh_health(vitals)
+	_on_inventory_changed(inventory, null)
 
 
 func _refresh_health(new_vitals: VitalsComponent) -> void:
@@ -33,3 +39,7 @@ func _refresh_health(new_vitals: VitalsComponent) -> void:
 
 func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> void:
 	_refresh_health(new_vitals)
+
+
+func _on_inventory_changed(inventory: InventoryComponent, _item: Item) -> void:
+	_inventory_capacity_label.text = "%d/%d" % [inventory.items.size(), inventory.max_items]
