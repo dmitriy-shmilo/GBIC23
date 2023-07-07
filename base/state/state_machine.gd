@@ -11,6 +11,7 @@ func _ready() -> void:
 
 	for n in get_children():
 		n.state_machine = self
+	current_state.enter()
 
 
 func _process(delta: float) -> void:
