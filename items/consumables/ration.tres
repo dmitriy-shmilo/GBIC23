@@ -10,5 +10,5 @@ region = Rect2(32, 0, 16, 16)
 [resource]
 script = ExtResource("1_0jtf4")
 strength = 1.0
-loc_name = "item_ration"
+loc_name = "it_ration"
 icon = SubResource("AtlasTexture_pl25u")

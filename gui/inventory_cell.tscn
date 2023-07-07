@@ -69,5 +69,3 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_ihr10")
 expand_mode = 1
 stretch_mode = 2
-
-[connection signal="pressed" from="." to="." method="_on_pressed"]
