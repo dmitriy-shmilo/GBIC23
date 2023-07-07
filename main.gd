@@ -23,6 +23,7 @@ const PICKUP_SCENE = preload("res://map/pickup.tscn")
 const PLAYER_SCENE = preload("res://player/player.tscn")
 const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
 
+@onready var _pause: PauseGui = $"GUI/Pause"
 @onready var _tilemap = $"TileMap"
 @onready var _objects = $"Objects"
 @onready var _player = $"Objects/Player"
@@ -30,7 +31,7 @@ const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
 var _enemies = FastNoiseLite.new()
-var _radius = 128
+var _radius = 32
 
 func _ready() -> void:
 	_moisture.seed = randi()
@@ -41,6 +42,11 @@ func _ready() -> void:
 	_generate_terrain()
 	_place_loot()
 	_place_player()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		_pause.enter()
 
 
 func _place_player() -> void:
