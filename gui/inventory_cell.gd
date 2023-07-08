@@ -2,6 +2,7 @@ class_name InventoryCell
 extends Button
 
 @export var item: Item = null: set = _set_item
+@export var index: int = -1
 
 @onready var _item_icon: TextureRect = $"ItemIcon"
 

@@ -46,6 +46,14 @@ func _show_context_menu(cell: InventoryCell) -> void:
 	_drop_button.grab_focus()
 
 
+func _hide_context_menu() -> void:
+	_context_menu.visible = false
+	if _last_cell != null:
+		_should_play_sfx = false
+		_last_cell.grab_focus()
+		_last_cell.button_pressed = false
+		_should_play_sfx = true
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -67,6 +75,12 @@ func _on_inventory_changed(inventory: InventoryComponent) -> void:
 		var item = inventory.items[i]
 		var cell = _inventory_grid.get_child(i)
 		cell.item = item
+		cell.index = i
+
+	for i in range(inventory.items.size(), inventory.max_items):
+		var cell = _inventory_grid.get_child(i)
+		cell.item = null
+		cell.index = i
 
 
 func _on_inventory_button_focus_entered() -> void:
@@ -92,9 +106,13 @@ func _on_inventory_button_pressed(cell: InventoryCell) -> void:
 func _on_context_cancel_button_pressed() -> void:
 	_audio_player.stream = CANCEL_SFX.items.pick_random()
 	_audio_player.play()
-	_context_menu.visible = false
-	if _last_cell != null:
-		_should_play_sfx = false
-		_last_cell.grab_focus()
-		_last_cell.button_pressed = false
-		_should_play_sfx = true
+	_hide_context_menu()
+
+
+func _on_drop_button_pressed() -> void:
+	if _last_cell == null or _last_cell.index < 0:
+		# sanity check, shouldn't happen
+		return
+
+	inventory.drop_item(_last_cell.index)
+	_hide_context_menu()

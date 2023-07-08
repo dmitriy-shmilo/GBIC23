@@ -1,10 +1,12 @@
 class_name Player
 extends CharacterBody2D
 
+const ITEM_DROP_RANGE = 48.0
 # TODO: consider playing sounds within the state
 const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
 const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
 const swoosh_sfx: SfxCollection = preload("res://assets/sfx/swoosh.tres")
+const PICKUP_SCENE := preload("res://map/pickup.tscn")
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
@@ -71,3 +73,12 @@ func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool
 	if vitals.current_health <= 0:
 		# TODO: exit the level
 		visible = false
+
+
+func _on_inventory_component_item_dropped(_inventory: InventoryComponent, item: Item) -> void:
+	var pickup = PICKUP_SCENE.instantiate() as Pickup
+	pickup.item = item
+	var offset = Vector2(randf() * ITEM_DROP_RANGE - ITEM_DROP_RANGE / 2.0, randf() * ITEM_DROP_RANGE - ITEM_DROP_RANGE / 2.0)
+	pickup.global_position = global_position + offset
+	pickup.push(offset)
+	add_sibling(pickup)

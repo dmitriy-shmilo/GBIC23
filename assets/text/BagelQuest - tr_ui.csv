@@ -1,4 +1,5 @@
 keys,en,ru,ua
+keys,en,ru,ua
 ui_start,Start,Начать,Почати
 ui_continue,Continue,Продолжить,Продовжити
 ui_exit,Exit,Выход,Вихід
@@ -6,4 +7,6 @@ ui_back,Back,Назад,Назад
 ui_credits,Credits,Роли и ресурсы,Ролі та ресурси
 ui_controls,Controls,Управление,Управління
 ui_pickup_hint,Take (%s),Взять (%s),Взяти (%s)
+ui_drop,Drop,Бросить,Викинути
+ui_use,Use,Использовать,Використати
 ui_inventory,Inventory,Инвернтарь,Інвентар

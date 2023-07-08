@@ -169,7 +169,7 @@ needs_food = true
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_rhoiw")
-max_items = 2
+max_items = 20
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -177,3 +177,4 @@ max_items = 2
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
 [connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
+[connection signal="item_dropped" from="InventoryComponent" to="." method="_on_inventory_component_item_dropped"]

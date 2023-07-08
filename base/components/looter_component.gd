@@ -11,12 +11,15 @@ func has_loot() -> bool:
 	return current_interactive != null
 
 
-func _refresh_closest_body() -> void:
-	if current_interactive != null:
-		current_interactive.is_highlighted = false
+func refresh() -> void:
+	_refresh_closest_body()
 
+
+func _refresh_closest_body() -> void:
 	var bodies = get_overlapping_bodies()
 	if bodies.is_empty():
+		if current_interactive != null:
+			current_interactive.is_highlighted = false
 		current_interactive = null
 		loot_changed.emit(null)
 		return
@@ -29,9 +32,11 @@ func _refresh_closest_body() -> void:
 		if d < _closest_distance:
 			closest_body = b
 			_closest_distance = d
-	closest_body.is_highlighted = true
 
 	if current_interactive != closest_body:
+		if current_interactive != null:
+			current_interactive.is_highlighted = false
+		closest_body.is_highlighted = true
 		current_interactive = closest_body
 		loot_changed.emit(current_interactive)
 
@@ -41,4 +46,8 @@ func _on_body_entered(_body: Node2D) -> void:
 
 
 func _on_body_exited(_body: Node2D) -> void:
+	_refresh_closest_body()
+
+
+func _on_refresh_timer_timeout() -> void:
 	_refresh_closest_body()

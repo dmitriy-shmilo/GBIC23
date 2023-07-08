@@ -70,9 +70,8 @@ theme_override_constants/margin_bottom = 8
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Item Name"
 
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -82,9 +81,6 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 bbcode_enabled = true
-text = "Item Description
-Goes Here
-Line 3"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
@@ -119,8 +115,7 @@ focus_neighbor_bottom = NodePath("../UseButton")
 focus_next = NodePath("../UseButton")
 focus_previous = NodePath("../ContextCancelButton")
 theme = ExtResource("2_swf25")
-text = "ui_drop
-"
+text = "ui_drop"
 script = ExtResource("3_kh80o")
 
 [node name="UseButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
@@ -149,4 +144,5 @@ theme = ExtResource("2_swf25")
 text = "ui_back"
 script = ExtResource("3_kh80o")
 
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/ContextCancelButton" to="." method="_on_context_cancel_button_pressed"]

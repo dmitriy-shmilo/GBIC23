@@ -1,6 +1,7 @@
 class_name Pickup
-extends Node2D
+extends CharacterBody2D
 
+const FRICTION = 32.0
 const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 
 @export var item: Item: set = _set_item
@@ -11,7 +12,7 @@ const pickup_sfx = preload("res://assets/sfx/pickup.tres")
 @onready var _audio_player: AudioStreamPlayer2D = $"AudioPlayer"
 @onready var _hint_label: Label = $"Hint"
 
-var _picked_up = false
+var is_picked_up = false
 
 func _ready() -> void:
 	_set_item(item)
@@ -20,13 +21,23 @@ func _ready() -> void:
 	_hint_label.text = tr("ui_pickup_hint") % key.as_text()
 
 
+func push(force: Vector2) -> void:
+	velocity += force
+
+
 func loot() -> void:
-	if _picked_up:
+	if is_picked_up:
 		return
-	_picked_up = true
+	is_picked_up = true
+
 	_audio_player.stream = pickup_sfx.items.pick_random()
 	_audio_player.play()
 	_animation_player.play("loot")
+
+
+func _physics_process(delta: float) -> void:
+	move_and_slide()
+	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 
 func _set_item(i: Item) -> void:
@@ -36,7 +47,7 @@ func _set_item(i: Item) -> void:
 
 
 func _set_is_highlighted(value) -> void:
-	if _picked_up:
+	if is_picked_up:
 		return
 	is_highlighted = value
 	if is_inside_tree():
