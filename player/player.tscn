@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=22 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="3_1gawu"]
 [ext_resource type="Script" path="res://player/state/player_state_idle.gd" id="4_xumsq"]
+[ext_resource type="Texture2D" uid="uid://kc7u06kqw6pu" path="res://assets/img/slash.png" id="5_adw38"]
 [ext_resource type="Script" path="res://player/state/player_state_move.gd" id="5_b3qoq"]
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="6_7oms2"]
 [ext_resource type="Script" path="res://player/state/player_state_attack_ready.gd" id="6_cxw04"]
@@ -57,8 +58,8 @@ shape = SubResource("CircleShape2D_4pfks")
 debug_color = Color(0, 0.631373, 0.45098, 0.14902)
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -6)
-rotation = 1.5708
 collision_layer = 4
 collision_mask = 0
 monitoring = false
@@ -72,6 +73,11 @@ position = Vector2(0, 5)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_g1oqg")
 debug_color = Color(0.878431, 0.294118, 0.435294, 0.180392)
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+position = Vector2(7.62939e-06, 3)
+rotation = 3.14159
+texture = ExtResource("5_adw38")
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -6)

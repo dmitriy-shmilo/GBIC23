@@ -8,10 +8,12 @@ var _current_attack_duration = 0.0
 
 func enter(args: Dictionary = {}) -> void:
 	hit_box.monitorable = true
+	hit_box.visible = true
 	_current_attack_duration = 0.0
 
 
 func exit() -> void:
+	hit_box.visible = false
 	hit_box.monitorable = false
 
 

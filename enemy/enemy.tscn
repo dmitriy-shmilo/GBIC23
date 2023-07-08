@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=22 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="3_e6jfp"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="4_cggsa"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_idle.gd" id="5_gwmtk"]
+[ext_resource type="Texture2D" uid="uid://kc7u06kqw6pu" path="res://assets/img/slash.png" id="5_mgq8o"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_knocked_back.gd" id="6_28jua"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_chase.gd" id="6_m2ea2"]
 [ext_resource type="Script" path="res://base/gui/state_label.gd" id="7_86lk8"]
@@ -64,9 +65,8 @@ shape = SubResource("CircleShape2D_cmlcq")
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = ExtResource("1_pr55l")
-animation = &"idle_down"
+animation = &"attack_up"
 autoplay = "idle_down"
-frame_progress = 0.899467
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -7)
@@ -78,6 +78,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_k4koq")
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -7)
 collision_layer = 4
 collision_mask = 0
@@ -90,6 +91,11 @@ damage = 1.0
 position = Vector2(0, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_u3bvy")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+position = Vector2(7.62939e-06, 4)
+rotation = 3.14159
+texture = ExtResource("5_mgq8o")
 
 [node name="Target" type="Area2D" parent="."]
 position = Vector2(0, -7)
@@ -170,7 +176,7 @@ sprite = NodePath("../../BodySprite")
 
 [node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
 script = ExtResource("13_t655m")
-attack_duration = 0.5
+attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
