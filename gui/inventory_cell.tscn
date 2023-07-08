@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://n3qtcmjm1lqs"]
+[gd_scene load_steps=12 format=3 uid="uid://n3qtcmjm1lqs"]
 
 [ext_resource type="Texture2D" uid="uid://bsx57e4g24q7w" path="res://gui/hud_item_cell.tres" id="1_b68mq"]
 [ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="2_2cgwp"]
@@ -6,16 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://kp50e3uhhnw0" path="res://gui/hud_item_cell_active.tres" id="2_o5fqq"]
 [ext_resource type="Texture2D" uid="uid://dxhefkrqj5ut7" path="res://gui/hud_item_cell_pressed.tres" id="3_iqjoh"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2kr6h"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eeyke"]
 texture = ExtResource("1_b68mq")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k73ca"]
 texture = ExtResource("2_o5fqq")
@@ -28,6 +20,10 @@ texture_margin_bottom = 5.0
 texture = ExtResource("3_iqjoh")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrl2d"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_trivl"]
+resource_local_to_scene = false
+resource_name = "inventory"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ihr10"]
 atlas = ExtResource("2_2cgwp")
@@ -46,11 +42,13 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_2kr6h")
+theme_override_styles/normal = SubResource("StyleBoxTexture_eeyke")
 theme_override_styles/hover = SubResource("StyleBoxTexture_k73ca")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_020yu")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_qrl2d")
 theme_override_styles/focus = SubResource("StyleBoxTexture_k73ca")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_trivl")
 script = ExtResource("2_5o0f6")
 
 [node name="ItemIcon" type="TextureRect" parent="."]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bttlpvtcf3hnx"]
+[gd_scene load_steps=4 format=3 uid="uid://bttlpvtcf3hnx"]
 
 [ext_resource type="Script" path="res://gui/pause.gd" id="1_jmxno"]
+[ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="2_swf25"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="3_kh80o"]
 
 [node name="Pause" type="Control"]
 process_mode = 2
@@ -65,4 +67,86 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "Item Description
+Goes Here
+Line 3"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="ContextMenu" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 330.0
+offset_top = 169.0
+offset_right = 416.0
+offset_bottom = 250.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ContextMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContextMenu/MarginContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="DropButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../ContextCancelButton")
+focus_neighbor_top = NodePath("../ContextCancelButton")
+focus_neighbor_right = NodePath("../UseButton")
+focus_neighbor_bottom = NodePath("../UseButton")
+focus_next = NodePath("../UseButton")
+focus_previous = NodePath("../ContextCancelButton")
+theme = ExtResource("2_swf25")
+text = "ui_drop
+"
+script = ExtResource("3_kh80o")
+
+[node name="UseButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../DropButton")
+focus_neighbor_top = NodePath("../DropButton")
+focus_neighbor_right = NodePath("../ContextCancelButton")
+focus_neighbor_bottom = NodePath("../ContextCancelButton")
+focus_next = NodePath("../ContextCancelButton")
+focus_previous = NodePath("../DropButton")
+theme = ExtResource("2_swf25")
+text = "ui_use"
+script = ExtResource("3_kh80o")
+
+[node name="ContextCancelButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../UseButton")
+focus_neighbor_top = NodePath("../UseButton")
+focus_neighbor_right = NodePath("../DropButton")
+focus_neighbor_bottom = NodePath("../DropButton")
+focus_next = NodePath("../DropButton")
+focus_previous = NodePath("../UseButton")
+theme = ExtResource("2_swf25")
+text = "ui_back"
+script = ExtResource("3_kh80o")
+
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/ContextCancelButton" to="." method="_on_context_cancel_button_pressed"]
