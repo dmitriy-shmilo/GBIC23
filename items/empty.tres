@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dankcuukmuuko"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_ok82u"]
+
+[resource]
+script = ExtResource("1_ok82u")
+loc_name = "it_empty"
+loc_description = "it_desc_empty"

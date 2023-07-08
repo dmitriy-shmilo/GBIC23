@@ -1,6 +1,7 @@
 class_name PauseGui
 extends Control
 
+const EMPTY_ITEM = preload("res://items/empty.tres")
 const CANCEL_SFX = preload("res://assets/sfx/cancel.tres")
 const MENU_NAVIGATION_SFX = preload("res://assets/sfx/menu_navigation.tres")
 const MENU_SELECT_SFX = preload("res://assets/sfx/menu_select.tres")
@@ -14,6 +15,8 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 @onready var _drop_button: Button = $"%DropButton"
 @onready var _use_button: Button = $"%UseButton"
 @onready var _context_cancel_button: Button = $"%ContextCancelButton"
+@onready var _item_name: Label = $"%ItemNameLabel"
+@onready var _item_description: RichTextLabel = $"%ItemDescriptionLabel"
 
 var _should_play_sfx = false
 var _last_cell: InventoryCell = null
@@ -68,8 +71,8 @@ func _on_inventory_changed(inventory: InventoryComponent) -> void:
 		for i in range(inventory.max_items - existing_count):
 			var cell = INVENTORY_CELL_SCENE.instantiate() as InventoryCell
 			_inventory_grid.add_child(cell)
-			cell.connect("focus_entered", _on_inventory_button_focus_entered)
-			cell.connect("pressed", _on_inventory_button_pressed.bind(cell))
+			cell.focus_entered.connect(_on_inventory_button_focus_entered.bind(cell))
+			cell.pressed.connect(_on_inventory_button_pressed.bind(cell))
 
 	for i in range(inventory.items.size()):
 		var item = inventory.items[i]
@@ -79,18 +82,21 @@ func _on_inventory_changed(inventory: InventoryComponent) -> void:
 
 	for i in range(inventory.items.size(), inventory.max_items):
 		var cell = _inventory_grid.get_child(i)
-		cell.item = null
+		cell.item = EMPTY_ITEM
 		cell.index = i
 
 
-func _on_inventory_button_focus_entered() -> void:
+func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 	if _should_play_sfx:
 		_audio_player.stream = MENU_NAVIGATION_SFX.items.pick_random()
 		_audio_player.play()
 
+	_item_name.text = tr(cell.item.loc_name).capitalize()
+	_item_description.text = tr(cell.item.loc_description)
+
 
 func _on_inventory_button_pressed(cell: InventoryCell) -> void:
-	if cell.item == null:
+	if cell.item == EMPTY_ITEM:
 		cell.button_pressed = false
 		_audio_player.stream = CANCEL_SFX.items.pick_random()
 		_audio_player.play()

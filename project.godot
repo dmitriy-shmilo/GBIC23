@@ -98,7 +98,7 @@ pause={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/text/BagelQuest - tr_ui.en.translation", "res://assets/text/BagelQuest - tr_ui.ru.translation", "res://assets/text/BagelQuest - tr_ui.ua.translation", "res://assets/text/BagelQuest - tr_items.en.translation", "res://assets/text/BagelQuest - tr_items.ru.translation", "res://assets/text/BagelQuest - tr_items.ua.translation")
+locale/translations=PackedStringArray("res://assets/text/BagelQuest - tr_ui.en.translation", "res://assets/text/BagelQuest - tr_ui.ru.translation", "res://assets/text/BagelQuest - tr_ui.ua.translation", "res://assets/text/BagelQuest - tr_items.en.translation", "res://assets/text/BagelQuest - tr_items.ru.translation", "res://assets/text/BagelQuest - tr_items.ua.translation", "res://assets/text/BagelQuest - tr_items_desc.en.translation", "res://assets/text/BagelQuest - tr_items_desc.ru.translation", "res://assets/text/BagelQuest - tr_items_desc.ua.translation")
 
 [layer_names]
 

@@ -1,6 +1,8 @@
 class_name InventoryCell
 extends Button
 
+const EMPTY_ITEM = preload("res://items/empty.tres")
+
 @export var item: Item = null: set = _set_item
 @export var index: int = -1
 
@@ -13,4 +15,7 @@ func _ready() -> void:
 func _set_item(value: Item) -> void:
 	item = value
 	if is_inside_tree():
-		_item_icon.texture = value.icon if value != null else null
+		if item != null:
+			_item_icon.texture = value.icon
+		else:
+			item = EMPTY_ITEM

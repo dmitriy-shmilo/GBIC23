@@ -10,4 +10,5 @@ region = Rect2(16, 0, 16, 16)
 [resource]
 script = ExtResource("2_nv186")
 loc_name = "it_chest_rare"
+loc_description = "it_desc_chest_rare"
 icon = SubResource("AtlasTexture_lt4av")
