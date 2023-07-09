@@ -10,3 +10,5 @@ ui_drop,Drop,Бросить,Викинути
 ui_use,Use,Использовать,Використати
 ui_inventory,Inventory,Инвернтарь,Інвентар
 ui_go_home,Return Home,Вернуться домой,Повернутися додому
+ui_close,Close,Закрыть,Зачинити
+ui_send,Send Home,Отправить,Відправити

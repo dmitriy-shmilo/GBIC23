@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal portal_invoked()
+
 const ITEM_DROP_RANGE = 48.0
 # TODO: consider playing sounds within the state
 const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
@@ -24,6 +26,8 @@ func _play_animation() -> void:
 
 func _on_attack_machine_transitioned(state_name) -> void:
 	match state_name:
+		"Portal":
+			portal_invoked.emit()
 		"Attack":
 			_audio_player.stream = swoosh_sfx.items.pick_random()
 			_audio_player.play()

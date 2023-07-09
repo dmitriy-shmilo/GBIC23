@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=24 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://d06ni5uesoo2n" path="res://base/gui/state_label.tscn" id="12_xi5ew"]
 [ext_resource type="PackedScene" uid="uid://dhcki0w17a8m1" path="res://base/components/interactor_component.tscn" id="13_8pska"]
 [ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="15_6g6xd"]
+[ext_resource type="Script" path="res://player/state/player_state_interacting.gd" id="15_7env8"]
+[ext_resource type="Script" path="res://player/state/player_state_portaling.gd" id="16_a0ow2"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="16_rhoiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
@@ -154,6 +156,12 @@ hit_box = NodePath("../../HitBox")
 script = ExtResource("9_eu408")
 interactor = NodePath("../../InteractorComponent")
 inventory = NodePath("../../InventoryComponent")
+
+[node name="Interact" type="Node" parent="AttackMachine"]
+script = ExtResource("15_7env8")
+
+[node name="Portal" type="Node" parent="AttackMachine"]
+script = ExtResource("16_a0ow2")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("6_7oms2")

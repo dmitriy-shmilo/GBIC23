@@ -59,7 +59,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		_pause.enter()
+		_pause.enter(false)
 
 
 func _place_player() -> void:
@@ -171,3 +171,7 @@ func _generate_terrain() -> void:
 			else:
 				altitude = 3 - int(round((altitude + 1.0) * 3.0))
 				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_WATER[altitude])
+
+
+func _on_player_portal_invoked() -> void:
+	_pause.enter(true)

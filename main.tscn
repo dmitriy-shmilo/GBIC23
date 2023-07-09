@@ -38,4 +38,6 @@ inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 [node name="Pause" parent="GUI" node_paths=PackedStringArray("inventory") instance=ExtResource("4_3g7bp")]
 inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 
+[connection signal="portal_invoked" from="TileMap/Objects/Player" to="." method="_on_player_portal_invoked"]
+
 [editable path="TileMap/Objects/Player"]
