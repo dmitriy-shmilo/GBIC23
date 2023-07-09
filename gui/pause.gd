@@ -62,7 +62,6 @@ func _show_context_menu(cell: InventoryCell) -> void:
 	_context_menu.size = Vector2.ZERO
 	_last_cell = cell
 
-	cell.item is Consumable
 	if cell.item is Consumable:
 		_use_button.disabled = false
 		_unload_button.disabled = true
