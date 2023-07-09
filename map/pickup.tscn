@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cx6pihteqs2dx"]
+[gd_scene load_steps=11 format=3 uid="uid://cx6pihteqs2dx"]
 
 [ext_resource type="Script" path="res://map/pickup.gd" id="1_mhjl1"]
 [ext_resource type="Material" uid="uid://brk2s8qs2e4sa" path="res://base/shader/outline.tres" id="2_adgeq"]
 [ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="2_jl3ks"]
+[ext_resource type="Script" path="res://base/components/interactive_component.gd" id="4_ab216"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oe28b"]
 atlas = ExtResource("2_jl3ks")
@@ -270,3 +271,16 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Loot (E)"
 horizontal_alignment = 1
+
+[node name="InteractiveComponent" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("4_ab216")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveComponent"]
+position = Vector2(0, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nbh0p")
+
+[connection signal="interacted" from="InteractiveComponent" to="." method="_on_interactive_component_interacted"]
+[connection signal="target_changed" from="InteractiveComponent" to="." method="_on_interactive_component_target_changed"]

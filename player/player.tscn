@@ -14,14 +14,14 @@
 [ext_resource type="Script" path="res://player/state/player_state_looting.gd" id="9_eu408"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="9_iw2ky"]
 [ext_resource type="PackedScene" uid="uid://d06ni5uesoo2n" path="res://base/gui/state_label.tscn" id="12_xi5ew"]
-[ext_resource type="PackedScene" uid="uid://dhcki0w17a8m1" path="res://base/components/looter_component.tscn" id="13_8pska"]
+[ext_resource type="PackedScene" uid="uid://dhcki0w17a8m1" path="res://base/components/interactor_component.tscn" id="13_8pska"]
 [ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="15_6g6xd"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="16_rhoiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4pfks"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0lcn"]
 radius = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1oqg"]
@@ -50,12 +50,11 @@ position = Vector2(0, -6)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_dnrgw")
 
-[node name="LooterComponent" parent="." instance=ExtResource("13_8pska")]
-position = Vector2(0, -6)
+[node name="InteractorComponent" parent="." instance=ExtResource("13_8pska")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LooterComponent"]
-shape = SubResource("CircleShape2D_4pfks")
-debug_color = Color(0, 0.631373, 0.45098, 0.14902)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_s0lcn")
 
 [node name="HitBox" type="Area2D" parent="."]
 visible = false
@@ -142,17 +141,18 @@ own_hit_box = NodePath("../../HitBox")
 script = ExtResource("3_1gawu")
 initial_state = NodePath("Ready")
 
-[node name="Ready" type="Node" parent="AttackMachine" node_paths=PackedStringArray("looter")]
+[node name="Ready" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor")]
 script = ExtResource("6_cxw04")
-looter = NodePath("../../LooterComponent")
+interactor = NodePath("../../InteractorComponent")
 
 [node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
 script = ExtResource("7_sinek")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
-[node name="Loot" type="Node" parent="AttackMachine" node_paths=PackedStringArray("inventory")]
+[node name="Loot" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "inventory")]
 script = ExtResource("9_eu408")
+interactor = NodePath("../../InteractorComponent")
 inventory = NodePath("../../InventoryComponent")
 
 [node name="MovementComponent" type="Node" parent="."]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhcki0w17a8m1"]
+
+[ext_resource type="Script" path="res://base/components/interactor_component.gd" id="1_xau1g"]
+
+[node name="InteractorComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_xau1g")
+
+[node name="RefreshTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="RefreshTimer" to="." method="_on_refresh_timer_timeout"]

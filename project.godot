@@ -106,7 +106,7 @@ locale/translations=PackedStringArray("res://assets/text/BagelQuest - tr_ui.en.t
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Hazard"
 2d_physics/layer_4="Obstacle"
-2d_physics/layer_5="Loot"
+2d_physics/layer_5="Interactive"
 
 [rendering]
 
