@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://base/components/interactive_component.gd" id="1_8jp05"]
 
 [node name="InteractiveComponent" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_8jp05")
