@@ -14,7 +14,6 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
 @onready var _drop_button: Button = $"%DropButton"
 @onready var _use_button: Button = $"%UseButton"
-@onready var _context_cancel_button: Button = $"%ContextCancelButton"
 @onready var _item_name: Label = $"%ItemNameLabel"
 @onready var _item_description: RichTextLabel = $"%ItemDescriptionLabel"
 
@@ -65,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func _on_inventory_changed(inventory: InventoryComponent) -> void:
+func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 	var existing_count = _inventory_grid.get_child_count()
 	if existing_count < inventory.max_items:
 		for i in range(inventory.max_items - existing_count):

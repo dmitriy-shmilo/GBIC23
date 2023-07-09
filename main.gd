@@ -43,7 +43,7 @@ var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
 var _vegetation = FastNoiseLite.new()
 var _enemies = FastNoiseLite.new()
-var _radius = 96
+var _radius = 40
 
 func _ready() -> void:
 	_moisture.seed = randi()
@@ -64,10 +64,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _place_player() -> void:
 	# TODO: spawn randomly off-center
-	var position = Vector2.ZERO
-	_player.global_position = position + Vector2.DOWN
+	var start = Vector2.ZERO
+	_player.global_position = start + Vector2.DOWN
 	var portal = PORTAL_SCENE.instantiate() as Portal
-	portal.global_position = position
+	portal.global_position = start
 	_objects.add_child(portal)
 
 

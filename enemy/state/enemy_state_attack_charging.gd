@@ -8,7 +8,7 @@ const blink_shader: ShaderMaterial = preload("res://base/shader/blink.tres")
 
 var _current_telegraph_time: float = 0.0
 
-func enter(args: Dictionary = {}) -> void:
+func enter(_args: Dictionary = {}) -> void:
 	sprite.material = blink_shader
 
 

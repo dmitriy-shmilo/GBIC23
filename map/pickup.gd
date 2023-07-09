@@ -37,13 +37,13 @@ func _set_item(i: Item) -> void:
 		_body_sprite.texture = i.icon
 
 
-func _on_interactive_component_target_changed(interactor, targets) -> void:
+func _on_interactive_component_target_changed(_interactor, targets) -> void:
 	if is_picked_up:
 		return
 	_animation_player.play("highlight" if targets else "RESET")
 
 
-func _on_interactive_component_interacted(interactor) -> void:
+func _on_interactive_component_interacted(_interactor) -> void:
 	if is_picked_up:
 		return
 	is_picked_up = true

@@ -24,8 +24,11 @@ func physics_process(delta: float) -> void:
 
 	_current_looting_period += delta
 	if _current_looting_period >= looting_period:
+		var pickup = _loot.owner as Pickup
+		if pickup.is_picked_up:
+			return
 		state_machine.transition("Ready")
-		inventory.add_item(_loot.owner.item)
+		inventory.add_item(pickup.item)
 		_loot.interact(interactor)
 		_loot = null
 

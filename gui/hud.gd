@@ -41,5 +41,5 @@ func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> 
 	_refresh_health(new_vitals)
 
 
-func _on_inventory_changed(inventory: InventoryComponent, _item: Item) -> void:
+func _on_inventory_changed(_inventory: InventoryComponent, _item: Item) -> void:
 	_inventory_capacity_label.text = "%d/%d" % [inventory.items.size(), inventory.max_items]

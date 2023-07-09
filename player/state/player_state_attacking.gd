@@ -6,7 +6,7 @@ extends State
 
 var _current_attack_duration = 0.0
 
-func enter(args: Dictionary = {}) -> void:
+func enter(_args: Dictionary = {}) -> void:
 	hit_box.monitorable = true
 	hit_box.visible = true
 	_current_attack_duration = 0.0

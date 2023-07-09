@@ -4,7 +4,7 @@ extends Node
 var state_machine: StateMachine
 
 
-func enter(args: Dictionary = {}) -> void:
+func enter(_args: Dictionary = {}) -> void:
 	pass
 
 

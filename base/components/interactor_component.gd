@@ -44,9 +44,9 @@ func _on_refresh_timer_timeout() -> void:
 	_refresh_closest_target()
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	_refresh_closest_target()
 
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 	_refresh_closest_target()
