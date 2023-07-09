@@ -1,6 +1,18 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cpam5jme5qfxi"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cpam5jme5qfxi"]
 
 [ext_resource type="Texture2D" uid="uid://ywhkccg72uyq" path="res://assets/img/terrain.png" id="1_b1fel"]
+[ext_resource type="Texture2D" uid="uid://qwc5s81glkpm" path="res://assets/img/clutter.png" id="1_oaevo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibc4y"]
+texture = ExtResource("1_oaevo")
+0:0/0 = 0
+0:0/0/y_sort_origin = 7
+1:0/0 = 0
+1:0/0/y_sort_origin = 7
+2:0/0 = 0
+2:0/0/y_sort_origin = 7
+3:0/0 = 0
+3:0/0/y_sort_origin = 7
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02pu7"]
 texture = ExtResource("1_b1fel")
@@ -11,6 +23,7 @@ texture = ExtResource("1_b1fel")
 16:0/0 = 0
 16:0/0/terrain_set = 0
 16:0/0/terrain = 2
+16:0/0/probability = 0.7
 16:1/0 = 0
 16:1/0/terrain_set = 0
 16:1/0/terrain = 2
@@ -74,6 +87,14 @@ texture = ExtResource("1_b1fel")
 1:10/0/terrain_set = 0
 1:10/0/terrain = 5
 1:10/0/custom_data_0 = 3
+16:2/0 = 0
+16:2/0/terrain_set = 0
+16:2/0/terrain = 2
+16:2/0/probability = 0.3
+17:2/0 = 0
+17:2/0/terrain_set = 0
+17:2/0/terrain = 2
+17:2/0/probability = 0.3
 
 [resource]
 terrain_set_0/mode = 1
@@ -92,3 +113,4 @@ terrain_set_0/terrain_5/color = Color(0.305882, 0.737255, 0.72549, 1)
 custom_data_layer_0/name = "depth"
 custom_data_layer_0/type = 2
 sources/1 = SubResource("TileSetAtlasSource_02pu7")
+sources/0 = SubResource("TileSetAtlasSource_ibc4y")

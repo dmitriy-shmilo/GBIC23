@@ -5,9 +5,11 @@ const TILE_SIZE = 16
 const MIN_SPAWN_DISTANCE = 8
 
 const TERRAIN_LAND = [
-	0, # Grass Lush
-	1, # Grass
 	2, # Sand
+	2, # Sand
+	1, # Grass
+	0, # Grass Lush
+	0, # Grass Lush
 ]
 
 const TERRAIN_WATER = [
@@ -17,25 +19,36 @@ const TERRAIN_WATER = [
 	5, # Deep Water
 ]
 
+const TREES = [
+	Vector2i(0, 0),
+	Vector2i(1, 0),
+	Vector2i(2, 0),
+	Vector2i(3, 0),
+]
+
 const CHEST_NORMAL = preload("res://items/chest_normal.tres")
 const CHEST_RARE = preload("res://items/chest_rare.tres")
+
 const PICKUP_SCENE = preload("res://map/pickup.tscn")
 const PLAYER_SCENE = preload("res://player/player.tscn")
 const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
+const PORTAL_SCENE = preload("res://map/portal.tscn")
 
 @onready var _pause: PauseGui = $"GUI/Pause"
 @onready var _tilemap = $"TileMap"
-@onready var _objects = $"Objects"
-@onready var _player = $"Objects/Player"
+@onready var _objects = $"%Objects"
+@onready var _player = $"%Objects/Player"
 
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
+var _vegetation = FastNoiseLite.new()
 var _enemies = FastNoiseLite.new()
-var _radius = 32
+var _radius = 96
 
 func _ready() -> void:
 	_moisture.seed = randi()
 	_altitude.seed = randi()
+	_vegetation.seed = randi()
 	_enemies.seed = randi()
 	_moisture.frequency *= 4
 	_altitude.frequency *= 4
@@ -51,8 +64,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _place_player() -> void:
 	# TODO: spawn randomly off-center
-	_player.global_position = Vector2(0, 0)
-	pass
+	var position = Vector2.ZERO
+	_player.global_position = position + Vector2.DOWN
+	var portal = PORTAL_SCENE.instantiate() as Portal
+	portal.global_position = position
+	_objects.add_child(portal)
 
 
 func _is_land(x, y) -> bool:
@@ -92,11 +108,17 @@ func _place_loot() -> void:
 
 
 func _place_chest(x, y, is_rare) -> void:
+	var pos = Vector2(x, y)
 	var chest = PICKUP_SCENE.instantiate() as Pickup
 	chest.item = CHEST_NORMAL if is_rare else CHEST_RARE
-	chest.global_position = Vector2(x, y) * TILE_SIZE
+	chest.global_position = pos * (0.5 + TILE_SIZE)
+	_tilemap.erase_cell(1, pos)
+	for cx in range(-2, 2):
+		for cy in range(-2, 2):
+			if randi() % 2 > 0:
+				_tilemap.erase_cell(1, pos + Vector2(cx, cy))
 	_objects.add_child(chest)
-	_place_guards(Vector2(x, y))
+	_place_guards(pos)
 
 
 func _place_guards(center: Vector2i) -> void:
@@ -137,10 +159,15 @@ func _generate_terrain() -> void:
 				altitude_mod = -2.0
 
 			var altitude = clampf(_altitude.get_noise_2d(x / 4.0, y / 4.0) * 2 + altitude_mod, -1.0, 1.0)
-			var moisture = round((_moisture.get_noise_2d(x / 4.0, y / 4.0) + 1.0) / 2.0 * 2.0)
+			var moisture = (_moisture.get_noise_2d(x / 2.0, y / 2.0) + 1.0) / 2.0 * 5.0 # [0 - 5.0]
+
 
 			if altitude > 0:
-				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_LAND[moisture])
+				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_LAND[round(moisture)])
+				if moisture > 1.5 and rsq > 4.0:
+					var vegetation = _vegetation.get_noise_2d(x * 4.0, y * 4.0)
+					if vegetation > 0.4 / moisture:
+						_tilemap.set_cell(1, Vector2i(x, y), 0, TREES.pick_random())
 			else:
 				altitude = 3 - int(round((altitude + 1.0) * 3.0))
 				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_WATER[altitude])

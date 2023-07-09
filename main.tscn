@@ -1,45 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=6 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_nl6uh"]
 [ext_resource type="PackedScene" uid="uid://btailb80t6j47" path="res://player/player.tscn" id="3_y7d5t"]
 [ext_resource type="PackedScene" uid="uid://bttlpvtcf3hnx" path="res://gui/pause.tscn" id="4_3g7bp"]
-[ext_resource type="PackedScene" uid="uid://cx6pihteqs2dx" path="res://map/pickup.tscn" id="5_3jfs2"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
-[ext_resource type="Resource" uid="uid://xqlubc3spyso" path="res://items/chest_rare.tres" id="7_grthw"]
-[ext_resource type="Resource" uid="uid://dqwnqahncd31d" path="res://items/chest_normal.tres" id="8_fcahy"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_t5h54")
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = ExtResource("2_nl6uh")
 format = 2
+layer_0/z_index = -1
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Objects" type="Node2D" parent="TileMap"]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="Player" parent="TileMap/Objects" instance=ExtResource("3_y7d5t")]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="GUI" node_paths=PackedStringArray("vitals", "inventory") instance=ExtResource("5_q1vmy")]
-vitals = NodePath("../../Objects/Player/VitalsComponent")
-inventory = NodePath("../../Objects/Player/InventoryComponent")
+vitals = NodePath("../../TileMap/Objects/Player/VitalsComponent")
+inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 
 [node name="Pause" parent="GUI" node_paths=PackedStringArray("inventory") instance=ExtResource("4_3g7bp")]
-inventory = NodePath("../../Objects/Player/InventoryComponent")
+inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 
-[node name="Objects" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Player" parent="Objects" instance=ExtResource("3_y7d5t")]
-
-[node name="Pickup" parent="Objects" instance=ExtResource("5_3jfs2")]
-position = Vector2(65, 34)
-item = ExtResource("7_grthw")
-
-[node name="Pickup2" parent="Objects" instance=ExtResource("5_3jfs2")]
-position = Vector2(-38, 71)
-item = ExtResource("8_fcahy")
-
-[node name="Pickup3" parent="Objects" instance=ExtResource("5_3jfs2")]
-position = Vector2(63, 73)
-item = ExtResource("8_fcahy")
-
-[editable path="Objects/Player"]
+[editable path="TileMap/Objects/Player"]
