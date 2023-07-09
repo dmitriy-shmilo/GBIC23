@@ -10,6 +10,7 @@ region = Rect2(0, 0, 16, 16)
 [resource]
 script = ExtResource("2_n2lbw")
 strength = 1.0
+type = 1
 loc_name = "it_bandage"
 loc_description = "it_desc_bandage"
 icon = SubResource("AtlasTexture_pl25u")

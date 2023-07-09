@@ -3,6 +3,7 @@ extends Node
 
 signal item_added(inventory, item)
 signal item_dropped(inventory, item)
+signal item_used(inventory, item)
 signal changed(inventory)
 
 
@@ -30,6 +31,18 @@ func drop_item(index: int) -> void:
 	var item = items[index]
 	items.remove_at(index)
 	item_dropped.emit(self, item)
+	changed.emit(self)
+
+
+func use_item(index: int) -> void:
+	if index < 0 or index >= items.size():
+		return
+
+	var item = items[index]
+	if not item is Consumable:
+		return
+	items.remove_at(index)
+	item_used.emit(self, item)
 	changed.emit(self)
 
 

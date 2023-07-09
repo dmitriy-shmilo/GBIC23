@@ -9,7 +9,8 @@ region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_130kt")
-strength = 1.0
+strength = 3.0
+type = 1
 loc_name = "it_first_aid"
 loc_description = "it_desc_first_aid"
 icon = SubResource("AtlasTexture_pl25u")

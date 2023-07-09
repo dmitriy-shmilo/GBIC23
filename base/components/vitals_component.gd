@@ -11,6 +11,14 @@ signal food_changed(vitals)
 @export var needs_food = false
 
 
+func apply_consumable(item: Consumable) -> void:
+	match item.type:
+		Consumable.ConsumableType.HEALTH:
+			current_health = clamp(current_health + item.strength, 0, max_health)
+		Consumable.ConsumableType.FOOD:
+			current_food = clamp(current_food + item.strength * max_food, 0, max_food)
+
+
 func _set_max_health(h):
 	var positive = max_health < h
 	max_health = h

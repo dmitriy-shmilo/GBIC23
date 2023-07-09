@@ -122,3 +122,11 @@ func _on_drop_button_pressed() -> void:
 
 	inventory.drop_item(_last_cell.index)
 	_hide_context_menu()
+
+
+func _on_use_button_pressed() -> void:
+	if _last_cell == null or _last_cell.index < 0:
+		return
+
+	inventory.use_item(_last_cell.index)
+	_hide_context_menu()

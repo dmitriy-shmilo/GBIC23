@@ -178,3 +178,4 @@ max_items = 20
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
 [connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
 [connection signal="item_dropped" from="InventoryComponent" to="." method="_on_inventory_component_item_dropped"]
+[connection signal="item_used" from="InventoryComponent" to="." method="_on_inventory_component_item_used"]

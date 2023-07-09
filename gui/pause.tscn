@@ -147,4 +147,5 @@ text = "ui_back"
 script = ExtResource("3_kh80o")
 
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/UseButton" to="." method="_on_use_button_pressed"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/ContextCancelButton" to="." method="_on_context_cancel_button_pressed"]

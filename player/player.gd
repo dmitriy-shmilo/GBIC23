@@ -12,6 +12,7 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _hit_box: Area2D = $"HitBox"
 @onready var _movement_machine: StateMachine = $"MovementMachine"
 @onready var _audio_player: AudioStreamPlayer = $"AudioPlayer"
+@onready var _vitals: VitalsComponent = $"VitalsComponent"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -82,3 +83,8 @@ func _on_inventory_component_item_dropped(_inventory: InventoryComponent, item: 
 	pickup.global_position = global_position + offset
 	pickup.push(offset)
 	add_sibling(pickup)
+
+
+func _on_inventory_component_item_used(_inventory: InventoryComponent, item: Consumable) -> void:
+	_vitals.apply_consumable(item)
+
