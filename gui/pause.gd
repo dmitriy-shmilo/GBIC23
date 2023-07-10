@@ -176,8 +176,11 @@ func _on_go_home_button_pressed() -> void:
 		_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
 		_audio_player.play()
 
+	await _audio_player.finished
+
 	visible = false
 	get_tree().paused = false
+	get_tree().change_scene_to_file("res://home/hub.tscn")
 
 
 func _on_unload_button_pressed() -> void:
