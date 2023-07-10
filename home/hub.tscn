@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bc67r0dmlug82"]
+[gd_scene load_steps=16 format=3 uid="uid://bc67r0dmlug82"]
 
 [ext_resource type="Script" path="res://home/hub.gd" id="1_ngyb1"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="2_3logs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_kda6n"]
 [ext_resource type="PackedScene" uid="uid://cwqw44qxr36s8" path="res://map/portal.tscn" id="3_tu34s"]
 [ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="5_hgrft"]
+[ext_resource type="PackedScene" uid="uid://bjjapi7y0vwbi" path="res://home/portal_shop.tscn" id="8_4qmre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnnf0"]
 atlas = ExtResource("2_dn1ii")
@@ -53,31 +54,43 @@ layer_0/tile_data = PackedInt32Array(1966120, 786433, 4, 1900584, 983041, 5, 183
 [node name="Portal" parent="TileMap" instance=ExtResource("3_tu34s")]
 position = Vector2(583, 405)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MainScreen" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = -19.5
-offset_right = 36.0
-offset_bottom = 19.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -107.0
+offset_right = 75.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainScreen/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="MainMenu" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="MainMenu" type="VBoxContainer" parent="MainScreen/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MyShopButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="MyShopButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
@@ -85,22 +98,25 @@ text = "ui_my_shop"
 icon = SubResource("AtlasTexture_vnnf0")
 script = ExtResource("3_kda6n")
 
-[node name="PortalShopButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="PortalShopButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_portal_shop"
 icon = SubResource("AtlasTexture_qls1q")
 script = ExtResource("3_kda6n")
 
-[node name="FlavorShopButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="MarketShopButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
-text = "ui_groceries_shop"
+text = "ui_market_shop"
 icon = SubResource("AtlasTexture_px3br")
 script = ExtResource("3_kda6n")
 
-[node name="CarpenterShopButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="CarpenterShopButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
@@ -108,7 +124,8 @@ text = "ui_carpenter_shop"
 icon = SubResource("AtlasTexture_l2j62")
 script = ExtResource("3_kda6n")
 
-[node name="BarracksShopButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="BarracksShopButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
@@ -116,7 +133,8 @@ text = "ui_barracks_shop"
 icon = SubResource("AtlasTexture_l8v1t")
 script = ExtResource("3_kda6n")
 
-[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="SettingsButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
@@ -124,12 +142,17 @@ text = "ui_settings"
 icon = SubResource("AtlasTexture_dr67i")
 script = ExtResource("3_kda6n")
 
-[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/MainMenu"]
+[node name="QuitButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_quit"
 icon = SubResource("AtlasTexture_33dq4")
 script = ExtResource("3_kda6n")
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/MainMenu/PortalShopButton" to="." method="_on_portal_shop_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="PortalShop" parent="." instance=ExtResource("8_4qmre")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MainScreen/PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://owk3ykubwdkx"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://owk3ykubwdkx"]
 
 [ext_resource type="FontFile" uid="uid://cmar5lcfsxpun" path="res://assets/font/monogram-extended.ttf" id="1_kxall"]
 [ext_resource type="Texture2D" uid="uid://bu4wtnob4nf25" path="res://gui/hud_button_active.tres" id="1_ue2jo"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://babcep51jnp8t" path="res://gui/hud_button.tres" id="2_p8ktd"]
 [ext_resource type="Texture2D" uid="uid://ce0poqmra4sjf" path="res://gui/hud_panel.tres" id="2_qp2ng"]
 [ext_resource type="Texture2D" uid="uid://x7vh3rkbv51g" path="res://gui/hud_button_pressed.tres" id="3_xox2m"]
+[ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="6_qybff"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wcsxe"]
 content_margin_left = 4.0
@@ -62,6 +63,21 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf7ro"]
+atlas = ExtResource("6_qybff")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jvibh"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = SubResource("AtlasTexture_rf7ro")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixjm1"]
 texture = ExtResource("2_qp2ng")
 texture_margin_left = 3.0
@@ -82,5 +98,6 @@ Button/styles/normal = SubResource("StyleBoxTexture_eh6vo")
 Button/styles/pressed = SubResource("StyleBoxTexture_rurv7")
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_kxall")
+Panel/styles/panel = SubResource("StyleBoxTexture_jvibh")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ixjm1")
 RichTextLabel/fonts/normal_font = ExtResource("1_kxall")

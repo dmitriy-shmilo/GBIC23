@@ -12,3 +12,13 @@ ui_inventory,Inventory,Инвернтарь,Інвентар
 ui_go_home,Return Home,Вернуться домой,Повернутися додому
 ui_close,Close,Закрыть,Зачинити
 ui_send,Send Home,Отправить,Відправити
+ui_my_shop,My Shop,Мой магазин,Мій магазин
+ui_portal_shop,Portals,Портальня,Портальня
+ui_market_shop,Market,Базар,Базар
+ui_carpenter_shop,Carpenter,Столяр,Столяр
+ui_barracks_shop,Barracks,Казармы,Казарми
+ui_settings,Settings,Настройки,Налаштування
+ui_quit,Quit Game,Выход,Вихід
+ui_buy_portal,Buy Teleport,Купить телепорт,Придбати телепорт
+ui_gossip,Gossip,Болтать,Базікати
+ui_buy_upgrades,Upgrade,Улучшения,Покращення

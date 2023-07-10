@@ -1,0 +1,168 @@
+[gd_scene load_steps=14 format=3 uid="uid://bjjapi7y0vwbi"]
+
+[ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
+[ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
+[ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_2pr2c"]
+[ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="2_as714"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="3_x5nge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfn8k"]
+atlas = ExtResource("1_br65d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57xyd"]
+atlas = ExtResource("1_br65d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qeok"]
+atlas = ExtResource("1_br65d")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fvphj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfn8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57xyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qeok")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yycdh"]
+atlas = ExtResource("2_as714")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qls1q"]
+atlas = ExtResource("1_br65d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0201d"]
+atlas = ExtResource("2_as714")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33dq4"]
+atlas = ExtResource("2_as714")
+region = Rect2(80, 0, 16, 16)
+
+[node name="PortalShop" type="Control" node_paths=PackedStringArray("first_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8htoa")
+first_button = NodePath("PanelContainer/MarginContainer/PortalMenu/PortalGossipButton")
+
+[node name="PortraitPanel" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TileMap" type="TileMap" parent="PortraitPanel"]
+tile_set = ExtResource("2_2pr2c")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720897, 4, 196608, 720897, 4, 262144, 720897, 4, 327680, 720897, 5, 1, 786433, 3, 65537, 786433, 4, 131073, 786433, 4, 196609, 786433, 4, 262145, 786433, 4, 327681, 786433, 5, 2, 786433, 3, 65538, 786433, 4, 131074, 786433, 4, 196610, 786433, 4, 262146, 786433, 4, 327682, 786433, 5, 3, 786433, 3, 65539, 786433, 4, 131075, 786433, 4, 196611, 786433, 4, 262147, 786433, 4, 327683, 786433, 5, 4, 786433, 3, 65540, 786433, 4, 131076, 786433, 4, 196612, 786433, 4, 262148, 786433, 4, 327684, 786433, 5, 5, 851969, 3, 65541, 851969, 4, 131077, 851969, 4, 196613, 851969, 4, 262149, 851969, 4, 327685, 851969, 5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PortraitPanel"]
+position = Vector2(48, 32)
+sprite_frames = SubResource("SpriteFrames_fvphj")
+autoplay = "default"
+frame_progress = 0.536756
+
+[node name="TextPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -536.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="TitleLabel" type="Label" parent="TextPanel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 530.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+text = "ui_portal_shop"
+
+[node name="Text" type="RichTextLabel" parent="TextPanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 526.0
+offset_bottom = 93.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -65.0
+offset_right = 78.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PortalMenu" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PortalGossipButton" type="Button" parent="PanelContainer/MarginContainer/PortalMenu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_gossip"
+icon = SubResource("AtlasTexture_yycdh")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_portal_gossip"
+
+[node name="PortalBuyButton" type="Button" parent="PanelContainer/MarginContainer/PortalMenu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_buy_portal"
+icon = SubResource("AtlasTexture_qls1q")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_portal_buy"
+
+[node name="PortalUpgradesButton" type="Button" parent="PanelContainer/MarginContainer/PortalMenu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_buy_upgrades"
+icon = SubResource("AtlasTexture_0201d")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_portal_upgrade"
+
+[node name="PortalBackButton" type="Button" parent="PanelContainer/MarginContainer/PortalMenu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = SubResource("AtlasTexture_33dq4")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_portal_back"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/PortalMenu/PortalBuyButton" to="." method="_on_portal_buy_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/PortalMenu/PortalBackButton" to="." method="_on_portal_back_button_pressed"]
