@@ -13,7 +13,7 @@ func _ready() -> void:
 func enter(_args: Dictionary = {}) -> void:
 	var dx = randf() * radius * 2 - radius
 	var dy = randf() * radius * 2 - radius
-	target = _anchor_point + Vector2(dx, dy)
+	super.enter({ "target": _anchor_point + Vector2(dx, dy) })
 
 
 func physics_process(delta: float) -> void:

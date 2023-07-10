@@ -13,10 +13,12 @@ func _ready() -> void:
 
 func enter(_args: Dictionary = {}) -> void:
 	_refresh_closest_body()
+	if _closest_body != null:
+		super.enter({ "target": _closest_body.global_position })
 
 
 func physics_process(delta: float) -> void:
-	target = _closest_body.global_position
+	_target = _closest_body.global_position
 	super.physics_process(delta)
 
 

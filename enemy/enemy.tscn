@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=23 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attack_ready.gd" id="11_00jjv"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attack_charging.gd" id="12_xjak5"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attacking.gd" id="13_t655m"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_return.gd" id="14_hmwwa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmlcq"]
 radius = 6.0
@@ -148,16 +149,25 @@ vitals = NodePath("../../VitalsComponent")
 movement = NodePath("../../MovementComponent")
 own_hit_box = NodePath("../../HitBox")
 
-[node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "body", "movement")]
+[node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "unstuck_state", "body", "movement")]
 script = ExtResource("6_m2ea2")
 aggro_area = NodePath("../../AggroArea")
+unstuck_state = NodePath("../Return")
 body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
 
-[node name="Wonder" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "next_state", "body", "movement")]
+[node name="Wonder" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "next_state", "unstuck_state", "body", "movement")]
 script = ExtResource("9_o7mje")
 aggro_area = NodePath("../../AggroArea")
 next_state = NodePath("../Idle")
+unstuck_state = NodePath("../Return")
+body = NodePath("../..")
+movement = NodePath("../../WonderMovementComponent")
+
+[node name="Return" type="Node" parent="MovementMachine" node_paths=PackedStringArray("next_state", "unstuck_state", "body", "movement")]
+script = ExtResource("14_hmwwa")
+next_state = NodePath("../Wonder")
+unstuck_state = NodePath("../Wonder")
 body = NodePath("../..")
 movement = NodePath("../../WonderMovementComponent")
 
