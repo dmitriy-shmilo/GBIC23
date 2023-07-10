@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=17 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_2pr2c"]
 [ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="2_as714"]
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="3_e1anw"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_x5nge"]
+[ext_resource type="SpriteFrames" uid="uid://bbj6e54iwsjcj" path="res://npc/frames/mage_frames.tres" id="4_dcmi1"]
+[ext_resource type="Texture2D" uid="uid://dv0ir8yjkwmnq" path="res://items/icon_chest_rare.tres" id="6_2x2km"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfn8k"]
 atlas = ExtResource("1_br65d")
@@ -71,15 +74,43 @@ offset_right = 100.0
 offset_bottom = 100.0
 
 [node name="TileMap" type="TileMap" parent="PortraitPanel"]
+y_sort_enabled = true
 tile_set = ExtResource("2_2pr2c")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720897, 4, 196608, 720897, 4, 262144, 720897, 4, 327680, 720897, 5, 1, 786433, 3, 65537, 786433, 4, 131073, 786433, 4, 196609, 786433, 4, 262145, 786433, 4, 327681, 786433, 5, 2, 786433, 3, 65538, 786433, 4, 131074, 786433, 4, 196610, 786433, 4, 262146, 786433, 4, 327682, 786433, 5, 3, 786433, 3, 65539, 786433, 4, 131075, 786433, 4, 196611, 786433, 4, 262147, 786433, 4, 327683, 786433, 5, 4, 786433, 3, 65540, 786433, 4, 131076, 786433, 4, 196612, 786433, 4, 262148, 786433, 4, 327684, 786433, 5, 5, 851969, 3, 65541, 851969, 4, 131077, 851969, 4, 196613, 851969, 4, 262149, 851969, 4, 327685, 851969, 5)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PortraitPanel"]
+[node name="IconChestNormal" type="Sprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(66, 32)
+texture = ExtResource("3_e1anw")
+
+[node name="IconChestNormal2" type="Sprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(20, 43)
+texture = ExtResource("3_e1anw")
+
+[node name="IconChestNormal3" type="Sprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(23, 35)
+texture = ExtResource("3_e1anw")
+
+[node name="IconChestNormal4" type="Sprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(13, 38)
+texture = ExtResource("3_e1anw")
+
+[node name="IconChestRare" type="Sprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(73, 27)
+texture = ExtResource("6_2x2km")
+
+[node name="Portal" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(48, 32)
 sprite_frames = SubResource("SpriteFrames_fvphj")
 autoplay = "default"
 frame_progress = 0.536756
+
+[node name="Mage" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(60, 60)
+sprite_frames = ExtResource("4_dcmi1")
+animation = &"idle_down"
+autoplay = "idle_down"
+frame_progress = 0.0741896
 
 [node name="TextPanel" type="Panel" parent="."]
 layout_mode = 1

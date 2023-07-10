@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dqwnqahncd31d"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dqwnqahncd31d"]
 
 [ext_resource type="Script" path="res://items/item.gd" id="1_6vmwq"]
-[ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="1_hswqw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lt4av"]
-atlas = ExtResource("1_hswqw")
-region = Rect2(0, 0, 16, 16)
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="1_im5om"]
 
 [resource]
 script = ExtResource("1_6vmwq")
 loc_name = "it_chest_normal"
 loc_description = "it_desc_chest_normal"
-icon = SubResource("AtlasTexture_lt4av")
+icon = ExtResource("1_im5om")
