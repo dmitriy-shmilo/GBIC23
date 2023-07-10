@@ -178,9 +178,15 @@ func _on_go_home_button_pressed() -> void:
 
 	await _audio_player.finished
 
+	# TODO: return home intermediate screen
+	for i in inventory.items:
+		if not i is Consumable:
+			SaveManager.data.money += 20
+
 	visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://home/hub.tscn")
+	SaveManager.save_data()
 
 
 func _on_unload_button_pressed() -> void:

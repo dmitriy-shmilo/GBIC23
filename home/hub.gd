@@ -2,6 +2,7 @@ class_name Hub
 extends Control
 
 @onready var _main_screen: Control = $"%MainScreen"
+@onready var _money_label: Label = $"%MoneyLabel"
 
 #shop buttons
 @onready var _my_shop_button: Button = $"%MyShopButton"
@@ -36,6 +37,8 @@ func _ready() -> void:
 		shop_button.pressed.connect(_on_shop_button_pressed.bind(shop))
 
 	_my_shop_button.grab_focus()
+	SaveManager.data.money_changed.connect(_on_save_data_money_changed)
+	_on_save_data_money_changed(0, SaveManager.data.money)
 
 
 func _on_shop_back_pressed(shop_button: Button, shop: HubShop) -> void:
@@ -50,5 +53,10 @@ func _on_shop_button_pressed(shop: HubShop) -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	# TODO: save
+	SaveManager.save_data()
 	get_tree().quit()
+
+
+func _on_save_data_money_changed(_old: int, new: int) -> void:
+	# TODO: track max money
+	_money_label.text = "%d/%d" % [new, 1000]
