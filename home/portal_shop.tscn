@@ -51,7 +51,7 @@ region = Rect2(96, 32, 16, 16)
 atlas = ExtResource("2_as714")
 region = Rect2(80, 0, 16, 16)
 
-[node name="PortalShop" type="Control" node_paths=PackedStringArray("first_button")]
+[node name="PortalShop" type="Control" node_paths=PackedStringArray("first_button", "hint_label", "button_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,6 +60,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8htoa")
 first_button = NodePath("PanelContainer/MarginContainer/PortalMenu/PortalGossipButton")
+hint_label = NodePath("TextPanel/Text")
+button_container = NodePath("PanelContainer/MarginContainer/PortalMenu")
 
 [node name="PortraitPanel" type="Panel" parent="."]
 layout_mode = 1

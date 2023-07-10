@@ -1,6 +1,8 @@
 class_name BetterButton
 extends Button
 
+@export var loc_hint = ""
+
 var _focus_style: StyleBox = null
 var _temp_focus_style: StyleBox = StyleBoxEmpty.new()
 
