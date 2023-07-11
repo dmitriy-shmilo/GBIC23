@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=23 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" path="res://home/shop_button.gd" id="9_p7rv6"]
 [ext_resource type="Texture2D" uid="uid://dvn1140oc62pa" path="res://home/icons/icon_upgrade.tres" id="11_yk264"]
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="12_bep8d"]
+[ext_resource type="Texture2D" uid="uid://djt8t60scoafq" path="res://home/icons/icon_portal_1.tres" id="13_ng05c"]
+[ext_resource type="Texture2D" uid="uid://cmhw74fabaqp0" path="res://home/icons/icon_portal_2.tres" id="15_gvffg"]
+[ext_resource type="Texture2D" uid="uid://cimksteq5dfnm" path="res://home/icons/icon_portal_3.tres" id="16_shijn"]
+[ext_resource type="Texture2D" uid="uid://dqrm8cotabmr0" path="res://home/icons/icon_portal_4.tres" id="17_vhysc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfn8k"]
 atlas = ExtResource("1_br65d")
@@ -46,18 +50,6 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_qls1q"]
 atlas = ExtResource("1_br65d")
 region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wfkjk"]
-atlas = ExtResource("1_br65d")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uoqcf"]
-atlas = ExtResource("1_br65d")
-region = Rect2(0, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j5eef"]
-atlas = ExtResource("1_br65d")
-region = Rect2(0, 48, 16, 16)
 
 [node name="PortalShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label", "button_container")]
 layout_mode = 3
@@ -241,7 +233,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 text = "ui_portal_buy_1"
-icon = SubResource("AtlasTexture_qls1q")
+icon = ExtResource("13_ng05c")
 script = ExtResource("3_x5nge")
 tag = 0
 loc_hint = "hint_portal_buy_1"
@@ -266,7 +258,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 text = "ui_portal_buy_2"
-icon = SubResource("AtlasTexture_wfkjk")
+icon = ExtResource("15_gvffg")
 script = ExtResource("3_x5nge")
 tag = 1
 loc_hint = "hint_portal_buy_2"
@@ -291,7 +283,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 text = "ui_portal_buy_3"
-icon = SubResource("AtlasTexture_uoqcf")
+icon = ExtResource("16_shijn")
 script = ExtResource("3_x5nge")
 tag = 2
 loc_hint = "hint_portal_buy_3"
@@ -316,7 +308,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2
 text = "ui_portal_buy_4"
-icon = SubResource("AtlasTexture_j5eef")
+icon = ExtResource("17_vhysc")
 script = ExtResource("3_x5nge")
 tag = 3
 loc_hint = "hint_portal_buy_4"
