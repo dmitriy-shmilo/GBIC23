@@ -22,3 +22,7 @@ ui_quit,Quit Game,Выход,Вихід
 ui_buy_portal,Buy Teleport,Купить телепорт,Придбати телепорт
 ui_gossip,Gossip,Болтать,Базікати
 ui_buy_upgrades,Upgrade,Улучшения,Покращення
+ui_portal_buy_1,Near Islands,Ближние острова,Ближні острови
+ui_portal_buy_2,Further Islands,Дальние острова,Дальні острови
+ui_portal_buy_3,Danger Islands,Опасные острова,Небезпечні острови
+ui_portal_buy_4,Rich Islands,Богатые острова,Багаті острови

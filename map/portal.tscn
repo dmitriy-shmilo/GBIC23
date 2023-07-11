@@ -1,38 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwqw44qxr36s8"]
+[gd_scene load_steps=9 format=3 uid="uid://cwqw44qxr36s8"]
 
 [ext_resource type="Script" path="res://map/portal.gd" id="1_71qbk"]
-[ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_cwma8"]
+[ext_resource type="SpriteFrames" uid="uid://bqmx32qqwl6xf" path="res://map/portal_frames_1.tres" id="2_ctw2y"]
 [ext_resource type="PackedScene" uid="uid://ddg55xlax5e6k" path="res://base/components/interactive_component.tscn" id="3_urg5k"]
 [ext_resource type="Material" uid="uid://brk2s8qs2e4sa" path="res://base/shader/outline.tres" id="4_8v1rq"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wwmt"]
-atlas = ExtResource("1_cwma8")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cug1m"]
-atlas = ExtResource("1_cwma8")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t4pna"]
-atlas = ExtResource("1_cwma8")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_053dv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wwmt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cug1m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t4pna")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg13f"]
 size = Vector2(12, 12)
@@ -150,9 +121,8 @@ script = ExtResource("1_71qbk")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_053dv")
+sprite_frames = ExtResource("2_ctw2y")
 autoplay = "default"
-frame_progress = 0.535026
 
 [node name="GoHomeInteractive" parent="." instance=ExtResource("3_urg5k")]
 monitoring = false

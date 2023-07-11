@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://bqmx32qqwl6xf"]
+
+[ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_8sry0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0m0v"]
+atlas = ExtResource("1_8sry0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5tu8"]
+atlas = ExtResource("1_8sry0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuble"]
+atlas = ExtResource("1_8sry0")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0m0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5tu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuble")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
