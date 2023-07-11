@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=26 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -8,7 +8,10 @@
 [ext_resource type="SpriteFrames" uid="uid://bbj6e54iwsjcj" path="res://npc/frames/mage_frames.tres" id="4_dcmi1"]
 [ext_resource type="Texture2D" uid="uid://dv0ir8yjkwmnq" path="res://items/icon_chest_rare.tres" id="6_2x2km"]
 [ext_resource type="Script" path="res://home/shop_menu.gd" id="7_hoa3e"]
+[ext_resource type="SpriteFrames" uid="uid://cqpx60thj4tu0" path="res://map/portal_frames_3.tres" id="7_nb1et"]
+[ext_resource type="SpriteFrames" uid="uid://c02lve8ggc71u" path="res://map/portal_frames_4.tres" id="8_eahwv"]
 [ext_resource type="Texture2D" uid="uid://bij8j5hsoqlyx" path="res://home/icons/icon_gossip.tres" id="8_iighe"]
+[ext_resource type="SpriteFrames" uid="uid://c8n7kulp01xu" path="res://map/portal_frames_2.tres" id="9_2ux4b"]
 [ext_resource type="Texture2D" uid="uid://wvp7lxnivpne" path="res://gui/hud_money.tres" id="9_husay"]
 [ext_resource type="Script" path="res://home/shop_button.gd" id="9_p7rv6"]
 [ext_resource type="Texture2D" uid="uid://dvn1140oc62pa" path="res://home/icons/icon_upgrade.tres" id="11_yk264"]
@@ -30,7 +33,7 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("1_br65d")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fvphj"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_k2mj8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -60,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8htoa")
 initial_menu = NodePath("PortalMenu")
-hint_label = NodePath("TextPanel/Text")
+hint_label = NodePath("TextPanel/TextLabel")
 button_container = NodePath("PortalMenu/MarginContainer/PortalMenu")
 
 [node name="PortraitPanel" type="Panel" parent="."]
@@ -77,37 +80,51 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720897, 4, 196608, 720897, 4, 262144, 720897, 4, 327680, 720897, 5, 1, 786433, 3, 65537, 786433, 4, 131073, 786433, 4, 196609, 786433, 4, 262145, 786433, 4, 327681, 786433, 5, 2, 786433, 3, 65538, 786433, 4, 131074, 786433, 4, 196610, 786433, 4, 262146, 786433, 4, 327682, 786433, 5, 3, 786433, 3, 65539, 786433, 4, 131075, 786433, 4, 196611, 786433, 4, 262147, 786433, 4, 327683, 786433, 5, 4, 786433, 3, 65540, 786433, 4, 131076, 786433, 4, 196612, 786433, 4, 262148, 786433, 4, 327684, 786433, 5, 5, 851969, 3, 65541, 851969, 4, 131077, 851969, 4, 196613, 851969, 4, 262149, 851969, 4, 327685, 851969, 5)
 
 [node name="IconChestNormal" type="Sprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(66, 32)
+position = Vector2(70, 44)
 texture = ExtResource("3_e1anw")
 
 [node name="IconChestNormal2" type="Sprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(20, 43)
+position = Vector2(24, 55)
 texture = ExtResource("3_e1anw")
 
 [node name="IconChestNormal3" type="Sprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(23, 35)
+position = Vector2(27, 47)
 texture = ExtResource("3_e1anw")
 
 [node name="IconChestNormal4" type="Sprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(13, 38)
+position = Vector2(17, 50)
 texture = ExtResource("3_e1anw")
 
 [node name="IconChestRare" type="Sprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(73, 27)
+position = Vector2(77, 39)
 texture = ExtResource("6_2x2km")
 
-[node name="Portal" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(48, 32)
-sprite_frames = SubResource("SpriteFrames_fvphj")
-autoplay = "default"
-frame_progress = 0.536756
-
 [node name="Mage" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
-position = Vector2(60, 60)
+position = Vector2(64, 72)
 sprite_frames = ExtResource("4_dcmi1")
 animation = &"idle_down"
 autoplay = "idle_down"
 frame_progress = 0.775126
+
+[node name="Portal2" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(52, 44)
+sprite_frames = SubResource("SpriteFrames_k2mj8")
+autoplay = "default"
+
+[node name="Portal3" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(39, 19)
+sprite_frames = ExtResource("7_nb1et")
+autoplay = "default"
+
+[node name="Portal4" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(78, 21)
+sprite_frames = ExtResource("8_eahwv")
+autoplay = "default"
+
+[node name="Portal5" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(14, 32)
+sprite_frames = ExtResource("9_2ux4b")
+autoplay = "default"
 
 [node name="TextPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -129,7 +146,7 @@ offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 text = "ui_portal_shop"
 
-[node name="Text" type="RichTextLabel" parent="TextPanel"]
+[node name="TextLabel" type="RichTextLabel" parent="TextPanel"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 23.0
@@ -166,7 +183,6 @@ layout_mode = 2
 [node name="PortalGossipButton" type="Button" parent="PortalMenu/MarginContainer/PortalMenu"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_gossip"
 icon = ExtResource("8_iighe")
 script = ExtResource("3_x5nge")
@@ -333,3 +349,5 @@ text = "ui_back"
 icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
 loc_hint = "hint_portal_back"
+
+[connection signal="pressed" from="PortalMenu/MarginContainer/PortalMenu/PortalGossipButton" to="." method="_on_portal_gossip_button_pressed"]
