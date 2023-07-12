@@ -7,7 +7,6 @@ signal item_used(inventory, item)
 signal item_removed(inventory, item)
 signal changed(inventory)
 
-@export var loc_name = ""
 @export var max_items = 1: set = _set_max_items
 
 var items: Array[Item]: get = _get_items

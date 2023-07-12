@@ -7,16 +7,23 @@ signal money_changed(old, new)
 @export var money = 0: set = set_money
 
 ## Permanent player storage. Persisted between runs.
-@export var player_storage = Inventory.new()
+@export var storage_inventory = Inventory.new()
+
+## Permanent bagels for sale storage.
+@export var counter_inventory = Inventory.new()
 
 ## Temporary storage filled when interacting with a portal.
-## Eventually transfers itc contents to player_storage.
-@export var portal_storage = Inventory.new()
+## Eventually transfers itc contents to storage_inventory.
+@export var portal_inventory = Inventory.new()
 
 ## Temporary player inventory. Can transfer items to
-## portal_storage when interacting with the portal.
-## Transfers all items to player_storage upon return to the hub.
-@export var player_pockets = Inventory.new()
+## portal_inventory when interacting with the portal.
+## Transfers all items to storage_inventory upon return to the hub.
+@export var pockets_inventory = Inventory.new()
+
+## Hub market inventory. Is cleared and restocked every time the player
+## returns to town.
+@export var market_inventory = Inventory.new()
 
 func set_money(value: int) -> void:
 	var old = money

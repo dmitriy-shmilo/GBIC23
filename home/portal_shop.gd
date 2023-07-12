@@ -34,7 +34,6 @@ var _gossip = [
 func _ready() -> void:
 	super._ready()
 	for b in _portal_buy_buttons:
-		b.focus_entered.connect(_on_shop_button_focused.bind(b))
 		b.pressed.connect(_on_portal_buy_button_pressed.bind(b))
 	_exit_button.focus_entered.connect(_on_shop_button_focused.bind(_exit_button))
 

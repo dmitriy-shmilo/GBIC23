@@ -25,7 +25,7 @@ var _last_cell: InventoryCell = null
 var _is_portal = false
 
 func _ready() -> void:
-	_storage_inventory.inventory = SaveManager.data.player_storage
+	_storage_inventory.inventory = SaveManager.data.pockets_inventory
 	visible = false
 	player_inventory.connect("changed", _on_inventory_changed)
 	_on_inventory_changed(player_inventory)

@@ -25,6 +25,8 @@ func set_inventory(value) -> void:
 	if inventory != null:
 		inventory.changed.disconnect(_on_inventory_changed)
 	inventory = value
+	if inventory == null:
+		return
 	inventory.changed.connect(_on_inventory_changed)
 	_on_inventory_changed(inventory)
 

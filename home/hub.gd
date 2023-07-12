@@ -4,6 +4,11 @@ extends Control
 @onready var _main_screen: Control = $"%MainScreen"
 @onready var _money_label: Label = $"%MoneyLabel"
 
+# inventories
+@onready var _storage_inventory: Node = %StorageInventory
+@onready var _counter_inventory: Node = %CounterInventory
+@onready var _market_inventory: Node = %MarketInventory
+
 #shop buttons
 @onready var _my_shop_button: Button = $"%MyShopButton"
 @onready var _portal_shop_button: Button = $"%PortalShopButton"
@@ -20,13 +25,18 @@ extends Control
 
 # shops
 @onready var _portal_shop: PortalShop = $"%PortalShop"
+@onready var _my_shop: MyShop = $"%MyShop"
 @onready var _shops = [
-	HubShop.new(),
+	_my_shop,
 	_portal_shop
 ]
 
 
 func _ready() -> void:
+	_storage_inventory.inventory = SaveManager.data.storage_inventory
+	_counter_inventory.inventory = SaveManager.data.counter_inventory
+	_market_inventory.inventory = SaveManager.data.market_inventory
+
 	_main_screen.visible = true
 
 	for i in range(_shops.size()):

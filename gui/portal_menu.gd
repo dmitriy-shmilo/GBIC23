@@ -28,7 +28,7 @@ func _ready() -> void:
 		min(MAX_INV_HEIGHT, player_inventory.total_slots() * 32 / 8))
 	_portal_inventory_grid.custom_minimum_size = Vector2(0,
 		min(MAX_INV_HEIGHT, player_inventory.total_slots() * 32 / 8))
-	_storage_inventory.inventory = SaveManager.data.player_storage
+	_storage_inventory.inventory = SaveManager.data.storage_inventory
 	visible = false
 	_context_menu.visible = false
 

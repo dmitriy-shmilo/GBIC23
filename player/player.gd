@@ -21,7 +21,7 @@ var _direction_suffix = "down"
 var _animation_root = "idle"
 
 func _ready() -> void:
-	_inventory.inventory = SaveManager.data.player_pockets
+	_inventory.inventory = SaveManager.data.pockets_inventory
 
 
 func _play_animation() -> void:

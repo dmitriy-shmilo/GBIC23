@@ -1,0 +1,219 @@
+[gd_scene load_steps=14 format=3 uid="uid://xpppcroatuff"]
+
+[ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
+[ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
+[ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="3_jg2ct"]
+[ext_resource type="Script" path="res://home/shop_menu.gd" id="4_sfkn1"]
+[ext_resource type="Texture2D" uid="uid://8m6p0fpu3pjw" path="res://home/icons/icon_calendar.tres" id="5_cyc7b"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="6_jga7i"]
+[ext_resource type="Script" path="res://home/shop_button.gd" id="8_mjvgj"]
+[ext_resource type="Texture2D" uid="uid://bi7d2i5plaf1p" path="res://home/icons/icon_bagel.tres" id="9_7t1tp"]
+[ext_resource type="Texture2D" uid="uid://wvp7lxnivpne" path="res://gui/hud_money.tres" id="9_jqoxp"]
+[ext_resource type="Texture2D" uid="uid://cs1c3vdsy7a28" path="res://home/icons/icon_quest.tres" id="9_uhtag"]
+[ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="10_nmuhl"]
+[ext_resource type="Texture2D" uid="uid://ddlm2sbgospat" path="res://home/icons/icon_ration.tres" id="10_yi8qa"]
+[ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="11_mgysl"]
+
+[node name="MyShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6y1ov")
+initial_menu = NodePath("MainMenu")
+hint_label = NodePath("TextPanel/TextLabel")
+
+[node name="PortraitPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TileMap" type="TileMap" parent="PortraitPanel"]
+y_sort_enabled = true
+tile_set = ExtResource("2_qvyim")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720897, 4, 196608, 720897, 4, 262144, 720897, 4, 327680, 720897, 5, 1, 786433, 3, 65537, 786433, 4, 131073, 786433, 4, 196609, 786433, 4, 262145, 786433, 4, 327681, 786433, 5, 2, 786433, 3, 65538, 786433, 4, 131074, 786433, 4, 196610, 786433, 4, 262146, 786433, 4, 327682, 786433, 5, 3, 786433, 3, 65539, 786433, 4, 131075, 786433, 4, 196611, 786433, 4, 262147, 786433, 4, 327683, 786433, 5, 4, 786433, 3, 65540, 786433, 4, 131076, 786433, 4, 196612, 786433, 4, 262148, 786433, 4, 327684, 786433, 5, 5, 851969, 3, 65541, 851969, 4, 131077, 851969, 4, 196613, 851969, 4, 262149, 851969, 4, 327685, 851969, 5)
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(65538, 196610, 1, 131075, 65538, 0, 196611, 393218, 0, 65540, 65536, 0, 131076, 196610, 0, 196612, 65536, 0, 65541, 0, 0, 196613, 0, 0)
+
+[node name="Character" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(38, 44)
+sprite_frames = ExtResource("3_jg2ct")
+animation = &"idle_down"
+autoplay = "idle_down"
+frame_progress = 0.0485432
+
+[node name="TextPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -536.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="TitleLabel" type="Label" parent="TextPanel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 530.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_my_shop"
+
+[node name="TextLabel" type="RichTextLabel" parent="TextPanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 526.0
+offset_bottom = 93.0
+
+[node name="MainMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -65.0
+offset_right = 78.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_sfkn1")
+initial_button = NodePath("MarginContainer/Menu/ReportButton")
+back_button = NodePath("MarginContainer/Menu/BackButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Menu" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="ReportButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_my_report"
+icon = ExtResource("5_cyc7b")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_report"
+
+[node name="KitchenButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_my_kitchen"
+icon = ExtResource("9_7t1tp")
+script = ExtResource("8_mjvgj")
+submenu = NodePath("")
+loc_hint = "hint_my_kitchen"
+
+[node name="StorageButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_my_counter"
+icon = ExtResource("9_jqoxp")
+script = ExtResource("8_mjvgj")
+submenu = NodePath("../../../../StorageMenu")
+loc_hint = "hint_my_counter"
+
+[node name="CanneryButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_my_cannery"
+icon = ExtResource("10_yi8qa")
+script = ExtResource("8_mjvgj")
+submenu = NodePath("")
+loc_hint = "hint_my_cannery"
+
+[node name="QuestsButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_my_quests"
+icon = ExtResource("9_uhtag")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_quests"
+
+[node name="BackButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="StorageMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_sfkn1")
+initial_button = NodePath("VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("VBoxContainer/HBoxContainer/BackButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StorageMenu"]
+layout_mode = 2
+
+[node name="StorageInventoryLabel" type="Label" parent="StorageMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+
+[node name="StorageInventoryGrid" parent="StorageMenu/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="StorageMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="CounterInventoryLabel" type="Label" parent="StorageMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_counter_inventory"
+
+[node name="CounterInventoryGrid" parent="StorageMenu/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StorageMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="StorageMenu/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"

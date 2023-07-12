@@ -6,7 +6,7 @@ extends Node2D
 
 func _ready() -> void:
 	# TODO: setup max count
-	_inventory.inventory = SaveManager.data.portal_storage
+	_inventory.inventory = SaveManager.data.portal_inventory
 
 
 func _on_go_home_interactive_target_changed(_interactor, targets) -> void:
