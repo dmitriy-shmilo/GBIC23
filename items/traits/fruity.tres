@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Trait" load_steps=2 format=3 uid="uid://b28j7rjxn68gf"]
+
+[ext_resource type="Script" path="res://items/trait.gd" id="1_mn2gt"]
+
+[resource]
+script = ExtResource("1_mn2gt")
+loc_name = "trait_fruity"
+color = Color(0.952941, 0.701961, 0.690196, 1)

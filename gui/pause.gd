@@ -118,7 +118,10 @@ func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 		_audio_player.play()
 
 	_item_name.text = tr(cell.item.loc_name).capitalize()
-	_item_description.text = tr(cell.item.loc_description)
+	if cell.item is Ingredient:
+		_item_description.text = cell.item.get_rich_description()
+	else:
+		_item_description.text = tr(cell.item.loc_description)
 
 
 func _on_inventory_button_pressed(cell: InventoryCell) -> void:
