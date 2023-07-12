@@ -10,6 +10,8 @@ const EMPTY_ITEM = preload("res://items/empty.tres")
 
 func _ready() -> void:
 	_set_item(item)
+	focus_entered.connect(_on_focus_entered)
+	pressed.connect(_on_pressed)
 
 
 func _set_item(value: Item) -> void:
@@ -19,3 +21,11 @@ func _set_item(value: Item) -> void:
 			_item_icon.texture = value.icon
 		else:
 			item = EMPTY_ITEM
+
+
+func _on_focus_entered() -> void:
+	GuiAudio.play_navigation()
+
+
+func _on_pressed() -> void:
+	GuiAudio.play_select()

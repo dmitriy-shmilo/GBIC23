@@ -6,9 +6,10 @@ extends BetterButton
 
 func _ready() -> void:
 	super._ready()
-	pressed.connect(_on_pressed)
+
 
 
 func _on_pressed() -> void:
+	super._on_pressed()
 	if submenu != null:
 		(owner as HubShop).push_menu(submenu)

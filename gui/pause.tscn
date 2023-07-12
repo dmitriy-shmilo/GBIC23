@@ -88,9 +88,6 @@ layout_mode = 2
 text = "ui_close"
 script = ExtResource("3_kh80o")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-
 [node name="ContextMenu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 0

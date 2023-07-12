@@ -2,9 +2,6 @@ class_name PauseGui
 extends Control
 
 const EMPTY_ITEM = preload("res://items/empty.tres")
-const CANCEL_SFX = preload("res://assets/sfx/cancel.tres")
-const MENU_NAVIGATION_SFX = preload("res://assets/sfx/menu_navigation.tres")
-const MENU_SELECT_SFX = preload("res://assets/sfx/menu_select.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
 @export var player_inventory: InventoryComponent = null
@@ -12,7 +9,6 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
 @onready var _storage_inventory: InventoryComponent = $"StorageInventoryComponent"
 @onready var _inventory_grid: GridContainer = $"%InventoryGrid"
-@onready var _audio_player: AudioStreamPlayer = $"AudioStreamPlayer"
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
 @onready var _use_button: Button = $"%UseButton"
 @onready var _context_cancel_button: Button = %ContextCancelButton
@@ -45,8 +41,7 @@ func enter(is_portal: bool) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and visible:
 		if _should_play_sfx:
-			_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
-			_audio_player.play()
+			GuiAudio.play_cancel()
 		visible = false
 		get_tree().paused = false
 		get_viewport().set_input_as_handled()
@@ -100,8 +95,7 @@ func _on_inventory_changed(inventory: InventoryComponent) -> void:
 
 func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 	if _should_play_sfx:
-		_audio_player.stream = MENU_NAVIGATION_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_navigation()
 
 	_item_name.text = tr(cell.item.loc_name).capitalize()
 	if cell.item is Ingredient:
@@ -113,20 +107,17 @@ func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 func _on_inventory_button_pressed(cell: InventoryCell) -> void:
 	if cell.item == EMPTY_ITEM:
 		cell.button_pressed = false
-		_audio_player.stream = CANCEL_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_cancel()
 		return
 
 	if _should_play_sfx:
-		_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_select()
 
 	_show_context_menu(cell)
 
 
 func _on_context_cancel_button_pressed() -> void:
-	_audio_player.stream = CANCEL_SFX.items.pick_random()
-	_audio_player.play()
+	GuiAudio.play_cancel()
 	_hide_context_menu()
 
 
@@ -136,8 +127,7 @@ func _on_drop_button_pressed() -> void:
 		return
 
 	if _should_play_sfx:
-		_audio_player.stream = CANCEL_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_cancel()
 
 	player_inventory.drop_item(_last_cell.index)
 	_hide_context_menu()
@@ -153,8 +143,7 @@ func _on_use_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	if _should_play_sfx:
-		_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_select()
 
 	visible = false
 	get_tree().paused = false
@@ -162,5 +151,4 @@ func _on_close_button_pressed() -> void:
 
 func _on_button_focus_entered() -> void:
 	if _should_play_sfx:
-		_audio_player.stream = MENU_NAVIGATION_SFX.items.pick_random()
-		_audio_player.play()
+		GuiAudio.play_navigation()

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://m77dega82qtk"]
+
+[ext_resource type="Script" path="res://gui/gui_audio_autoload.gd" id="1_6b2gc"]
+
+[node name="GuiAudioAutoload" type="Node"]
+script = ExtResource("1_6b2gc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
