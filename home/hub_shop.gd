@@ -5,15 +5,13 @@ signal back_pressed()
 
 @export var initial_menu: ShopMenu = null
 @export var hint_label: RichTextLabel = null
-@export var button_container: Control = null
 
-var _menu_stack = []
+var _menu_stack: Array[ShopMenu] = []
 
 func _ready() -> void:
-	if button_container != null:
-		for button in button_container.get_children():
-			if button is BetterButton:
-				button.focus_entered.connect(_on_shop_button_focused.bind(button))
+	for menu in get_children():
+		if menu is ShopMenu:
+			menu.button_focused.connect(_on_shop_button_focused)
 
 
 func enter() -> void:
@@ -27,8 +25,8 @@ func exit() -> void:
 
 
 func push_menu(menu: Control) -> void:
-	if _menu_stack.size() > 1:
-		(_menu_stack[_menu_stack.size() - 1] as Control).visible = false
+	if _menu_stack.size() > 0:
+		_menu_stack[_menu_stack.size() - 1].exit()
 	_menu_stack.push_back(menu)
 	menu.enter()
 

@@ -54,7 +54,7 @@ animations = [{
 atlas = ExtResource("1_br65d")
 region = Rect2(0, 0, 16, 16)
 
-[node name="PortalShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label", "button_container")]
+[node name="PortalShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,7 +64,6 @@ grow_vertical = 2
 script = ExtResource("1_8htoa")
 initial_menu = NodePath("PortalMenu")
 hint_label = NodePath("TextPanel/TextLabel")
-button_container = NodePath("PortalMenu/MarginContainer/PortalMenu")
 
 [node name="PortraitPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -144,6 +143,7 @@ offset_top = 4.0
 offset_right = 530.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_portal_shop"
 
 [node name="TextLabel" type="RichTextLabel" parent="TextPanel"]
@@ -152,6 +152,7 @@ offset_left = 3.0
 offset_top = 23.0
 offset_right = 526.0
 offset_bottom = 93.0
+bbcode_enabled = true
 
 [node name="PortalMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
 layout_mode = 1
@@ -262,7 +263,6 @@ stretch_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal1"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "5"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -287,7 +287,6 @@ stretch_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal2"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "15"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -312,7 +311,6 @@ stretch_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal3"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "50"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -337,7 +335,6 @@ stretch_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal4"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "150"
 horizontal_alignment = 2
 vertical_alignment = 1
