@@ -7,8 +7,10 @@ const MENU_NAVIGATION_SFX = preload("res://assets/sfx/menu_navigation.tres")
 const MENU_SELECT_SFX = preload("res://assets/sfx/menu_select.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
-@export var inventory: InventoryComponent = null
+@export var player_inventory: InventoryComponent = null
+@export var portal_inventory: InventoryComponent = null
 
+@onready var _storage_inventory: InventoryComponent = $"StorageInventoryComponent"
 @onready var _inventory_grid: GridContainer = $"%InventoryGrid"
 @onready var _audio_player: AudioStreamPlayer = $"AudioStreamPlayer"
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
@@ -24,9 +26,10 @@ var _last_cell: InventoryCell = null
 var _is_portal = false
 
 func _ready() -> void:
+	_storage_inventory.inventory = SaveManager.data.player_storage
 	visible = false
-	inventory.connect("changed", _on_inventory_changed)
-	_on_inventory_changed(inventory)
+	player_inventory.connect("changed", _on_inventory_changed)
+	_on_inventory_changed(player_inventory)
 	_context_menu.visible = false
 
 
@@ -91,7 +94,7 @@ func _hide_context_menu() -> void:
 		_should_play_sfx = true
 
 
-func _on_inventory_changed(_inventory: InventoryComponent) -> void:
+func _on_inventory_changed(inventory: InventoryComponent) -> void:
 	var existing_count = _inventory_grid.get_child_count()
 	if existing_count < inventory.max_items:
 		for i in range(inventory.max_items - existing_count):
@@ -153,7 +156,7 @@ func _on_drop_button_pressed() -> void:
 		_audio_player.stream = CANCEL_SFX.items.pick_random()
 		_audio_player.play()
 
-	inventory.drop_item(_last_cell.index)
+	player_inventory.drop_item(_last_cell.index)
 	_hide_context_menu()
 
 
@@ -161,7 +164,7 @@ func _on_use_button_pressed() -> void:
 	if _last_cell == null or _last_cell.index < 0:
 		return
 
-	inventory.use_item(_last_cell.index)
+	player_inventory.use_item(_last_cell.index)
 	_hide_context_menu()
 
 
@@ -182,10 +185,18 @@ func _on_go_home_button_pressed() -> void:
 	await _audio_player.finished
 
 	# TODO: return home intermediate screen
-	for i in inventory.items:
+	for i in player_inventory.items:
+		_storage_inventory.add_item(i)
 		if not i is Consumable:
-			SaveManager.data.money += 20
+			SaveManager.data.money += 10
 
+	for i in portal_inventory.items:
+		_storage_inventory.add_item(i)
+		if not i is Consumable:
+			SaveManager.data.money += 10
+
+	player_inventory.clear()
+	portal_inventory.clear()
 	visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://home/hub.tscn")
@@ -200,7 +211,9 @@ func _on_unload_button_pressed() -> void:
 		_audio_player.stream = CANCEL_SFX.items.pick_random()
 		_audio_player.play()
 
-	inventory.remove_item(_last_cell.index)
+	# TODO: check for portal inventory capacity
+	var item = player_inventory.remove_item(_last_cell.index)
+	portal_inventory.add_item(item)
 	_hide_context_menu()
 
 

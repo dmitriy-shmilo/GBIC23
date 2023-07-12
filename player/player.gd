@@ -15,9 +15,13 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _movement_machine: StateMachine = $"MovementMachine"
 @onready var _audio_player: AudioStreamPlayer = $"AudioPlayer"
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
+@onready var _inventory: InventoryComponent = $"InventoryComponent"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
+
+func _ready() -> void:
+	_inventory.inventory = SaveManager.data.player_pockets
 
 
 func _play_animation() -> void:
@@ -80,7 +84,7 @@ func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool
 		visible = false
 
 
-func _on_inventory_component_item_dropped(_inventory: InventoryComponent, item: Item) -> void:
+func _on_inventory_component_item_dropped(_i: InventoryComponent, item: Item) -> void:
 	var pickup = PICKUP_SCENE.instantiate() as Pickup
 	pickup.item = item
 	var offset = Vector2(randf() * ITEM_DROP_RANGE - ITEM_DROP_RANGE / 2.0, randf() * ITEM_DROP_RANGE - ITEM_DROP_RANGE / 2.0)
@@ -89,6 +93,6 @@ func _on_inventory_component_item_dropped(_inventory: InventoryComponent, item: 
 	add_sibling(pickup)
 
 
-func _on_inventory_component_item_used(_inventory: InventoryComponent, item: Consumable) -> void:
+func _on_inventory_component_item_used(_i: InventoryComponent, item: Consumable) -> void:
 	_vitals.apply_consumable(item)
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwqw44qxr36s8"]
+[gd_scene load_steps=10 format=3 uid="uid://cwqw44qxr36s8"]
 
 [ext_resource type="Script" path="res://map/portal.gd" id="1_71qbk"]
 [ext_resource type="SpriteFrames" uid="uid://bqmx32qqwl6xf" path="res://map/portal_frames_1.tres" id="2_ctw2y"]
 [ext_resource type="PackedScene" uid="uid://ddg55xlax5e6k" path="res://base/components/interactive_component.tscn" id="3_urg5k"]
 [ext_resource type="Material" uid="uid://brk2s8qs2e4sa" path="res://base/shader/outline.tres" id="4_8v1rq"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="5_tx3dr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg13f"]
 size = Vector2(12, 12)
@@ -151,5 +152,8 @@ horizontal_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_ifh1w")
 }
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("5_tx3dr")
 
 [connection signal="target_changed" from="GoHomeInteractive" to="." method="_on_go_home_interactive_target_changed"]

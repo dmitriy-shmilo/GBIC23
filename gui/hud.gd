@@ -13,8 +13,7 @@ const MAX_ICONS = 3
 
 func _ready() -> void:
 	vitals.connect("health_changed", _on_vitals_health_changed)
-	inventory.connect("item_added", _on_inventory_changed)
-	inventory.connect("item_dropped", _on_inventory_changed)
+	inventory.changed.connect(_on_inventory_changed)
 
 	for i in range(MAX_ICONS):
 		var heart_rect = _health_icon_template.duplicate(0)

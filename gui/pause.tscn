@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bttlpvtcf3hnx"]
+[gd_scene load_steps=5 format=3 uid="uid://bttlpvtcf3hnx"]
 
 [ext_resource type="Script" path="res://gui/pause.gd" id="1_jmxno"]
 [ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="2_swf25"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_kh80o"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="4_03nxb"]
 
 [node name="Pause" type="Control"]
 process_mode = 2
@@ -169,6 +170,9 @@ focus_previous = NodePath("../UseButton")
 theme = ExtResource("2_swf25")
 text = "ui_back"
 script = ExtResource("3_kh80o")
+
+[node name="StorageInventoryComponent" type="Node" parent="."]
+script = ExtResource("4_03nxb")
 
 [connection signal="focus_entered" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_button_focus_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

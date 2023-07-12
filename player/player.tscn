@@ -177,7 +177,7 @@ needs_food = true
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_rhoiw")
-max_items = 20
+max_items = 5
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 

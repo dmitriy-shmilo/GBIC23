@@ -38,6 +38,7 @@ const PORTAL_SCENE = preload("res://map/portal.tscn")
 @onready var _tilemap = $"TileMap"
 @onready var _objects = $"%Objects"
 @onready var _player = $"%Objects/Player"
+@onready var _portal = $"%Objects/Portal"
 
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
@@ -66,9 +67,8 @@ func _place_player() -> void:
 	# TODO: spawn randomly off-center
 	var start = Vector2.ZERO
 	_player.global_position = start + Vector2.DOWN
-	var portal = PORTAL_SCENE.instantiate() as Portal
-	portal.global_position = start
-	_objects.add_child(portal)
+	_portal.global_position = start
+
 
 
 func _is_land(x, y) -> bool:

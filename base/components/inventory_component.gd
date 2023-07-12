@@ -7,19 +7,17 @@ signal item_used(inventory, item)
 signal item_removed(inventory, item)
 signal changed(inventory)
 
-
+@export var loc_name = ""
 @export var max_items = 1: set = _set_max_items
-@export var items : Array[Item] = []
 
+var items: Array[Item]: get = _get_items
+var inventory: Inventory = null
 
 func has_space() -> bool:
 	return items.size() < max_items
 
 
 func add_item(item: Item) -> void:
-	if items.size() >= max_items:
-		return
-
 	items.push_back(item)
 	item_added.emit(self, item)
 	changed.emit(self)
@@ -47,7 +45,7 @@ func use_item(index: int) -> void:
 	changed.emit(self)
 
 
-func remove_item(index: int) -> void:
+func remove_item(index: int) -> Item:
 	if index < 0 or index >= items.size():
 		return
 
@@ -55,6 +53,16 @@ func remove_item(index: int) -> void:
 	items.remove_at(index)
 	item_removed.emit(self, item)
 	changed.emit(self)
+	return item
+
+
+func clear() -> void:
+	items.clear()
+	changed.emit(self)
+
+
+func _get_items() -> Array[Item]:
+	return inventory.items
 
 
 func _set_max_items(value: int) -> void:
