@@ -13,6 +13,11 @@ signal changed(inventory)
 var items: Array[Item]: get = _get_items
 var inventory: Inventory = null
 
+
+func total_slots() -> int:
+	return max(max_items, items.size())
+
+
 func has_space() -> bool:
 	return items.size() < max_items
 

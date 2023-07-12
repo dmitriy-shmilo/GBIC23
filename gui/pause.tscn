@@ -88,12 +88,6 @@ layout_mode = 2
 text = "ui_close"
 script = ExtResource("3_kh80o")
 
-[node name="GoHomeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "ui_go_home"
-script = ExtResource("3_kh80o")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 
@@ -118,29 +112,12 @@ custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="UnloadButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-focus_neighbor_left = NodePath("../ContextCancelButton")
-focus_neighbor_top = NodePath("../ContextCancelButton")
-focus_neighbor_right = NodePath("../DropButton")
-focus_neighbor_bottom = NodePath("../DropButton")
-focus_next = NodePath("../DropButton")
-focus_previous = NodePath("../ContextCancelButton")
-theme = ExtResource("2_swf25")
-text = "ui_send"
-script = ExtResource("3_kh80o")
-
 [node name="DropButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_left = NodePath("../UnloadButton")
-focus_neighbor_top = NodePath("../UnloadButton")
 focus_neighbor_right = NodePath("../UseButton")
 focus_neighbor_bottom = NodePath("../UseButton")
 focus_next = NodePath("../UseButton")
-focus_previous = NodePath("../UnloadButton")
 theme = ExtResource("2_swf25")
 text = "ui_drop"
 script = ExtResource("3_kh80o")
@@ -163,9 +140,6 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../UseButton")
 focus_neighbor_top = NodePath("../UseButton")
-focus_neighbor_right = NodePath("../UnloadButton")
-focus_neighbor_bottom = NodePath("../UnloadButton")
-focus_next = NodePath("../UnloadButton")
 focus_previous = NodePath("../UseButton")
 theme = ExtResource("2_swf25")
 text = "ui_back"
@@ -173,13 +147,10 @@ script = ExtResource("3_kh80o")
 
 [node name="StorageInventoryComponent" type="Node" parent="."]
 script = ExtResource("4_03nxb")
+max_items = 999
 
 [connection signal="focus_entered" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_button_focus_entered"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="focus_entered" from="Panel/VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_button_focus_entered"]
-[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_go_home_button_pressed"]
-[connection signal="focus_entered" from="ContextMenu/MarginContainer/VBoxContainer/UnloadButton" to="." method="_on_button_focus_entered"]
-[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/UnloadButton" to="." method="_on_unload_button_pressed"]
 [connection signal="focus_entered" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_button_focus_entered"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="focus_entered" from="ContextMenu/MarginContainer/VBoxContainer/UseButton" to="." method="_on_button_focus_entered"]

@@ -1,0 +1,170 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhmaxhmwd5aq5"]
+
+[ext_resource type="Script" path="res://gui/portal_menu.gd" id="1_7dtn6"]
+[ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="2_lcu42"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="2_stpqn"]
+[ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="3_2pjte"]
+[ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="3_6gh7v"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="4_uammr"]
+[ext_resource type="Texture2D" uid="uid://djt8t60scoafq" path="res://home/icons/icon_portal_1.tres" id="5_tx6kk"]
+
+[node name="PortalMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7dtn6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.215686)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -143.0
+offset_right = 215.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="PlayerInventoryLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+text = "ui_player_inventory"
+horizontal_alignment = 1
+
+[node name="PlayerInventoryGrid" parent="Panel/VBoxContainer" instance=ExtResource("2_lcu42")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="PortalInventoryLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+text = "ui_portal_inventory"
+horizontal_alignment = 1
+
+[node name="PortalInventoryGrid" parent="Panel/VBoxContainer" instance=ExtResource("2_lcu42")]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="ItemNameLabel" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+text = "Item Name"
+
+[node name="ItemDescriptionLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "Item Description"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_close"
+icon = ExtResource("3_6gh7v")
+script = ExtResource("2_stpqn")
+
+[node name="GoHomeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_go_home"
+icon = ExtResource("5_tx6kk")
+script = ExtResource("2_stpqn")
+
+[node name="ContextMenu" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 330.0
+offset_top = 169.0
+offset_right = 416.0
+offset_bottom = 250.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ContextMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContextMenu/MarginContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="UnloadButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../ContextCancelButton")
+focus_neighbor_top = NodePath("../ContextCancelButton")
+focus_neighbor_right = NodePath("../DropButton")
+focus_neighbor_bottom = NodePath("../DropButton")
+focus_next = NodePath("../DropButton")
+focus_previous = NodePath("../ContextCancelButton")
+theme = ExtResource("3_2pjte")
+text = "ui_send"
+script = ExtResource("2_stpqn")
+
+[node name="DropButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../UnloadButton")
+focus_neighbor_top = NodePath("../UnloadButton")
+focus_previous = NodePath("../UnloadButton")
+theme = ExtResource("3_2pjte")
+text = "ui_drop"
+script = ExtResource("2_stpqn")
+
+[node name="ContextCancelButton" type="Button" parent="ContextMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_right = NodePath("../UnloadButton")
+focus_neighbor_bottom = NodePath("../UnloadButton")
+focus_next = NodePath("../UnloadButton")
+theme = ExtResource("3_2pjte")
+text = "ui_back"
+script = ExtResource("2_stpqn")
+
+[node name="StorageInventoryComponent" type="Node" parent="."]
+script = ExtResource("4_uammr")
+max_items = 999
+
+[connection signal="cell_highlighted" from="Panel/VBoxContainer/PlayerInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="Panel/VBoxContainer/PlayerInventoryGrid" to="." method="_on_player_inventory_grid_cell_selected"]
+[connection signal="cell_highlighted" from="Panel/VBoxContainer/PortalInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="Panel/VBoxContainer/PortalInventoryGrid" to="." method="_on_portal_inventory_grid_cell_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_go_home_button_pressed"]
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/UnloadButton" to="." method="_on_unload_button_pressed"]
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
+[connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/ContextCancelButton" to="." method="_on_context_cancel_button_pressed"]

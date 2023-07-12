@@ -21,7 +21,7 @@ func _ready() -> void:
 		_health_container.add_child(heart_rect)
 	_extra_health_label.move_to_front()
 	_refresh_health(vitals)
-	_on_inventory_changed(inventory, null)
+	_on_inventory_changed(inventory)
 
 
 func _refresh_health(new_vitals: VitalsComponent) -> void:
@@ -40,5 +40,5 @@ func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> 
 	_refresh_health(new_vitals)
 
 
-func _on_inventory_changed(_inventory: InventoryComponent, _item: Item) -> void:
+func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 	_inventory_capacity_label.text = "%d/%d" % [inventory.items.size(), inventory.max_items]

@@ -14,12 +14,11 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 @onready var _inventory_grid: GridContainer = $"%InventoryGrid"
 @onready var _audio_player: AudioStreamPlayer = $"AudioStreamPlayer"
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
-@onready var _drop_button: Button = $"%DropButton"
 @onready var _use_button: Button = $"%UseButton"
-@onready var _unload_button: Button = $"%UnloadButton"
+@onready var _context_cancel_button: Button = %ContextCancelButton
 @onready var _item_name: Label = $"%ItemNameLabel"
 @onready var _item_description: RichTextLabel = $"%ItemDescriptionLabel"
-@onready var _go_home_button: Button = $"%GoHomeButton"
+
 
 var _should_play_sfx = false
 var _last_cell: InventoryCell = null
@@ -41,18 +40,10 @@ func enter(is_portal: bool) -> void:
 	_inventory_grid.get_child(0).call_deferred("grab_focus")
 	set_deferred("_should_play_sfx", true)
 
-	if _is_portal:
-		_go_home_button.visible = true
-		_use_button.visible = false
-		_unload_button.visible = true
-	else:
-		_go_home_button.visible = false
-		_use_button.visible = true
-		_unload_button.visible = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") and visible:
 		if _should_play_sfx:
 			_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
 			_audio_player.play()
@@ -67,22 +58,14 @@ func _show_context_menu(cell: InventoryCell) -> void:
 
 	if cell.item is Consumable:
 		_use_button.disabled = false
-		_unload_button.disabled = true
 		_use_button.focus_mode = Control.FOCUS_ALL
-		_unload_button.focus_mode = Control.FOCUS_NONE
 	else:
 		_use_button.disabled = true
-		_unload_button.disabled = false
 		_use_button.focus_mode = Control.FOCUS_NONE
-		_unload_button.focus_mode = Control.FOCUS_ALL
 
 	_context_menu.global_position = cell.global_position + Vector2(8.0, 8.0)
 	_context_menu.visible = true
-
-	if _is_portal:
-		_unload_button.grab_focus()
-	else:
-		_drop_button.grab_focus()
+	_context_cancel_button.grab_focus()
 
 
 func _hide_context_menu() -> void:
@@ -175,46 +158,6 @@ func _on_close_button_pressed() -> void:
 
 	visible = false
 	get_tree().paused = false
-
-
-func _on_go_home_button_pressed() -> void:
-	if _should_play_sfx:
-		_audio_player.stream = MENU_SELECT_SFX.items.pick_random()
-		_audio_player.play()
-
-	await _audio_player.finished
-
-	# TODO: return home intermediate screen
-	for i in player_inventory.items:
-		_storage_inventory.add_item(i)
-		if not i is Consumable:
-			SaveManager.data.money += 10
-
-	for i in portal_inventory.items:
-		_storage_inventory.add_item(i)
-		if not i is Consumable:
-			SaveManager.data.money += 10
-
-	player_inventory.clear()
-	portal_inventory.clear()
-	visible = false
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://home/hub.tscn")
-	SaveManager.save_data()
-
-
-func _on_unload_button_pressed() -> void:
-	if _last_cell == null or _last_cell.index < 0:
-		return
-
-	if _should_play_sfx:
-		_audio_player.stream = CANCEL_SFX.items.pick_random()
-		_audio_player.play()
-
-	# TODO: check for portal inventory capacity
-	var item = player_inventory.remove_item(_last_cell.index)
-	portal_inventory.add_item(item)
-	_hide_context_menu()
 
 
 func _on_button_focus_entered() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=8 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_nl6uh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btailb80t6j47" path="res://player/player.tscn" id="3_y7d5t"]
 [ext_resource type="PackedScene" uid="uid://bttlpvtcf3hnx" path="res://gui/pause.tscn" id="4_3g7bp"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
+[ext_resource type="PackedScene" uid="uid://dhmaxhmwd5aq5" path="res://gui/portal_menu.tscn" id="7_e1ady"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -39,6 +40,10 @@ vitals = NodePath("../../TileMap/Objects/Player/VitalsComponent")
 inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 
 [node name="Pause" parent="GUI" node_paths=PackedStringArray("player_inventory", "portal_inventory") instance=ExtResource("4_3g7bp")]
+player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
+portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
+
+[node name="PortalMenu" parent="GUI" node_paths=PackedStringArray("player_inventory", "portal_inventory") instance=ExtResource("7_e1ady")]
 player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
 
