@@ -96,6 +96,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ui_summary_return"
 

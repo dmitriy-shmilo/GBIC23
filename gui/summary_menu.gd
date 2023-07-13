@@ -12,6 +12,7 @@ extends Control
 @onready var _storage_inventory: InventoryComponent = $"StorageInventoryComponent"
 @onready var _counter_inventory: InventoryComponent = $"CounterInventoryComponent"
 
+@onready var _title_label: Label = $"%Title"
 @onready var _sales_header: HBoxContainer = $"%Container/SalesHeader"
 @onready var _loot_header: HBoxContainer = $"%Container/LootHeader"
 @onready var _lost_header: HBoxContainer = $"%Container/LostHeader"
@@ -51,10 +52,12 @@ func _enter_return() -> void:
 		# TODO: open chests
 		_loot_inventory.add_items(_portal_inventory.items)
 		_loot_inventory.add_items(_pockets_inventory.items)
+		_title_label.text = tr("ui_summary_return")
 	else:
 		# TODO: retain some items when upgraded
 		_lost_inventory.add_items(_portal_inventory.items)
 		_lost_inventory.add_items(_pockets_inventory.items)
+		_title_label.text = tr("ui_summary_fail")
 	_portal_inventory.clear()
 	_pockets_inventory.clear()
 

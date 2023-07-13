@@ -2,12 +2,14 @@ class_name Player
 extends CharacterBody2D
 
 signal portal_invoked()
+signal died()
 
 const ITEM_DROP_RANGE = 48.0
 # TODO: consider playing sounds within the state
 const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
 const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
 const swoosh_sfx: SfxCollection = preload("res://assets/sfx/swoosh.tres")
+const PORTAL_SFX: SfxCollection = preload("res://assets/sfx/portal.tres")
 const PICKUP_SCENE := preload("res://map/pickup.tscn")
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
@@ -79,9 +81,10 @@ func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool
 		_audio_player.stream = impact_sfx.items.pick_random()
 	_audio_player.play()
 
+	# TODO: dying state
 	if vitals.current_health <= 0:
-		# TODO: exit the level
-		visible = false
+		PORTAL_SFX.play_random(_audio_player)
+		died.emit()
 
 
 func _on_inventory_component_item_dropped(_i: InventoryComponent, item: Item) -> void:

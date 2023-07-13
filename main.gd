@@ -180,4 +180,10 @@ func _on_player_portal_invoked() -> void:
 
 
 func _on_portal_menu_return_home() -> void:
+	_summary_menu.is_failed = false
+	_summary_menu.enter()
+
+
+func _on_player_died() -> void:
+	_summary_menu.is_failed = true
 	_summary_menu.enter()

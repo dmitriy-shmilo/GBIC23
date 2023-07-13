@@ -180,6 +180,7 @@ script = ExtResource("16_rhoiw")
 max_items = 5
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]

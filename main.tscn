@@ -51,6 +51,7 @@ portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
 [node name="SummaryMenu" parent="GUI" instance=ExtResource("8_p3ow5")]
 is_returning = true
 
+[connection signal="died" from="TileMap/Objects/Player" to="." method="_on_player_died"]
 [connection signal="portal_invoked" from="TileMap/Objects/Player" to="." method="_on_player_portal_invoked"]
 [connection signal="return_home" from="GUI/PortalMenu" to="." method="_on_portal_menu_return_home"]
 

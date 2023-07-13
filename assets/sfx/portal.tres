@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=4 format=3 uid="uid://ctgvxcmi8pfvl"]
+
+[ext_resource type="AudioStream" uid="uid://blyovcyu2tvsb" path="res://assets/sfx/portal1.wav" id="1_53nkx"]
+[ext_resource type="AudioStream" uid="uid://dn5j3lc4amei6" path="res://assets/sfx/portal2.wav" id="2_h7irt"]
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="4_36yja"]
+
+[resource]
+script = ExtResource("4_36yja")
+items = Array[AudioStream]([ExtResource("1_53nkx"), ExtResource("2_h7irt")])
