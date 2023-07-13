@@ -41,59 +41,68 @@ offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 layout_mode = 2
+follow_focus = true
 
-[node name="PlayerInventoryLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerInventoryLabel" type="Label" parent="Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_player_inventory"
 
-[node name="PlayerInventoryGrid" parent="Panel/VBoxContainer" instance=ExtResource("2_lcu42")]
+[node name="PlayerInventoryGrid" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_lcu42")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+[node name="Spacer" type="Control" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="PortalInventoryLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="PortalInventoryLabel" type="Label" parent="Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_portal_inventory"
 
-[node name="PortalInventoryGrid" parent="Panel/VBoxContainer" instance=ExtResource("2_lcu42")]
+[node name="PortalInventoryGrid" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource("2_lcu42")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="ItemNameLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="ItemNameLabel" type="Label" parent="Panel/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "Item Name"
 
-[node name="ItemDescriptionLabel" type="RichTextLabel" parent="Panel/VBoxContainer"]
+[node name="ItemDescriptionLabel" type="RichTextLabel" parent="Panel/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_vertical = 3
 bbcode_enabled = true
 text = "Item Description"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_close"
 icon = ExtResource("3_6gh7v")
 script = ExtResource("2_stpqn")
 
-[node name="GoHomeButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="GoHomeButton" type="Button" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
@@ -159,12 +168,12 @@ script = ExtResource("2_stpqn")
 script = ExtResource("4_uammr")
 max_items = 999
 
-[connection signal="cell_highlighted" from="Panel/VBoxContainer/PlayerInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
-[connection signal="cell_selected" from="Panel/VBoxContainer/PlayerInventoryGrid" to="." method="_on_player_inventory_grid_cell_selected"]
-[connection signal="cell_highlighted" from="Panel/VBoxContainer/PortalInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
-[connection signal="cell_selected" from="Panel/VBoxContainer/PortalInventoryGrid" to="." method="_on_portal_inventory_grid_cell_selected"]
-[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_go_home_button_pressed"]
+[connection signal="cell_highlighted" from="Panel/ScrollContainer/VBoxContainer/PlayerInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="Panel/ScrollContainer/VBoxContainer/PlayerInventoryGrid" to="." method="_on_player_inventory_grid_cell_selected"]
+[connection signal="cell_highlighted" from="Panel/ScrollContainer/VBoxContainer/PortalInventoryGrid" to="." method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="Panel/ScrollContainer/VBoxContainer/PortalInventoryGrid" to="." method="_on_portal_inventory_grid_cell_selected"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer/GoHomeButton" to="." method="_on_go_home_button_pressed"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/UnloadButton" to="." method="_on_unload_button_pressed"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/DropButton" to="." method="_on_drop_button_pressed"]
 [connection signal="pressed" from="ContextMenu/MarginContainer/VBoxContainer/ContextCancelButton" to="." method="_on_context_cancel_button_pressed"]

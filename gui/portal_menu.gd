@@ -5,6 +5,8 @@ const MAX_INV_HEIGHT = 128
 const CONTEXT_MENU_OFFSET = Vector2(8.0, 8.0)
 const EMPTY_ITEM = preload("res://items/empty.tres")
 
+signal return_home()
+
 @export var player_inventory: InventoryComponent = null
 @export var portal_inventory: InventoryComponent = null
 
@@ -14,8 +16,8 @@ const EMPTY_ITEM = preload("res://items/empty.tres")
 @onready var _context_cancel_button: Button = %ContextCancelButton
 @onready var _item_name: Label = $"%ItemNameLabel"
 @onready var _item_description: RichTextLabel = $"%ItemDescriptionLabel"
-@onready var _player_inventory_grid: InventoryGrid = $Panel/VBoxContainer/PlayerInventoryGrid
-@onready var _portal_inventory_grid: InventoryGrid = $Panel/VBoxContainer/PortalInventoryGrid
+@onready var _player_inventory_grid: InventoryGrid = $"%PlayerInventoryGrid"
+@onready var _portal_inventory_grid: InventoryGrid = $"%PortalInventoryGrid"
 
 var _last_cell: InventoryCell = null
 
@@ -109,23 +111,8 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_go_home_button_pressed() -> void:
-	# TODO: return home intermediate screen
-	for i in player_inventory.items:
-		_storage_inventory.add_item(i)
-		if not i is Consumable:
-			SaveManager.data.money += 10
-
-	for i in portal_inventory.items:
-		_storage_inventory.add_item(i)
-		if not i is Consumable:
-			SaveManager.data.money += 10
-
-	player_inventory.clear()
-	portal_inventory.clear()
 	visible = false
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://home/hub.tscn")
-	SaveManager.save_data()
+	return_home.emit()
 
 
 func _on_unload_button_pressed() -> void:

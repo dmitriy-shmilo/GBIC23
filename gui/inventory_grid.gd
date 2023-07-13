@@ -1,5 +1,5 @@
 class_name InventoryGrid
-extends ScrollContainer
+extends Container
 
 signal cell_highlighted(cell)
 signal cell_selected(cell)
@@ -7,9 +7,10 @@ signal cell_selected(cell)
 const EMPTY_ITEM = preload("res://items/empty.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
+@export var selectable = true
 @export var inventory: InventoryComponent = null: set = set_inventory
 
-@onready var _inventory_grid: GridContainer = $"CenterContainer/InventoryGrid"
+@onready var _inventory_grid: Container = self
 
 func _ready() -> void:
 	set_inventory(inventory)
@@ -20,9 +21,10 @@ func focus_first_cell() -> void:
 
 
 func set_inventory(value) -> void:
-	if value == inventory:
+	if not is_inside_tree():
+		inventory = value
 		return
-	if inventory != null:
+	if inventory != null and inventory.changed.is_connected(_on_inventory_changed):
 		inventory.changed.disconnect(_on_inventory_changed)
 	inventory = value
 	if inventory == null:
@@ -63,7 +65,7 @@ func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 
 
 func _on_inventory_button_pressed(cell: InventoryCell) -> void:
-	if cell.item == EMPTY_ITEM:
+	if cell.item == EMPTY_ITEM or not selectable:
 		cell.button_pressed = false
 		return
 

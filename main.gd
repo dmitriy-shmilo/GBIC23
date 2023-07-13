@@ -36,6 +36,7 @@ const PORTAL_SCENE = preload("res://map/portal.tscn")
 
 @onready var _pause: PauseGui = $"GUI/Pause"
 @onready var _portal_menu: PortalMenu = $"GUI/PortalMenu"
+@onready var _summary_menu: SummaryMenu = $"GUI/SummaryMenu"
 @onready var _tilemap = $"TileMap"
 @onready var _objects = $"%Objects"
 @onready var _player = $"%Objects/Player"
@@ -176,3 +177,7 @@ func _generate_terrain() -> void:
 
 func _on_player_portal_invoked() -> void:
 	_portal_menu.enter()
+
+
+func _on_portal_menu_return_home() -> void:
+	_summary_menu.enter()

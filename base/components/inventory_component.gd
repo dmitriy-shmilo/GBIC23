@@ -8,13 +8,16 @@ signal item_removed(inventory, item)
 signal changed(inventory)
 
 @export var max_items = 1: set = _set_max_items
+@export var inventory: Inventory = null
 
 var items: Array[Item]: get = _get_items
-var inventory: Inventory = null
-
 
 func total_slots() -> int:
 	return max(max_items, items.size())
+
+
+func is_empty() -> bool:
+	return items.size() == 0
 
 
 func has_space() -> bool:
@@ -24,6 +27,11 @@ func has_space() -> bool:
 func add_item(item: Item) -> void:
 	items.push_back(item)
 	item_added.emit(self, item)
+	changed.emit(self)
+
+
+func add_items(arr: Array[Item]) -> void:
+	items.append_array(arr)
 	changed.emit(self)
 
 

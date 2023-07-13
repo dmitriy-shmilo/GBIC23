@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7j8u2vq5ha67"]
+[gd_scene load_steps=9 format=3 uid="uid://b7j8u2vq5ha67"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_t5h54"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_nl6uh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bttlpvtcf3hnx" path="res://gui/pause.tscn" id="4_3g7bp"]
 [ext_resource type="PackedScene" uid="uid://dcsij2ymvcr1x" path="res://gui/hud.tscn" id="5_q1vmy"]
 [ext_resource type="PackedScene" uid="uid://dhmaxhmwd5aq5" path="res://gui/portal_menu.tscn" id="7_e1ady"]
+[ext_resource type="PackedScene" uid="uid://4pxfhj6u3mhj" path="res://gui/summary_menu.tscn" id="8_p3ow5"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -47,7 +48,11 @@ portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
 player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
 
+[node name="SummaryMenu" parent="GUI" instance=ExtResource("8_p3ow5")]
+is_returning = true
+
 [connection signal="portal_invoked" from="TileMap/Objects/Player" to="." method="_on_player_portal_invoked"]
+[connection signal="return_home" from="GUI/PortalMenu" to="." method="_on_portal_menu_return_home"]
 
 [editable path="TileMap/Objects/Portal"]
 [editable path="TileMap/Objects/Player"]

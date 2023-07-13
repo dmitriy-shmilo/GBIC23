@@ -1,0 +1,185 @@
+[gd_scene load_steps=13 format=3 uid="uid://4pxfhj6u3mhj"]
+
+[ext_resource type="Script" path="res://gui/summary_menu.gd" id="1_eks57"]
+[ext_resource type="Texture2D" uid="uid://wvp7lxnivpne" path="res://gui/hud_money.tres" id="1_lioub"]
+[ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="2_rra5b"]
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="3_nvgrc"]
+[ext_resource type="Texture2D" uid="uid://mrc8xjf8hoof" path="res://home/icons/icon_quit.tres" id="4_se6p1"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="6_8rvgq"]
+[ext_resource type="Texture2D" uid="uid://cn4ygamyj2urn" path="res://home/icons/icon_my_shop.tres" id="6_025ld"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="6_bbifw"]
+[ext_resource type="Script" path="res://base/inventory.gd" id="7_2ekur"]
+
+[sub_resource type="Resource" id="Resource_ww4cj"]
+script = ExtResource("7_2ekur")
+items = Array[Resource("res://items/item.gd")]([])
+
+[sub_resource type="Resource" id="Resource_k6r1i"]
+script = ExtResource("7_2ekur")
+items = Array[Resource("res://items/item.gd")]([])
+
+[sub_resource type="Resource" id="Resource_3yo83"]
+script = ExtResource("7_2ekur")
+items = Array[Resource("res://items/item.gd")]([])
+
+[node name="SummaryMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eks57")
+
+[node name="PocketsInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+
+[node name="PortalInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+
+[node name="LootInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+inventory = SubResource("Resource_ww4cj")
+
+[node name="LostInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+inventory = SubResource("Resource_k6r1i")
+
+[node name="SaleInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+inventory = SubResource("Resource_3yo83")
+
+[node name="StorageInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+
+[node name="CounterInventoryComponent" type="Node" parent="."]
+script = ExtResource("6_8rvgq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.215686)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+text = "ui_summary_return"
+
+[node name="SalesHeader" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/SalesHeader"]
+layout_mode = 2
+texture = ExtResource("1_lioub")
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/SalesHeader"]
+layout_mode = 2
+text = "ui_today_sales_empty"
+
+[node name="SalesText" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+bbcode_enabled = true
+text = "ui_today_sales_empty"
+fit_content = true
+
+[node name="SalesGrid" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
+layout_mode = 2
+selectable = false
+inventory = NodePath("../../../../../../SaleInventoryComponent")
+
+[node name="LootHeader" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/LootHeader"]
+layout_mode = 2
+texture = ExtResource("3_nvgrc")
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/LootHeader"]
+layout_mode = 2
+text = "ui_gained_loot"
+
+[node name="LootText" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+bbcode_enabled = true
+text = "ui_gained_loot_nothing"
+fit_content = true
+
+[node name="LootGrid" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
+layout_mode = 2
+selectable = false
+inventory = NodePath("../../../../../../LootInventoryComponent")
+
+[node name="LostHeader" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/LostHeader"]
+layout_mode = 2
+texture = ExtResource("4_se6p1")
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/LostHeader"]
+layout_mode = 2
+text = "ui_lost_loot"
+
+[node name="LostText" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+text = "ui_gained_loot_nothing"
+fit_content = true
+
+[node name="LostGrid" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
+layout_mode = 2
+selectable = false
+inventory = NodePath("../../../../../../LostInventoryComponent")
+
+[node name="Spacer" type="Control" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Actions" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_summary_continue"
+icon = ExtResource("6_025ld")
+script = ExtResource("6_bbifw")
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/Container/Actions/ContinueButton" to="." method="_on_continue_pressed"]
