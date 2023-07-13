@@ -5,9 +5,7 @@ const EMPTY_ITEM = preload("res://items/empty.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
 @export var player_inventory: InventoryComponent = null
-@export var portal_inventory: InventoryComponent = null
 
-@onready var _pockets_inventory: InventoryComponent = $"PocketsInventoryComponent"
 @onready var _inventory_grid: GridContainer = $"%InventoryGrid"
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
 @onready var _use_button: Button = $"%UseButton"
@@ -21,9 +19,9 @@ var _last_cell: InventoryCell = null
 var _is_portal = false
 
 func _ready() -> void:
-	_pockets_inventory.inventory = SaveManager.data.pockets_inventory
 	visible = false
 	_context_menu.visible = false
+	_inventory_grid.inventory = player_inventory
 
 
 func enter(is_portal: bool) -> void:

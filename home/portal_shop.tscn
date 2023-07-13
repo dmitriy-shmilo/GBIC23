@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=27 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="3_e1anw"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_x5nge"]
 [ext_resource type="SpriteFrames" uid="uid://bbj6e54iwsjcj" path="res://npc/frames/mage_frames.tres" id="4_dcmi1"]
-[ext_resource type="Texture2D" uid="uid://dv0ir8yjkwmnq" path="res://items/icon_chest_rare.tres" id="6_2x2km"]
+[ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="4_uuvfh"]
 [ext_resource type="Script" path="res://home/shop_menu.gd" id="7_hoa3e"]
 [ext_resource type="SpriteFrames" uid="uid://cqpx60thj4tu0" path="res://map/portal_frames_3.tres" id="7_nb1et"]
 [ext_resource type="SpriteFrames" uid="uid://c02lve8ggc71u" path="res://map/portal_frames_4.tres" id="8_eahwv"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://cmhw74fabaqp0" path="res://home/icons/icon_portal_2.tres" id="15_gvffg"]
 [ext_resource type="Texture2D" uid="uid://cimksteq5dfnm" path="res://home/icons/icon_portal_3.tres" id="16_shijn"]
 [ext_resource type="Texture2D" uid="uid://dqrm8cotabmr0" path="res://home/icons/icon_portal_4.tres" id="17_vhysc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmftq"]
+atlas = ExtResource("4_uuvfh")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfn8k"]
 atlas = ExtResource("1_br65d")
@@ -96,7 +100,7 @@ texture = ExtResource("3_e1anw")
 
 [node name="IconChestRare" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(77, 39)
-texture = ExtResource("6_2x2km")
+texture = SubResource("AtlasTexture_rmftq")
 
 [node name="Mage" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(64, 72)

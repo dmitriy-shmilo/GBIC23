@@ -1,11 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://bc67r0dmlug82"]
+[gd_scene load_steps=28 format=3 uid="uid://bc67r0dmlug82"]
 
 [ext_resource type="Script" path="res://home/hub.gd" id="1_ngyb1"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="2_3logs"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_ny84y"]
 [ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="3_73l73"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_kda6n"]
-[ext_resource type="Texture2D" uid="uid://dv0ir8yjkwmnq" path="res://items/icon_chest_rare.tres" id="4_1iuo6"]
+[ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="4_n6k5o"]
 [ext_resource type="SpriteFrames" uid="uid://bbj6e54iwsjcj" path="res://npc/frames/mage_frames.tres" id="4_serk8"]
 [ext_resource type="SpriteFrames" uid="uid://cqpx60thj4tu0" path="res://map/portal_frames_3.tres" id="6_bfwcr"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="7_t3hnl"]
@@ -22,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://bwxw60x0ayxha" path="res://home/icons/icon_settings.tres" id="15_ijhh7"]
 [ext_resource type="PackedScene" uid="uid://xpppcroatuff" path="res://home/my_shop.tscn" id="21_lf05c"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="22_8snxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmftq"]
+atlas = ExtResource("4_n6k5o")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfn8k"]
 atlas = ExtResource("2_3logs")
@@ -92,7 +96,7 @@ texture = ExtResource("3_73l73")
 
 [node name="IconChestRare" type="Sprite2D" parent="TileMap"]
 position = Vector2(630, 415)
-texture = ExtResource("4_1iuo6")
+texture = SubResource("AtlasTexture_rmftq")
 
 [node name="Portal" type="AnimatedSprite2D" parent="TileMap"]
 position = Vector2(600, 422)

@@ -48,10 +48,19 @@ func _enter_return() -> void:
 	_sales_grid.visible = false
 	_loot_header.visible = true
 
+	_loot_inventory.set_block_signals(true)
 	if not is_failed:
-		# TODO: open chests
-		_loot_inventory.add_items(_portal_inventory.items)
-		_loot_inventory.add_items(_pockets_inventory.items)
+		# TODO: disable change signals
+		for i in _portal_inventory.items:
+			if i is ItemContainer:
+				# TODO: define looted container item in the ItemContainer
+				_loot_inventory.add_item(i)
+				_loot_inventory.add_items(i.contents)
+		for i in _pockets_inventory.items:
+			if i is ItemContainer:
+				# TODO: define looted container item in the ItemContainer
+				_loot_inventory.add_item(i)
+				_loot_inventory.add_items(i.contents)
 		_title_label.text = tr("ui_summary_return")
 	else:
 		# TODO: retain some items when upgraded
@@ -77,6 +86,8 @@ func _enter_return() -> void:
 		_lost_header.visible = true
 		_lost_text.visible = false
 		_lost_grid.visible = true
+	_loot_inventory.set_block_signals(false)
+	_loot_inventory.changed.emit(_loot_inventory)
 
 
 func _enter_focus() -> void:
@@ -91,7 +102,12 @@ func _enter_focus() -> void:
 
 
 func _on_continue_pressed() -> void:
-	_storage_inventory.add_items(_loot_inventory.items)
+	_storage_inventory.set_block_signals(true)
+	for i in _loot_inventory.items:
+		if i is Ingredient or i is Consumable:
+			_storage_inventory.add_item(i)
+	_storage_inventory.set_block_signals(false)
+	_storage_inventory.changed.emit(_storage_inventory)
 
 	get_tree().paused = false
 	visible = false

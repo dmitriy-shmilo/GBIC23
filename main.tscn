@@ -40,9 +40,8 @@ y_sort_enabled = true
 vitals = NodePath("../../TileMap/Objects/Player/VitalsComponent")
 inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
 
-[node name="Pause" parent="GUI" node_paths=PackedStringArray("player_inventory", "portal_inventory") instance=ExtResource("4_3g7bp")]
+[node name="Pause" parent="GUI" node_paths=PackedStringArray("player_inventory") instance=ExtResource("4_3g7bp")]
 player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
-portal_inventory = NodePath("../../TileMap/Objects/Portal/InventoryComponent")
 
 [node name="PortalMenu" parent="GUI" node_paths=PackedStringArray("player_inventory", "portal_inventory") instance=ExtResource("7_e1ady")]
 player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
