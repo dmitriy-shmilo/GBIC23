@@ -7,7 +7,7 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 @export var player_inventory: InventoryComponent = null
 @export var portal_inventory: InventoryComponent = null
 
-@onready var _storage_inventory: InventoryComponent = $"StorageInventoryComponent"
+@onready var _pockets_inventory: InventoryComponent = $"PocketsInventoryComponent"
 @onready var _inventory_grid: GridContainer = $"%InventoryGrid"
 @onready var _context_menu: PanelContainer = $"%ContextMenu"
 @onready var _use_button: Button = $"%UseButton"
@@ -21,10 +21,8 @@ var _last_cell: InventoryCell = null
 var _is_portal = false
 
 func _ready() -> void:
-	_storage_inventory.inventory = SaveManager.data.pockets_inventory
+	_pockets_inventory.inventory = SaveManager.data.pockets_inventory
 	visible = false
-	player_inventory.connect("changed", _on_inventory_changed)
-	_on_inventory_changed(player_inventory)
 	_context_menu.visible = false
 
 
@@ -35,7 +33,6 @@ func enter(is_portal: bool) -> void:
 	get_tree().paused = true
 	_inventory_grid.get_child(0).call_deferred("grab_focus")
 	set_deferred("_should_play_sfx", true)
-
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -72,31 +69,7 @@ func _hide_context_menu() -> void:
 		_should_play_sfx = true
 
 
-func _on_inventory_changed(inventory: InventoryComponent) -> void:
-	var existing_count = _inventory_grid.get_child_count()
-	if existing_count < inventory.max_items:
-		for i in range(inventory.max_items - existing_count):
-			var cell = INVENTORY_CELL_SCENE.instantiate() as InventoryCell
-			_inventory_grid.add_child(cell)
-			cell.focus_entered.connect(_on_inventory_button_focus_entered.bind(cell))
-			cell.pressed.connect(_on_inventory_button_pressed.bind(cell))
-
-	for i in range(inventory.items.size()):
-		var item = inventory.items[i]
-		var cell = _inventory_grid.get_child(i)
-		cell.item = item
-		cell.index = i
-
-	for i in range(inventory.items.size(), inventory.max_items):
-		var cell = _inventory_grid.get_child(i)
-		cell.item = EMPTY_ITEM
-		cell.index = i
-
-
-func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
-	if _should_play_sfx:
-		GuiAudio.play_navigation()
-
+func _on_inventory_grid_cell_highlighted(cell) -> void:
 	_item_name.text = tr(cell.item.loc_name).capitalize()
 	if cell.item is Ingredient:
 		_item_description.text = cell.item.get_rich_description()
@@ -104,15 +77,7 @@ func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
 		_item_description.text = tr(cell.item.loc_description)
 
 
-func _on_inventory_button_pressed(cell: InventoryCell) -> void:
-	if cell.item == EMPTY_ITEM:
-		cell.button_pressed = false
-		GuiAudio.play_cancel()
-		return
-
-	if _should_play_sfx:
-		GuiAudio.play_select()
-
+func _on_inventory_grid_cell_selected(cell) -> void:
 	_show_context_menu(cell)
 
 
@@ -152,3 +117,4 @@ func _on_close_button_pressed() -> void:
 func _on_button_focus_entered() -> void:
 	if _should_play_sfx:
 		GuiAudio.play_navigation()
+

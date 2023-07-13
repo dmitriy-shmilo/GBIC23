@@ -16,6 +16,10 @@ func _ready() -> void:
 
 func enter() -> void:
 	visible = true
+	for menu in get_children():
+		if menu is ShopMenu:
+			menu.visible = false
+
 	if initial_menu != null:
 		push_menu(initial_menu)
 

@@ -135,15 +135,15 @@ script = ExtResource("8_mjvgj")
 submenu = NodePath("../../../../StorageMenu")
 loc_hint = "hint_my_counter"
 
-[node name="CanneryButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+[node name="PackingTableButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 disabled = true
-text = "ui_my_cannery"
+text = "ui_my_packing_table"
 icon = ExtResource("10_yi8qa")
 script = ExtResource("8_mjvgj")
 submenu = NodePath("")
-loc_hint = "hint_my_cannery"
+loc_hint = "hint_my_packing_table"
 
 [node name="QuestsButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 24)
@@ -163,54 +163,62 @@ script = ExtResource("6_jga7i")
 loc_hint = "hint_my_back"
 
 [node name="StorageMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -100.0
-offset_right = 150.0
-offset_bottom = 100.0
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_sfkn1")
-initial_button = NodePath("VBoxContainer/HBoxContainer/BackButton")
-back_button = NodePath("VBoxContainer/HBoxContainer/BackButton")
+initial_button = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StorageMenu"]
+[node name="ScrollContainer" type="ScrollContainer" parent="StorageMenu"]
 layout_mode = 2
+follow_focus = true
 
-[node name="StorageInventoryLabel" type="Label" parent="StorageMenu/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StorageMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StorageInventoryLabel" type="Label" parent="StorageMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_storage_inventory"
 
-[node name="StorageInventoryGrid" parent="StorageMenu/VBoxContainer" instance=ExtResource("11_mgysl")]
-unique_name_in_owner = true
+[node name="StorageInventoryGrid" parent="StorageMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="StorageMenu/VBoxContainer"]
+[node name="Spacer" type="Control" parent="StorageMenu/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="CounterInventoryLabel" type="Label" parent="StorageMenu/VBoxContainer"]
+[node name="CounterInventoryLabel" type="Label" parent="StorageMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_counter_inventory"
 
-[node name="CounterInventoryGrid" parent="StorageMenu/VBoxContainer" instance=ExtResource("11_mgysl")]
-unique_name_in_owner = true
+[node name="CounterInventoryGrid" parent="StorageMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="StorageMenu/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StorageMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="StorageMenu/VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="StorageMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_back"

@@ -22,6 +22,8 @@ extends Control
 @onready var _lost_text: RichTextLabel = $"%Container/LostText"
 @onready var _lost_grid: InventoryGrid = $"%Container/LostGrid"
 @onready var _continue_button: BetterButton = %"ContinueButton"
+@onready var _item_name_label: Label = %"ItemNameLabel"
+@onready var _item_description_label: RichTextLabel = %"ItemDescriptionLabel"
 
 func _ready() -> void:
 	_portal_inventory.inventory = SaveManager.data.portal_inventory
@@ -66,9 +68,11 @@ func _enter_return() -> void:
 
 	if _lost_inventory.is_empty():
 		_lost_header.visible = false
+		_lost_text.visible = false
 		_lost_grid.visible = false
 	else:
 		_lost_header.visible = true
+		_lost_text.visible = false
 		_lost_grid.visible = true
 
 
@@ -91,3 +95,15 @@ func _on_continue_pressed() -> void:
 	if is_returning:
 		get_tree().change_scene_to_file("res://home/hub.tscn")
 
+
+func _on_grid_cell_highlighted(cell) -> void:
+	_item_name_label.text = tr(cell.item.loc_name).capitalize()
+	if cell.item is Ingredient:
+		_item_description_label.text = cell.item.get_rich_description()
+	else:
+		_item_description_label.text = tr(cell.item.loc_description)
+
+
+func _on_continue_button_focus_entered() -> void:
+	_item_name_label.text = ""
+	_item_description_label.text = ""

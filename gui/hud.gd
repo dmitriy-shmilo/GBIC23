@@ -9,7 +9,7 @@ extends Control
 @onready var _health_icon_template = $"%HealthIconTemplate"
 @onready var _inventory_capacity_label = $"InventoryCapacityLabel"
 
-const MAX_ICONS = 3
+const MAX_ICONS = 10
 
 func _ready() -> void:
 	vitals.connect("health_changed", _on_vitals_health_changed)

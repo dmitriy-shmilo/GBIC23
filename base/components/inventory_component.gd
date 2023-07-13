@@ -8,7 +8,7 @@ signal item_removed(inventory, item)
 signal changed(inventory)
 
 @export var max_items = 1: set = _set_max_items
-@export var inventory: Inventory = null
+@export var inventory: Inventory = null: set = _set_inventory
 
 var items: Array[Item]: get = _get_items
 
@@ -74,9 +74,16 @@ func clear() -> void:
 
 
 func _get_items() -> Array[Item]:
+	if inventory == null:
+		return []
 	return inventory.items
 
 
 func _set_max_items(value: int) -> void:
 	max_items = value
+	changed.emit(self)
+
+
+func _set_inventory(i: Inventory) -> void:
+	inventory = i
 	changed.emit(self)
