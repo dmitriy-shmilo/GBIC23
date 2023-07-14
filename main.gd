@@ -59,11 +59,20 @@ func _ready() -> void:
 	_generate_terrain()
 	_place_loot()
 	_place_player()
+	_enable_objects()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_pause.enter(false)
+
+
+func _enable_objects() -> void:
+	for o in _objects.get_children():
+		if o is CharacterBody2D:
+			for shape in o.get_children():
+				if shape is CollisionShape2D:
+					shape.set_deferred("disabled", false)
 
 
 func _place_player() -> void:
@@ -118,6 +127,11 @@ func _place_chest(x, y, is_rare) -> void:
 	var chest = PICKUP_SCENE.instantiate() as Pickup
 	chest.item = item
 	chest.global_position = pos * (0.5 + TILE_SIZE)
+
+	for shape in chest.get_children():
+		if shape is CollisionShape2D:
+			shape.disabled = true
+
 	_tilemap.erase_cell(1, pos)
 	for cx in range(-2, 2):
 		for cy in range(-2, 2):
@@ -137,6 +151,9 @@ func _place_guards(center: Vector2i) -> void:
 		var guard = ENEMY_SCENE.instantiate() as Enemy
 		var offset = positions.pick_random() * (randi() % 3 + 1)
 		guard.global_position = (center + offset) * TILE_SIZE
+		for shape in guard.get_children():
+			if shape is CollisionShape2D:
+				shape.disabled = true
 		_objects.add_child(guard)
 
 
