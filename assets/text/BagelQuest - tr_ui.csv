@@ -45,3 +45,7 @@ ui_lost_loot,You couldn't hold onto,Вам не удалось забрать,В
 ui_today_sales_empty,"Nothing, the countery was empty","Ничего, прилавок был пуст.","Нічого, прилавок був пустий."
 ui_gained_loot_nothing,Nothing,Ничего,Нічого
 ui_summary_continue,Back to town,Назад в город,Назад до міста
+ui_market_ingredients,Ingredients,Ингредиенты,Інгредієнти
+ui_market_supplies,Supplies,Припасы,Приладдя
+ui_market_sell,Sell,Продать,Продати
+ui_market_inventory,Market Stock,Рынок,Ринок

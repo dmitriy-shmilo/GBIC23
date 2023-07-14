@@ -1,0 +1,243 @@
+[gd_scene load_steps=14 format=3 uid="uid://g7ig5f3mequw"]
+
+[ext_resource type="Script" path="res://home/market_shop.gd" id="1_2wg6k"]
+[ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_wj762"]
+[ext_resource type="SpriteFrames" uid="uid://bgfs8bx3xdlff" path="res://npc/frames/trader_frames.tres" id="3_rldhb"]
+[ext_resource type="Script" path="res://home/shop_menu.gd" id="4_cxx1o"]
+[ext_resource type="Texture2D" uid="uid://bij8j5hsoqlyx" path="res://home/icons/icon_gossip.tres" id="5_jqnpl"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="6_dhvum"]
+[ext_resource type="Texture2D" uid="uid://b2hrnqwr7m1rq" path="res://home/icons/icon_ingredients_bundle.tres" id="7_ebemg"]
+[ext_resource type="Script" path="res://home/shop_button.gd" id="8_rd18o"]
+[ext_resource type="Texture2D" uid="uid://ddlm2sbgospat" path="res://home/icons/icon_ration.tres" id="10_eorb5"]
+[ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="10_iw85g"]
+[ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="12_fty7s"]
+[ext_resource type="Texture2D" uid="uid://cn4ygamyj2urn" path="res://home/icons/icon_my_shop.tres" id="13_fiijk"]
+[ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="13_lir1f"]
+
+[node name="MarketShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wg6k")
+initial_menu = NodePath("MainMenu")
+hint_label = NodePath("TextPanel/TextLabel")
+
+[node name="PortraitPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TileMap" type="TileMap" parent="PortraitPanel"]
+y_sort_enabled = true
+tile_set = ExtResource("2_wj762")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720897, 4, 196608, 720897, 4, 262144, 720897, 4, 327680, 720897, 5, 1, 786433, 3, 65537, 786433, 4, 131073, 786433, 4, 196609, 917505, 2, 262145, 786433, 4, 327681, 786433, 5, 2, 786433, 3, 65538, 786433, 4, 131074, 786433, 4, 196610, 917505, 2, 262146, 786433, 4, 327682, 786433, 5, 3, 786433, 3, 65539, 786433, 4, 131075, 983041, 2, 196611, 983041, 2, 262147, 983041, 2, 327683, 786433, 5, 4, 786433, 3, 65540, 786433, 4, 131076, 983041, 2, 196612, 917505, 2, 262148, 786433, 4, 327684, 786433, 5, 5, 851969, 3, 65541, 851969, 4, 131077, 851969, 4, 196613, 851969, 4, 262149, 851969, 4, 327685, 851969, 5)
+layer_1/name = ""
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(65537, 131072, 0, 131073, 131074, 3, 65538, 0, 0, 131074, 196610, 3, 262146, 196610, 4, 65539, 131074, 0, 262147, 131074, 65540, 65540, 262146, 4, 262148, 131074, 3)
+
+[node name="Character" type="AnimatedSprite2D" parent="PortraitPanel/TileMap"]
+position = Vector2(57, 39)
+sprite_frames = ExtResource("3_rldhb")
+animation = &"idle_down"
+autoplay = "idle_down"
+
+[node name="TextPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -536.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="TitleLabel" type="Label" parent="TextPanel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 530.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_market_shop"
+
+[node name="TextLabel" type="RichTextLabel" parent="TextPanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 526.0
+offset_bottom = 93.0
+
+[node name="MainMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -65.0
+offset_right = 78.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_cxx1o")
+initial_button = NodePath("MarginContainer/Menu/GossipButton")
+back_button = NodePath("MarginContainer/Menu/BackButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Menu" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="GossipButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_gossip"
+icon = ExtResource("5_jqnpl")
+script = ExtResource("6_dhvum")
+loc_hint = "hint_market_gossip"
+
+[node name="BuyIngredientsButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_market_ingredients"
+icon = ExtResource("7_ebemg")
+script = ExtResource("8_rd18o")
+submenu = NodePath("")
+loc_hint = "hint_market_ingredients"
+
+[node name="BuySuppliesButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_market_supplies"
+icon = ExtResource("10_eorb5")
+script = ExtResource("8_rd18o")
+submenu = NodePath("")
+loc_hint = "hint_market_supplies"
+
+[node name="SellButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+disabled = true
+text = "ui_market_sell"
+icon = ExtResource("10_iw85g")
+script = ExtResource("8_rd18o")
+submenu = NodePath("")
+loc_hint = "hint_market_sell"
+
+[node name="BackButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("12_fty7s")
+script = ExtResource("6_dhvum")
+loc_hint = "hint_my_back"
+
+[node name="BuyIngredientsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_cxx1o")
+initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BuyIngredientsMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BuyIngredientsMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarketInventoryHeader" type="HBoxContainer" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader"]
+layout_mode = 2
+texture = ExtResource("7_ebemg")
+
+[node name="MarketInventoryLabel" type="Label" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_market_inventory"
+vertical_alignment = 1
+
+[node name="MarketInventoryGrid" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarketInventoryHeader2" type="HBoxContainer" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader2"]
+layout_mode = 2
+texture = ExtResource("13_fiijk")
+
+[node name="StorageInventoryLabel" type="Label" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+vertical_alignment = 1
+
+[node name="StorageInventoryGrid" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("12_fty7s")
+script = ExtResource("6_dhvum")
+loc_hint = "hint_my_back"
