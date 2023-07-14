@@ -156,4 +156,9 @@ libraries = {
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("5_tx3dr")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -8)
+
 [connection signal="target_changed" from="GoHomeInteractive" to="." method="_on_go_home_interactive_target_changed"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

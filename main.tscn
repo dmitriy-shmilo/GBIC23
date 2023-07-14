@@ -36,9 +36,11 @@ y_sort_enabled = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="GUI" node_paths=PackedStringArray("vitals", "inventory") instance=ExtResource("5_q1vmy")]
+[node name="HUD" parent="GUI" node_paths=PackedStringArray("vitals", "inventory", "portal", "player") instance=ExtResource("5_q1vmy")]
 vitals = NodePath("../../TileMap/Objects/Player/VitalsComponent")
 inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")
+portal = NodePath("../../TileMap/Objects/Portal")
+player = NodePath("../../TileMap/Objects/Player")
 
 [node name="Pause" parent="GUI" node_paths=PackedStringArray("player_inventory") instance=ExtResource("4_3g7bp")]
 player_inventory = NodePath("../../TileMap/Objects/Player/InventoryComponent")

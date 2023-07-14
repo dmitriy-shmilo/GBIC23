@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcsij2ymvcr1x"]
+[gd_scene load_steps=7 format=3 uid="uid://dcsij2ymvcr1x"]
 
 [ext_resource type="Script" path="res://gui/hud.gd" id="1_tlkf4"]
 [ext_resource type="Texture2D" uid="uid://b0v3k4tusthhg" path="res://gui/hud_health.tres" id="2_ftoaj"]
 [ext_resource type="Texture2D" uid="uid://bb5jw57l32lrb" path="res://gui/hud_food.tres" id="2_vx6fv"]
 [ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="4_61l14"]
+[ext_resource type="SpriteFrames" uid="uid://bqmx32qqwl6xf" path="res://map/portal_frames_1.tres" id="5_u24vj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sbhe8"]
 atlas = ExtResource("4_61l14")
@@ -84,3 +85,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "0/3"
 horizontal_alignment = 2
+
+[node name="PortalIndiciator" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.368627)
+position = Vector2(240, 160)
+sprite_frames = ExtResource("5_u24vj")
