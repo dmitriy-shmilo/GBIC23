@@ -61,8 +61,11 @@ func _enter_return() -> void:
 				_loot_inventory.add_items(i.contents)
 		_title_label.text = tr("ui_summary_return")
 	else:
+		for i in _portal_inventory.items:
+			if i is ItemContainer:
+				_loot_inventory.add_item(i.opened_item)
+				_loot_inventory.add_items(i.contents)
 		# TODO: retain some items when upgraded
-		_lost_inventory.add_items(_portal_inventory.items)
 		_lost_inventory.add_items(_pockets_inventory.items)
 		_title_label.text = tr("ui_summary_fail")
 	_portal_inventory.clear()
