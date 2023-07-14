@@ -13,6 +13,13 @@ func _play_animation() -> void:
 	_sprite.play(_animation_root + "_" + _direction_suffix)
 
 
+func _on_vitals_machine_transitioned(state_name) -> void:
+	match state_name:
+		"Dying":
+			_attack_machine.set_physics_process(false)
+			_movement_machine.set_physics_process(false)
+
+
 func _on_attack_machine_transitioned(state_name) -> void:
 	match state_name:
 		"Attack":
@@ -52,10 +59,3 @@ func _on_move_direction_changed(direction) -> void:
 		_hit_box.rotation_degrees = 180
 
 	_play_animation()
-
-
-func _on_vitals_machine_transitioned(state_name) -> void:
-	match state_name:
-		"Dying":
-			_attack_machine.set_physics_process(false)
-			_movement_machine.set_physics_process(false)

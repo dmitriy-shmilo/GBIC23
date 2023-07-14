@@ -187,8 +187,9 @@ script = ExtResource("12_xjak5")
 telegraph_time = 0.5
 sprite = NodePath("../../BodySprite")
 
-[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
+[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("audio_player", "hit_box")]
 script = ExtResource("13_t655m")
+audio_player = NodePath("../../AudioPlayer")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
