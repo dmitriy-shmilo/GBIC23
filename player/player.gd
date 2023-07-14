@@ -9,7 +9,6 @@ const ITEM_DROP_RANGE = 48.0
 const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
 const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
 const swoosh_sfx: SfxCollection = preload("res://assets/sfx/swoosh.tres")
-const PORTAL_SFX: SfxCollection = preload("res://assets/sfx/portal.tres")
 const PICKUP_SCENE := preload("res://map/pickup.tscn")
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
@@ -81,11 +80,6 @@ func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool
 		_audio_player.stream = impact_sfx.items.pick_random()
 	_audio_player.play()
 
-	# TODO: dying state
-	if vitals.current_health <= 0:
-		PORTAL_SFX.play_random(_audio_player)
-		died.emit()
-
 
 func _on_inventory_component_item_dropped(_i: InventoryComponent, item: Item) -> void:
 	var pickup = PICKUP_SCENE.instantiate() as Pickup
@@ -99,3 +93,8 @@ func _on_inventory_component_item_dropped(_i: InventoryComponent, item: Item) ->
 func _on_inventory_component_item_used(_i: InventoryComponent, item: Consumable) -> void:
 	_vitals.apply_consumable(item)
 
+
+func _on_vitals_machine_transitioned(state_name) -> void:
+	match state_name:
+		"Dead":
+			died.emit()

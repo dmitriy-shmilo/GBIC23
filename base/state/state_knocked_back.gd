@@ -3,7 +3,6 @@ extends State
 
 @export var hurt_box: Area2D = null
 @export var body: CharacterBody2D = null
-@export var vitals: VitalsComponent = null
 @export var movement: MovementComponent = null
 @export var own_hit_box: Hazard = null
 
@@ -26,6 +25,3 @@ func _on_hurt_box_area_entered(area: Hazard) -> void:
 	state_machine.transition("KnockBack")
 	_knockback_vector = (body.global_position - area.global_position).normalized() * area.knockback_force
 	body.velocity = _knockback_vector
-
-	# TODO: movement state shouldn't really know about health
-	vitals.current_health -= area.damage
