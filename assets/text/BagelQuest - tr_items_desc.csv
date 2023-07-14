@@ -1,7 +1,8 @@
 keys,en,ru,ua
 it_desc_empty,An empty item slot.,Пустой слот инвентаря.,Порожній слот інвентарю.
 it_desc_ration,Food for a traveller. Restores stamina.,Еда для путешественника. Утоляет усталость.,Їжа для мандрів. Вгамовує виснаження.
-it_desc_bandage,Treats small bruises and scratches. Restores a little bit of health.,Для обработки ушибов и царапин. Восстанавливает немного здоровья.,Для обробки забоїв та подряпин. Відновлює трохи здоровʼя.
+it_desc_bandage,Treats small bruises and scratches. Restores a little bit of health.,Для обработки ушибов и царапин. Восстанавливает немного здоровья.,Для обробки забоїв та подряпин. Відновлює трохи здоров'я.
 it_desc_first_aid,Treats serious injuries. Restores a lot of health.,Для серьёзных ранений. Восстанавливает много здоровья.,Для серʼйозних поранень. Відновлює багато здоровʼя.
 it_desc_chest_normal,A chest full of goodies. Locked. Bring it back to the portal.,Сундук с добычей. Заперт. Нужно отнести его назад к порталу.,Скриня із здобиччю. Замкнена. Треба віднести її назад до порталу.
 it_desc_chest_rare,An ornate chest with lots of stuff inside. Locked. Bring it back to the portal.,Красивый сундук с кучей добра внутри. Заперт. Нужно отнести его к порталу.,Гарна скриня із купою добра всередині. Замкнена. Треба віднести її назад до порталу.
+it_desc_chest_open,It was unlocked and is empty now.,Он был открыт и теперь пуст.,Вона була відімкнена і тепер пуста.

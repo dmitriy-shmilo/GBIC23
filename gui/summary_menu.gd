@@ -53,13 +53,11 @@ func _enter_return() -> void:
 		# TODO: disable change signals
 		for i in _portal_inventory.items:
 			if i is ItemContainer:
-				# TODO: define looted container item in the ItemContainer
-				_loot_inventory.add_item(i)
+				_loot_inventory.add_item(i.opened_item)
 				_loot_inventory.add_items(i.contents)
 		for i in _pockets_inventory.items:
 			if i is ItemContainer:
-				# TODO: define looted container item in the ItemContainer
-				_loot_inventory.add_item(i)
+				_loot_inventory.add_item(i.opened_item)
 				_loot_inventory.add_items(i.contents)
 		_title_label.text = tr("ui_summary_return")
 	else:
@@ -104,7 +102,7 @@ func _enter_focus() -> void:
 func _on_continue_pressed() -> void:
 	_storage_inventory.set_block_signals(true)
 	for i in _loot_inventory.items:
-		if i is Ingredient or i is Consumable:
+		if not i.is_junk:
 			_storage_inventory.add_item(i)
 	_storage_inventory.set_block_signals(false)
 	_storage_inventory.changed.emit(_storage_inventory)

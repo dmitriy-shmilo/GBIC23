@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemContainer" load_steps=4 format=3 uid="uid://boaerufvk7rch"]
+
+[ext_resource type="Texture2D" uid="uid://dwj17xvgx27vx" path="res://items/icons/icon_chest_rare.tres" id="1_y3wc2"]
+[ext_resource type="Resource" uid="uid://c8o2401o4ic8a" path="res://items/containers/chest_rare_open.tres" id="2_4choi"]
+[ext_resource type="Script" path="res://items/item_container.gd" id="3_vcf36"]
+
+[resource]
+script = ExtResource("3_vcf36")
+opened_item = ExtResource("2_4choi")
+contents = Array[Resource("res://items/item.gd")]([])
+loc_name = "it_chest_rare"
+loc_description = "it_desc_chest_rare"
+icon = ExtResource("1_y3wc2")
+is_junk = false

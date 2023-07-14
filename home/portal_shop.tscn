@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_2pr2c"]
-[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icon_chest_normal.tres" id="3_e1anw"]
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icons/icon_chest_normal.tres" id="3_cgsr0"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_x5nge"]
 [ext_resource type="SpriteFrames" uid="uid://bbj6e54iwsjcj" path="res://npc/frames/mage_frames.tres" id="4_dcmi1"]
 [ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="4_uuvfh"]
@@ -84,19 +84,19 @@ layer_0/tile_data = PackedInt32Array(0, 720897, 3, 65536, 720897, 4, 131072, 720
 
 [node name="IconChestNormal" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(70, 44)
-texture = ExtResource("3_e1anw")
+texture = ExtResource("3_cgsr0")
 
 [node name="IconChestNormal2" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(24, 55)
-texture = ExtResource("3_e1anw")
+texture = ExtResource("3_cgsr0")
 
 [node name="IconChestNormal3" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(27, 47)
-texture = ExtResource("3_e1anw")
+texture = ExtResource("3_cgsr0")
 
 [node name="IconChestNormal4" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(17, 50)
-texture = ExtResource("3_e1anw")
+texture = ExtResource("3_cgsr0")
 
 [node name="IconChestRare" type="Sprite2D" parent="PortraitPanel/TileMap"]
 position = Vector2(77, 39)

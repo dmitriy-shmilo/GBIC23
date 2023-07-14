@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://0qh3vr13y5my"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_dcauv"]
+[ext_resource type="Texture2D" uid="uid://b44mph7urywca" path="res://items/icons/icon_chest_normal_open.tres" id="1_dlwbu"]
+
+[resource]
+script = ExtResource("1_dcauv")
+loc_name = "it_chest_open"
+loc_description = "it_desc_chest_open"
+icon = ExtResource("1_dlwbu")
+is_junk = true
