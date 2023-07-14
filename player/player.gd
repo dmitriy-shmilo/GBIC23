@@ -14,6 +14,7 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
 @onready var _movement_machine: StateMachine = $"MovementMachine"
+@onready var _attack_machine: StateMachine = $"AttackMachine"
 @onready var _audio_player: AudioStreamPlayer = $"AudioPlayer"
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
 @onready var _inventory: InventoryComponent = $"InventoryComponent"
@@ -73,7 +74,7 @@ func _on_move_direction_changed(direction) -> void:
 	_play_animation()
 
 
-func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool) -> void:
+func _on_vitals_component_health_changed(_v: VitalsComponent, positive: bool) -> void:
 	if positive:
 		_audio_player.stream = heal_sfx.items.pick_random()
 	else:
@@ -96,5 +97,8 @@ func _on_inventory_component_item_used(_i: InventoryComponent, item: Consumable)
 
 func _on_vitals_machine_transitioned(state_name) -> void:
 	match state_name:
+		"Dying":
+			_movement_machine.set_physics_process(false)
+			_attack_machine.set_physics_process(false)
 		"Dead":
 			died.emit()

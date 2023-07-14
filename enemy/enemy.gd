@@ -1,17 +1,13 @@
 class_name Enemy
 extends CharacterBody2D
 
-const impact_sfx: SfxCollection = preload("res://assets/sfx/impact.tres")
-const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
-
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
 @onready var _movement_machine: StateMachine = $"MovementMachine"
-@onready var _audio_player: AudioStreamPlayer2D = $"AudioPlayer"
+@onready var _attack_machine: StateMachine = $"AttackMachine"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
-
 
 func _play_animation() -> void:
 	_sprite.play(_animation_root + "_" + _direction_suffix)
@@ -25,7 +21,7 @@ func _on_attack_machine_transitioned(state_name) -> void:
 			match _movement_machine.current_state.name:
 				"Idle":
 					_animation_root = "idle"
-				"Chase", "Wonder":
+				"Chase", "Wonder", "Return":
 					_animation_root = "move"
 	_play_animation()
 
@@ -34,7 +30,7 @@ func _on_movement_machine_transitioned(state_name) -> void:
 	match state_name:
 		"Idle":
 			_animation_root = "idle"
-		"Chase", "Wonder":
+		"Chase", "Wonder", "Return":
 			_animation_root = "move"
 
 	_play_animation()
@@ -58,13 +54,8 @@ func _on_move_direction_changed(direction) -> void:
 	_play_animation()
 
 
-func _on_vitals_component_health_changed(vitals: VitalsComponent, positive: bool) -> void:
-	if positive:
-		_audio_player.stream = heal_sfx.items.pick_random()
-	else:
-		_audio_player.stream = impact_sfx.items.pick_random()
-	_audio_player.play()
-
-	# TODO: death state
-	if vitals.current_health <= 0:
-		queue_free()
+func _on_vitals_machine_transitioned(state_name) -> void:
+	match state_name:
+		"Dying":
+			_attack_machine.set_physics_process(false)
+			_movement_machine.set_physics_process(false)

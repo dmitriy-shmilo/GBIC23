@@ -1,14 +1,11 @@
 class_name StateVitalsDying
 extends State
 
-const PORTAL_SFX: SfxCollection = preload("res://assets/sfx/portal.tres")
 const BLINK_SHADER: ShaderMaterial = preload("res://base/shader/blink.tres")
 
 @export var sprite: Node2D = null
-@export var audio_player: AudioStreamPlayer = null
 @export var hurt_box: Area2D = null
 @export var dying_time = 0.5
-@export var particles: GPUParticles2D = null
 
 var _current_time = 0.0
 var _shader: ShaderMaterial = null
@@ -22,8 +19,6 @@ func _ready() -> void:
 func enter(_args = {}) -> void:
 	_current_time = 0
 	sprite.material = _shader
-	particles.emitting = true
-	PORTAL_SFX.play_random(audio_player)
 	for shape in hurt_box.get_children():
 		if shape is CollisionShape2D:
 			shape.set_deferred("disabled", true)
@@ -31,7 +26,6 @@ func enter(_args = {}) -> void:
 
 func exit() -> void:
 	sprite.material = null
-	particles.emitting = false
 	for shape in hurt_box.get_children():
 		if shape is CollisionShape2D:
 			shape.set_deferred("disabled", false)

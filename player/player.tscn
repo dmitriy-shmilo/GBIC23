@@ -19,9 +19,9 @@
 [ext_resource type="Script" path="res://player/state/player_state_interacting.gd" id="15_7env8"]
 [ext_resource type="Script" path="res://player/state/player_state_portaling.gd" id="16_a0ow2"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="16_rhoiw"]
+[ext_resource type="Script" path="res://player/state/player_state_invulnerable.gd" id="18_hngxp"]
+[ext_resource type="Script" path="res://player/state/player_state_dying.gd" id="19_021po"]
 [ext_resource type="Script" path="res://base/state/state_vitals_normal.gd" id="19_ker6l"]
-[ext_resource type="Script" path="res://base/state/state_vitals_invulnerable.gd" id="20_lg5l1"]
-[ext_resource type="Script" path="res://base/state/state_vitals_dying.gd" id="21_fopcb"]
 [ext_resource type="Script" path="res://player/state/state_player_dead.gd" id="22_8yoa6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
@@ -199,19 +199,20 @@ hurt_box = NodePath("../../HurtBox")
 vitals = NodePath("../../VitalsComponent")
 own_hit_box = NodePath("../../HitBox")
 
-[node name="Invulnerable" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("sprite", "hurt_box")]
-script = ExtResource("20_lg5l1")
+[node name="Invulnerable" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "sprite", "hurt_box")]
+script = ExtResource("18_hngxp")
+audio_player = NodePath("../../AudioPlayer")
 sprite = NodePath("../../BodySprite")
-invulnerability_time = 1.0
+invulnerability_time = 0.5
 hurt_box = NodePath("../../HurtBox")
 
-[node name="Dying" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("sprite", "audio_player", "hurt_box", "particles")]
-script = ExtResource("21_fopcb")
-sprite = NodePath("../../BodySprite")
+[node name="Dying" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "particles", "sprite", "hurt_box")]
+script = ExtResource("19_021po")
 audio_player = NodePath("../../AudioPlayer")
+particles = NodePath("../../PortalParticles")
+sprite = NodePath("../../BodySprite")
 hurt_box = NodePath("../../HurtBox")
 dying_time = 1.5
-particles = NodePath("../../PortalParticles")
 
 [node name="Dead" type="Node" parent="VitalsMachine"]
 script = ExtResource("22_8yoa6")

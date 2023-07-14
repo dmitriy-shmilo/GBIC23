@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SfxCollection" load_steps=3 format=3 uid="uid://ds4u4tk1qwmuh"]
+
+[ext_resource type="AudioStream" uid="uid://diddpcr07wfsr" path="res://assets/sfx/enemy_death1.wav" id="1_644an"]
+[ext_resource type="Script" path="res://base/sfx_collection.gd" id="2_mkbol"]
+
+[resource]
+script = ExtResource("2_mkbol")
+items = Array[AudioStream]([ExtResource("1_644an")])

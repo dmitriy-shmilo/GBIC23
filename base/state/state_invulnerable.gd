@@ -1,6 +1,7 @@
-class_name StateVitalsInvulnerable
+class_name StateInvulnerable
 extends State
 
+const IMPACT_SFX: SfxCollection = preload("res://assets/sfx/impact.tres")
 const BLINK_SHADER: ShaderMaterial = preload("res://base/shader/blink.tres")
 
 @export var sprite: Node2D = null

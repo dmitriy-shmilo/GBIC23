@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=27 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
@@ -17,6 +17,10 @@
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attack_charging.gd" id="12_xjak5"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attacking.gd" id="13_t655m"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_return.gd" id="14_hmwwa"]
+[ext_resource type="Script" path="res://base/state/state_vitals_normal.gd" id="18_clsm3"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_invulnerable.gd" id="19_0dcod"]
+[ext_resource type="Script" path="res://enemy/state/enemy_state_dying.gd" id="21_eb5l1"]
+[ext_resource type="Script" path="res://base/state/state_vitals_dead.gd" id="21_yjjei"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmlcq"]
 radius = 6.0
@@ -140,12 +144,11 @@ movement = NodePath("../../MovementComponent")
 aggro_area = NodePath("../../AggroArea")
 time_to_wonder = 1.5
 
-[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "hurt_box", "body", "vitals", "movement", "own_hit_box")]
+[node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "hurt_box", "body", "movement", "own_hit_box")]
 script = ExtResource("6_28jua")
 aggro_area = NodePath("../../AggroArea")
 hurt_box = NodePath("../../HurtBox")
 body = NodePath("../..")
-vitals = NodePath("../../VitalsComponent")
 movement = NodePath("../../MovementComponent")
 own_hit_box = NodePath("../../HitBox")
 
@@ -189,10 +192,36 @@ script = ExtResource("13_t655m")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
+[node name="VitalsMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_cggsa")
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("hurt_box", "vitals", "own_hit_box")]
+script = ExtResource("18_clsm3")
+hurt_box = NodePath("../../HurtBox")
+vitals = NodePath("../../VitalsComponent")
+own_hit_box = NodePath("../../HitBox")
+
+[node name="Invulnerable" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "sprite", "hurt_box")]
+script = ExtResource("19_0dcod")
+audio_player = NodePath("../../AudioPlayer")
+sprite = NodePath("../../BodySprite")
+invulnerability_time = 0.2
+hurt_box = NodePath("../../HurtBox")
+
+[node name="Dead" type="Node" parent="VitalsMachine"]
+script = ExtResource("21_yjjei")
+
+[node name="Dying" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "sprite", "hurt_box")]
+script = ExtResource("21_eb5l1")
+audio_player = NodePath("../../AudioPlayer")
+sprite = NodePath("../../BodySprite")
+hurt_box = NodePath("../../HurtBox")
+
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 
-[connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_movement_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Chase" to="." method="_on_move_direction_changed"]
 [connection signal="direction_changed" from="MovementMachine/Wonder" to="." method="_on_move_direction_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
+[connection signal="transitioned" from="VitalsMachine" to="." method="_on_vitals_machine_transitioned"]
