@@ -16,6 +16,7 @@ func _ready() -> void:
 	super._ready()
 	# TODO: calculate and assign max items
 	_kitchen_inventory.inventory = Inventory.new()
+	_kitchen_inventory.changed.connect(_on_kitchen_inventory_changed)
 	_kitchen_grid.inventory = _kitchen_inventory
 
 	await owner.ready
@@ -26,9 +27,10 @@ func _ready() -> void:
 func enter() -> void:
 	super.enter()
 	_storage_grid.call_deferred("focus_first_cell")
+	_on_kitchen_inventory_changed(null)
 
 
-func _refresh_recipe() -> void:
+func _on_kitchen_inventory_changed(_inventory: InventoryComponent) -> void:
 	_needs_dough = true
 	var traits = {}
 
@@ -65,14 +67,12 @@ func _on_storage_inventory_grid_cell_selected(cell) -> void:
 		return
 	_kitchen_inventory.add_item(cell.item)
 	owner.storage_inventory.remove_item(cell.index)
-	_refresh_recipe()
 
 
 func _on_kitchen_inventory_grid_cell_selected(cell) -> void:
 	cell.button_pressed = false
 	owner.storage_inventory.add_item(cell.item)
 	_kitchen_inventory.remove_item(cell.index)
-	_refresh_recipe()
 
 
 func _on_back_button_pressed() -> void:

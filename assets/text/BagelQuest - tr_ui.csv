@@ -49,3 +49,8 @@ ui_market_ingredients,Ingredients,Ингредиенты,Інгредієнти
 ui_market_supplies,Supplies,Припасы,Приладдя
 ui_market_sell,Sell,Продать,Продати
 ui_market_inventory,Market Stock,Рынок,Ринок
+ui_cooking_table_inventory,Cooking Table,Кухонный стол,Кухонний стіл
+ui_cook,Cook a Bagel,Приготовить бублик,Приготувати бублік
+ui_needs_dough,Can't make a bagel without any bagel dough.,Невозможно приготовить бублик без теста.,Неможливо приготувати бублік без тіста.
+ui_counter_sell,Work At the Counter,Работать за прилавком,Працювати за прилавком
+ui_counter_empty,There's nothing on the counter.,На прилавке ничего нет.,На прилавку нічого немає.

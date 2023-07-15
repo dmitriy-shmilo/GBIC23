@@ -255,7 +255,6 @@ script = ExtResource("6_jga7i")
 loc_hint = "hint_counter_sell"
 
 [node name="KitchenMenu" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -276,6 +275,8 @@ follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="KitchenMenu/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -283,8 +284,6 @@ theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="KitchenMenu/ScrollContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="StorageInventoryLabel" type="Label" parent="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -300,6 +299,7 @@ layout_mode = 2
 [node name="Spacer" type="Control" parent="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="KitchenTableLabel" type="Label" parent="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
