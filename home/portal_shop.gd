@@ -1,6 +1,10 @@
 class_name PortalShop
 extends HubShop
 
+@export var storage_inventory: InventoryComponent = null
+@export var pockets_inventory: InventoryComponent = null
+
+@onready var _embark_menu: PortalEmbarkMenu = $"EmbarkMenu"
 @onready var _exit_button: BetterButton = $"BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortalBackButton"
 @onready var _portal_buy_button1: BetterButton = $"BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal1/PortalBuyButton"
 @onready var _portal_buy_button2: BetterButton = $"BuyPortalMenu/MarginContainer/BuyPortalMenu/BuyPortal2/PortalBuyButton"
@@ -38,7 +42,18 @@ func _ready() -> void:
 	_exit_button.focus_entered.connect(_on_shop_button_focused.bind(_exit_button))
 
 
+func enter() -> void:
+	super.enter()
+	for b in _portal_buy_buttons:
+		b.disabled = SaveManager.data.money < _portal_costs[b.tag] and b.tag != 0
+
+
 func _on_portal_buy_button_pressed(button: BetterButton) -> void:
+	if storage_inventory.items.any(func(i): return i is Consumable):
+		_embark_menu.cost = _portal_costs[button.tag]
+		push_menu(_embark_menu)
+		return
+
 	var cost = _portal_costs[button.tag]
 	SaveManager.data.money -= cost
 	get_tree().change_scene_to_file("res://main.tscn")

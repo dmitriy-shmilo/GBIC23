@@ -5,9 +5,10 @@ extends Control
 @onready var _money_label: Label = $"%MoneyLabel"
 
 # inventories
-@onready var _storage_inventory: Node = %StorageInventory
-@onready var _counter_inventory: Node = %CounterInventory
-@onready var _market_inventory: Node = %MarketInventory
+@onready var _storage_inventory: InventoryComponent = %"StorageInventory"
+@onready var _counter_inventory: InventoryComponent = %"CounterInventory"
+@onready var _market_inventory: InventoryComponent = %"MarketInventory"
+@onready var _pockets_inventory: InventoryComponent = %"PocketsInventory"
 
 #shop buttons
 @onready var _my_shop_button: Button = $"%MyShopButton"
@@ -38,6 +39,7 @@ func _ready() -> void:
 	_storage_inventory.inventory = SaveManager.data.storage_inventory
 	_counter_inventory.inventory = SaveManager.data.counter_inventory
 	_market_inventory.inventory = SaveManager.data.market_inventory
+	_pockets_inventory.inventory = SaveManager.data.pockets_inventory
 
 	_main_screen.visible = true
 

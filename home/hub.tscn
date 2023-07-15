@@ -269,11 +269,13 @@ text = "ui_quit"
 icon = ExtResource("12_xettg")
 script = ExtResource("3_kda6n")
 
-[node name="PortalShop" parent="." instance=ExtResource("8_4qmre")]
+[node name="PortalShop" parent="." node_paths=PackedStringArray("storage_inventory", "pockets_inventory") instance=ExtResource("8_4qmre")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 offset_top = 40.0
+storage_inventory = NodePath("../StorageInventory")
+pockets_inventory = NodePath("../PocketsInventory")
 
 [node name="MyShop" parent="." node_paths=PackedStringArray("storage_inventory", "counter_inventory") instance=ExtResource("21_lf05c")]
 unique_name_in_owner = true
@@ -301,5 +303,10 @@ script = ExtResource("22_8snxj")
 [node name="MarketInventory" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_8snxj")
+
+[node name="PocketsInventory" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("22_8snxj")
+max_items = 5
 
 [connection signal="pressed" from="MainScreen/PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]

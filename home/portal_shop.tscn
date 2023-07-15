@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=29 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://cmhw74fabaqp0" path="res://home/icons/icon_portal_2.tres" id="15_gvffg"]
 [ext_resource type="Texture2D" uid="uid://cimksteq5dfnm" path="res://home/icons/icon_portal_3.tres" id="16_shijn"]
 [ext_resource type="Texture2D" uid="uid://dqrm8cotabmr0" path="res://home/icons/icon_portal_4.tres" id="17_vhysc"]
+[ext_resource type="Script" path="res://home/portal_embark_menu.gd" id="21_bffmn"]
+[ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="22_sjd8x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmftq"]
 atlas = ExtResource("4_uuvfh")
@@ -239,10 +241,10 @@ back_button = NodePath("MarginContainer/BuyPortalMenu/BuyPortalBackButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="BuyPortalMenu"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
 [node name="BuyPortalMenu" type="VBoxContainer" parent="BuyPortalMenu/MarginContainer"]
 layout_mode = 2
@@ -351,4 +353,99 @@ icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
 loc_hint = "hint_portal_back"
 
+[node name="EmbarkMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_bffmn")
+initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="EmbarkMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="EmbarkMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EmbarkMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StorageInventoryLabel" type="Label" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+
+[node name="StorageInventoryGrid" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("22_sjd8x")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="PocketsInventoryLabel" type="Label" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_embark_inventory"
+
+[node name="PocketsInventoryGrid" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("22_sjd8x")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("12_bep8d")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmbarkButton" type="Button" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_portal_embark"
+icon = ExtResource("13_ng05c")
+script = ExtResource("3_x5nge")
+loc_hint = "hint_portal_embark"
+
 [connection signal="pressed" from="PortalMenu/MarginContainer/PortalMenu/PortalGossipButton" to="." method="_on_portal_gossip_button_pressed"]
+[connection signal="cell_highlighted" from="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="EmbarkMenu" method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="EmbarkMenu" method="_on_storage_inventory_grid_cell_selected"]
+[connection signal="cell_highlighted" from="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/PocketsInventoryGrid" to="EmbarkMenu" method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/PocketsInventoryGrid" to="EmbarkMenu" method="_on_pockets_inventory_grid_cell_selected"]
+[connection signal="pressed" from="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/EmbarkButton" to="EmbarkMenu" method="_on_embark_button_pressed"]

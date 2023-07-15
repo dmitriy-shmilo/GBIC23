@@ -54,3 +54,6 @@ ui_cook,Cook a Bagel,Приготовить бублик,Приготувати 
 ui_needs_dough,Can't make a bagel without any bagel dough.,Невозможно приготовить бублик без теста.,Неможливо приготувати бублік без тіста.
 ui_counter_sell,Work At the Counter,Работать за прилавком,Працювати за прилавком
 ui_counter_empty,There's nothing on the counter.,На прилавке ничего нет.,На прилавку нічого немає.
+ui_embark_inventory,Taking with me,Беру с собой,Беру з собою
+ui_portal_embark,Embark,Отправиться,Рушити
+ui_portal_embark_empty,Embark Without Consumables,Отправиться налегке,Рушити без запасів
