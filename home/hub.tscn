@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bc67r0dmlug82"]
+[gd_scene load_steps=35 format=3 uid="uid://bc67r0dmlug82"]
 
 [ext_resource type="Script" path="res://home/hub.gd" id="1_ngyb1"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="2_3logs"]
@@ -16,9 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://cn4ygamyj2urn" path="res://home/icons/icon_my_shop.tres" id="9_5utvk"]
 [ext_resource type="SpriteFrames" uid="uid://bgfs8bx3xdlff" path="res://npc/frames/trader_frames.tres" id="10_msqro"]
 [ext_resource type="Texture2D" uid="uid://djt8t60scoafq" path="res://home/icons/icon_portal_1.tres" id="11_wujk4"]
+[ext_resource type="Texture2D" uid="uid://cs1c3vdsy7a28" path="res://home/icons/icon_quest.tres" id="12_bf3n1"]
+[ext_resource type="Texture2D" uid="uid://8m6p0fpu3pjw" path="res://home/icons/icon_calendar.tres" id="12_is8xb"]
 [ext_resource type="Texture2D" uid="uid://csnv0kxaacwpj" path="res://home/icons/icon_market.tres" id="12_mpwd7"]
 [ext_resource type="Texture2D" uid="uid://mrc8xjf8hoof" path="res://home/icons/icon_quit.tres" id="12_xettg"]
 [ext_resource type="Texture2D" uid="uid://c3a58txkprojg" path="res://home/icons/icon_carpenter.tres" id="13_pbtqr"]
+[ext_resource type="Shader" uid="uid://d1avwehdpu8nx" path="res://base/shader/blink_shader.tres" id="13_qgnpj"]
 [ext_resource type="Texture2D" uid="uid://ditxl2m5lwtxk" path="res://home/icons/icon_barracks.tres" id="14_qtjix"]
 [ext_resource type="Texture2D" uid="uid://bwxw60x0ayxha" path="res://home/icons/icon_settings.tres" id="15_ijhh7"]
 [ext_resource type="PackedScene" uid="uid://xpppcroatuff" path="res://home/my_shop.tscn" id="21_lf05c"]
@@ -57,6 +60,18 @@ animations = [{
 "name": &"default",
 "speed": 2.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18bjk"]
+shader = ExtResource("13_qgnpj")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_frequency = 8.0
+shader_parameter/max_phase = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w6jxk"]
+shader = ExtResource("13_qgnpj")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_frequency = 10.0
+shader_parameter/max_phase = 0.75
 
 [node name="Hub" type="Control"]
 layout_mode = 3
@@ -158,14 +173,60 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -78.0
+offset_left = -628.0
 offset_top = -8.0
 offset_right = -4.0
 offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 2
+alignment = 2
+
+[node name="DateIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_is8xb")
+stretch_mode = 2
+
+[node name="DateLabel" type="Label" parent="StatsPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Day 1, Mon"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="StatsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuestsIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_bf3n1")
+stretch_mode = 2
+
+[node name="QuestsLabel" type="Label" parent="StatsPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="StorageIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_18bjk")
+layout_mode = 2
+texture = ExtResource("3_ryxyh")
+stretch_mode = 2
+
+[node name="StorageLabel" type="Label" parent="StatsPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MoneyIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_w6jxk")
 layout_mode = 2
 texture = ExtResource("8_k026u")
 stretch_mode = 2
@@ -173,7 +234,7 @@ stretch_mode = 2
 [node name="MoneyLabel" type="Label" parent="StatsPanel/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "9999/9999"
+text = "0/0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -295,6 +356,7 @@ market_inventory = NodePath("../MarketInventory")
 [node name="StorageInventory" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_8snxj")
+max_items = 10
 
 [node name="CounterInventory" type="Node" parent="."]
 unique_name_in_owner = true
@@ -310,3 +372,4 @@ script = ExtResource("22_8snxj")
 max_items = 5
 
 [connection signal="pressed" from="MainScreen/PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="changed" from="StorageInventory" to="." method="_on_storage_inventory_changed"]

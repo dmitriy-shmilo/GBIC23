@@ -111,6 +111,8 @@ func _on_continue_pressed() -> void:
 	_storage_inventory.changed.emit(_storage_inventory)
 
 	get_tree().paused = false
+	SaveManager.data.date += 1
+	SaveManager.save_data()
 	visible = false
 	if is_returning:
 		get_tree().change_scene_to_file("res://home/hub.tscn")

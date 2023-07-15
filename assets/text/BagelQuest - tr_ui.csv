@@ -57,3 +57,11 @@ ui_counter_empty,There's nothing on the counter.,На прилавке ниче�
 ui_embark_inventory,Taking with me,Беру с собой,Беру з собою
 ui_portal_embark,Embark,Отправиться,Рушити
 ui_portal_embark_empty,Embark Without Consumables,Отправиться налегке,Рушити без запасів
+ui_day_1,Mon,Пн,Пн
+ui_day_2,Tue,Вт,Вт
+ui_day_3,Wed,Ср,Ср
+ui_day_4,Thu,Чт,Чт
+ui_day_5,Fri,Пт,Пт
+ui_day_6,Sat,Сб,Сб
+ui_day_7,Sun,Вс,Нд
+ui_date,"Day %d, %s","День %d, %s","День %d, %s"

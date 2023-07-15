@@ -1,0 +1,15 @@
+[gd_resource type="Shader" format=3 uid="uid://d1avwehdpu8nx"]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec4 blink_color: source_color = vec4(1.0);
+uniform float blink_frequency = 20.0;
+uniform float max_phase = 1.0;
+
+void fragment() {
+	float has_pixel = COLOR.a;
+	float phase = min(max_phase, sin(TIME * blink_frequency) / 2.0 + 0.5);
+	COLOR = mix(COLOR, blink_color,  phase * has_pixel);
+}
+"

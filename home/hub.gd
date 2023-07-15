@@ -1,8 +1,15 @@
 class_name Hub
 extends Control
 
-@onready var _main_screen: Control = $"%MainScreen"
-@onready var _money_label: Label = $"%MoneyLabel"
+@onready var _main_screen: Control = %"MainScreen"
+
+# stats bar
+@onready var _date_label: Label = %"DateLabel"
+@onready var _money_label: Label = %"MoneyLabel"
+@onready var _money_icon: TextureRect = %"MoneyIcon"
+@onready var _storage_label: Label = %"StorageLabel"
+@onready var _storage_icon: TextureRect = %"StorageIcon"
+@onready var _quests_label: Label = %"QuestsLabel"
 
 # inventories
 @onready var _storage_inventory: InventoryComponent = %"StorageInventory"
@@ -52,7 +59,9 @@ func _ready() -> void:
 
 	_my_shop_button.grab_focus()
 	SaveManager.data.money_changed.connect(_on_save_data_money_changed)
+	SaveManager.data.date_changed.connect(_on_save_data_date_changed)
 	_on_save_data_money_changed(0, SaveManager.data.money)
+	_on_save_data_date_changed(0, SaveManager.data.date)
 
 
 func _on_shop_back_pressed(shop_button: Button, shop: HubShop) -> void:
@@ -73,4 +82,21 @@ func _on_quit_button_pressed() -> void:
 
 func _on_save_data_money_changed(_old: int, new: int) -> void:
 	# TODO: track max money
-	_money_label.text = "%d/%d" % [new, 1000]
+	var max_money = 100
+	_money_label.text = "%d/%d" % [new, max_money]
+	if new < 0 or new > max_money:
+		(_money_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 1.0)
+	else:
+		(_money_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 0.0)
+
+
+func _on_storage_inventory_changed(inventory) -> void:
+	_storage_label.text = "%d/%d" % [inventory.items.size(), inventory.max_items]
+	if inventory.items.size() > inventory.max_items:
+		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 1.0)
+	else:
+		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 0.0)
+
+
+func _on_save_data_date_changed(_old: int, _new: int) -> void:
+	_date_label.text = SaveManager.data.get_formatted_date()
