@@ -13,7 +13,7 @@ func load_data() -> void:
 	if ResourceLoader.exists(path):
 		data = ResourceLoader.load(path)
 		return
-	data = SaveData.new()
+	data = preload("res://stats/starting_data.tres")
 
 
 func save_data() -> void:
