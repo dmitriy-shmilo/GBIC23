@@ -16,6 +16,18 @@ func total_slots() -> int:
 	return max(max_items, items.size())
 
 
+func total_slots_filtered(p: Callable) -> int:
+	if max_items > items.size():
+		return max_items
+
+	var result = 0
+	for i in items:
+		if p.call(i):
+			result += 1
+
+	return max(max_items, result)
+
+
 func is_empty() -> bool:
 	return items.size() == 0
 

@@ -7,8 +7,10 @@ signal cell_selected(cell)
 const EMPTY_ITEM = preload("res://items/empty.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
+
 @export var selectable = true
 @export var inventory: InventoryComponent = null: set = set_inventory
+var item_filter: Callable = func(_i): return true
 
 @onready var _inventory_grid: Container = self
 
@@ -35,29 +37,36 @@ func set_inventory(value) -> void:
 
 func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 	var existing_count = _inventory_grid.get_child_count()
-	if existing_count < inventory.total_slots():
+	var total_slots = inventory.total_slots_filtered(item_filter)
+
+	# prepare cells, or hide extra ones
+	if existing_count < total_slots:
 		for i in range(existing_count):
 			_inventory_grid.get_child(i).visible = true
 
-		for i in range(inventory.total_slots() - existing_count):
+		for i in range(total_slots - existing_count):
 			var cell = INVENTORY_CELL_SCENE.instantiate() as InventoryCell
 			_inventory_grid.add_child(cell)
 			cell.focus_entered.connect(_on_inventory_button_focus_entered.bind(cell))
 			cell.pressed.connect(_on_inventory_button_pressed.bind(cell))
 	else:
-		for i in range(inventory.total_slots(), existing_count):
+		for i in range(total_slots, existing_count):
 			_inventory_grid.get_child(i).visible = false
 
-	for i in range(inventory.items.size()):
-		var item = inventory.items[i]
-		var cell = _inventory_grid.get_child(i)
-		cell.item = item
-		cell.index = i
+	# place items
+	var i = 0
+	for item in inventory.items:
+		if item_filter.call(item):
+			var cell = _inventory_grid.get_child(i)
+			cell.item = item
+			cell.index = i
+			i += 1
 
-	for i in range(inventory.items.size(), inventory.max_items):
-		var cell = _inventory_grid.get_child(i)
+	# set extra slots as empty items
+	for j in range(i, total_slots):
+		var cell = _inventory_grid.get_child(j)
 		cell.item = EMPTY_ITEM
-		cell.index = i
+		cell.index = j
 
 
 func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
