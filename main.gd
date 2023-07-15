@@ -5,18 +5,36 @@ const TILE_SIZE = 16
 const MIN_SPAWN_DISTANCE = 8
 
 const TERRAIN_LAND = [
-	2, # Sand
-	2, # Sand
-	1, # Grass
-	0, # Grass Lush
-	0, # Grass Lush
+	[Vector2i(12, 1),  # Sand
+		Vector2i(16, 0), Vector2i(16, 1),
+		Vector2i(17, 0), Vector2i(17, 1),
+	],
+	[Vector2i(12, 1),  # Sand
+		Vector2i(16, 0), Vector2i(16, 1),
+		Vector2i(17, 0), Vector2i(17, 1),
+	],
+	[Vector2i(12, 4), # Grass
+		Vector2i(14, 5), Vector2i(15, 5),
+		Vector2i(16, 3), Vector2i(16, 4)
+	],
+	[Vector2i(12, 7), # Grass Lush
+		Vector2i(16, 6), Vector2i(16, 7),
+		Vector2i(14, 8), Vector2i(15, 8),
+	],
+	[Vector2i(12, 7), # Grass Lush
+		Vector2i(16, 6), Vector2i(16, 7),
+		Vector2i(14, 8), Vector2i(15, 8),
+	],
 ]
 
 const TERRAIN_WATER = [
-	2, # Sand (Beach)
-	3, # Shallow Water
-	4, # Water
-	5, # Deep Water
+	[Vector2i(12, 1),  # Sand (Beach)
+		Vector2i(16, 0), Vector2i(16, 1), Vector2i(16, 2),
+		Vector2i(17, 0), Vector2i(17, 1), Vector2i(17, 2)
+	],
+	[Vector2i(1, 4)], # Shallow Water
+	[Vector2i(1, 7)], # Water
+	[Vector2i(1, 10)], # Deep Water
 ]
 
 const TREES = [
@@ -47,7 +65,7 @@ var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
 var _vegetation = FastNoiseLite.new()
 var _enemies = FastNoiseLite.new()
-var _radius = 40
+var _radius = 100
 
 func _ready() -> void:
 	_moisture.seed = randi()
@@ -59,7 +77,6 @@ func _ready() -> void:
 	_generate_terrain()
 	_place_loot()
 	_place_player()
-	_enable_objects()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -98,7 +115,7 @@ func _place_loot() -> void:
 	var dy = 0
 
 	# TODO: determine by difficulty and randomize
-	var extra_chest_count = 4
+	var extra_chest_count = 8
 
 	for r in range(retry_count):
 		# guarantee a chest nearby
@@ -143,7 +160,7 @@ func _place_chest(x, y, is_rare) -> void:
 
 func _place_guards(center: Vector2i) -> void:
 	# TODO: base on difficulty
-	var guard_count = randi() % 3 + 1
+	var guard_count = randi() % 7 + 1
 	var positions = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 	for i in range(guard_count):
@@ -186,14 +203,16 @@ func _generate_terrain() -> void:
 
 
 			if altitude > 0:
-				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_LAND[round(moisture)])
+				var land = TERRAIN_LAND[round(moisture)].pick_random() if randi() % 35 == 0 else TERRAIN_LAND[round(moisture)][0]
+				_tilemap.set_cell(0, Vector2i(x, y), 1, land)
 				if moisture > 1.5 and rsq > 4.0:
 					var vegetation = _vegetation.get_noise_2d(x * 4.0, y * 4.0)
 					if vegetation > 0.4 / moisture:
 						_tilemap.set_cell(1, Vector2i(x, y), 0, TREES.pick_random())
 			else:
 				altitude = 3 - int(round((altitude + 1.0) * 3.0))
-				_tilemap.set_cells_terrain_connect(0, [Vector2i(x, y)], 0, TERRAIN_WATER[altitude])
+				var water = TERRAIN_WATER[altitude].pick_random() if randi() % 25 == 0 else TERRAIN_WATER[altitude][0]
+				_tilemap.set_cell(0, Vector2i(x, y), 1, water)
 
 
 func _on_player_portal_invoked() -> void:
@@ -208,3 +227,7 @@ func _on_portal_menu_return_home() -> void:
 func _on_player_died() -> void:
 	_summary_menu.is_failed = true
 	_summary_menu.enter()
+
+
+func _on_post_generation_timer_timeout() -> void:
+	_enable_objects()
