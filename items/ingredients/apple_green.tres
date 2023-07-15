@@ -8,7 +8,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
 atlas = ExtResource("1_e1v0k")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(0, 16, 16, 16)
 
 [resource]
 script = ExtResource("1_j5ju8")
@@ -17,3 +17,4 @@ trait_strength = Array[int]([1, 1, 1])
 loc_name = "it_apple_green"
 loc_description = ""
 icon = SubResource("AtlasTexture_x4h6d")
+is_junk = false

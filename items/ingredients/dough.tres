@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=3 format=3 uid="uid://dv5qptej2t6s"]
+
+[ext_resource type="Texture2D" uid="uid://dy4ga5nigpd6d" path="res://items/icons/icon_dough.tres" id="1_3u53o"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_38kge"]
+
+[resource]
+script = ExtResource("2_38kge")
+traits = Array[Resource("res://items/trait.gd")]([])
+trait_strength = Array[int]([])
+loc_name = "it_dough"
+loc_description = "it_desc_dough"
+icon = ExtResource("1_3u53o")
+is_junk = false

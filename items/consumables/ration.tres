@@ -14,3 +14,4 @@ type = 2
 loc_name = "it_ration"
 loc_description = "it_desc_ration"
 icon = SubResource("AtlasTexture_pl25u")
+is_junk = false

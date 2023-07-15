@@ -26,7 +26,7 @@ const TREES = [
 	Vector2i(3, 0),
 ]
 
-const LOOT_TABLE = preload("res://items/tables/apples.tres")
+const LOOT_TABLE = preload("res://items/tables/basic.tres")
 const CHEST_NORMAL = preload("res://items/containers/chest_normal.tres")
 const CHEST_RARE = preload("res://items/containers/chest_rare.tres")
 
@@ -123,7 +123,7 @@ func _place_chest(x, y, is_rare) -> void:
 	var pos = Vector2(x, y)
 	var item = (CHEST_RARE if is_rare else CHEST_NORMAL).duplicate(false) as ItemContainer
 	for i in range(5 if is_rare else 3):
-		item.contents.append(LOOT_TABLE.entries.pick_random().item)
+		item.contents.append(LOOT_TABLE.pick_weighted())
 	var chest = PICKUP_SCENE.instantiate() as Pickup
 	chest.item = item
 	chest.global_position = pos * (0.5 + TILE_SIZE)
