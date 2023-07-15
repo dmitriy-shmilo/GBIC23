@@ -3,7 +3,7 @@ extends Button
 
 const EMPTY_ITEM = preload("res://items/empty.tres")
 
-@export var item: Item = null: set = _set_item
+@export var item: Item = EMPTY_ITEM: set = _set_item
 ## Item index within the inventory
 @export var index: int = -1
 
@@ -13,6 +13,10 @@ func _ready() -> void:
 	_set_item(item)
 	focus_entered.connect(_on_focus_entered)
 	pressed.connect(_on_pressed)
+
+
+func is_empty() -> bool:
+	return item == EMPTY_ITEM
 
 
 func _set_item(value: Item) -> void:

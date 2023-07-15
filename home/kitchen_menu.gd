@@ -13,6 +13,7 @@ var _needs_dough = true
 var _product: Product = Product.new()
 
 func _ready() -> void:
+	super._ready()
 	# TODO: calculate and assign max items
 	_kitchen_inventory.inventory = Inventory.new()
 	_kitchen_grid.inventory = _kitchen_inventory
@@ -47,6 +48,15 @@ func _refresh_recipe() -> void:
 			_product.traits.append(t)
 
 	_cook_button.disabled = _needs_dough
+
+
+func _on_inventory_grid_cell_highlighted(cell: InventoryCell) -> void:
+	if cell.is_empty():
+		message_shown.emit("")
+		return
+	var text = "%s\n%s" % [cell.item.get_item_name().capitalize(),
+		cell.item.get_item_description()]
+	message_shown.emit(text)
 
 
 func _on_storage_inventory_grid_cell_selected(cell) -> void:

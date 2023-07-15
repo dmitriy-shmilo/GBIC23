@@ -14,7 +14,13 @@ void fragment() {
 	has_neightbor *= texture(TEXTURE, UV - vec2(size.x, 0.0)).a;
 	has_neightbor *= texture(TEXTURE, UV - vec2(0.0, size.y)).a;
 	has_neightbor = mix(1.0, 0.0, has_neightbor);
-	float should_draw = has_pixel * has_neightbor;
+	float should_draw = 0.0;
+	// TODO: a hack, should instead check for frame borders
+	if (UV.x <= size.x || UV.x >= 1.0 - size.x || UV.y <= size.y || UV.y == 1.0 - size.y) {
+		should_draw = has_pixel;
+	} else {
+		should_draw = has_pixel * has_neightbor;
+	}
 	COLOR = mix(color, line_color, should_draw);
 }
 "

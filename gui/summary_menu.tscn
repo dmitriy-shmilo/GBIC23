@@ -88,6 +88,7 @@ theme_override_constants/margin_bottom = 4
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="Container" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true

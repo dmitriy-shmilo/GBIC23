@@ -14,6 +14,8 @@ var item_filter: Callable = func(_i): return true
 
 @onready var _inventory_grid: Container = self
 
+var _is_dirty = false
+
 func _ready() -> void:
 	set_inventory(inventory)
 
@@ -36,6 +38,10 @@ func set_inventory(value) -> void:
 
 
 func _on_inventory_changed(_inventory: InventoryComponent) -> void:
+	if not visible:
+		_is_dirty = true
+		return
+
 	var existing_count = _inventory_grid.get_child_count()
 	var total_slots = inventory.total_slots_filtered(item_filter)
 
@@ -47,6 +53,7 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 		for i in range(total_slots - existing_count):
 			var cell = INVENTORY_CELL_SCENE.instantiate() as InventoryCell
 			_inventory_grid.add_child(cell)
+			cell.mouse_entered.connect(_on_inventory_button_mouse_entered.bind(cell))
 			cell.focus_entered.connect(_on_inventory_button_focus_entered.bind(cell))
 			cell.pressed.connect(_on_inventory_button_pressed.bind(cell))
 	else:
@@ -62,8 +69,11 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 	for item in inventory.items:
 		if item_filter.call(item):
 			var cell = _inventory_grid.get_child(i)
+			var old_item = cell.item
 			cell.item = item
 			cell.index = index
+			if item != old_item and cell.has_focus():
+				_on_inventory_button_focus_entered(cell)
 			i += 1
 		index += 1
 
@@ -72,6 +82,10 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 		var cell = _inventory_grid.get_child(j)
 		cell.item = EMPTY_ITEM
 		cell.index = j
+
+
+func _on_inventory_button_mouse_entered(cell: InventoryCell) -> void:
+	cell_highlighted.emit(cell)
 
 
 func _on_inventory_button_focus_entered(cell: InventoryCell) -> void:
@@ -84,3 +98,8 @@ func _on_inventory_button_pressed(cell: InventoryCell) -> void:
 		return
 
 	cell_selected.emit(cell)
+
+
+func _on_visibility_changed() -> void:
+	if visible and _is_dirty:
+		_on_inventory_changed(inventory)
