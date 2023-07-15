@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://owk3ykubwdkx"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://owk3ykubwdkx"]
 
 [ext_resource type="FontFile" uid="uid://cmar5lcfsxpun" path="res://assets/font/monogram-extended.ttf" id="1_kxall"]
 [ext_resource type="Texture2D" uid="uid://bu4wtnob4nf25" path="res://gui/hud_button_active.tres" id="1_ue2jo"]
@@ -85,6 +85,54 @@ texture_margin_top = 3.0
 texture_margin_right = 3.0
 texture_margin_bottom = 3.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sscy"]
+atlas = ExtResource("6_qybff")
+region = Rect2(118, 16, 6, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lj2kc"]
+texture = SubResource("AtlasTexture_2sscy")
+texture_margin_left = 1.0
+texture_margin_top = 3.0
+texture_margin_right = 1.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_krdoa"]
+texture = SubResource("AtlasTexture_2sscy")
+texture_margin_left = 1.0
+texture_margin_top = 3.0
+texture_margin_right = 1.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u84gf"]
+texture = SubResource("AtlasTexture_2sscy")
+texture_margin_left = 1.0
+texture_margin_top = 3.0
+texture_margin_right = 1.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d63h"]
+atlas = ExtResource("6_qybff")
+region = Rect2(112, 16, 6, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lw18"]
+texture = SubResource("AtlasTexture_1d63h")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8dypd"]
+texture = SubResource("AtlasTexture_1d63h")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+
 [resource]
 Button/colors/font_color = Color(0.431373, 0.286275, 0.184314, 1)
 Button/colors/font_disabled_color = Color(0.462745, 0.462745, 0.462745, 1)
@@ -104,3 +152,8 @@ Panel/styles/panel = SubResource("StyleBoxTexture_jvibh")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_ixjm1")
 RichTextLabel/colors/default_color = Color(0.345098, 0.211765, 0.164706, 1)
 RichTextLabel/fonts/normal_font = ExtResource("1_kxall")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_lj2kc")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_krdoa")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_u84gf")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_6lw18")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_8dypd")

@@ -5,9 +5,9 @@ const ITEM_DOUGH = preload("res://items/ingredients/dough.tres")
 const ICON_BAGEL = preload("res://items/icons/icon_bagel.tres")
 
 @onready var _kitchen_inventory: InventoryComponent = $"KitchenInventoryComponent"
-@onready var _storage_grid: InventoryGrid = $"ScrollContainer/VBoxContainer/StorageInventoryGrid"
-@onready var _kitchen_grid: InventoryGrid = $"ScrollContainer/VBoxContainer/KitchenInventoryGrid"
-@onready var _cook_button: BetterButton = $"ScrollContainer/VBoxContainer/HBoxContainer/CookButton"
+@onready var _storage_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid"
+@onready var _kitchen_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/KitchenInventoryGrid"
+@onready var _cook_button: BetterButton = $"ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton"
 
 var _needs_dough = true
 var _product: Product = Product.new()
