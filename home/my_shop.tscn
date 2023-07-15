@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://xpppcroatuff"]
+[gd_scene load_steps=16 format=3 uid="uid://xpppcroatuff"]
 
 [ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="10_nmuhl"]
 [ext_resource type="Texture2D" uid="uid://ddlm2sbgospat" path="res://home/icons/icon_ration.tres" id="10_yi8qa"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="11_mgysl"]
+[ext_resource type="Script" path="res://home/kitchen_menu.gd" id="14_0liar"]
+[ext_resource type="Script" path="res://base/components/inventory_component.gd" id="15_7tl1x"]
 
 [node name="MyShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
 layout_mode = 3
@@ -119,11 +121,10 @@ loc_hint = "hint_my_report"
 [node name="KitchenButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_my_kitchen"
 icon = ExtResource("9_7t1tp")
 script = ExtResource("8_mjvgj")
-submenu = NodePath("")
+submenu = NodePath("../../../../KitchenMenu")
 loc_hint = "hint_my_kitchen"
 
 [node name="StorageButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
@@ -132,7 +133,7 @@ layout_mode = 2
 text = "ui_my_counter"
 icon = ExtResource("9_jqoxp")
 script = ExtResource("8_mjvgj")
-submenu = NodePath("../../../../StorageMenu")
+submenu = NodePath("../../../../CounterMenu")
 loc_hint = "hint_my_counter"
 
 [node name="PackingTableButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
@@ -162,7 +163,7 @@ icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")
 loc_hint = "hint_my_back"
 
-[node name="StorageMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+[node name="CounterMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,49 +180,143 @@ script = ExtResource("4_sfkn1")
 initial_button = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
 back_button = NodePath("ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="StorageMenu"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CounterMenu"]
 layout_mode = 2
 follow_focus = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StorageMenu/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CounterMenu/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="StorageInventoryLabel" type="Label" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+[node name="StorageInventoryLabel" type="Label" parent="CounterMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_storage_inventory"
 
-[node name="StorageInventoryGrid" parent="StorageMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+[node name="StorageInventoryGrid" parent="CounterMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="CounterMenu/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="CounterInventoryLabel" type="Label" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+[node name="CounterInventoryLabel" type="Label" parent="CounterMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "ui_counter_inventory"
 
-[node name="CounterInventoryGrid" parent="StorageMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+[node name="CounterInventoryGrid" parent="CounterMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 layout_mode = 2
 
-[node name="Spacer2" type="Control" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+[node name="Spacer2" type="Control" parent="CounterMenu/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="StorageMenu/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CounterMenu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="StorageMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="BackButton" type="Button" parent="CounterMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_back"
 icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")
 loc_hint = "hint_my_back"
+
+[node name="KitchenMenu" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_0liar")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="KitchenMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="KitchenMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StorageInventoryLabel" type="Label" parent="KitchenMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+
+[node name="StorageInventoryGrid" parent="KitchenMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="KitchenMenu/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="KitchenTableLabel" type="Label" parent="KitchenMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_cooking_table_inventory"
+
+[node name="KitchenInventoryGrid" parent="KitchenMenu/ScrollContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="KitchenMenu/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="KitchenMenu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_right = NodePath("../CookButton")
+focus_next = NodePath("../CookButton")
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CookButton" type="Button" parent="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../BackButton")
+focus_previous = NodePath("../BackButton")
+text = "ui_cook"
+icon = ExtResource("9_7t1tp")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="KitchenInventoryComponent" type="Node" parent="KitchenMenu"]
+script = ExtResource("15_7tl1x")
+max_items = 3
+
+[connection signal="cell_selected" from="KitchenMenu/ScrollContainer/VBoxContainer/StorageInventoryGrid" to="KitchenMenu" method="_on_storage_inventory_grid_cell_selected"]
+[connection signal="cell_selected" from="KitchenMenu/ScrollContainer/VBoxContainer/KitchenInventoryGrid" to="KitchenMenu" method="_on_kitchen_inventory_grid_cell_selected"]
+[connection signal="pressed" from="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer/BackButton" to="KitchenMenu" method="_on_back_button_pressed"]
+[connection signal="focus_entered" from="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_focus_entered"]
+[connection signal="pressed" from="KitchenMenu/ScrollContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_pressed"]

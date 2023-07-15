@@ -2,11 +2,15 @@ class_name ShopMenu
 extends PanelContainer
 
 signal button_focused(button)
+signal message_shown(message)
 
-@export var initial_button: Button = null
+@export var initial_button: Control = null
 @export var back_button: Button = null
 
+var _scroll_container: ScrollContainer = null
+
 func _ready() -> void:
+	_scroll_container = get_child(0) as ScrollContainer
 	if back_button != null:
 		back_button.pressed.connect(_on_back_button_pressed)
 	var buttons = find_children("", "BetterButton", true)
@@ -16,8 +20,10 @@ func _ready() -> void:
 
 func enter() -> void:
 	visible = true
+	if _scroll_container != null:
+		_scroll_container.set_deferred("scroll_vertical", 0)
 	if initial_button != null:
-		initial_button.grab_focus()
+		initial_button.call_deferred("grab_focus")
 
 
 func exit() -> void:

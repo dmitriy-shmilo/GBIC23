@@ -4,6 +4,7 @@ extends Button
 const EMPTY_ITEM = preload("res://items/empty.tres")
 
 @export var item: Item = null: set = _set_item
+## Item index within the inventory
 @export var index: int = -1
 
 @onready var _item_icon: TextureRect = $"ItemIcon"

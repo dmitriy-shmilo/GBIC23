@@ -12,6 +12,7 @@ func _ready() -> void:
 	for menu in get_children():
 		if menu is ShopMenu:
 			menu.button_focused.connect(_on_shop_button_focused)
+			menu.message_shown.connect(_on_shop_message_shown)
 
 
 func enter() -> void:
@@ -50,3 +51,7 @@ func pop_menu() -> void:
 
 func _on_shop_button_focused(button: BetterButton) -> void:
 	hint_label.text = tr(button.loc_hint)
+
+
+func _on_shop_message_shown(message: String) -> void:
+	hint_label.text = message

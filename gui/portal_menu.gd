@@ -77,11 +77,8 @@ func _hide_context_menu() -> void:
 
 
 func _on_inventory_grid_cell_highlighted(cell: InventoryCell) -> void:
-	_item_name.text = tr(cell.item.loc_name).capitalize()
-	if cell.item is Ingredient:
-		_item_description.text = cell.item.get_rich_description()
-	else:
-		_item_description.text = tr(cell.item.loc_description)
+	_item_name.text = cell.item.get_item_name().capitalize()
+	_item_description.text = cell.item.get_item_description()
 
 
 func _on_player_inventory_grid_cell_selected(cell: InventoryCell) -> void:

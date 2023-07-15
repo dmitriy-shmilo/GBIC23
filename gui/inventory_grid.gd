@@ -50,17 +50,22 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 			cell.focus_entered.connect(_on_inventory_button_focus_entered.bind(cell))
 			cell.pressed.connect(_on_inventory_button_pressed.bind(cell))
 	else:
+		# TODO: this loop is not totally necessary
+		for i in range(0, total_slots):
+			_inventory_grid.get_child(i).visible = true
 		for i in range(total_slots, existing_count):
 			_inventory_grid.get_child(i).visible = false
 
 	# place items
 	var i = 0
+	var index = 0
 	for item in inventory.items:
 		if item_filter.call(item):
 			var cell = _inventory_grid.get_child(i)
 			cell.item = item
-			cell.index = i
+			cell.index = index
 			i += 1
+		index += 1
 
 	# set extra slots as empty items
 	for j in range(i, total_slots):

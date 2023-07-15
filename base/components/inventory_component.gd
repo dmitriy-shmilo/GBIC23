@@ -43,6 +43,8 @@ func add_item(item: Item) -> void:
 
 
 func add_items(arr: Array[Item]) -> void:
+	if arr.size() == 0:
+		return
 	items.append_array(arr)
 	changed.emit(self)
 

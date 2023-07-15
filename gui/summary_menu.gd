@@ -117,11 +117,8 @@ func _on_continue_pressed() -> void:
 
 
 func _on_grid_cell_highlighted(cell) -> void:
-	_item_name_label.text = tr(cell.item.loc_name).capitalize()
-	if cell.item is Ingredient:
-		_item_description_label.text = cell.item.get_rich_description()
-	else:
-		_item_description_label.text = tr(cell.item.loc_description)
+	_item_name_label.text = cell.item.get_item_name().capitalize()
+	_item_description_label.text = cell.item.get_item_description()
 
 
 func _on_continue_button_focus_entered() -> void:
