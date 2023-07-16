@@ -58,6 +58,7 @@ func _on_pockets_inventory_changed(inventory: InventoryComponent) -> void:
 	else:
 		_embark_button.text = tr("ui_portal_embark")
 		_embark_button.loc_hint = "hint_portal_embark"
+	_embark_button.append_shortcut()
 
 
 func _on_embark_button_pressed() -> void:

@@ -16,6 +16,15 @@ func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	pressed.connect(_on_pressed)
 
+	if shortcut != null and shortcut.events.size() > 0:
+		shortcut_in_tooltip = false
+		text = "%s [%s]" % [tr(text), shortcut.events[0].as_text()]
+
+
+func append_shortcut() -> void:
+	if shortcut != null and shortcut.events.size() > 0:
+		text = "%s [%s]" % [text, shortcut.events[0].as_text()]
+
 
 func _on_button_down() -> void:
 	add_theme_stylebox_override("focus", _temp_focus_style)

@@ -36,10 +36,12 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# TODO: assign shortcuts
 	if event.is_action_pressed("pause") and visible:
-		visible = false
-		get_tree().paused = false
+		if _context_menu.visible:
+			_hide_context_menu()
+		else:
+			visible = false
+			get_tree().paused = false
 		get_viewport().set_input_as_handled()
 
 
