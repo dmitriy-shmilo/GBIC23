@@ -5,7 +5,7 @@ ui_exit,Exit,Выход,Вихід
 ui_back,Back,Назад,Назад
 ui_credits,Credits,Роли и ресурсы,Ролі та ресурси
 ui_controls,Controls,Управление,Управління
-ui_pickup_hint,Take (%s),Взять (%s),Взяти (%s)
+ui_pickup_hint,Take,Взять,Взяти
 ui_drop,Drop,Бросить,Викинути
 ui_use,Use,Использовать,Використати
 ui_inventory,Inventory,Инвернтарь,Інвентар

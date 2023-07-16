@@ -60,7 +60,10 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 		# TODO: this loop is not totally necessary
 		for i in range(0, total_slots):
 			_inventory_grid.get_child(i).visible = true
+
 		for i in range(total_slots, existing_count):
+			if _inventory_grid.get_child(i).has_focus() and total_slots > 1:
+				_inventory_grid.get_child(total_slots - 1).grab_focus()
 			_inventory_grid.get_child(i).visible = false
 
 	# place items

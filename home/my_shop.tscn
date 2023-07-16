@@ -343,7 +343,6 @@ focus_previous = NodePath("../BackButton")
 text = "ui_cook"
 icon = ExtResource("9_7t1tp")
 script = ExtResource("6_jga7i")
-loc_hint = "hint_my_back"
 
 [node name="KitchenInventoryComponent" type="Node" parent="KitchenMenu"]
 script = ExtResource("15_7tl1x")

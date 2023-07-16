@@ -11,14 +11,14 @@ var _current_attack_duration = 0.0
 
 func enter(_args: Dictionary = {}) -> void:
 	SWOOSH_SFX.play_random_2d(audio_player)
-	hit_box.monitorable = true
+	hit_box.set_deferred("monitorable", true)
 	hit_box.visible = true
 	_current_attack_duration = 0.0
 
 
 func exit() -> void:
 	hit_box.visible = false
-	hit_box.monitorable = false
+	hit_box.set_deferred("monitorable", false)
 
 
 func physics_process(delta: float) -> void:

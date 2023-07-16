@@ -424,6 +424,8 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+focus_neighbor_right = NodePath("../EmbarkButton")
+focus_next = NodePath("../EmbarkButton")
 text = "ui_back"
 icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
@@ -438,6 +440,8 @@ size_flags_vertical = 3
 [node name="EmbarkButton" type="Button" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+focus_neighbor_left = NodePath("../BackButton")
+focus_previous = NodePath("../BackButton")
 text = "ui_portal_embark"
 icon = ExtResource("13_ng05c")
 script = ExtResource("3_x5nge")

@@ -84,12 +84,14 @@ func _on_back_button_pressed() -> void:
 func _on_cook_button_pressed() -> void:
 	_product.icon = ICON_BAGEL
 	owner.storage_inventory.add_item(_product)
-	_kitchen_inventory.clear()
 	_product = Product.new()
+	_kitchen_inventory.clear()
 
 
 func _on_cook_button_focus_entered() -> void:
 	if _needs_dough:
 		message_shown.emit(tr("ui_needs_dough"))
 	else:
-		message_shown.emit(_product.get_item_description())
+		var product_name = tr("hint_cook") % _product.get_item_name().capitalize()
+		var text = "%s\n%s" % [product_name, _product.get_item_description()]
+		message_shown.emit(text)

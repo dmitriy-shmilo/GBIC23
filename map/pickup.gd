@@ -16,7 +16,7 @@ var is_picked_up = false
 func _ready() -> void:
 	_set_item(item)
 	var key: InputEvent = InputMap.action_get_events("interact")[0]
-	_hint_label.text = tr("ui_pickup_hint") % key.as_text()
+	_hint_label.text = "%s [%s]" % [tr("ui_pickup_hint"), key.as_text()]
 
 
 func push(force: Vector2) -> void:
