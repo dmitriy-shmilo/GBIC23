@@ -38,7 +38,7 @@ func _on_attack_machine_transitioned(state_name) -> void:
 			_audio_player.stream = swoosh_sfx.items.pick_random()
 			_audio_player.play()
 			_animation_root = "attack"
-		"Ready":
+		"Ready", "Cooldown":
 			match _movement_machine.current_state.name:
 				"Idle", "KnockBack":
 					_animation_root = "idle"

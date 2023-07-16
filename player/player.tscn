@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=32 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://player/state/player_state_interacting.gd" id="15_7env8"]
 [ext_resource type="Script" path="res://player/state/player_state_portaling.gd" id="16_a0ow2"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="16_rhoiw"]
+[ext_resource type="Script" path="res://player/state/player_state_cooldown.gd" id="17_1rmqg"]
 [ext_resource type="Script" path="res://player/state/player_state_invulnerable.gd" id="18_hngxp"]
 [ext_resource type="Script" path="res://player/state/player_state_dying.gd" id="19_021po"]
 [ext_resource type="Script" path="res://base/state/state_vitals_normal.gd" id="19_ker6l"]
@@ -188,6 +189,12 @@ script = ExtResource("15_7env8")
 
 [node name="Portal" type="Node" parent="AttackMachine"]
 script = ExtResource("16_a0ow2")
+
+[node name="Cooldown" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "next_state")]
+script = ExtResource("17_1rmqg")
+interactor = NodePath("../../InteractorComponent")
+next_state = NodePath("../Ready")
+time = 1.0
 
 [node name="VitalsMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_1gawu")

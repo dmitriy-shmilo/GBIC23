@@ -15,6 +15,8 @@ func _play_animation() -> void:
 
 func _on_vitals_machine_transitioned(state_name) -> void:
 	match state_name:
+		"Invulnerable":
+			_attack_machine.transition("Interrupt")
 		"Dying":
 			_attack_machine.set_physics_process(false)
 			_movement_machine.set_physics_process(false)
@@ -24,7 +26,7 @@ func _on_attack_machine_transitioned(state_name) -> void:
 	match state_name:
 		"Attack":
 			_animation_root = "attack"
-		"Ready":
+		"Ready", "Cooldown", "Interrupt":
 			match _movement_machine.current_state.name:
 				"Idle":
 					_animation_root = "idle"

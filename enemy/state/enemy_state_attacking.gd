@@ -24,4 +24,4 @@ func exit() -> void:
 func physics_process(delta: float) -> void:
 	_current_attack_duration += delta
 	if _current_attack_duration >= attack_duration:
-		state_machine.transition("Ready")
+		state_machine.transition("Cooldown")
