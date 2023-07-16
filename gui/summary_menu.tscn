@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://4pxfhj6u3mhj"]
+[gd_scene load_steps=14 format=3 uid="uid://4pxfhj6u3mhj"]
 
 [ext_resource type="Script" path="res://gui/summary_menu.gd" id="1_eks57"]
 [ext_resource type="Texture2D" uid="uid://wvp7lxnivpne" path="res://gui/hud_money.tres" id="1_lioub"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://gui/better_button.gd" id="6_bbifw"]
 [ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icons/icon_chest_normal.tres" id="6_onnij"]
 [ext_resource type="Script" path="res://base/inventory.gd" id="7_2ekur"]
+[ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="8_5wi0x"]
 
 [sub_resource type="Resource" id="Resource_ww4cj"]
 script = ExtResource("7_2ekur")
@@ -194,6 +195,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("8_5wi0x")
 text = "ui_summary_continue"
 icon = ExtResource("6_025ld")
 script = ExtResource("6_bbifw")

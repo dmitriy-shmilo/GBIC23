@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SfxCollection" load_steps=3 format=3 uid="uid://c65ucmsjwqi0i"]
 
-[ext_resource type="AudioStream" uid="uid://dxdb7jg8vaji3" path="res://assets/sfx/cancel1.wav" id="1_y5t2t"]
+[ext_resource type="AudioStream" uid="uid://qfqbv3ymjtxg" path="res://assets/sfx/cancel1.wav" id="1_y5t2t"]
 [ext_resource type="Script" path="res://base/sfx_collection.gd" id="4_wpjjs"]
 
 [resource]

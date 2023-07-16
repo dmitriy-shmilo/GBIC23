@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://g7ig5f3mequw"]
+[gd_scene load_steps=15 format=3 uid="uid://g7ig5f3mequw"]
 
 [ext_resource type="Script" path="res://home/market_shop.gd" id="1_2wg6k"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_wj762"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://home/shop_button.gd" id="8_rd18o"]
 [ext_resource type="Texture2D" uid="uid://ddlm2sbgospat" path="res://home/icons/icon_ration.tres" id="10_eorb5"]
 [ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="10_iw85g"]
+[ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="11_8my0s"]
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="12_fty7s"]
 [ext_resource type="Texture2D" uid="uid://cn4ygamyj2urn" path="res://home/icons/icon_my_shop.tres" id="13_fiijk"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="13_lir1f"]
@@ -148,6 +149,7 @@ loc_hint = "hint_market_sell"
 [node name="BackButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("11_8my0s")
 text = "ui_back"
 icon = ExtResource("12_fty7s")
 script = ExtResource("6_dhvum")

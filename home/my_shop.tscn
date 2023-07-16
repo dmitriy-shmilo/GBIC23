@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://xpppcroatuff"]
+[gd_scene load_steps=23 format=3 uid="uid://xpppcroatuff"]
 
 [ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
@@ -15,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="11_mgysl"]
 [ext_resource type="Script" path="res://home/counter_menu.gd" id="13_xy7qt"]
 [ext_resource type="Script" path="res://home/kitchen_menu.gd" id="14_0liar"]
+[ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="15_4r0qd"]
 [ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="15_7nmoj"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="15_7tl1x"]
+[ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="16_vva48"]
 [ext_resource type="Script" path="res://home/sales_summary_menu.gd" id="18_k5rck"]
 [ext_resource type="Script" path="res://base/inventory.gd" id="19_y1vb5"]
 
@@ -166,6 +168,7 @@ loc_hint = "hint_my_quests"
 [node name="BackButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("15_4r0qd")
 text = "ui_back"
 icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")
@@ -242,6 +245,7 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("15_4r0qd")
 text = "ui_back"
 icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")
@@ -256,6 +260,7 @@ size_flags_vertical = 3
 [node name="SellButton" type="Button" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("16_vva48")
 text = "ui_counter_sell"
 icon = ExtResource("15_7nmoj")
 script = ExtResource("8_mjvgj")
@@ -333,6 +338,7 @@ custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_neighbor_right = NodePath("../CookButton")
 focus_next = NodePath("../CookButton")
+shortcut = ExtResource("15_4r0qd")
 text = "ui_back"
 icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")
@@ -349,6 +355,7 @@ custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_neighbor_left = NodePath("../BackButton")
 focus_previous = NodePath("../BackButton")
+shortcut = ExtResource("16_vva48")
 text = "ui_cook"
 icon = ExtResource("9_7t1tp")
 script = ExtResource("6_jga7i")
@@ -426,6 +433,7 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("15_4r0qd")
 text = "ui_back"
 icon = ExtResource("10_nmuhl")
 script = ExtResource("6_jga7i")

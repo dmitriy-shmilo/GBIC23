@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=31 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://dqrm8cotabmr0" path="res://home/icons/icon_portal_4.tres" id="17_vhysc"]
 [ext_resource type="Script" path="res://home/portal_embark_menu.gd" id="21_bffmn"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="22_sjd8x"]
+[ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="23_xyijw"]
+[ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="24_jux8x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmftq"]
 atlas = ExtResource("4_uuvfh")
@@ -216,6 +218,7 @@ loc_hint = "hint_portal_upgrade"
 [node name="PortalBackButton" type="Button" parent="PortalMenu/MarginContainer/PortalMenu"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("23_xyijw")
 text = "ui_back"
 icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
@@ -348,6 +351,7 @@ vertical_alignment = 1
 [node name="BuyPortalBackButton" type="Button" parent="BuyPortalMenu/MarginContainer/BuyPortalMenu"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("23_xyijw")
 text = "ui_back"
 icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
@@ -427,6 +431,7 @@ custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_neighbor_right = NodePath("../EmbarkButton")
 focus_next = NodePath("../EmbarkButton")
+shortcut = ExtResource("23_xyijw")
 text = "ui_back"
 icon = ExtResource("12_bep8d")
 script = ExtResource("3_x5nge")
@@ -443,6 +448,7 @@ custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_neighbor_left = NodePath("../BackButton")
 focus_previous = NodePath("../BackButton")
+shortcut = ExtResource("24_jux8x")
 text = "ui_portal_embark"
 icon = ExtResource("13_ng05c")
 script = ExtResource("3_x5nge")

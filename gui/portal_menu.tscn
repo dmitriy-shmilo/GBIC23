@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhmaxhmwd5aq5"]
+[gd_scene load_steps=9 format=3 uid="uid://dhmaxhmwd5aq5"]
 
 [ext_resource type="Script" path="res://gui/portal_menu.gd" id="1_7dtn6"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="2_lcu42"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://owk3ykubwdkx" path="res://gui/default_theme.tres" id="3_2pjte"]
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="3_6gh7v"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="4_uammr"]
+[ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="5_d4d5r"]
 [ext_resource type="Texture2D" uid="uid://djt8t60scoafq" path="res://home/icons/icon_portal_1.tres" id="5_tx6kk"]
 
 [node name="PortalMenu" type="Control"]
@@ -104,6 +105,7 @@ script = ExtResource("2_stpqn")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+shortcut = ExtResource("5_d4d5r")
 text = "ui_go_home"
 icon = ExtResource("5_tx6kk")
 script = ExtResource("2_stpqn")
