@@ -915,6 +915,7 @@ max_items = 10
 [node name="CounterInventory" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_8snxj")
+max_items = 3
 
 [node name="MarketInventory" type="Node" parent="."]
 unique_name_in_owner = true

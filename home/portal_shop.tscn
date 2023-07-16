@@ -398,6 +398,7 @@ text = "ui_storage_inventory"
 [node name="StorageInventoryGrid" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("22_sjd8x")]
 unique_name_in_owner = false
 layout_mode = 2
+hide_empty_extras = true
 
 [node name="Spacer" type="Control" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)

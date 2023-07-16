@@ -9,7 +9,9 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 
 
 @export var selectable = true
+@export var hide_empty_extras = false
 @export var inventory: InventoryComponent = null: set = set_inventory
+
 var item_filter: Callable = func(_i): return true
 
 @onready var _inventory_grid: Container = self
@@ -43,7 +45,11 @@ func _on_inventory_changed(_inventory: InventoryComponent) -> void:
 		return
 
 	var existing_count = _inventory_grid.get_child_count()
-	var total_slots = inventory.total_slots_filtered(item_filter)
+	var matching_items = inventory.items.filter(item_filter)
+
+	var total_slots = max(1, matching_items.size())
+	if not hide_empty_extras and inventory.max_items > total_slots:
+		total_slots = inventory.max_items
 
 	# prepare cells, or hide extra ones
 	if existing_count < total_slots:

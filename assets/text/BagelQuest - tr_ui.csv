@@ -38,7 +38,7 @@ ui_storage_inventory,Storage,Хранилище,Сховище
 ui_counter_inventory,For Sale,На продажу,На продаж
 ui_summary_return,You safely return to the town.,Вы благополучно возвращаетесь в город.,Ви благополучно повертаєтеся до міста.
 ui_summary_fail,"You were knocked out, and got pulled back home!","Вы были нокаутированы, и вас вернули домой!","Ви були нокаутовані, і вас повернули додому!"
-ui_summary_skip,You take care of your shop for a day.,Вы проработали день в своем магазине.,Ви пропрацювали день у своєму магазині.
+ui_summary_counter,You take care of your shop for a day and earn %d.,Вы проработали день в своем магазине и заработали %d.,Ви пропрацювали день у своєму магазині та заробили %d.
 ui_today_sales,Sold today,Продано сегодня,Продано сьогодні
 ui_gained_loot,You bring home,Вы забираете с собой,Ви забираєте з собою
 ui_lost_loot,You couldn't hold onto,Вам не удалось забрать,Вам не вдалося забрати
@@ -65,3 +65,5 @@ ui_day_5,Fri,Пт,Пт
 ui_day_6,Sat,Сб,Сб
 ui_day_7,Sun,Вс,Нд
 ui_date,"Day %d, %s","День %d, %s","День %d, %s"
+ui_day_passed,Another day passed.,Прошел еще один день.,Пройшов ще один день.
+ui_day_ended,%s ended.,%s подошел к конку.,%s добіг кінця.

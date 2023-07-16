@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://xpppcroatuff"]
+[gd_scene load_steps=21 format=3 uid="uid://xpppcroatuff"]
 
 [ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
@@ -17,6 +17,12 @@
 [ext_resource type="Script" path="res://home/kitchen_menu.gd" id="14_0liar"]
 [ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="15_7nmoj"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="15_7tl1x"]
+[ext_resource type="Script" path="res://home/sales_summary_menu.gd" id="18_k5rck"]
+[ext_resource type="Script" path="res://base/inventory.gd" id="19_y1vb5"]
+
+[sub_resource type="Resource" id="Resource_v23ep"]
+script = ExtResource("19_y1vb5")
+items = Array[Resource("res://items/item.gd")]([])
 
 [node name="MyShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
 layout_mode = 3
@@ -209,6 +215,7 @@ text = "ui_storage_inventory"
 [node name="StorageInventoryGrid" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 unique_name_in_owner = false
 layout_mode = 2
+hide_empty_extras = true
 
 [node name="Spacer" type="Control" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -246,12 +253,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SellButton" type="Button" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SellButton" type="Button" parent="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_counter_sell"
 icon = ExtResource("15_7nmoj")
-script = ExtResource("6_jga7i")
+script = ExtResource("8_mjvgj")
+submenu = NodePath("../../../../../../SalesSummaryMenu")
 loc_hint = "hint_counter_sell"
 
 [node name="KitchenMenu" type="PanelContainer" parent="."]
@@ -295,6 +303,7 @@ text = "ui_storage_inventory"
 [node name="StorageInventoryGrid" parent="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
 unique_name_in_owner = false
 layout_mode = 2
+hide_empty_extras = true
 
 [node name="Spacer" type="Control" parent="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -348,11 +357,94 @@ script = ExtResource("6_jga7i")
 script = ExtResource("15_7tl1x")
 max_items = 3
 
+[node name="SalesSummaryMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_k5rck")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SalesSummaryMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="SalesSummaryMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SalesSummaryMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderBox" type="HBoxContainer" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/HeaderBox"]
+layout_mode = 2
+texture = ExtResource("5_cyc7b")
+
+[node name="DateLabel" type="Label" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "Day 1, Mon"
+vertical_alignment = 1
+
+[node name="SalesLabel" type="Label" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_summary_counter"
+
+[node name="SalesInventoryGrid" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventory") instance=ExtResource("11_mgysl")]
+unique_name_in_owner = false
+layout_mode = 2
+selectable = false
+inventory = NodePath("../../../../SalesInventoryComponent")
+
+[node name="Spacer2" type="Control" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SalesInventoryComponent" type="Node" parent="SalesSummaryMenu"]
+script = ExtResource("15_7tl1x")
+inventory = SubResource("Resource_v23ep")
+
 [connection signal="cell_highlighted" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_storage_inventory_grid_cell_selected"]
 [connection signal="cell_highlighted" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CounterMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CounterMenu" method="_on_counter_inventory_grid_cell_selected"]
-[connection signal="pressed" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/SellButton" to="CounterMenu" method="_on_sell_button_pressed"]
 [connection signal="cell_highlighted" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="KitchenMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="KitchenMenu" method="_on_storage_inventory_grid_cell_selected"]
 [connection signal="cell_highlighted" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/KitchenInventoryGrid" to="KitchenMenu" method="_on_inventory_grid_cell_highlighted"]
@@ -360,3 +452,4 @@ max_items = 3
 [connection signal="pressed" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="KitchenMenu" method="_on_back_button_pressed"]
 [connection signal="focus_entered" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_focus_entered"]
 [connection signal="pressed" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_pressed"]
+[connection signal="cell_highlighted" from="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/SalesInventoryGrid" to="SalesSummaryMenu" method="_on_sales_inventory_grid_cell_highlighted"]

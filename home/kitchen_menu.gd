@@ -49,6 +49,7 @@ func _on_kitchen_inventory_changed(_inventory: InventoryComponent) -> void:
 			t.strength = traits[key]
 			_product.traits.append(t)
 
+	_product.traits.sort_custom(func(a,b): return b.strength < a.strength)
 	_cook_button.disabled = _needs_dough
 
 

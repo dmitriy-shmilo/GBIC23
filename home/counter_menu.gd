@@ -49,14 +49,8 @@ func _on_counter_inventory_changed(counter_inventory: InventoryComponent) -> voi
 		_sell_button.loc_hint = "ui_counter_empty"
 	else:
 		_sell_button.disabled = false
-		_sell_button.loc_hint = "ui_counter_sell"
+		_sell_button.loc_hint = "hint_counter_sell"
 
 
 func _on_sell_button_pressed() -> void:
-	# TODO: show a summary screen
-	# TODO: calculate selling price
-	for product in owner.counter_inventory.items:
-		if product is Product:
-			SaveManager.data.money += 10
-
-	owner.counter_inventory.clear()
+	owner.push_menu()

@@ -4,11 +4,6 @@ extends BetterButton
 @export var submenu: Control = null
 
 
-func _ready() -> void:
-	super._ready()
-
-
-
 func _on_pressed() -> void:
 	super._on_pressed()
 	if submenu != null:
