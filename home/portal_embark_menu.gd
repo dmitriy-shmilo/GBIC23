@@ -63,7 +63,7 @@ func _on_pockets_inventory_changed(inventory: InventoryComponent) -> void:
 
 func _on_embark_button_pressed() -> void:
 	SaveManager.data.money -= cost
-	get_tree().change_scene_to_file("res://main.tscn")
+	SceneManager.change_scene("res://main.tscn")
 
 
 func _on_back_button_pressed() -> void:

@@ -115,7 +115,7 @@ func _on_continue_pressed() -> void:
 	SaveManager.save_data()
 	visible = false
 	if is_returning:
-		get_tree().change_scene_to_file("res://home/hub.tscn")
+		SceneManager.change_scene("res://home/hub.tscn")
 
 
 func _on_grid_cell_highlighted(cell) -> void:

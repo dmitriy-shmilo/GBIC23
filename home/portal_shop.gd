@@ -56,7 +56,7 @@ func _on_portal_buy_button_pressed(button: BetterButton) -> void:
 
 	var cost = _portal_costs[button.tag]
 	SaveManager.data.money -= cost
-	get_tree().change_scene_to_file("res://main.tscn")
+	SceneManager.change_scene("res://main.tscn")
 
 
 func _on_portal_gossip_button_pressed() -> void:

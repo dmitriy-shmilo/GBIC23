@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BagelQuest"
-run/main_scene="res://home/hub.tscn"
+run/main_scene="res://base/root_scene.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SaveManager="*res://stats/player_save_manager.gd"
 GuiAudio="*res://gui/gui_audio_autoload.tscn"
+SceneManager="*res://base/scene_manager.gd"
 
 [display]
 
