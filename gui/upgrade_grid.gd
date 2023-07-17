@@ -20,8 +20,9 @@ func set_upgrades(value: Array[ShopUpgrade]) -> void:
 		_invalidate_grid()
 
 
-func refresh() -> void:
-	_invalidate_grid()
+func focus_first_cell() -> void:
+	if get_child_count() > 0:
+		get_child(0).focus_button()
 
 
 func _invalidate_grid() -> void:

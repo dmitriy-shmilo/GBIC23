@@ -6,24 +6,24 @@
 [ext_resource type="Script" path="res://gui/better_button.gd" id="4_2kdp1"]
 
 [node name="UpgradeCell" type="Panel"]
-custom_minimum_size = Vector2(105, 55)
-offset_left = 25.0
-offset_top = 39.0
-offset_right = 130.0
-offset_bottom = 94.0
+custom_minimum_size = Vector2(105, 64)
+offset_right = 105.0
+offset_bottom = 64.0
 script = ExtResource("1_wsf8d")
 
 [node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -75.0
+offset_left = -102.0
 offset_top = 3.0
 offset_right = -3.0
-offset_bottom = 19.0
+offset_bottom = 33.0
 grow_horizontal = 0
-text = "Upgrade name"
+text = "   Upgrade name test test"
+autowrap_mode = 1
 clip_text = true
 text_overrun_behavior = 3
 

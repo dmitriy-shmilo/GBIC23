@@ -456,7 +456,7 @@ icon = ExtResource("13_ng05c")
 script = ExtResource("3_x5nge")
 loc_hint = "hint_portal_embark"
 
-[node name="UpgradeMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+[node name="UpgradeMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -470,7 +470,6 @@ offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("25_x2dlj")
-initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu"]
@@ -493,7 +492,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "ui_portal_upgrades"
+text = "ui_buy_upgrades"
 
 [node name="CenterContainer" type="CenterContainer" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

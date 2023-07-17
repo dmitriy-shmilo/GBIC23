@@ -19,5 +19,10 @@ func _ready() -> void:
 	_upgrade_grid.upgrades = _upgrades
 
 
+func enter() -> void:
+	super.enter()
+	_upgrade_grid.focus_first_cell()
+
+
 func _on_upgrade_grid_cell_highlighted(cell: UpgradeCell) -> void:
 	message_shown.emit(cell.upgrade.get_rich_description())

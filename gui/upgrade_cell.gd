@@ -20,12 +20,16 @@ func _ready() -> void:
 	set_upgrade(upgrade)
 
 
+func focus_button() -> void:
+	_purchase_button.grab_focus()
+
+
 func set_upgrade(value: ShopUpgrade) -> void:
 	upgrade = value
 	if upgrade == null:
 		upgrade = EMPTY
 	if is_inside_tree():
-		_name_label.text = tr(upgrade.loc_name)
+		_name_label.text = "   " + tr(upgrade.loc_name)
 		_purchase_button.text = "%d" % upgrade.base_price
 		_icon_rect.texture = upgrade.icon
 
