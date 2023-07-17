@@ -22,8 +22,10 @@ func is_empty() -> bool:
 func _set_item(value: Item) -> void:
 	item = value
 	if is_inside_tree():
+		_item_icon.modulate = Color.WHITE
 		if item != null:
 			_item_icon.texture = value.icon
+			_item_icon.modulate = value.icon_modulate
 		else:
 			item = EMPTY_ITEM
 
