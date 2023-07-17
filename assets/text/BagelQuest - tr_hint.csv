@@ -25,3 +25,5 @@ hint_embark_storage_full,Your storage is full! Dispose of unneeded items before 
 hint_embark_money_full,Your money safe is full! All extra money will be lost!,Ваш сейф переполнен! Вы потеряете все непоместившиеся деньги!,"Ваш сейф переповнений! Ви втратите всі гроші, що не помістилися!"
 hint_cook,Cook a %s,Приготовить %s,Приготувати %s
 hint_sold_product,Sold a %s for %d,%s продан за %d,%s проданий за %d
+hint_carpenter_sell,I'll buy back some of your shop's furniture if you're short on cash.,"Я выкуплю свою продукцию обратно, если у вас проблемы с деньгами.","Я викуплю свою продукцію, якщо у вас проблеми з грошима."
+hint_carpenter_upgrade,I sell the best custom made shop furniture!,Я продаю лучшую мебель и инвентарь для магазинов.,Я продаю найкращі меблі та інвентар для магазинів.
