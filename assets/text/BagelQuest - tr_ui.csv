@@ -67,3 +67,4 @@ ui_day_7,Sun,Вс,Нд
 ui_date,"Day %d, %s","День %d, %s","День %d, %s"
 ui_day_passed,Another day passed.,Прошел еще один день.,Пройшов ще один день.
 ui_day_ended,%s ended.,%s подошел к конку.,%s добіг кінця.
+ui_prerequisites,Prerequisites,Требует,Потребує

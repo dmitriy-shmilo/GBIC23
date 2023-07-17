@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=3 format=3 uid="uid://drf6ke7qxmp8x"]
+
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="1_5k32q"]
+[ext_resource type="Texture2D" uid="uid://cmhw74fabaqp0" path="res://home/icons/icon_portal_2.tres" id="1_fqj0n"]
+
+[resource]
+script = ExtResource("1_5k32q")
+loc_name = "up_portal_license_1"
+loc_description = "up_desc_portal_license_1"
+icon = ExtResource("1_fqj0n")
+base_price = 250
+prerequisites = Array[ExtResource("1_5k32q")]([])

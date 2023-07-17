@@ -3,6 +3,7 @@ extends GridContainer
 
 signal cell_highlighted(cell)
 signal cell_selected(cell)
+signal upgrade_purchased(cell)
 
 const UPGRADE_CELL = preload("res://gui/upgrade_cell.tscn")
 
@@ -51,6 +52,10 @@ func _invalidate_grid() -> void:
 
 func _on_cell_selected(cell: UpgradeCell) -> void:
 	cell_selected.emit(cell)
+	SaveManager.data.upgrades.push_back(cell.upgrade)
+	SaveManager.data.money -= cell.upgrade.base_price
+	upgrade_purchased.emit(cell)
+	_invalidate_grid()
 
 
 func _on_cell_highlighted(cell: UpgradeCell) -> void:

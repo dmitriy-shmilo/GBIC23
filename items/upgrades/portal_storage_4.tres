@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=4 format=3 uid="uid://dwuo408hxet8"]
+
+[ext_resource type="Texture2D" uid="uid://bqthxvw5y110d" path="res://items/icons/icon_chest_magic_2.tres" id="1_dvswp"]
+[ext_resource type="Resource" uid="uid://dhasc4dj1j3s6" path="res://items/upgrades/portal_storage_3.tres" id="2_wv1ud"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="3_oelit"]
+
+[resource]
+script = ExtResource("3_oelit")
+loc_name = "up_portal_storage_4"
+loc_description = "up_desc_portal_storage_4"
+icon = ExtResource("1_dvswp")
+base_price = 1500
+prerequisites = Array[ExtResource("3_oelit")]([ExtResource("2_wv1ud")])

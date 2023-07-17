@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d3lvla25nqf8p"
+
+[deps]
+
+files=["res://assets/text/BagelQuest - tr_upgrades_desc.en.translation", "res://assets/text/BagelQuest - tr_upgrades_desc.ru.translation", "res://assets/text/BagelQuest - tr_upgrades_desc.ua.translation"]
+
+source_file="res://assets/text/BagelQuest - tr_upgrades_desc.csv"
+dest_files=["res://assets/text/BagelQuest - tr_upgrades_desc.en.translation", "res://assets/text/BagelQuest - tr_upgrades_desc.ru.translation", "res://assets/text/BagelQuest - tr_upgrades_desc.ua.translation"]
+
+[params]
+
+compress=true
+delimiter=0

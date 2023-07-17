@@ -26,6 +26,13 @@ var _portal_costs = [
 	150
 ]
 
+var _portal_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/empty.tres"),
+	preload("res://items/upgrades/portal_license_1.tres"),
+	preload("res://items/upgrades/portal_license_2.tres"),
+	preload("res://items/upgrades/portal_license_3.tres"),
+]
+
 var _last_gossip = 0
 var _gossip = [
 	"gossip_portal_1",
@@ -45,7 +52,12 @@ func _ready() -> void:
 func enter() -> void:
 	super.enter()
 	for b in _portal_buy_buttons:
-		b.disabled = SaveManager.data.money < _portal_costs[b.tag] and b.tag != 0
+		if b.tag == 0:
+			b.disabled = false
+		elif SaveManager.data.money < _portal_costs[b.tag]:
+			b.disabled = true
+		elif not SaveManager.data.upgrades.has(_portal_upgrades[b.tag]):
+			b.disabled = true
 
 
 func _on_portal_buy_button_pressed(button: BetterButton) -> void:
