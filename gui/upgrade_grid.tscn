@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf8d3mbwu8gtc"]
+
+[ext_resource type="Script" path="res://gui/upgrade_grid.gd" id="1_44okx"]
+
+[node name="UpgradeGrid" type="GridContainer"]
+offset_right = 323.0
+offset_bottom = 173.0
+columns = 3
+script = ExtResource("1_44okx")

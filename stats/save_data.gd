@@ -38,6 +38,9 @@ signal date_changed(old, new)
 ## returns to town.
 @export var market_inventory = Inventory.new()
 
+## A list of all purchased upgrades across all shops.
+@export var upgrades: Array[ShopUpgrade] = []
+
 
 func set_money(value: int) -> void:
 	var old = money

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SaveData" load_steps=10 format=3 uid="uid://djix64vuf5vk2"]
+[gd_resource type="Resource" script_class="SaveData" load_steps=11 format=3 uid="uid://djix64vuf5vk2"]
 
 [ext_resource type="Script" path="res://base/inventory.gd" id="1_abibu"]
 [ext_resource type="Script" path="res://stats/save_data.gd" id="1_leivg"]
 [ext_resource type="Resource" uid="uid://cybn5ohny8owi" path="res://items/consumables/ration.tres" id="3_sgj1e"]
 [ext_resource type="Resource" uid="uid://dv5qptej2t6s" path="res://items/ingredients/dough.tres" id="4_pia5u"]
+[ext_resource type="Resource" uid="uid://cuaojdyt0p3bd" path="res://items/upgrades/empty.tres" id="5_fxdqy"]
 
 [sub_resource type="Resource" id="Resource_0ffaa"]
 script = ExtResource("1_abibu")
@@ -34,3 +35,4 @@ counter_inventory = SubResource("Resource_0ffaa")
 portal_inventory = SubResource("Resource_bva0b")
 pockets_inventory = SubResource("Resource_dtiv8")
 market_inventory = SubResource("Resource_222p8")
+upgrades = Array[Resource("res://items/shop_upgrade.gd")]([ExtResource("5_fxdqy")])
