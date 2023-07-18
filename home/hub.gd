@@ -36,11 +36,13 @@ extends Control
 @onready var _portal_shop: PortalShop = %"PortalShop"
 @onready var _market_shop: MarketShop = %"MarketShop"
 @onready var _carpenter_shop: CarpenterShop = %"CarpenterShop"
+@onready var _barracks_shop: BarracksShop = %"BarracksShop"
 @onready var _shops = [
 	_my_shop,
 	_portal_shop,
 	_market_shop,
-	_carpenter_shop
+	_carpenter_shop,
+	_barracks_shop
 ]
 
 
