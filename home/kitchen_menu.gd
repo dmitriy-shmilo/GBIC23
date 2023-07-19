@@ -52,6 +52,8 @@ func _on_kitchen_inventory_changed(_inventory: InventoryComponent) -> void:
 	if _product.traits.size() > 0:
 		_product.traits.sort_custom(func(a,b): return b.strength < a.strength)
 		_product.icon_modulate = _product.traits[0].item_trait.color
+	else:
+		_product.loc_description = "it_desc_plain_bagel"
 	_cook_button.disabled = _needs_dough
 
 
