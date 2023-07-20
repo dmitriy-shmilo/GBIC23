@@ -2,12 +2,13 @@ class_name VitalsComponent
 extends Node
 
 signal health_changed(vitals, is_positive)
-signal food_changed(vitals)
+signal food_changed(vitals, is_positive)
 
 @export var max_health = 100.0 : set = _set_max_health
 @export var current_health = 100.0 : set = _set_current_health
 @export var max_food = 100.0 : set = _set_max_food
 @export var current_food = 100.0 : set = _set_current_food
+@export var food_consumption_rate = 0.2
 @export var needs_food = false
 
 
@@ -38,6 +39,7 @@ func _set_max_food(f):
 
 
 func _set_current_food(f):
-	var positive = current_food < f
+	var change = current_food - f
 	current_food = f
-	food_changed.emit(self, positive)
+	if abs(change) > 0:
+		food_changed.emit(self, change < 0)

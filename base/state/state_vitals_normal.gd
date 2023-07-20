@@ -9,6 +9,10 @@ func _ready() -> void:
 	hurt_box.connect("area_entered", _on_hurt_box_area_entered)
 
 
+func physics_process(delta: float) -> void:
+	vitals.current_food -= vitals.food_consumption_rate * delta
+
+
 func _on_hurt_box_area_entered(area: Hazard) -> void:
 	if area == own_hit_box or state_machine.current_state != self:
 		return

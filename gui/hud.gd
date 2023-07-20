@@ -8,6 +8,7 @@ const MAX_ICONS = 10
 @export var portal: Portal = null
 @export var player: Player = null
 
+@onready var _food_progress_bar: ProgressBar = $"FoodContainer/ProgressBar"
 @onready var _health_container: HBoxContainer = $"%HealthContainer"
 @onready var _extra_health_label = $"%HealthContainer/ExtraHealthLabel"
 @onready var _health_icon_template = $"%HealthIconTemplate"
@@ -22,6 +23,7 @@ func _ready() -> void:
 	_padded_size = Vector2(_screen_size.x - 16, _screen_size.y - 16)
 
 	vitals.health_changed.connect(_on_vitals_health_changed)
+	vitals.food_changed.connect(_on_vitals_food_changed)
 	inventory.changed.connect(_on_inventory_changed)
 	portal.screen_entered.connect(_on_portal_screen_entered)
 	portal.screen_exited.connect(_on_portal_screen_exited)
@@ -31,6 +33,7 @@ func _ready() -> void:
 		_health_container.add_child(heart_rect)
 	_extra_health_label.move_to_front()
 	_refresh_health(vitals)
+	_refresh_food(vitals)
 	_on_inventory_changed(inventory)
 
 
@@ -52,8 +55,17 @@ func _refresh_health(new_vitals: VitalsComponent) -> void:
 		icon.visible = i < new_vitals.current_health
 
 
+func _refresh_food(new_vitals: VitalsComponent) -> void:
+	_food_progress_bar.max_value = new_vitals.max_food
+	_food_progress_bar.value = new_vitals.current_food
+
+
 func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> void:
 	_refresh_health(new_vitals)
+
+
+func _on_vitals_food_changed(new_vitals: VitalsComponent, _positive: bool) -> void:
+	_refresh_food(new_vitals)
 
 
 func _on_inventory_changed(_inventory: InventoryComponent) -> void:
