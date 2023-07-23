@@ -9,7 +9,7 @@ signal direction_changed(direction: Vector2)
 
 var _direction := Vector2.ZERO
 
-func enter(args = {}) -> void:
+func enter(_args = {}) -> void:
 	vitals.food_consumption_rate = 1.0
 
 
@@ -37,7 +37,7 @@ func physics_process(delta: float) -> void:
 		_direction = direction
 		direction_changed.emit(direction)
 
-	if _direction == Vector2.ZERO:
+	if _direction == Vector2.ZERO or movement.is_busy:
 		state_machine.transition("Idle")
 
 	# TODO: accelerate faster if the direction doesn't match current one

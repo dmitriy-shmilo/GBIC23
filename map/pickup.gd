@@ -5,6 +5,7 @@ const FRICTION = 32.0
 const PICKUP_SFX = preload("res://assets/sfx/pickup.tres")
 
 @export var item: Item: set = _set_item
+@export var is_heavy = false
 
 @onready var _body_sprite: Sprite2D = $"BodySprite"
 @onready var _animation_player: AnimationPlayer = $"AnimationPlayer"
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func _set_item(i: Item) -> void:
 	item = i
+	is_heavy = item is ItemContainer
 	if is_inside_tree() and i != null:
 		_body_sprite.texture = i.icon
 

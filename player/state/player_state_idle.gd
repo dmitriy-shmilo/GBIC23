@@ -10,6 +10,9 @@ func enter(_args = {}) -> void:
 
 
 func physics_process(delta: float) -> void:
+	if movement.is_busy:
+		return
+
 	if body.velocity != Vector2.ZERO:
 		body.velocity = body.velocity.move_toward(
 			Vector2.ZERO, movement.decelration * delta)

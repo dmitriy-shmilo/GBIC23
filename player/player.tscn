@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=35 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://player/state/player_state_dying.gd" id="19_021po"]
 [ext_resource type="Script" path="res://base/state/state_vitals_normal.gd" id="19_ker6l"]
 [ext_resource type="Script" path="res://player/state/state_player_dead.gd" id="22_8yoa6"]
+[ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="25_mwb32"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
@@ -37,6 +38,14 @@ height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsh7a"]
 radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4tsq"]
+atlas = ExtResource("25_mwb32")
+region = Rect2(144, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dxi5"]
+atlas = ExtResource("25_mwb32")
+region = Rect2(128, 48, 16, 16)
 
 [sub_resource type="Gradient" id="Gradient_dl5cl"]
 offsets = PackedFloat32Array(0, 0.434685)
@@ -118,6 +127,24 @@ monitorable = false
 shape = SubResource("CircleShape2D_fsh7a")
 debug_color = Color(0.686275, 0.478431, 0.419608, 0.419608)
 
+[node name="BusyIndicator" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -26.0
+offset_right = 8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+fill_mode = 4
+texture_under = SubResource("AtlasTexture_q4tsq")
+texture_progress = SubResource("AtlasTexture_4dxi5")
+
 [node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_xi5ew")]
 visible = false
 offset_left = -46.0
@@ -182,10 +209,11 @@ vitals = NodePath("../../VitalsComponent")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
-[node name="Loot" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "inventory")]
+[node name="Loot" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "inventory", "movement")]
 script = ExtResource("9_eu408")
 interactor = NodePath("../../InteractorComponent")
 inventory = NodePath("../../InventoryComponent")
+movement = NodePath("../../MovementComponent")
 
 [node name="Interact" type="Node" parent="AttackMachine"]
 script = ExtResource("15_7env8")
@@ -261,6 +289,7 @@ randomness = 0.1
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
+[connection signal="progress" from="AttackMachine/Loot" to="." method="_on_loot_progress"]
 [connection signal="transitioned" from="VitalsMachine" to="." method="_on_vitals_machine_transitioned"]
 [connection signal="health_changed" from="VitalsComponent" to="." method="_on_vitals_component_health_changed"]
 [connection signal="item_dropped" from="InventoryComponent" to="." method="_on_inventory_component_item_dropped"]

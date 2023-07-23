@@ -13,3 +13,6 @@ extends Node
 
 ## Counter acceleration in px/s2 to apply when the body is being knocked back.
 @export var knock_back_resistance := 900.0
+
+## When true, the movement should be interrupted.
+@export var is_busy = false

@@ -18,6 +18,7 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _audio_player: AudioStreamPlayer = $"AudioPlayer"
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
 @onready var _inventory: InventoryComponent = $"InventoryComponent"
+@onready var _busy_indicator: TextureProgressBar = $"BusyIndicator"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -31,6 +32,7 @@ func _play_animation() -> void:
 
 
 func _on_attack_machine_transitioned(state_name) -> void:
+	_busy_indicator.visible = state_name == "Loot"
 	match state_name:
 		"Portal":
 			portal_invoked.emit()
@@ -38,7 +40,7 @@ func _on_attack_machine_transitioned(state_name) -> void:
 			_audio_player.stream = swoosh_sfx.items.pick_random()
 			_audio_player.play()
 			_animation_root = "attack"
-		"Ready", "Cooldown":
+		"Ready", "Cooldown", "Loot":
 			match _movement_machine.current_state.name:
 				"Idle", "KnockBack":
 					_animation_root = "idle"
@@ -102,3 +104,7 @@ func _on_vitals_machine_transitioned(state_name) -> void:
 			_attack_machine.set_physics_process(false)
 		"Dead":
 			died.emit()
+
+
+func _on_loot_progress(value) -> void:
+	_busy_indicator.value = value * 100
