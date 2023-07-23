@@ -49,6 +49,7 @@ const LOOT_TABLE = preload("res://items/tables/basic.tres")
 const CHEST_NORMAL = preload("res://items/containers/chest_normal.tres")
 const CHEST_RARE = preload("res://items/containers/chest_rare.tres")
 
+const SPAWNER_SCENE = preload("res://map/spawner.tscn")
 const PICKUP_SCENE = preload("res://map/pickup.tscn")
 const PLAYER_SCENE = preload("res://player/player.tscn")
 const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
@@ -59,15 +60,14 @@ const PORTAL_SCENE = preload("res://map/portal.tscn")
 @onready var _pause: PauseGui = $"GUI/Pause"
 @onready var _portal_menu: PortalMenu = $"GUI/PortalMenu"
 @onready var _summary_menu: SummaryMenu = $"GUI/SummaryMenu"
-@onready var _tilemap = $"TileMap"
-@onready var _objects = $"%Objects"
-@onready var _player = $"%Objects/Player"
-@onready var _portal = $"%Objects/Portal"
+@onready var _tilemap: TileMap = $"TileMap"
+@onready var _objects: Node2D = $"%Objects"
+@onready var _player: Player = $"%Objects/Player"
+@onready var _portal: Portal = $"%Objects/Portal"
 
 var _moisture = FastNoiseLite.new()
 var _altitude = FastNoiseLite.new()
 var _vegetation = FastNoiseLite.new()
-var _enemies = FastNoiseLite.new()
 var _radius = 100
 var _enemies: Array[EnemyDescription] = [
 	preload("res://enemy/descriptions/grunt_0.tres"),
@@ -83,11 +83,11 @@ func _ready() -> void:
 	_moisture.seed = randi()
 	_altitude.seed = randi()
 	_vegetation.seed = randi()
-	_enemies.seed = randi()
 	_moisture.frequency *= 4
 	_altitude.frequency *= 4
 	_generate_terrain()
 	_place_loot()
+	_place_spawners()
 	_place_player()
 
 
@@ -141,6 +141,7 @@ func _place_loot() -> void:
 		for r in range(retry_count):
 			dx = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
 			dy = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+
 			if not _is_land(dx, dy) and r < retry_count - 1:
 				continue
 			_place_chest(dx, dy, randi() % 4 > 0)
@@ -212,7 +213,7 @@ func _generate_terrain() -> void:
 				altitude_mod = -2.0
 
 			var altitude = clampf(_altitude.get_noise_2d(x / 4.0, y / 4.0) * 2 + altitude_mod, -1.0, 1.0)
-			var moisture = (_moisture.get_noise_2d(x / 2.0, y / 2.0) + 1.0) / 2.0 * 5.0 # [0 - 5.0]
+			var moisture = (_moisture.get_noise_2d(x / 2.0, y / 2.0) + 1.0) / 2.0 * 4.0 # [0 - 4.0]
 
 
 			if altitude > 0:
@@ -226,6 +227,34 @@ func _generate_terrain() -> void:
 				altitude = 3 - int(round((altitude + 1.0) * 3.0))
 				var water = TERRAIN_WATER[altitude].pick_random() if randi() % 25 == 0 else TERRAIN_WATER[altitude][0]
 				_tilemap.set_cell(0, Vector2i(x, y), 1, water)
+
+
+@warning_ignore("integer_division")
+func _place_spawners() -> void:
+	var retry_count = 10
+	var dx = 0
+	var dy = 0
+
+	var spawner_count = randi_range(options.min_spawners, options.max_spawners)
+
+	for i in range(spawner_count):
+		for r in range(retry_count):
+			dx = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+			dy = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+
+			if not _is_land(dx, dy) and r < retry_count - 1:
+				continue
+			_place_spawner(dx, dy)
+			break
+
+
+func _place_spawner(x, y) -> void:
+	var spawner = SPAWNER_SCENE.instantiate() as Spawner
+	spawner.descriptions = _enemies
+	spawner.max_spawns = randi_range(options.min_spawns, options.max_spawns)
+	spawner.global_position = Vector2(x, y) * TILE_SIZE
+	_tilemap.set_cells_terrain_path(1, [Vector2i(x, y)], 0, 6)
+	_objects.add_child(spawner)
 
 
 func _on_player_portal_invoked() -> void:

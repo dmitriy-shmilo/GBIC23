@@ -9,3 +9,7 @@ extends Resource
 @export var max_chest_count = 6
 @export var min_guard_count = 1
 @export var max_guard_count = 4
+@export var min_spawners = 1
+@export var max_spawners = 2
+@export var min_spawns = 1
+@export var max_spawns = 2

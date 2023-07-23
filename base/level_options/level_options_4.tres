@@ -4,11 +4,15 @@
 
 [resource]
 script = ExtResource("1_5i8yv")
-size = 128
+size = 160
 min_loot_count = 3
 max_loot_count = 4
 rare_chest_loot_mod = 3
-min_chest_count = 10
+min_chest_count = 12
 max_chest_count = 20
 min_guard_count = 8
 max_guard_count = 12
+min_spawners = 12
+max_spawners = 16
+min_spawns = 1
+max_spawns = 2
