@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyDescription" load_steps=3 format=3 uid="uid://cqmpyi5i5honj"]
+
+[ext_resource type="SpriteFrames" uid="uid://br47sqs1pobo8" path="res://enemy/frames/farmer_frames_0.tres" id="1_f4m3y"]
+[ext_resource type="Script" path="res://enemy/enemy_description.gd" id="2_21hqa"]
+
+[resource]
+script = ExtResource("2_21hqa")
+frames = ExtResource("1_f4m3y")
+min_health = 2
+max_health = 2
+min_speed = 80.0
+max_speed = 100.0

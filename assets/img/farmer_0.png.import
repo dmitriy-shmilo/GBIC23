@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw2iljto8nmg4"
-path="res://.godot/imported/club_goblin.png-8043f8a55c97b21d5a51ad1559ec9875.ctex"
+uid="uid://e74bllq018o6"
+path="res://.godot/imported/farmer_0.png-be2f6116057938870742756cd33d1f24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/club_goblin.png"
-dest_files=["res://.godot/imported/club_goblin.png-8043f8a55c97b21d5a51ad1559ec9875.ctex"]
+source_file="res://assets/img/farmer_0.png"
+dest_files=["res://.godot/imported/farmer_0.png-be2f6116057938870742756cd33d1f24.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=28 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
-[ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/club_goblin_frames.tres" id="1_pr55l"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="2_vqokq"]
+[ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/grunt_frames_1.tres" id="3_cptjr"]
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="3_e6jfp"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="4_cggsa"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_idle.gd" id="5_gwmtk"]
@@ -70,7 +70,7 @@ shape = SubResource("CircleShape2D_cmlcq")
 
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
-sprite_frames = ExtResource("1_pr55l")
+sprite_frames = ExtResource("3_cptjr")
 animation = &"attack_up"
 autoplay = "idle_down"
 

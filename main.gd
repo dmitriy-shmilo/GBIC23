@@ -69,6 +69,14 @@ var _altitude = FastNoiseLite.new()
 var _vegetation = FastNoiseLite.new()
 var _enemies = FastNoiseLite.new()
 var _radius = 100
+var _enemies: Array[EnemyDescription] = [
+	preload("res://enemy/descriptions/grunt_0.tres"),
+	preload("res://enemy/descriptions/grunt_1.tres"),
+	preload("res://enemy/descriptions/grunt_2.tres"),
+	preload("res://enemy/descriptions/farmer_0.tres"),
+	preload("res://enemy/descriptions/farmer_1.tres"),
+	preload("res://enemy/descriptions/farmer_2.tres")
+]
 
 func _ready() -> void:
 	_radius = options.size
@@ -169,8 +177,8 @@ func _place_guards(center: Vector2i) -> void:
 	var positions = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 	for i in range(guard_count):
-		# TODO: enemy resource
 		var guard = ENEMY_SCENE.instantiate() as Enemy
+		guard.description = _enemies.pick_random()
 		var offset = positions.pick_random() * (randi() % 3 + 1)
 		guard.global_position = (center + offset) * TILE_SIZE
 		for shape in guard.get_children():

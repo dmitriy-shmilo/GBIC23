@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyDescription" load_steps=3 format=3 uid="uid://d1gqypvtcnhxa"]
+
+[ext_resource type="SpriteFrames" uid="uid://ctribknmabiq3" path="res://enemy/frames/grunt_frames_2.tres" id="1_lmwh8"]
+[ext_resource type="Script" path="res://enemy/enemy_description.gd" id="2_kuwin"]
+
+[resource]
+script = ExtResource("2_kuwin")
+frames = ExtResource("1_lmwh8")
+min_health = 3
+max_health = 4
+min_speed = 70.0
+max_speed = 100.0
