@@ -9,8 +9,10 @@ func _ready() -> void:
 	add_child(STARTING_SCENE.instantiate())
 
 
-func _on_scene_change_requested(path: String) -> void:
+func _on_scene_change_requested(path: String, options: Resource) -> void:
 	var new_scene = load(path).instantiate()
+	if options != null:
+		new_scene.options = options
 	var children = get_children()
 	for child in children:
 		remove_child(child)

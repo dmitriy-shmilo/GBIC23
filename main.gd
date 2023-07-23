@@ -3,6 +3,7 @@ extends Node2D
 
 const TILE_SIZE = 16
 const MIN_SPAWN_DISTANCE = 8
+const BASE_CHEST_COUNT = 4
 
 const TERRAIN_LAND = [
 	[Vector2i(12, 1),  # Sand
@@ -53,6 +54,8 @@ const PLAYER_SCENE = preload("res://player/player.tscn")
 const ENEMY_SCENE = preload("res://enemy/enemy.tscn")
 const PORTAL_SCENE = preload("res://map/portal.tscn")
 
+@export var options: LevelOptions = preload("res://base/level_options/level_options_1.tres")
+
 @onready var _pause: PauseGui = $"GUI/Pause"
 @onready var _portal_menu: PortalMenu = $"GUI/PortalMenu"
 @onready var _summary_menu: SummaryMenu = $"GUI/SummaryMenu"
@@ -68,6 +71,7 @@ var _enemies = FastNoiseLite.new()
 var _radius = 100
 
 func _ready() -> void:
+	_radius = options.size
 	_moisture.seed = randi()
 	_altitude.seed = randi()
 	_vegetation.seed = randi()
@@ -114,8 +118,7 @@ func _place_loot() -> void:
 	var dx = 0
 	var dy = 0
 
-	# TODO: determine by difficulty and randomize
-	var extra_chest_count = 8
+	var extra_chest_count = randi_range(options.min_chest_count, options.max_chest_count)
 
 	for r in range(retry_count):
 		# guarantee a chest nearby
@@ -126,7 +129,7 @@ func _place_loot() -> void:
 		_place_chest(dx, dy, false)
 		break
 
-	for i in range(extra_chest_count):
+	for i in range(extra_chest_count - 1):
 		for r in range(retry_count):
 			dx = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
 			dy = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
@@ -138,8 +141,11 @@ func _place_loot() -> void:
 
 func _place_chest(x, y, is_rare) -> void:
 	var pos = Vector2(x, y)
+	var loot_count = randi_range(options.min_loot_count, options.max_loot_count) + options.rare_chest_loot_mod if is_rare else 0
 	var item = (CHEST_RARE if is_rare else CHEST_NORMAL).duplicate(false) as ItemContainer
-	for i in range(5 if is_rare else 3):
+
+	# TODO: different loot tables
+	for i in range(loot_count):
 		item.contents.append(LOOT_TABLE.pick_weighted())
 	var chest = PICKUP_SCENE.instantiate() as Pickup
 	chest.item = item
@@ -159,8 +165,7 @@ func _place_chest(x, y, is_rare) -> void:
 
 
 func _place_guards(center: Vector2i) -> void:
-	# TODO: base on difficulty
-	var guard_count = randi() % 7 + 1
+	var guard_count = randi_range(options.min_guard_count, options.max_guard_count)
 	var positions = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 	for i in range(guard_count):

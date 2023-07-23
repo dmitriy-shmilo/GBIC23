@@ -1,8 +1,8 @@
 class_name PortalEmbarkMenu
 extends ShopMenu
 
-# TODO: pass full embark options
 @export var cost = 0
+@export var level_options: LevelOptions = preload("res://base/level_options/level_options_1.tres")
 
 @onready var _storage_inventory_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid"
 @onready var _pockets_inventory_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/PocketsInventoryGrid"
@@ -63,7 +63,7 @@ func _on_pockets_inventory_changed(inventory: InventoryComponent) -> void:
 
 func _on_embark_button_pressed() -> void:
 	SaveManager.data.money -= cost
-	SceneManager.change_scene("res://main.tscn")
+	SceneManager.change_scene("res://main.tscn", level_options)
 
 
 func _on_back_button_pressed() -> void:

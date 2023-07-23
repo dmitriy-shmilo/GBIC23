@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelOptions" load_steps=2 format=3 uid="uid://dd80kwgnuraf3"]
+
+[ext_resource type="Script" path="res://base/level_options.gd" id="1_j4o3p"]
+
+[resource]
+script = ExtResource("1_j4o3p")
+size = 48
+min_loot_count = 2
+max_loot_count = 3
+rare_chest_loot_mod = 1
+min_chest_count = 3
+max_chest_count = 6
+min_guard_count = 1
+max_guard_count = 3
