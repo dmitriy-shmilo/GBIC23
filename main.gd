@@ -130,8 +130,9 @@ func _place_loot() -> void:
 
 	for r in range(retry_count):
 		# guarantee a chest nearby
-		dx = randi_range(MIN_SPAWN_DISTANCE, _radius / 6) * [-1, 1].pick_random()
-		dy = randi_range(MIN_SPAWN_DISTANCE, _radius / 6) * [-1, 1].pick_random()
+		var v = Vector2(0, randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 6)).rotated(randf() * PI * 2)
+		dx = round(v.x)
+		dy = round(v.y)
 		if not _is_land(dx, dy) and r < retry_count - 1:
 			continue
 		_place_chest(dx, dy, false)
@@ -139,8 +140,9 @@ func _place_loot() -> void:
 
 	for i in range(extra_chest_count - 1):
 		for r in range(retry_count):
-			dx = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
-			dy = randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3) * [-1, 1].pick_random()
+			var v = Vector2(0, randi_range(MIN_SPAWN_DISTANCE * 2, _radius / 4 * 3)).rotated(randf() * PI * 2)
+			dx = round(v.x)
+			dy = round(v.y)
 
 			if not _is_land(dx, dy) and r < retry_count - 1:
 				continue
@@ -150,7 +152,7 @@ func _place_loot() -> void:
 
 func _place_chest(x, y, is_rare) -> void:
 	var pos = Vector2(x, y)
-	var loot_count = randi_range(options.min_loot_count, options.max_loot_count) + options.rare_chest_loot_mod if is_rare else 0
+	var loot_count = randi_range(options.min_loot_count, options.max_loot_count) + (options.rare_chest_loot_mod if is_rare else 0)
 	var item = (CHEST_RARE if is_rare else CHEST_NORMAL).duplicate(false) as ItemContainer
 
 	# TODO: different loot tables

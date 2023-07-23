@@ -24,10 +24,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _spawn() -> void:
-	var positions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 	var enemy = ENEMY_SCENE.instantiate() as Enemy
 	enemy.description = descriptions.pick_random()
-	var offset = positions.pick_random() * (randi() % 3 + 1)
 	enemy.global_position = global_position + Vector2(randf_range(-2.0, 2.0), randf_range(-2.0, 2.0)) * TILE_SIZE
 	enemy.died.connect(_on_enemy_died)
 	# assuming parent is the map objects container

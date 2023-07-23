@@ -9,7 +9,6 @@ const UPGRADE_CELL = preload("res://gui/upgrade_cell.tscn")
 
 @export var upgrades: Array[ShopUpgrade] = []: set = set_upgrades
 
-
 func _ready() -> void:
 	set_upgrades(upgrades)
 
