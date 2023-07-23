@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=3 format=3 uid="uid://cvusp6ctku5g2"]
+
+[ext_resource type="Texture2D" uid="uid://3j5fifek5qu3" path="res://items/icons/icon_ration_1.tres" id="1_if67p"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_j2fqq"]
+
+[resource]
+script = ExtResource("2_j2fqq")
+loc_name = "up_max_food_1"
+loc_description = "up_desc_max_food_1"
+icon = ExtResource("1_if67p")
+base_price = 100
+prerequisites = Array[ExtResource("2_j2fqq")]([])

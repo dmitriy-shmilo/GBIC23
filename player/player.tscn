@@ -265,8 +265,8 @@ decelration = 1200.0
 
 [node name="VitalsComponent" type="Node" parent="."]
 script = ExtResource("9_iw2ky")
-max_health = 5.0
-current_health = 5.0
+max_health = 2.0
+current_health = 2.0
 needs_food = true
 
 [node name="InventoryComponent" type="Node" parent="."]

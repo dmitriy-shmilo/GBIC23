@@ -25,6 +25,7 @@ var _animation_root = "idle"
 
 func _ready() -> void:
 	_inventory.inventory = SaveManager.data.pockets_inventory
+	_vitals.apply_upgrades(SaveManager.data.upgrades)
 
 
 func _play_animation() -> void:

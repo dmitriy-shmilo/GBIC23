@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=3 format=3 uid="uid://dhs4cewoqnihh"]
+
+[ext_resource type="Texture2D" uid="uid://bfgp6vm52ld2w" path="res://items/icons/icon_shield_1.tres" id="1_ufghk"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_vatb6"]
+
+[resource]
+script = ExtResource("2_vatb6")
+loc_name = "up_armor_1"
+loc_description = "up_desc_armor_1"
+icon = ExtResource("1_ufghk")
+base_price = 250
+prerequisites = Array[ExtResource("2_vatb6")]([])

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=3 format=3 uid="uid://bej3114fmxq02"]
+
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icons/icon_chest_normal.tres" id="1_ngsrd"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_56lvj"]
+
+[resource]
+script = ExtResource("2_56lvj")
+loc_name = "up_pockets_storage_1"
+loc_description = "up_desc_pockets_storage_1"
+icon = ExtResource("1_ngsrd")
+base_price = 50
+prerequisites = Array[ExtResource("2_56lvj")]([])

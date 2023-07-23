@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=4 format=3 uid="uid://bf6p210rpbu4q"]
+
+[ext_resource type="Texture2D" uid="uid://coj0h4ql0sef" path="res://items/icons/icon_sword_4.tres" id="1_bb4aw"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_7lah4"]
+[ext_resource type="Resource" uid="uid://7rb7hkpsvktg" path="res://items/upgrades/dexterity_3.tres" id="2_vasu2"]
+
+[resource]
+script = ExtResource("2_7lah4")
+loc_name = "up_dexterity_3"
+loc_description = "up_desc_dexterity_3"
+icon = ExtResource("1_bb4aw")
+base_price = 1500
+prerequisites = Array[ExtResource("2_7lah4")]([ExtResource("2_vasu2")])
