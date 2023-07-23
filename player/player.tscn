@@ -149,15 +149,17 @@ current = true
 script = ExtResource("3_1gawu")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
+[node name="Idle" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement", "vitals")]
 script = ExtResource("4_xumsq")
 body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
+vitals = NodePath("../../VitalsComponent")
 
-[node name="Move" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement")]
+[node name="Move" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement", "vitals")]
 script = ExtResource("5_b3qoq")
 body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
+vitals = NodePath("../../VitalsComponent")
 
 [node name="KnockBack" type="Node" parent="MovementMachine" node_paths=PackedStringArray("hurt_box", "body", "movement", "own_hit_box")]
 script = ExtResource("6_ni6g4")
@@ -174,8 +176,9 @@ initial_state = NodePath("Ready")
 script = ExtResource("6_cxw04")
 interactor = NodePath("../../InteractorComponent")
 
-[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("hit_box")]
+[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("vitals", "hit_box")]
 script = ExtResource("7_sinek")
+vitals = NodePath("../../VitalsComponent")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
 
@@ -190,9 +193,10 @@ script = ExtResource("15_7env8")
 [node name="Portal" type="Node" parent="AttackMachine"]
 script = ExtResource("16_a0ow2")
 
-[node name="Cooldown" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "next_state")]
+[node name="Cooldown" type="Node" parent="AttackMachine" node_paths=PackedStringArray("interactor", "vitals", "next_state")]
 script = ExtResource("17_1rmqg")
 interactor = NodePath("../../InteractorComponent")
+vitals = NodePath("../../VitalsComponent")
 next_state = NodePath("../Ready")
 time = 1.0
 
@@ -213,10 +217,11 @@ sprite = NodePath("../../BodySprite")
 invulnerability_time = 0.5
 hurt_box = NodePath("../../HurtBox")
 
-[node name="Dying" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "particles", "sprite", "hurt_box")]
+[node name="Dying" type="Node" parent="VitalsMachine" node_paths=PackedStringArray("audio_player", "particles", "vitals", "sprite", "hurt_box")]
 script = ExtResource("19_021po")
 audio_player = NodePath("../../AudioPlayer")
 particles = NodePath("../../PortalParticles")
+vitals = NodePath("../../VitalsComponent")
 sprite = NodePath("../../BodySprite")
 hurt_box = NodePath("../../HurtBox")
 dying_time = 1.5
@@ -226,7 +231,7 @@ script = ExtResource("22_8yoa6")
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("6_7oms2")
-max_speed = 150.0
+max_speed = 200.0
 acceleration = 750.0
 decelration = 1200.0
 

@@ -8,7 +8,7 @@ signal food_changed(vitals, is_positive)
 @export var current_health = 100.0 : set = _set_current_health
 @export var max_food = 100.0 : set = _set_max_food
 @export var current_food = 100.0 : set = _set_current_food
-@export var food_consumption_rate = 0.2
+@export var food_consumption_rate = 0.5
 @export var needs_food = false
 
 

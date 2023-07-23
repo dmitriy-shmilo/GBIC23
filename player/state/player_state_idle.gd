@@ -1,8 +1,13 @@
 class_name PlayerStateIdle
 extends State
 
-@export var body: CharacterBody2D
-@export var movement: MovementComponent
+@export var body: CharacterBody2D = null
+@export var movement: MovementComponent = null
+@export var vitals: VitalsComponent = null
+
+func enter(_args = {}) -> void:
+	vitals.food_consumption_rate = 0.5
+
 
 func physics_process(delta: float) -> void:
 	if body.velocity != Vector2.ZERO:

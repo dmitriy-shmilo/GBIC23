@@ -9,7 +9,7 @@ uniform float max_phase = 1.0;
 
 void fragment() {
 	float has_pixel = COLOR.a;
-	float phase = min(max_phase, sin(TIME * blink_frequency) / 2.0 + 0.5);
+	float phase = max_phase * (sin(TIME * blink_frequency) / 2.0 + 0.5);
 	COLOR = mix(COLOR, blink_color,  phase * has_pixel);
 }
 "

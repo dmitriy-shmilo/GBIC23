@@ -10,6 +10,7 @@ const MAX_ICONS = 10
 
 @onready var _food_progress_bar: ProgressBar = $"FoodContainer/ProgressBar"
 @onready var _health_container: HBoxContainer = $"%HealthContainer"
+@onready var _food_container:  HBoxContainer = $"FoodContainer"
 @onready var _extra_health_label = $"%HealthContainer/ExtraHealthLabel"
 @onready var _health_icon_template = $"%HealthIconTemplate"
 @onready var _inventory_capacity_label = $"InventoryCapacityLabel"
@@ -58,6 +59,24 @@ func _refresh_health(new_vitals: VitalsComponent) -> void:
 func _refresh_food(new_vitals: VitalsComponent) -> void:
 	_food_progress_bar.max_value = new_vitals.max_food
 	_food_progress_bar.value = new_vitals.current_food
+
+	var material = _food_container.material as ShaderMaterial
+
+	if new_vitals.current_food < new_vitals.max_food / 8:
+		material.set_shader_parameter("max_phase", 0.8)
+		material.set_shader_parameter("blink_frequency", 16)
+		material.set_shader_parameter("blink_color", Color.ORANGE_RED)
+	elif new_vitals.current_food < new_vitals.max_food / 4:
+		material.set_shader_parameter("max_phase", 0.6)
+		material.set_shader_parameter("blink_frequency", 10)
+		material.set_shader_parameter("blink_color", Color.DARK_ORANGE)
+	elif new_vitals.current_food < new_vitals.max_food / 2:
+		material.set_shader_parameter("max_phase", 0.4)
+		material.set_shader_parameter("blink_frequency", 5)
+		material.set_shader_parameter("blink_color", Color.YELLOW)
+	else:
+		material.set_shader_parameter("max_phase", 0.0)
+
 
 
 func _on_vitals_health_changed(new_vitals: VitalsComponent, _positive: bool) -> void:

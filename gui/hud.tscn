@@ -1,10 +1,55 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcsij2ymvcr1x"]
+[gd_scene load_steps=12 format=3 uid="uid://dcsij2ymvcr1x"]
 
 [ext_resource type="Script" path="res://gui/hud.gd" id="1_tlkf4"]
 [ext_resource type="Texture2D" uid="uid://b0v3k4tusthhg" path="res://gui/hud_health.tres" id="2_ftoaj"]
 [ext_resource type="Texture2D" uid="uid://bb5jw57l32lrb" path="res://gui/hud_food.tres" id="2_vx6fv"]
+[ext_resource type="Shader" uid="uid://d1avwehdpu8nx" path="res://base/shader/blink_shader.tres" id="3_y6c1l"]
 [ext_resource type="Texture2D" uid="uid://btudcfnqkxpxv" path="res://assets/img/chests.png" id="4_61l14"]
 [ext_resource type="SpriteFrames" uid="uid://bqmx32qqwl6xf" path="res://map/portal_frames_1.tres" id="5_u24vj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjpde"]
+shader = ExtResource("3_y6c1l")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_frequency = 20.0
+shader_parameter/max_phase = 0.0
+
+[sub_resource type="Animation" id="Animation_1ytrt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 28)]
+}
+
+[sub_resource type="Animation" id="Animation_6cmih"]
+resource_name = "shake_once"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(8, 28), Vector2(0, 28), Vector2(8, 28), Vector2(16, 28)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_idudo"]
+_data = {
+"RESET": SubResource("Animation_1ytrt"),
+"shake_once": SubResource("Animation_6cmih")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sbhe8"]
 atlas = ExtResource("4_61l14")
@@ -46,6 +91,7 @@ theme_override_font_sizes/font_size = 24
 text = " +1"
 
 [node name="FoodContainer" type="HBoxContainer" parent="."]
+material = SubResource("ShaderMaterial_tjpde")
 layout_mode = 2
 offset_left = 8.0
 offset_top = 28.0
@@ -53,17 +99,24 @@ offset_right = 96.0
 offset_bottom = 44.0
 
 [node name="TextureRect" type="TextureRect" parent="FoodContainer"]
+use_parent_material = true
 layout_mode = 2
 texture = ExtResource("2_vx6fv")
 stretch_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="FoodContainer"]
+use_parent_material = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 value = 50.0
 show_percentage = false
+
+[node name="FoodBarAnimationPlayer" type="AnimationPlayer" parent="FoodContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_idudo")
+}
 
 [node name="InventoryIcon" type="TextureRect" parent="."]
 layout_mode = 1

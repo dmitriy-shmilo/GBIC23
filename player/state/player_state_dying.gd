@@ -3,14 +3,13 @@ extends StateVitalsDying
 
 const PORTAL_SFX: SfxCollection = preload("res://assets/sfx/portal.tres")
 
-
-
 @export var audio_player: AudioStreamPlayer = null
 @export var particles: GPUParticles2D = null
-
+@export var vitals: VitalsComponent = null
 
 func enter(args = {}) -> void:
 	super.enter(args)
+	vitals.food_consumption_rate = 0.0
 	particles.emitting = true
 	PORTAL_SFX.play_random(audio_player)
 

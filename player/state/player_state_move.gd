@@ -3,10 +3,27 @@ extends State
 
 signal direction_changed(direction: Vector2)
 
-@export var body: CharacterBody2D
-@export var movement: MovementComponent
+@export var body: CharacterBody2D = null
+@export var movement: MovementComponent = null
+@export var vitals: VitalsComponent = null
 
 var _direction := Vector2.ZERO
+
+func enter(args = {}) -> void:
+	vitals.food_consumption_rate = 1.0
+
+
+func _get_max_speed() -> float:
+	var result = movement.max_speed
+	if vitals.current_food < vitals.max_food / 8:
+		result *= 0.25
+	elif vitals.current_food < vitals.max_food / 4:
+		result *= 0.5
+	elif vitals.current_food < vitals.max_food / 2:
+		result *= 0.75
+
+	return result
+
 
 func physics_process(delta: float) -> void:
 	var dx = Input.get_action_strength("move_right") \
@@ -25,7 +42,7 @@ func physics_process(delta: float) -> void:
 
 	# TODO: accelerate faster if the direction doesn't match current one
 	body.velocity = body.velocity.move_toward(
-		_direction * movement.max_speed,
+		_direction * _get_max_speed(),
 		movement.acceleration * delta)
 	body.move_and_slide()
 
