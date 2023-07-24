@@ -41,6 +41,7 @@ signal date_changed(old, new)
 ## A list of all purchased upgrades across all shops.
 @export var upgrades: Array[ShopUpgrade] = []
 
+@export var current_quests: Array[Quest] = []
 
 func set_money(value: int) -> void:
 	var old = money
