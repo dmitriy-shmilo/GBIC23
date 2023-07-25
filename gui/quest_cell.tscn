@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://caa0qyqfck4bn" path="res://home/icons/icon_checkmark.tres" id="2_dbbyi"]
 [ext_resource type="Script" path="res://gui/better_button.gd" id="3_6dnbm"]
 [ext_resource type="Texture2D" uid="uid://mrc8xjf8hoof" path="res://home/icons/icon_quit.tres" id="3_tssnb"]
-[ext_resource type="Texture2D" uid="uid://cs1c3vdsy7a28" path="res://home/icons/icon_quest.tres" id="4_50wp1"]
 [ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="5_aa18k"]
+[ext_resource type="Texture2D" uid="uid://clxbb3vmrdr00" path="res://items/icons/icon_bagel.tres" id="5_itgpg"]
 [ext_resource type="Texture2D" uid="uid://8m6p0fpu3pjw" path="res://home/icons/icon_calendar.tres" id="6_1b1qn"]
 
 [node name="QuestCell" type="Panel"]
@@ -63,13 +63,13 @@ icon = ExtResource("3_tssnb")
 text_overrun_behavior = 3
 script = ExtResource("3_6dnbm")
 
-[node name="PortraitIcon" type="TextureRect" parent="."]
+[node name="ItemIcon" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 20.0
 offset_bottom = 20.0
-texture = ExtResource("4_50wp1")
+texture = ExtResource("5_itgpg")
 
 [node name="CoinIcon" type="TextureRect" parent="."]
 layout_mode = 0
