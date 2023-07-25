@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xpppcroatuff"]
+[gd_scene load_steps=25 format=3 uid="uid://xpppcroatuff"]
 
 [ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
@@ -21,6 +21,8 @@
 [ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="16_vva48"]
 [ext_resource type="Script" path="res://home/sales_summary_menu.gd" id="18_k5rck"]
 [ext_resource type="Script" path="res://base/inventory.gd" id="19_y1vb5"]
+[ext_resource type="Script" path="res://home/quests_menu.gd" id="22_p6bx7"]
+[ext_resource type="PackedScene" uid="uid://c3oll3ljjjr7q" path="res://gui/quest_grid.tscn" id="23_usrik"]
 
 [sub_resource type="Resource" id="Resource_v23ep"]
 script = ExtResource("19_y1vb5")
@@ -156,14 +158,13 @@ script = ExtResource("8_mjvgj")
 submenu = NodePath("")
 loc_hint = "hint_my_packing_table"
 
-[node name="QuestsButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
+[node name="QuestsButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_my_quests"
 icon = ExtResource("9_uhtag")
-script = ExtResource("6_jga7i")
-loc_hint = "hint_my_quests"
+script = ExtResource("8_mjvgj")
+submenu = NodePath("../../../../QuestsMenu")
 
 [node name="BackButton" type="Button" parent="MainMenu/MarginContainer/Menu"]
 custom_minimum_size = Vector2(0, 24)
@@ -448,6 +449,72 @@ size_flags_vertical = 3
 [node name="SalesInventoryComponent" type="Node" parent="SalesSummaryMenu"]
 script = ExtResource("15_7tl1x")
 inventory = SubResource("Resource_v23ep")
+
+[node name="QuestsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_p6bx7")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="QuestsMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="QuestsMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuestsMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "ui_my_quests"
+
+[node name="CenterContainer" type="CenterContainer" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuestGrid" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("23_usrik")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+shortcut = ExtResource("15_4r0qd")
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="cell_highlighted" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_storage_inventory_grid_cell_selected"]
