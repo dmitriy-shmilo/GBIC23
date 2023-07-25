@@ -41,7 +41,11 @@ signal date_changed(old, new)
 ## A list of all purchased upgrades across all shops.
 @export var upgrades: Array[ShopUpgrade] = []
 
-@export var current_quests: Array[Quest] = []
+## All available quests.
+@export var available_quests: Array[Quest] = []
+
+## A subset of available_quests.
+@export var accepted_quests: Array[Quest] = []
 
 func set_money(value: int) -> void:
 	var old = money
@@ -57,3 +61,27 @@ func set_date(value: int) -> void:
 
 func get_formatted_date() -> String:
 	return tr("ui_date") % [date + 1, tr(WEEKDAYS[date % WEEKDAYS.size()])]
+
+
+func refresh_quests() -> void:
+	# TODO: base on upgrades
+	var total_quests = 5
+
+	for i in range(available_quests.size(), 0, -1):
+		var quest = available_quests[i - 1]
+		if quest.expiration_day <= date:
+			available_quests[i] = null
+			var accepted_index = accepted_quests.find(quest)
+			if accepted_index >= 0:
+				accepted_quests.remove_at(accepted_index)
+
+	var available_count = available_quests.size()
+	var new_quests = randi_range(0 if available_count > 0 else 1, total_quests - available_count)
+
+
+	for i in range(available_quests.size(), new_quests):
+		var quest = Quest.generate(5 + randi() % 5,
+			i < 2 and accepted_quests.size() > 0,
+			min(14, accepted_quests.size() * 2 + 3),
+			null)
+		available_quests.push_back(quest)

@@ -90,6 +90,8 @@ func _enter_return() -> void:
 	_loot_inventory.set_block_signals(false)
 	_loot_inventory.changed.emit(_loot_inventory)
 
+	SaveManager.data.refresh_quests()
+
 
 func _enter_focus() -> void:
 	if _sales_grid.visible:
