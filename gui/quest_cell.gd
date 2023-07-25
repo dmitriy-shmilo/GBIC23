@@ -39,9 +39,9 @@ func is_accepted() -> bool:
 
 
 func can_complete() -> bool:
-	if SaveManager.data.storage_inventory.any(func (p): return p is Product and quest.is_match(p)):
+	if SaveManager.data.storage_inventory.items.any(func (p): return p is Product and quest.is_match(p)):
 		return true
-	if SaveManager.data.counter_inventory.any(func (p): return p is Product and quest.is_match(p)):
+	if SaveManager.data.counter_inventory.items.any(func (p): return p is Product and quest.is_match(p)):
 		return true
 
 	return false

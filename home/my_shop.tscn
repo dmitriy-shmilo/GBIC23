@@ -494,6 +494,11 @@ layout_mode = 2
 [node name="QuestGrid" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("23_usrik")]
 layout_mode = 2
 
+[node name="NoQuestsLabel" type="Label" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer"]
+visible = false
+layout_mode = 2
+text = "ui_no_quests"
+
 [node name="Spacer" type="Control" parent="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -528,3 +533,5 @@ size_flags_vertical = 3
 [connection signal="focus_entered" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_focus_entered"]
 [connection signal="pressed" from="KitchenMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton" to="KitchenMenu" method="_on_cook_button_pressed"]
 [connection signal="cell_highlighted" from="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer/SalesInventoryGrid" to="SalesSummaryMenu" method="_on_sales_inventory_grid_cell_highlighted"]
+[connection signal="cell_accepted" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_accepted"]
+[connection signal="cell_dismissed" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_dismissed"]
