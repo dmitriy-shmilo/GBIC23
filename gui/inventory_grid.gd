@@ -12,7 +12,7 @@ const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
 @export var hide_empty_extras = false
 @export var inventory: InventoryComponent = null: set = set_inventory
 
-var item_filter: Callable = func(_i): return true
+var item_filter: Callable = func(_i): return true: set = set_item_filter
 
 @onready var _inventory_grid: Container = self
 
@@ -24,6 +24,12 @@ func _ready() -> void:
 
 func focus_first_cell() -> void:
 	_inventory_grid.get_child(0).grab_focus()
+
+
+func set_item_filter(value: Callable) -> void:
+	item_filter = value
+	if is_inside_tree() and inventory != null:
+		_on_inventory_changed(inventory)
 
 
 func set_inventory(value) -> void:

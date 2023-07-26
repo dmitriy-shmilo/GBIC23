@@ -63,6 +63,17 @@ func get_formatted_date() -> String:
 	return tr("ui_date") % [date + 1, tr(WEEKDAYS[date % WEEKDAYS.size()])]
 
 
+func remove_quest(quest: Quest) -> void:
+	var available_index = SaveManager.data.available_quests.find(quest)
+	var accepted_index = SaveManager.data.accepted_quests.find(quest)
+
+	if available_index >= 0:
+		SaveManager.data.available_quests.remove_at(available_index)
+
+	if accepted_index >= 0:
+		SaveManager.data.accepted_quests.remove_at(accepted_index)
+
+
 func refresh_quests() -> void:
 	# TODO: base on upgrades
 	var total_quests = 5

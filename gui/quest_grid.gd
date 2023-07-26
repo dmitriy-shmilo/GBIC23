@@ -18,7 +18,7 @@ func set_quests(value: Array[Quest]) -> void:
 
 
 func focus_first_cell() -> void:
-	if get_child_count() > 0:
+	if get_child_count() > 0 and get_child(0).visible:
 		get_child(0).focus_button()
 
 

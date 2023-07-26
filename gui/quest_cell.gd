@@ -30,7 +30,6 @@ func set_quest(value: Quest) -> void:
 		_reward_label.text = "%d" % quest.get_reward()
 		_expiration_label.text = "%d" % quest.expiration_day
 		_item_icon.modulate = quest.get_product().traits[0].item_trait.color
-		# TODO: change button icon
 		if not is_accepted():
 			_accept_button.icon = ICON_ACCEPT
 			_accept_button.disabled = false

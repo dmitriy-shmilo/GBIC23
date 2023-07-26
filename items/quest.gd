@@ -94,7 +94,7 @@ func is_match(product: Product) -> bool:
 			return false
 
 	for req_trait in required_traits:
-		if product.traits.all(func(t): return t.item_trait != req_trait or t.strength < req_trait.strength):
+		if product.traits.all(func(t): return t.item_trait != req_trait.item_trait or t.strength < req_trait.strength):
 			return false
 
 	return true
