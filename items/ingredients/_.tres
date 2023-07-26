@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=4 format=3 uid="uid://cu1dm7sooy7hd"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_dck7f"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_gasnl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_dck7f")
+region = Rect2(112, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_gasnl")
+traits = Array[Resource("res://items/trait.gd")]([])
+trait_strength = Array[int]([])
+loc_name = "it_"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

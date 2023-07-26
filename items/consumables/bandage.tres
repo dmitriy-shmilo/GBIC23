@@ -14,4 +14,5 @@ type = 1
 loc_name = "it_bandage"
 loc_description = "it_desc_bandage"
 icon = SubResource("AtlasTexture_pl25u")
+icon_modulate = Color(1, 1, 1, 1)
 is_junk = false

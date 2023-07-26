@@ -10,9 +10,14 @@ trait_veggie,veggie,овощной,овочевий
 trait_sour,sour,кислый,кислий
 trait_citrus,citrus,цитрусовый,цитрусовий
 trait_plain,plain,обычный,звичайний
+trait_fatty,fatty,жирный,жирний
+trait_creamy,creamy,сливочный,вершковий
 trait_strength_1,barely,еле,ледве
 trait_strength_2,somewhat,немного,трохи
-trait_strength_3,moderately,умеренно,
+trait_strength_3,moderately,умеренно,помірно
 trait_strength_4,very,очень,дуже
 trait_strength_5,extra,особо,особливо
 trait_strength_6,impossibly,невозможно,неможливо
+trait_meaty,meaty,мясной,мʼясний
+trait_nutty,nutty,ореховый,горіховий
+trait_spicy,spicy,прянный,пряний

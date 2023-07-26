@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=7 format=3 uid="uid://cap8dsawkjovp"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_km3vk"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_06oum"]
+[ext_resource type="Resource" uid="uid://d3h1ultvn8v7i" path="res://items/traits/juicy.tres" id="3_miqsg"]
+[ext_resource type="Resource" uid="uid://bt2id4jhlwbwx" path="res://items/traits/sour.tres" id="4_lkt33"]
+[ext_resource type="Resource" uid="uid://btp21euyldc7c" path="res://items/traits/fresh.tres" id="5_kfodg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_km3vk")
+region = Rect2(48, 16, 16, 16)
+
+[resource]
+script = ExtResource("2_06oum")
+traits = Array[Resource("res://items/trait.gd")]([ExtResource("3_miqsg"), ExtResource("4_lkt33"), ExtResource("5_kfodg")])
+trait_strength = Array[int]([2, 1, 1])
+loc_name = "it_pepper_green"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

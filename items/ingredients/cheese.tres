@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=8 format=3 uid="uid://cpngfxbg2e0v3"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_daisn"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_fmjsb"]
+[ext_resource type="Resource" uid="uid://p0jobrhes64l" path="res://items/traits/fatty.tres" id="3_15a62"]
+[ext_resource type="Resource" uid="uid://dt6qgxixn2iky" path="res://items/traits/creamy.tres" id="4_xu01s"]
+[ext_resource type="Resource" uid="uid://d3g4q2ptlivhj" path="res://items/traits/salty.tres" id="5_2y364"]
+[ext_resource type="Resource" uid="uid://dhmunihidmkwd" path="res://items/traits/sweet.tres" id="6_oatno"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_daisn")
+region = Rect2(112, 64, 16, 16)
+
+[resource]
+script = ExtResource("2_fmjsb")
+traits = Array[Resource("res://items/trait.gd")]([ExtResource("3_15a62"), ExtResource("4_xu01s"), ExtResource("5_2y364"), ExtResource("6_oatno")])
+trait_strength = Array[int]([2, 1, 1, -2])
+loc_name = "it_"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

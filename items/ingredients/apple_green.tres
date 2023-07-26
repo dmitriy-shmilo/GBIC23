@@ -13,8 +13,9 @@ region = Rect2(0, 16, 16, 16)
 [resource]
 script = ExtResource("1_j5ju8")
 traits = Array[Resource("res://items/trait.gd")]([ExtResource("2_wfx8v"), ExtResource("3_hihdk"), ExtResource("4_1geyr")])
-trait_strength = Array[int]([1, 1, 1])
+trait_strength = Array[int]([1, 3, 1])
 loc_name = "it_apple_green"
 loc_description = ""
 icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
 is_junk = false

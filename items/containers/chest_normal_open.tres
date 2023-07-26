@@ -8,4 +8,5 @@ script = ExtResource("1_dcauv")
 loc_name = "it_chest_open"
 loc_description = "it_desc_chest_open"
 icon = ExtResource("1_dlwbu")
+icon_modulate = Color(1, 1, 1, 1)
 is_junk = true

@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_4dadx")
 loc_name = "trait_citrus"
-color = Color(0.988235, 0.847059, 0.505882, 1)
+color = Color(0.741176, 0.670588, 0.254902, 1)

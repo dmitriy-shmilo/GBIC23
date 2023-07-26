@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=11 format=3 uid="uid://2gbbmgcyle61"]
+
+[ext_resource type="Resource" uid="uid://c2dgpjfyeedn8" path="res://items/ingredients/apple_green.tres" id="1_on100"]
+[ext_resource type="Script" path="res://items/loot_table_entry.gd" id="2_d43hg"]
+[ext_resource type="Resource" uid="uid://3h7suencprfp" path="res://items/ingredients/apple_red.tres" id="3_rbj1f"]
+[ext_resource type="Resource" uid="uid://usas8hef0thv" path="res://items/ingredients/apple_yellow.tres" id="4_1uwnt"]
+[ext_resource type="Resource" uid="uid://cxo58dq8evvil" path="res://items/ingredients/butter.tres" id="5_i8nck"]
+[ext_resource type="Script" path="res://items/loot_table.gd" id="5_l2aax"]
+
+[sub_resource type="Resource" id="Resource_016it"]
+script = ExtResource("2_d43hg")
+item = ExtResource("1_on100")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_wsdb6"]
+script = ExtResource("2_d43hg")
+item = ExtResource("3_rbj1f")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_6jqfc"]
+script = ExtResource("2_d43hg")
+item = ExtResource("4_1uwnt")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_8v8pi"]
+script = ExtResource("2_d43hg")
+item = ExtResource("5_i8nck")
+weight = 1.0
+
+[resource]
+script = ExtResource("5_l2aax")
+entries = Array[ExtResource("2_d43hg")]([SubResource("Resource_016it"), SubResource("Resource_wsdb6"), SubResource("Resource_6jqfc"), SubResource("Resource_8v8pi")])

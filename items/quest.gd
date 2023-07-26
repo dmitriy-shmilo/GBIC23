@@ -18,8 +18,11 @@ static func generate(duration: int, has_bad: bool, max_strength: int, preferred_
 		preload("res://items/traits/fresh.tres"),
 		preload("res://items/traits/fruity.tres"),
 		preload("res://items/traits/juicy.tres"),
+		preload("res://items/traits/meaty.tres"),
+		preload("res://items/traits/nutty.tres"),
 		preload("res://items/traits/salty.tres"),
 		preload("res://items/traits/sour.tres"),
+		preload("res://items/traits/spicy.tres"),
 		preload("res://items/traits/sweet.tres")
 	]
 	traits.shuffle()

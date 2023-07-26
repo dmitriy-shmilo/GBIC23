@@ -1,44 +1,44 @@
 [gd_resource type="Resource" script_class="LootTable" load_steps=15 format=3 uid="uid://c7a56hq1tewxr"]
 
-[ext_resource type="Resource" uid="uid://c2dgpjfyeedn8" path="res://items/ingredients/apple_green.tres" id="1_hsuwi"]
 [ext_resource type="Resource" uid="uid://dv5qptej2t6s" path="res://items/ingredients/dough.tres" id="1_ijqwq"]
 [ext_resource type="Script" path="res://items/loot_table_entry.gd" id="2_ewm0w"]
-[ext_resource type="Resource" uid="uid://3h7suencprfp" path="res://items/ingredients/apple_red.tres" id="3_wwbgh"]
 [ext_resource type="Resource" uid="uid://usas8hef0thv" path="res://items/ingredients/apple_yellow.tres" id="4_ifg4d"]
 [ext_resource type="Script" path="res://items/loot_table.gd" id="5_r66tt"]
+[ext_resource type="Resource" uid="uid://dcffii160w57n" path="res://items/ingredients/carrot.tres" id="6_emptn"]
 [ext_resource type="Resource" uid="uid://cybn5ohny8owi" path="res://items/consumables/ration.tres" id="6_on04k"]
+[ext_resource type="Resource" uid="uid://bjhvcaqwu3qr7" path="res://items/ingredients/cabbage.tres" id="7_b0p24"]
 [ext_resource type="Resource" uid="uid://j13p44twsg3p" path="res://items/consumables/bandage.tres" id="7_n0rv8"]
 
 [sub_resource type="Resource" id="Resource_016it"]
 script = ExtResource("2_ewm0w")
 item = ExtResource("1_ijqwq")
-weight = 2.0
-
-[sub_resource type="Resource" id="Resource_wsdb6"]
-script = ExtResource("2_ewm0w")
-item = ExtResource("3_wwbgh")
-weight = 1.0
+weight = 10.0
 
 [sub_resource type="Resource" id="Resource_6jqfc"]
 script = ExtResource("2_ewm0w")
 item = ExtResource("4_ifg4d")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_bplb6"]
-script = ExtResource("2_ewm0w")
-item = ExtResource("1_hsuwi")
-weight = 1.0
-
 [sub_resource type="Resource" id="Resource_fgigr"]
 script = ExtResource("2_ewm0w")
 item = ExtResource("6_on04k")
-weight = 1.0
+weight = 2.0
 
 [sub_resource type="Resource" id="Resource_o8cm6"]
 script = ExtResource("2_ewm0w")
 item = ExtResource("7_n0rv8")
 weight = 1.0
 
+[sub_resource type="Resource" id="Resource_4bsth"]
+script = ExtResource("2_ewm0w")
+item = ExtResource("6_emptn")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_vrujm"]
+script = ExtResource("2_ewm0w")
+item = ExtResource("7_b0p24")
+weight = 1.0
+
 [resource]
 script = ExtResource("5_r66tt")
-entries = Array[ExtResource("2_ewm0w")]([SubResource("Resource_016it"), SubResource("Resource_wsdb6"), SubResource("Resource_6jqfc"), SubResource("Resource_bplb6"), SubResource("Resource_fgigr"), SubResource("Resource_o8cm6")])
+entries = Array[ExtResource("2_ewm0w")]([SubResource("Resource_016it"), SubResource("Resource_6jqfc"), SubResource("Resource_fgigr"), SubResource("Resource_o8cm6"), SubResource("Resource_4bsth"), SubResource("Resource_vrujm")])

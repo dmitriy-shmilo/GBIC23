@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=7 format=3 uid="uid://tapi4dawmhb"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_ukmtm"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_r5y2q"]
+[ext_resource type="Resource" uid="uid://btp21euyldc7c" path="res://items/traits/fresh.tres" id="3_m3lxb"]
+[ext_resource type="Resource" uid="uid://d3h1ultvn8v7i" path="res://items/traits/juicy.tres" id="4_qiq54"]
+[ext_resource type="Resource" uid="uid://d3g4q2ptlivhj" path="res://items/traits/salty.tres" id="5_3baju"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_ukmtm")
+region = Rect2(48, 32, 16, 16)
+
+[resource]
+script = ExtResource("2_r5y2q")
+traits = Array[Resource("res://items/trait.gd")]([ExtResource("3_m3lxb"), ExtResource("4_qiq54"), ExtResource("5_3baju")])
+trait_strength = Array[int]([2, 2, 1])
+loc_name = "it_celery"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

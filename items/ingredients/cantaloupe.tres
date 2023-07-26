@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=6 format=3 uid="uid://ch6r43ftpolpf"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_5c1lm"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_lm6o7"]
+[ext_resource type="Resource" uid="uid://d3h1ultvn8v7i" path="res://items/traits/juicy.tres" id="3_8xqaf"]
+[ext_resource type="Resource" uid="uid://dhmunihidmkwd" path="res://items/traits/sweet.tres" id="4_xk6sm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_5c1lm")
+region = Rect2(0, 32, 16, 16)
+
+[resource]
+script = ExtResource("2_lm6o7")
+traits = Array[Resource("res://items/trait.gd")]([ExtResource("3_8xqaf"), ExtResource("4_xk6sm")])
+trait_strength = Array[int]([2, 4])
+loc_name = "it_cantaloupe"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

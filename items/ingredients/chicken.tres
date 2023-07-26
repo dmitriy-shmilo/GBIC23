@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Ingredient" load_steps=7 format=3 uid="uid://cgg4x7m6r60k4"]
+
+[ext_resource type="Texture2D" uid="uid://dxha1hn1hwhf5" path="res://assets/img/ingredients.png" id="1_g3xig"]
+[ext_resource type="Script" path="res://items/ingredient.gd" id="2_jebd6"]
+[ext_resource type="Resource" uid="uid://p0jobrhes64l" path="res://items/traits/fatty.tres" id="3_wepe8"]
+[ext_resource type="Resource" uid="uid://mkxaqbpk3ykq" path="res://items/traits/meaty.tres" id="4_om4yc"]
+[ext_resource type="Resource" uid="uid://btp21euyldc7c" path="res://items/traits/fresh.tres" id="5_fy5go"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4h6d"]
+atlas = ExtResource("1_g3xig")
+region = Rect2(96, 32, 16, 16)
+
+[resource]
+script = ExtResource("2_jebd6")
+traits = Array[Resource("res://items/trait.gd")]([ExtResource("3_wepe8"), ExtResource("4_om4yc"), ExtResource("5_fy5go")])
+trait_strength = Array[int]([2, 4, -2])
+loc_name = "it_chicken"
+loc_description = ""
+icon = SubResource("AtlasTexture_x4h6d")
+icon_modulate = Color(1, 1, 1, 1)
+is_junk = false

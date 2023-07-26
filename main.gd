@@ -45,7 +45,7 @@ const TREES = [
 	Vector2i(3, 0),
 ]
 
-const LOOT_TABLE = preload("res://items/tables/basic.tres")
+const BASIC_LOOT_TABLE = preload("res://items/tables/basic.tres")
 const CHEST_NORMAL = preload("res://items/containers/chest_normal.tres")
 const CHEST_RARE = preload("res://items/containers/chest_rare.tres")
 
@@ -77,6 +77,7 @@ var _enemies: Array[EnemyDescription] = [
 	preload("res://enemy/descriptions/farmer_1.tres"),
 	preload("res://enemy/descriptions/farmer_2.tres")
 ]
+var _all_ingredients_table: LootTable = null
 
 func _ready() -> void:
 	_radius = options.size
@@ -89,6 +90,24 @@ func _ready() -> void:
 	_place_loot()
 	_place_spawners()
 	_place_player()
+
+
+func _get_all_ingredients_table() -> LootTable:
+	if _all_ingredients_table == null:
+		_all_ingredients_table = LootTable.new()
+		var folder = DirAccess.open("res://items/ingredients/")
+		folder.list_dir_begin()
+		var file_name = folder.get_next()
+		while file_name != "":
+			if not folder.current_is_dir():
+				var item = load("res://items/ingredients/" + file_name)
+				var entry = LootTableEntry.new()
+				entry.item = item
+				entry.weight = 1
+				_all_ingredients_table.entries.push_back(entry)
+			file_name = folder.get_next()
+		folder.list_dir_end()
+	return _all_ingredients_table
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -135,7 +154,7 @@ func _place_loot() -> void:
 		dy = round(v.y)
 		if not _is_land(dx, dy) and r < retry_count - 1:
 			continue
-		_place_chest(dx, dy, false)
+		_place_chest(dx, dy, false, BASIC_LOOT_TABLE)
 		break
 
 	for i in range(extra_chest_count - 1):
@@ -146,18 +165,18 @@ func _place_loot() -> void:
 
 			if not _is_land(dx, dy) and r < retry_count - 1:
 				continue
-			_place_chest(dx, dy, randi() % 4 > 0)
+			_place_chest(dx, dy, randi() % 4 > 0, _get_all_ingredients_table())
 			break
 
 
-func _place_chest(x, y, is_rare) -> void:
+func _place_chest(x, y, is_rare, table: LootTable) -> void:
 	var pos = Vector2(x, y)
 	var loot_count = randi_range(options.min_loot_count, options.max_loot_count) + (options.rare_chest_loot_mod if is_rare else 0)
 	var item = (CHEST_RARE if is_rare else CHEST_NORMAL).duplicate(false) as ItemContainer
 
 	# TODO: different loot tables
 	for i in range(loot_count):
-		item.contents.append(LOOT_TABLE.pick_weighted())
+		item.contents.append(table.pick_weighted())
 	var chest = PICKUP_SCENE.instantiate() as Pickup
 	chest.item = item
 	chest.global_position = pos * (0.5 + TILE_SIZE)
