@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=5 format=3 uid="uid://bv0x21f8bv7rc"]
+
+[ext_resource type="Resource" uid="uid://d0curhev1l6dq" path="res://items/upgrades/cannery_1.tres" id="1_ungwv"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_odan0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7uu0d"]
+load_path = "res://.godot/imported/upgrade_icons.png-7517c3386b2094c93f8276ed2f58e2f2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l7xb"]
+atlas = SubResource("CompressedTexture2D_7uu0d")
+region = Rect2(32, 48, 16, 16)
+
+[resource]
+script = ExtResource("2_odan0")
+loc_name = "up_cannery_2"
+loc_description = "up_desc_cannery_2"
+icon = SubResource("AtlasTexture_2l7xb")
+base_price = 0
+prerequisites = Array[ExtResource("2_odan0")]([ExtResource("1_ungwv")])

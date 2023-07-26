@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=3 format=3 uid="uid://cvkiocvj8ap2p"]
+
+[ext_resource type="Texture2D" uid="uid://c7doa5ktqrtrd" path="res://items/icons/icon_chest_normal.tres" id="1_hkp18"]
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_iwb7w"]
+
+[resource]
+script = ExtResource("2_iwb7w")
+loc_name = "up_storage_1"
+loc_description = "up_desc_storage_1"
+icon = ExtResource("1_hkp18")
+base_price = 100
+prerequisites = Array[ExtResource("2_iwb7w")]([])

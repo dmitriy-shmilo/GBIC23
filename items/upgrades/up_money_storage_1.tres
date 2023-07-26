@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=4 format=3 uid="uid://4mcq7shnq1w3"]
+
+[ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_hw007"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7uu0d"]
+load_path = "res://.godot/imported/upgrade_icons.png-7517c3386b2094c93f8276ed2f58e2f2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xln2v"]
+atlas = SubResource("CompressedTexture2D_7uu0d")
+region = Rect2(0, 80, 16, 16)
+
+[resource]
+script = ExtResource("2_hw007")
+loc_name = "up_money_storage_1"
+loc_description = "up_desc_money_storage_1"
+icon = SubResource("AtlasTexture_xln2v")
+base_price = 50
+prerequisites = Array[ExtResource("2_hw007")]([])
