@@ -60,7 +60,7 @@ func set_date(value: int) -> void:
 
 
 func get_formatted_date() -> String:
-	return tr("ui_date") % [date + 1, tr(WEEKDAYS[date % WEEKDAYS.size()])]
+	return tr("ui_date") % [date, tr(WEEKDAYS[date % WEEKDAYS.size()])]
 
 
 func remove_quest(quest: Quest) -> void:
@@ -80,9 +80,9 @@ func refresh_quests() -> void:
 
 	for i in range(available_quests.size(), 0, -1):
 		var quest = available_quests[i - 1]
-		if quest.expiration_day <= date:
-			available_quests[i] = null
+		if quest == null or quest.expiration_day < date:
 			var accepted_index = accepted_quests.find(quest)
+			available_quests.remove_at(i - 1)
 			if accepted_index >= 0:
 				accepted_quests.remove_at(accepted_index)
 

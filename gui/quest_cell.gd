@@ -19,16 +19,26 @@ signal dismissed
 @onready var _accept_button: Button = $"AcceptButton"
 
 
+func _ready() -> void:
+	SaveManager.data.date_changed.connect(_on_date_changed)
+
+
 func focus_button() -> void:
 	_accept_button.grab_focus()
 
 
 func set_quest(value: Quest) -> void:
 	quest = value
-	if is_inside_tree():
+	if is_inside_tree() and quest != null:
+		var today = SaveManager.data.date
 		_description_label.text = quest.get_description()
 		_reward_label.text = "%d" % quest.get_reward()
-		_expiration_label.text = "%d" % quest.expiration_day
+		if quest.expiration_day == today:
+			_expiration_label.text = tr("ui_quest_expire_today")
+		elif quest.expiration_day == today + 1:
+			_expiration_label.text = tr("ui_quest_expire_tomorrow")
+		else:
+			_expiration_label.text = tr("ui_quest_expire") % quest.expiration_day
 		_item_icon.modulate = quest.get_product().traits[0].item_trait.color
 		if not is_accepted():
 			_accept_button.icon = ICON_ACCEPT
@@ -66,3 +76,14 @@ func _on_accept_button_pressed() -> void:
 
 func _on_dismiss_button_pressed() -> void:
 	dismissed.emit()
+
+
+func _on_date_changed(_old, today) -> void:
+	if quest == null:
+		return
+	if quest.expiration_day == today:
+		_expiration_label.text = tr("ui_quest_expire_today")
+	elif quest.expiration_day == today + 1:
+		_expiration_label.text = tr("ui_quest_expire_tomorrow")
+	else:
+		_expiration_label.text = tr("ui_quest_expire") % quest.expiration_day

@@ -73,3 +73,6 @@ ui_quest_accept,Accept,Принять,Прийняти
 ui_quest_dismiss,Decline,Отклонить,Відмовитися
 ui_no_quests,No special orders. Come back later.,Нет заказов. Возвращайтесь позже.,Нема замовлень. Повертайтеся пізніше.
 ui_quest_complete,Complete,Выполнить,Виконати
+ui_quest_expire_today,Expires today!,Истекает сегодня!,Спливає сьогодні!
+ui_quest_expire_tomorrow,Expires tomorrow.,Истекает завтра.,Спливає завтра.
+ui_quest_expire,Expires on day %d.,Истекает %d-го числа.,Спливає %d-го числа.

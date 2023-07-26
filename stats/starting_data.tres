@@ -29,7 +29,7 @@ items = Array[Resource("res://items/item.gd")]([ExtResource("3_sgj1e"), ExtResou
 [resource]
 script = ExtResource("1_leivg")
 money = 15
-date = 0
+date = 1
 storage_inventory = SubResource("Resource_wtmks")
 counter_inventory = SubResource("Resource_0ffaa")
 portal_inventory = SubResource("Resource_bva0b")
