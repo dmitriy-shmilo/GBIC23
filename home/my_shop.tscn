@@ -94,6 +94,7 @@ offset_left = 3.0
 offset_top = 23.0
 offset_right = 526.0
 offset_bottom = 93.0
+bbcode_enabled = true
 
 [node name="MainMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
 layout_mode = 1
@@ -412,10 +413,11 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 text = "Day 1, Mon"
 vertical_alignment = 1
 
-[node name="SalesLabel" type="Label" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="SalesLabel" type="RichTextLabel" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+bbcode_enabled = true
 text = "ui_summary_counter"
 
 [node name="SalesInventoryGrid" parent="SalesSummaryMenu/ScrollContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventory") instance=ExtResource("11_mgysl")]
@@ -452,6 +454,7 @@ script = ExtResource("15_7tl1x")
 inventory = SubResource("Resource_v23ep")
 
 [node name="QuestsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("complete_quest_menu", "back_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -524,6 +527,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CompleteQuestMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
+visible = false
 layout_mode = 2
 offset_left = 148.0
 offset_top = 148.0

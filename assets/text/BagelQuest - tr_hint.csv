@@ -24,7 +24,7 @@ hint_portal_embark_empty,Embark without any supplies.,Отправиться в 
 hint_embark_storage_full,Your storage is full! Dispose of unneeded items before embarking.,Ваше хранилище переполнено! Избавьтесь от ненужных вещей прежде чем продолжать.,Ваше сховище переповнене! Позбавтеся непотрібних речей перш ніж продовжувати.
 hint_embark_money_full,Your money safe is full! All extra money will be lost!,Ваш сейф переполнен! Вы потеряете все непоместившиеся деньги!,"Ваш сейф переповнений! Ви втратите всі гроші, що не помістилися!"
 hint_cook,Cook a %s,Приготовить %s,Приготувати %s
-hint_sold_product,Sold a %s for %d,%s продан за %d,%s проданий за %d
+hint_sold_product,Sold a %s for %d[img]res://home/icons/icon_coin.tres[/img]..,%s продан за %d[img]res://home/icons/icon_coin.tres[/img].,%s проданий за %d[img]res://home/icons/icon_coin.tres[/img].
 hint_carpenter_sell,I'll buy back some of your shop's furniture if you're short on cash.,"Я выкуплю свою продукцию обратно, если у вас проблемы с деньгами.","Я викуплю свою продукцію, якщо у вас проблеми з грошима."
 hint_carpenter_upgrade,I sell the best custom made shop furniture!,Я продаю лучшую мебель и инвентарь для магазинов.,Я продаю найкращі меблі та інвентар для магазинів.
 hint_barracks_upgrade,Spend some time with our trainers. They'll surely teach you how to be more effective in the field.,Проведите немного времени с нашими тренерами. Они однозначно научат вас как быть эффективнее в поле.,Проведіть трохи часу із нашими тренерами. Вони однозначно навчать вас як бути ефективнішою у полі.
