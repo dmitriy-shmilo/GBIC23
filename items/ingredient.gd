@@ -25,10 +25,10 @@ func get_item_description() -> String:
 func _calculate_purchase_price() -> int:
 	var trait_count = traits.size()
 	var trait_total = trait_strength.reduce(func (a, b): return a + b, 0)
-	return max(trait_count, 2) * max(4, trait_total) / 2
+	return max(trait_count, 2) * max(4, trait_total) / 2 + price_modifier
 
 
 func _calculate_sell_price() -> int:
 	var trait_count = traits.size()
-	var trait_total = trait_strength.reduce(func (a, b): return a + b, 0)
-	return max(1, max(trait_count, 1) * max(1, trait_total) / 3)
+	var trait_total = trait_strength.reduce(func (a, b): return a + abs(b), 0)
+	return max(1, max(trait_count, 1) * max(1, trait_total) / 3 + price_modifier)

@@ -38,7 +38,7 @@ ui_storage_inventory,Storage,Хранилище,Сховище
 ui_counter_inventory,For Sale,На продажу,На продаж
 ui_summary_return,You safely return to the town.,Вы благополучно возвращаетесь в город.,Ви благополучно повертаєтеся до міста.
 ui_summary_fail,"You were knocked out, and got pulled back home!","Вы были нокаутированы, и вас вернули домой!","Ви були нокаутовані, і вас повернули додому!"
-ui_summary_counter,You take care of your shop for a day and earn %d.,Вы проработали день в своем магазине и заработали %d.,Ви пропрацювали день у своєму магазині та заробили %d.
+ui_summary_counter,You take care of your shop for a day and earn %d[img]res://home/icons/icon_coin.tres[/img].,Вы проработали день в своем магазине и заработали %d.,Ви пропрацювали день у своєму магазині та заробили %d.
 ui_today_sales,Sold today,Продано сегодня,Продано сьогодні
 ui_gained_loot,You bring home,Вы забираете с собой,Ви забираєте з собою
 ui_lost_loot,You couldn't hold onto,Вам не удалось забрать,Вам не вдалося забрати
@@ -75,4 +75,6 @@ ui_no_quests,No special orders. Come back later.,Нет заказов. Возв
 ui_quest_complete,Complete,Выполнить,Виконати
 ui_quest_expire_today,Expires today!,Истекает сегодня!,Спливає сьогодні!
 ui_quest_expire_tomorrow,Expires tomorrow.,Истекает завтра.,Спливає завтра.
-ui_quest_expire,Expires on day %d.,Истекает %d-го числа.,Спливає %d-го числа.
+ui_quest_expire,Expires on %s.,Истекает %s.,Спливає %d-го числа.
+ui_sell_item,Sell %s for %d[img]res://home/icons/icon_coin.tres[/img].,Продать %s за %d[img]res://home/icons/icon_coin.tres[/img].,Продати %s за %d[img]res://home/icons/icon_coin.tres[/img].
+ui_buy_item,Buy %s for %d[img]res://home/icons/icon_coin.tres[/img].,Купить %s за %d[img]res://home/icons/icon_coin.tres[/img].,Купити %s за %d[img]res://home/icons/icon_coin.tres[/img].

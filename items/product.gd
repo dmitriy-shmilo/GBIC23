@@ -23,15 +23,6 @@ const BASE_PRICE = 2
 
 var _rich_description = ""
 var _rich_name = ""
-var _price = 0
-
-func get_selling_price() -> int:
-	if _price == 0:
-		_price = BASE_PRICE
-		_price += traits.size()
-		for t in traits:
-			_price += t.strength
-	return _price
 
 
 func get_item_name() -> String:
@@ -68,3 +59,13 @@ func clear_traits() -> void:
 	traits.clear()
 	_rich_description = ""
 	_rich_name = ""
+	_sell_price = -1
+	_purchase_price = -1
+
+
+func _calculate_sell_price() -> int:
+	var price = BASE_PRICE
+	price += traits.size()
+	for t in traits:
+		price += t.strength
+	return price + price_modifier
