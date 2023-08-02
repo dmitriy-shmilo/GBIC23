@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=9 format=3 uid="uid://cke3awpabne5r"]
+
+[ext_resource type="Resource" uid="uid://cybn5ohny8owi" path="res://items/consumables/ration.tres" id="1_lit2f"]
+[ext_resource type="Script" path="res://items/loot_table_entry.gd" id="2_52yt8"]
+[ext_resource type="Resource" uid="uid://j13p44twsg3p" path="res://items/consumables/bandage.tres" id="3_ofuyq"]
+[ext_resource type="Resource" uid="uid://bdq6u0wynep1d" path="res://items/consumables/first_aid.tres" id="4_b64eq"]
+[ext_resource type="Script" path="res://items/loot_table.gd" id="5_d2xy1"]
+
+[sub_resource type="Resource" id="Resource_fgigr"]
+script = ExtResource("2_52yt8")
+item = ExtResource("1_lit2f")
+weight = 2.0
+
+[sub_resource type="Resource" id="Resource_o8cm6"]
+script = ExtResource("2_52yt8")
+item = ExtResource("3_ofuyq")
+weight = 2.0
+
+[sub_resource type="Resource" id="Resource_1l04q"]
+script = ExtResource("2_52yt8")
+item = ExtResource("4_b64eq")
+weight = 1.0
+
+[resource]
+script = ExtResource("5_d2xy1")
+entries = Array[ExtResource("2_52yt8")]([SubResource("Resource_fgigr"), SubResource("Resource_o8cm6"), SubResource("Resource_1l04q")])

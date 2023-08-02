@@ -34,6 +34,7 @@ func enter() -> void:
 	SaveManager.data.money += _profit
 	SaveManager.data.date += 1
 	SaveManager.data.refresh_quests()
+	SaveManager.data.refresh_market()
 
 
 func _on_sales_inventory_grid_cell_highlighted(cell) -> void:

@@ -100,4 +100,9 @@ func _set_max_items(value: int) -> void:
 
 func _set_inventory(i: Inventory) -> void:
 	inventory = i
+	inventory.changed.connect(_on_inventory_changed)
+	changed.emit(self)
+
+
+func _on_inventory_changed() -> void:
 	changed.emit(self)

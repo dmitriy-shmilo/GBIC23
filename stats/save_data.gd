@@ -1,6 +1,14 @@
 class_name SaveData
 extends Resource
 
+const MIN_MARKET_CONSUMABLES = 2
+const MAX_MARKET_CONSUMABLES = 5
+const MIN_MARKET_INGREDIENTS = 5
+const MAX_MARKET_INGREDIENTS = 10
+
+const MARKET_CONSUMABLES_TABLE = preload("res://items/tables/market_consumables.tres")
+const MARKET_INGREDIENTS_TABLE = preload("res://items/tables/all_ingredients.tres")
+
 const WEEKDAYS = [
 	"ui_day_1",
 	"ui_day_2",
@@ -89,10 +97,24 @@ func refresh_quests() -> void:
 	var available_count = available_quests.size()
 	var new_quests = randi_range(0 if available_count > 0 else 1, total_quests - available_count)
 
-
-	for i in range(available_quests.size(), new_quests):
+	var offset = available_quests.size()
+	for i in range(offset, new_quests):
+		var index = offset + i
 		var quest = Quest.generate(5 + randi() % 5,
-			i < 2 and accepted_quests.size() > 0,
-			min(14, accepted_quests.size() * 2 + 3),
+			index > 2,
+			min(14, (index + 1) * 2),
 			null)
 		available_quests.push_back(quest)
+
+
+func refresh_market() -> void:
+	market_inventory.begin_updates()
+	market_inventory.clear()
+	for i in range(randi_range(MIN_MARKET_CONSUMABLES, MAX_MARKET_CONSUMABLES)):
+		var item = MARKET_CONSUMABLES_TABLE.pick_weighted()
+		market_inventory.add_item(item)
+
+	for i in range(randi_range(MIN_MARKET_INGREDIENTS, MAX_MARKET_INGREDIENTS)):
+		var item = MARKET_INGREDIENTS_TABLE.pick_weighted()
+		market_inventory.add_item(item)
+	market_inventory.end_updates()

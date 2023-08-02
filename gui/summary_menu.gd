@@ -91,6 +91,7 @@ func _enter_return() -> void:
 	_loot_inventory.changed.emit(_loot_inventory)
 
 	SaveManager.data.refresh_quests()
+	SaveManager.data.refresh_market()
 
 
 func _enter_focus() -> void:

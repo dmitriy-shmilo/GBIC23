@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g7ig5f3mequw"]
+[gd_scene load_steps=17 format=3 uid="uid://g7ig5f3mequw"]
 
 [ext_resource type="Script" path="res://home/market_shop.gd" id="1_2wg6k"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_wj762"]
@@ -8,12 +8,14 @@
 [ext_resource type="Script" path="res://gui/better_button.gd" id="6_dhvum"]
 [ext_resource type="Texture2D" uid="uid://b2hrnqwr7m1rq" path="res://home/icons/icon_ingredients_bundle.tres" id="7_ebemg"]
 [ext_resource type="Script" path="res://home/shop_button.gd" id="8_rd18o"]
-[ext_resource type="Texture2D" uid="uid://ddlm2sbgospat" path="res://home/icons/icon_ration.tres" id="10_eorb5"]
 [ext_resource type="Texture2D" uid="uid://cd6qjsu76wisy" path="res://home/icons/icon_coin.tres" id="10_iw85g"]
 [ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="11_8my0s"]
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="12_fty7s"]
+[ext_resource type="Script" path="res://home/buy_ingredients_menu.gd" id="13_3puqe"]
 [ext_resource type="Texture2D" uid="uid://cn4ygamyj2urn" path="res://home/icons/icon_my_shop.tres" id="13_fiijk"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="13_lir1f"]
+[ext_resource type="Script" path="res://home/buy_consumables_menu.gd" id="16_ep57y"]
+[ext_resource type="Texture2D" uid="uid://cv5pet0k62clf" path="res://items/icons/icon_ration_2.tres" id="17_3b0fd"]
 
 [node name="MarketShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
 layout_mode = 3
@@ -119,21 +121,19 @@ loc_hint = "hint_market_gossip"
 [node name="BuyIngredientsButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_market_ingredients"
 icon = ExtResource("7_ebemg")
 script = ExtResource("8_rd18o")
-submenu = NodePath("")
+submenu = NodePath("../../../../BuyIngredientsMenu")
 loc_hint = "hint_market_ingredients"
 
 [node name="BuySuppliesButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_market_supplies"
-icon = ExtResource("10_eorb5")
+icon = ExtResource("17_3b0fd")
 script = ExtResource("8_rd18o")
-submenu = NodePath("")
+submenu = NodePath("../../../../BuyConsumablesMenu")
 loc_hint = "hint_market_supplies"
 
 [node name="SellButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
@@ -155,7 +155,7 @@ icon = ExtResource("12_fty7s")
 script = ExtResource("6_dhvum")
 loc_hint = "hint_my_back"
 
-[node name="BuyIngredientsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+[node name="BuyIngredientsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("market_grid", "storage_grid", "initial_button", "back_button")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -168,7 +168,9 @@ offset_right = 175.0
 offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_cxx1o")
+script = ExtResource("13_3puqe")
+market_grid = NodePath("../BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryGrid")
+storage_grid = NodePath("../BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid")
 initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 
@@ -205,6 +207,7 @@ text = "ui_market_inventory"
 vertical_alignment = 1
 
 [node name="MarketInventoryGrid" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+unique_name_in_owner = false
 layout_mode = 2
 
 [node name="Spacer2" type="Control" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -227,6 +230,7 @@ text = "ui_storage_inventory"
 vertical_alignment = 1
 
 [node name="StorageInventoryGrid" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+unique_name_in_owner = false
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -237,6 +241,99 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="BuyIngredientsMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_back"
+icon = ExtResource("12_fty7s")
+script = ExtResource("6_dhvum")
+loc_hint = "hint_my_back"
+
+[node name="BuyConsumablesMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("market_grid", "storage_grid", "initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_ep57y")
+market_grid = NodePath("ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryGrid")
+storage_grid = NodePath("ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid")
+initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BuyConsumablesMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BuyConsumablesMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarketInventoryHeader" type="HBoxContainer" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader"]
+layout_mode = 2
+texture = ExtResource("17_3b0fd")
+
+[node name="MarketInventoryLabel" type="Label" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_market_inventory"
+vertical_alignment = 1
+
+[node name="MarketInventoryGrid" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarketInventoryHeader2" type="HBoxContainer" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader2"]
+layout_mode = 2
+texture = ExtResource("13_fiijk")
+
+[node name="StorageInventoryLabel" type="Label" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryHeader2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+vertical_alignment = 1
+
+[node name="StorageInventoryGrid" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_lir1f")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "ui_back"

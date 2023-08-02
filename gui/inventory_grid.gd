@@ -1,8 +1,8 @@
 class_name InventoryGrid
 extends Container
 
-signal cell_highlighted(cell)
-signal cell_selected(cell)
+signal cell_highlighted(cell: InventoryCell)
+signal cell_selected(cell: InventoryCell)
 
 const EMPTY_ITEM = preload("res://items/empty.tres")
 const INVENTORY_CELL_SCENE = preload("res://gui/inventory_cell.tscn")
