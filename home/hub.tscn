@@ -904,6 +904,8 @@ counter_inventory = NodePath("../CounterInventory")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+offset_top = 40.0
+offset_bottom = 40.0
 storage_inventory = NodePath("../StorageInventory")
 market_inventory = NodePath("../MarketInventory")
 
@@ -911,11 +913,15 @@ market_inventory = NodePath("../MarketInventory")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+offset_top = 40.0
+offset_bottom = 40.0
 
 [node name="BarracksShop" parent="." instance=ExtResource("33_hup3c")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+offset_top = 40.0
+offset_bottom = 40.0
 
 [node name="StorageInventory" type="Node" parent="."]
 unique_name_in_owner = true

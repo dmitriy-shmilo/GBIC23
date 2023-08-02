@@ -169,8 +169,8 @@ offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_3puqe")
-market_grid = NodePath("../BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryGrid")
-storage_grid = NodePath("../BuyConsumablesMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid")
+market_grid = NodePath("ScrollContainer/MarginContainer/VBoxContainer/MarketInventoryGrid")
+storage_grid = NodePath("ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid")
 initial_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 
