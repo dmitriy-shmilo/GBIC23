@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bc67r0dmlug82"]
+[gd_scene load_steps=85 format=3 uid="uid://bc67r0dmlug82"]
 
 [ext_resource type="Script" path="res://home/hub.gd" id="1_ngyb1"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="2_3logs"]
@@ -32,8 +32,10 @@
 [ext_resource type="PackedScene" uid="uid://xpppcroatuff" path="res://home/my_shop.tscn" id="21_lf05c"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="22_8snxj"]
 [ext_resource type="PackedScene" uid="uid://g7ig5f3mequw" path="res://home/market_shop.tscn" id="22_kbq15"]
+[ext_resource type="Texture2D" uid="uid://bij8j5hsoqlyx" path="res://home/icons/icon_gossip.tres" id="28_3j2a6"]
 [ext_resource type="PackedScene" uid="uid://bauhl7bmwjifh" path="res://home/carpenter_shop.tscn" id="32_tdr53"]
 [ext_resource type="PackedScene" uid="uid://c6tms0a2bxhko" path="res://home/barracks_shop.tscn" id="33_hup3c"]
+[ext_resource type="PackedScene" uid="uid://d37mxudmute41" path="res://home/credits.tscn" id="35_ienc4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmftq"]
 atlas = ExtResource("4_n6k5o")
@@ -876,6 +878,14 @@ text = "ui_settings"
 icon = ExtResource("15_ijhh7")
 script = ExtResource("3_kda6n")
 
+[node name="CreditsButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "ui_credits"
+icon = ExtResource("28_3j2a6")
+script = ExtResource("3_kda6n")
+
 [node name="QuitButton" type="Button" parent="MainScreen/PanelContainer/MarginContainer/MainMenu"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
@@ -922,6 +932,11 @@ visible = false
 layout_mode = 1
 offset_top = 40.0
 offset_bottom = 40.0
+
+[node name="CreditsShop" parent="." instance=ExtResource("35_ienc4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
 [node name="StorageInventory" type="Node" parent="."]
 unique_name_in_owner = true

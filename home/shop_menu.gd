@@ -1,5 +1,5 @@
 class_name ShopMenu
-extends PanelContainer
+extends Control
 
 signal button_focused(button)
 signal message_shown(message)

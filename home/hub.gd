@@ -23,12 +23,14 @@ extends Control
 @onready var _market_shop_button: Button = $"%MarketShopButton"
 @onready var _carpenter_shop_button: Button = $"%CarpenterShopButton"
 @onready var _barracks_shop_button: Button = $"%BarracksShopButton"
+@onready var _credits_button: Button = %"CreditsButton"
 @onready var _shop_buttons = [
 	_my_shop_button,
 	_portal_shop_button,
 	_market_shop_button,
 	_carpenter_shop_button,
-	_barracks_shop_button
+	_barracks_shop_button,
+	_credits_button
 ]
 
 # shops
@@ -37,12 +39,14 @@ extends Control
 @onready var _market_shop: MarketShop = %"MarketShop"
 @onready var _carpenter_shop: CarpenterShop = %"CarpenterShop"
 @onready var _barracks_shop: BarracksShop = %"BarracksShop"
+@onready var _credits_shop: CreditsShop = %"CreditsShop"
 @onready var _shops = [
 	_my_shop,
 	_portal_shop,
 	_market_shop,
 	_carpenter_shop,
-	_barracks_shop
+	_barracks_shop,
+	_credits_shop
 ]
 
 

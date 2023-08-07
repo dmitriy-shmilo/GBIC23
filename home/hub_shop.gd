@@ -50,9 +50,10 @@ func pop_menu() -> void:
 
 
 func _on_shop_button_focused(button: BetterButton) -> void:
-	if button.loc_hint != "":
+	if button.loc_hint != "" and hint_label != null:
 		hint_label.text = tr(button.loc_hint)
 
 
 func _on_shop_message_shown(message: String) -> void:
-	hint_label.text = message
+	if hint_label != null:
+		hint_label.text = message

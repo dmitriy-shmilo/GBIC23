@@ -3,7 +3,7 @@ ui_start,Start,Начать,Почати
 ui_continue,Continue,Продолжить,Продовжити
 ui_exit,Exit,Выход,Вихід
 ui_back,Back,Назад,Назад
-ui_credits,Credits,Роли и ресурсы,Ролі та ресурси
+ui_credits,Credits,Благодарности,Подяки
 ui_controls,Controls,Управление,Управління
 ui_pickup_hint,Take,Взять,Взяти
 ui_drop,Drop,Бросить,Викинути
@@ -78,3 +78,9 @@ ui_quest_expire_tomorrow,Expires tomorrow.,Истекает завтра.,Спл
 ui_quest_expire,Expires on %s.,Истекает %s.,Спливає %d-го числа.
 ui_sell_item,Sell %s for %d[img]res://home/icons/icon_coin.tres[/img].,Продать %s за %d[img]res://home/icons/icon_coin.tres[/img].,Продати %s за %d[img]res://home/icons/icon_coin.tres[/img].
 ui_buy_item,Buy %s for %d[img]res://home/icons/icon_coin.tres[/img].,Купить %s за %d[img]res://home/icons/icon_coin.tres[/img].,Купити %s за %d[img]res://home/icons/icon_coin.tres[/img].
+ui_credits_by,%s by [url=%s]%s[/url],"%s, автор [url=%s]%s[/url]","%s, автор [url=%s]%s[/url]"
+ui_credits_art,Art,Арт,Арт
+ui_credits_sound,Sound,Звук,Звук
+ui_credits_font,Font,Шрифт,Шрифт
+ui_credits_famicase,Famicase,,
+ui_credits_other,Other,,

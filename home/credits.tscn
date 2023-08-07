@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://d37mxudmute41"]
+
+[ext_resource type="Script" path="res://home/credits_shop.gd" id="1_2dqdq"]
+[ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="1_2jwdi"]
+[ext_resource type="Script" path="res://home/shop_menu.gd" id="2_2ocav"]
+[ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="2_cbnyp"]
+[ext_resource type="Script" path="res://gui/better_button.gd" id="3_vysvl"]
+
+[node name="Credits" type="Control" node_paths=PackedStringArray("initial_menu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2dqdq")
+initial_menu = NodePath("CenterContainer")
+
+[node name="CenterContainer" type="CenterContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_2ocav")
+initial_button = NodePath("PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
+back_button = NodePath("PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "ui_credits"
+
+[node name="CreditsLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "ui_credits"
+fit_content = true
+
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+shortcut = ExtResource("1_2jwdi")
+text = "ui_back"
+icon = ExtResource("2_cbnyp")
+script = ExtResource("3_vysvl")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="meta_clicked" from="CenterContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/CreditsLabel" to="." method="_on_credits_label_meta_clicked"]
