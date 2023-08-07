@@ -3,6 +3,7 @@ extends State
 
 signal direction_changed(direction: Vector2)
 
+@export var tile_map: TileMapComponent = null
 @export var body: CharacterBody2D = null
 @export var movement: MovementComponent = null
 @export var vitals: VitalsComponent = null
@@ -21,6 +22,16 @@ func _get_max_speed() -> float:
 		result *= 0.5
 	elif vitals.current_food < vitals.max_food / 2:
 		result *= 0.75
+
+	var depth = tile_map.current_tile_depth()
+	if depth != 0:
+		print(depth)
+	if depth == 1:
+		result *= 0.75
+	elif depth == 2:
+		result *= 0.5
+	elif depth >= 3:
+		result *= 0.25
 
 	return result
 

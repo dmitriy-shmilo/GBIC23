@@ -32,7 +32,8 @@ y_sort_enabled = true
 
 [node name="Portal" parent="TileMap/Objects" instance=ExtResource("3_jmd3q")]
 
-[node name="Player" parent="TileMap/Objects" instance=ExtResource("3_y7d5t")]
+[node name="Player" parent="TileMap/Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("3_y7d5t")]
+tile_map = NodePath("../..")
 
 [node name="PostGenerationTimer" type="Timer" parent="."]
 wait_time = 0.5

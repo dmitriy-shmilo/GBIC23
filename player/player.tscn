@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=36 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://base/state/state_vitals_normal.gd" id="19_ker6l"]
 [ext_resource type="Script" path="res://player/state/state_player_dead.gd" id="22_8yoa6"]
 [ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="25_mwb32"]
+[ext_resource type="Script" path="res://base/components/tilemap_component.gd" id="26_ampvh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
@@ -182,8 +183,9 @@ body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
 vitals = NodePath("../../VitalsComponent")
 
-[node name="Move" type="Node" parent="MovementMachine" node_paths=PackedStringArray("body", "movement", "vitals")]
+[node name="Move" type="Node" parent="MovementMachine" node_paths=PackedStringArray("tile_map", "body", "movement", "vitals")]
 script = ExtResource("5_b3qoq")
+tile_map = NodePath("../../TileMapComponent")
 body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
 vitals = NodePath("../../VitalsComponent")
@@ -272,6 +274,9 @@ needs_food = true
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_rhoiw")
 max_items = 5
+
+[node name="TileMapComponent" type="Node" parent="."]
+script = ExtResource("26_ampvh")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3

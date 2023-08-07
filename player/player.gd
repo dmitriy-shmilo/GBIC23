@@ -11,6 +11,12 @@ const heal_sfx: SfxCollection = preload("res://assets/sfx/heal.tres")
 const swoosh_sfx: SfxCollection = preload("res://assets/sfx/swoosh.tres")
 const PICKUP_SCENE := preload("res://map/pickup.tscn")
 
+@export var tile_map: TileMap = null:
+	set(value):
+		tile_map = value
+		if is_inside_tree():
+			_tile_map_component.tilemap = value
+
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
 @onready var _movement_machine: StateMachine = $"MovementMachine"
@@ -19,6 +25,7 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
 @onready var _inventory: InventoryComponent = $"InventoryComponent"
 @onready var _busy_indicator: TextureProgressBar = $"BusyIndicator"
+@onready var _tile_map_component: TileMapComponent = $"TileMapComponent"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -26,6 +33,7 @@ var _animation_root = "idle"
 func _ready() -> void:
 	_inventory.inventory = SaveManager.data.pockets_inventory
 	_vitals.apply_upgrades(SaveManager.data.upgrades)
+	_tile_map_component.tilemap = tile_map
 
 
 func _play_animation() -> void:
