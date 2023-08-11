@@ -69,15 +69,9 @@ func enter() -> void:
 
 func _on_portal_buy_button_pressed(button: BetterButton) -> void:
 	var options = _level_options[button.tag]
-	if storage_inventory.items.any(func(i): return i is Consumable):
-		_embark_menu.cost = _portal_costs[button.tag]
-		_embark_menu.level_options = options
-		push_menu(_embark_menu)
-		return
-
-	var cost = _portal_costs[button.tag]
-	SaveManager.data.money -= cost
-	SceneManager.change_scene("res://main.tscn", options)
+	_embark_menu.cost = _portal_costs[button.tag]
+	_embark_menu.level_options = options
+	push_menu(_embark_menu)
 
 
 func _on_portal_gossip_button_pressed() -> void:

@@ -1,6 +1,9 @@
 class_name SaveData
 extends Resource
 
+const BASE_STORAGE_SPACE = 8
+const BASE_MONEY_SPACE = 500
+
 const MIN_MARKET_CONSUMABLES = 2
 const MAX_MARKET_CONSUMABLES = 5
 const MIN_MARKET_INGREDIENTS = 5
@@ -54,6 +57,9 @@ signal date_changed(old, new)
 
 ## A subset of available_quests.
 @export var accepted_quests: Array[Quest] = []
+
+@export var max_storage_space = BASE_STORAGE_SPACE
+@export var max_money_space = BASE_MONEY_SPACE
 
 func set_money(value: int) -> void:
 	var old = money
@@ -118,3 +124,10 @@ func refresh_market() -> void:
 		var item = MARKET_INGREDIENTS_TABLE.pick_weighted()
 		market_inventory.add_item(item)
 	market_inventory.end_updates()
+
+
+func refresh_space() -> void:
+	# TODO: scan purchased upgrades and update max storage
+	money_changed.emit(money, money)
+	storage_inventory.changed.emit()
+	return

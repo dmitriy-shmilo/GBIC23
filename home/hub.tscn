@@ -941,7 +941,6 @@ layout_mode = 1
 [node name="StorageInventory" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("22_8snxj")
-max_items = 10
 
 [node name="CounterInventory" type="Node" parent="."]
 unique_name_in_owner = true

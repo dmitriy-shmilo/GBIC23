@@ -7,6 +7,8 @@ extends ShopMenu
 @onready var _storage_inventory_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid"
 @onready var _pockets_inventory_grid: InventoryGrid = $"ScrollContainer/MarginContainer/VBoxContainer/PocketsInventoryGrid"
 @onready var _embark_button: BetterButton = $"ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/EmbarkButton"
+@onready var _money_warning_container: HBoxContainer = $"ScrollContainer/MarginContainer/VBoxContainer/MoneyWarningContainer"
+@onready var _storage_warning_container: HBoxContainer = $"ScrollContainer/MarginContainer/VBoxContainer/StorageWarningContainer"
 
 var _storage_inventory: InventoryComponent
 var _pockets_inventory: InventoryComponent
@@ -26,6 +28,8 @@ func _ready() -> void:
 func enter() -> void:
 	super.enter()
 	_storage_inventory_grid.call_deferred("focus_first_cell")
+	_storage_warning_container.visible = SaveManager.data.storage_inventory.items.size() > SaveManager.data.max_storage_space
+	_money_warning_container.visible = SaveManager.data.money > SaveManager.data.max_money_space
 
 
 func _on_inventory_grid_cell_highlighted(cell: InventoryCell) -> void:

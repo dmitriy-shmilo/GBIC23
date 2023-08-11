@@ -70,6 +70,7 @@ func _ready() -> void:
 	SaveManager.data.date_changed.connect(_on_save_data_date_changed)
 	_on_save_data_money_changed(0, SaveManager.data.money)
 	_on_save_data_date_changed(0, SaveManager.data.date)
+	SaveManager.data.refresh_space()
 
 
 func _on_shop_back_pressed(shop_button: Button, shop: HubShop) -> void:
@@ -89,8 +90,7 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_save_data_money_changed(_old: int, new: int) -> void:
-	# TODO: track max money
-	var max_money = 100
+	var max_money = SaveManager.data.max_money_space
 	_money_label.text = "%d/%d" % [new, max_money]
 	if new < 0 or new > max_money:
 		(_money_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 1.0)
@@ -99,8 +99,9 @@ func _on_save_data_money_changed(_old: int, new: int) -> void:
 
 
 func _on_storage_inventory_changed(inventory) -> void:
-	_storage_label.text = "%d/%d" % [inventory.items.size(), inventory.max_items]
-	if inventory.items.size() > inventory.max_items:
+	var max_items = SaveManager.data.max_storage_space
+	_storage_label.text = "%d/%d" % [inventory.items.size(), max_items]
+	if inventory.items.size() > max_items:
 		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 1.0)
 	else:
 		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 0.0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bjjapi7y0vwbi"]
+[gd_scene load_steps=36 format=3 uid="uid://bjjapi7y0vwbi"]
 
 [ext_resource type="Script" path="res://home/portal_shop.gd" id="1_8htoa"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="1_br65d"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dqrm8cotabmr0" path="res://home/icons/icon_portal_4.tres" id="17_vhysc"]
 [ext_resource type="Script" path="res://home/portal_embark_menu.gd" id="21_bffmn"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="22_sjd8x"]
+[ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="23_qftp5"]
 [ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="23_xyijw"]
 [ext_resource type="Shortcut" uid="uid://ckhoo7yiet0sp" path="res://gui/confirm_shortcut.tres" id="24_jux8x"]
 [ext_resource type="PackedScene" uid="uid://cf8d3mbwu8gtc" path="res://gui/upgrade_grid.tscn" id="25_l5q7a"]
@@ -63,6 +64,14 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_qls1q"]
 atlas = ExtResource("1_br65d")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwh51"]
+atlas = ExtResource("23_qftp5")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okwru"]
+atlas = ExtResource("23_qftp5")
+region = Rect2(160, 0, 16, 16)
 
 [node name="PortalShop" type="Control" node_paths=PackedStringArray("initial_menu", "hint_label")]
 layout_mode = 3
@@ -392,6 +401,38 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="MoneyWarningContainer" type="HBoxContainer" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/MoneyWarningContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_iwh51")
+
+[node name="Label" type="Label" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/MoneyWarningContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hint_embark_money_full"
+vertical_alignment = 2
+autowrap_mode = 1
+
+[node name="StorageWarningContainer" type="HBoxContainer" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageWarningContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_okwru")
+
+[node name="Label" type="Label" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageWarningContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "hint_embark_storage_full"
+vertical_alignment = 2
+autowrap_mode = 1
 
 [node name="StorageInventoryLabel" type="Label" parent="EmbarkMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -456,6 +497,7 @@ script = ExtResource("3_x5nge")
 loc_hint = "hint_portal_embark"
 
 [node name="UpgradeMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
