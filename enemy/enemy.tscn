@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=29 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="2_vqokq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://base/hazard.gd" id="7_em3gh"]
 [ext_resource type="PackedScene" uid="uid://keatv53646t8" path="res://base/components/aggro_area.tscn" id="7_ty5rc"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_wonder.gd" id="9_o7mje"]
+[ext_resource type="Script" path="res://base/components/tilemap_component.gd" id="9_tkdi3"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attack_ready.gd" id="11_00jjv"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attack_charging.gd" id="12_xjak5"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_attacking.gd" id="13_t655m"]
@@ -134,6 +135,9 @@ script = ExtResource("2_vqokq")
 max_health = 3.0
 current_health = 3.0
 
+[node name="TileMapComponent" type="Node" parent="."]
+script = ExtResource("9_tkdi3")
+
 [node name="MovementMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_cggsa")
 initial_state = NodePath("Wonder")
@@ -153,26 +157,29 @@ body = NodePath("../..")
 movement = NodePath("../../MovementComponent")
 own_hit_box = NodePath("../../HitBox")
 
-[node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "unstuck_state", "body", "movement")]
+[node name="Chase" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "unstuck_state", "body", "tile_map", "movement")]
 script = ExtResource("6_m2ea2")
 aggro_area = NodePath("../../AggroArea")
 unstuck_state = NodePath("../Return")
 body = NodePath("../..")
+tile_map = NodePath("../../TileMapComponent")
 movement = NodePath("../../MovementComponent")
 
-[node name="Wonder" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "next_state", "unstuck_state", "body", "movement")]
+[node name="Wonder" type="Node" parent="MovementMachine" node_paths=PackedStringArray("aggro_area", "next_state", "unstuck_state", "body", "tile_map", "movement")]
 script = ExtResource("9_o7mje")
 aggro_area = NodePath("../../AggroArea")
 next_state = NodePath("../Idle")
 unstuck_state = NodePath("../Return")
 body = NodePath("../..")
+tile_map = NodePath("../../TileMapComponent")
 movement = NodePath("../../WonderMovementComponent")
 
-[node name="Return" type="Node" parent="MovementMachine" node_paths=PackedStringArray("next_state", "unstuck_state", "body", "movement")]
+[node name="Return" type="Node" parent="MovementMachine" node_paths=PackedStringArray("next_state", "unstuck_state", "body", "tile_map", "movement")]
 script = ExtResource("14_hmwwa")
 next_state = NodePath("../Wonder")
 unstuck_state = NodePath("../Wonder")
 body = NodePath("../..")
+tile_map = NodePath("../../TileMapComponent")
 movement = NodePath("../../WonderMovementComponent")
 
 [node name="AttackMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

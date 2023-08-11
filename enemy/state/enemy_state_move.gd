@@ -11,6 +11,7 @@ signal direction_changed(direction)
 ## State to transition to when the movement is considered stuck.
 @export var unstuck_state: State = null
 @export var body: CharacterBody2D = null
+@export var tile_map: TileMapComponent = null
 @export var movement: MovementComponent = null
 ## How often, in seconds the state will compare its current
 ## position to the previous one.
@@ -49,6 +50,21 @@ func physics_process(delta: float) -> void:
 		return
 
 	body.velocity = body.velocity.move_toward(
-		direction * movement.max_speed,
+		direction * _get_max_speed(),
 		movement.acceleration * delta)
 	body.move_and_slide()
+
+
+func _get_max_speed() -> float:
+	var result = movement.max_speed
+	var depth = tile_map.current_tile_depth()
+	if depth == 1:
+		result *= 0.6
+	elif depth == 2:
+		result *= 0.4
+	elif depth == 3:
+		result *= 0.3
+	elif depth > 3:
+		result *= 0.1
+
+	return result

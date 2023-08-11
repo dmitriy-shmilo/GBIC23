@@ -4,6 +4,11 @@ extends CharacterBody2D
 signal died
 
 @export var description: EnemyDescription = preload("res://enemy/descriptions/grunt_1.tres")
+@export var tile_map: TileMap = null:
+	set(value):
+		tile_map = value
+		if is_inside_tree():
+			_tile_map_component.tilemap = value
 
 @onready var _sprite: AnimatedSprite2D = $"BodySprite"
 @onready var _hit_box: Area2D = $"HitBox"
@@ -11,6 +16,7 @@ signal died
 @onready var _attack_machine: StateMachine = $"AttackMachine"
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
 @onready var _movement: MovementComponent = $"MovementComponent"
+@onready var _tile_map_component: TileMapComponent = $"TileMapComponent"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -22,7 +28,7 @@ func _ready() -> void:
 	_vitals.current_health = _vitals.max_health
 	_movement.max_speed = randi_range(description.min_speed, description.max_speed)
 	_movement.acceleration = clamp(_movement.max_speed * 6.0, 300.0, 600.0)
-
+	_tile_map_component.tilemap = tile_map
 
 func _play_animation() -> void:
 	_sprite.play(_animation_root + "_" + _direction_suffix)
