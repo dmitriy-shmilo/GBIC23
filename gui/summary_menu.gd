@@ -50,7 +50,8 @@ func _enter_return() -> void:
 
 	_loot_inventory.set_block_signals(true)
 	if not is_failed:
-		# TODO: disable change signals
+		_loot_inventory.set_block_signals(true)
+		_pockets_inventory.set_block_signals(true)
 		for i in _portal_inventory.items:
 			if i is ItemContainer:
 				_loot_inventory.add_item(i.opened_item)
@@ -59,12 +60,16 @@ func _enter_return() -> void:
 			if i is ItemContainer:
 				_loot_inventory.add_item(i.opened_item)
 				_loot_inventory.add_items(i.contents)
+		_loot_inventory.set_block_signals(false)
+		_loot_inventory.changed.emit(_loot_inventory)
 		_title_label.text = tr("ui_summary_return")
 	else:
+		_loot_inventory.set_block_signals(true)
 		for i in _portal_inventory.items:
 			if i is ItemContainer:
 				_loot_inventory.add_item(i.opened_item)
 				_loot_inventory.add_items(i.contents)
+		_loot_inventory.set_block_signals(false)
 		# TODO: retain some items when upgraded
 		_lost_inventory.add_items(_pockets_inventory.items)
 		_title_label.text = tr("ui_summary_fail")
@@ -89,6 +94,20 @@ func _enter_return() -> void:
 		_lost_grid.visible = true
 	_loot_inventory.set_block_signals(false)
 	_loot_inventory.changed.emit(_loot_inventory)
+
+
+	var max_money = SaveManager.data.max_money_space
+	var max_storage = SaveManager.data.max_storage_space
+	if SaveManager.data.money > max_money:
+		var money_lost = randi_range(0, SaveManager.data.money - max_money)
+		SaveManager.data.money -= money_lost
+
+	if _storage_inventory.items.size() > max_storage:
+		var items_lost = randi_range(0, _storage_inventory.items.size() - max_storage)
+		for i in range(items_lost):
+			var index = randi_range(0, _storage_inventory.items.size() - 1)
+			var item = _storage_inventory.remove_item(index)
+			print(item)
 
 	SaveManager.data.refresh_quests()
 	SaveManager.data.refresh_market()
