@@ -200,6 +200,7 @@ func _place_guards(center: Vector2i) -> void:
 
 	for i in range(guard_count):
 		var guard = ENEMY_SCENE.instantiate() as Enemy
+		guard.tile_map = _tilemap
 		guard.description = _enemies.pick_random()
 		var offset = positions.pick_random() * (randi() % 3 + 1)
 		guard.global_position = (center + offset) * TILE_SIZE

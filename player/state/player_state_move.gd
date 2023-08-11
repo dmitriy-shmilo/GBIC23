@@ -24,14 +24,14 @@ func _get_max_speed() -> float:
 		result *= 0.75
 
 	var depth = tile_map.current_tile_depth()
-	if depth != 0:
-		print(depth)
 	if depth == 1:
 		result *= 0.75
 	elif depth == 2:
 		result *= 0.5
-	elif depth >= 3:
+	elif depth == 3:
 		result *= 0.25
+	elif depth > 3:
+		result *= 0.1
 
 	return result
 
