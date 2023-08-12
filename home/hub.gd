@@ -110,7 +110,7 @@ func _on_storage_inventory_changed(inventory) -> void:
 
 
 func _on_save_data_date_changed(_old: int, _new: int) -> void:
-	_date_label.text = SaveManager.data.get_formatted_date()
+	_date_label.text = SaveManager.data.get_formatted_current_date()
 
 
 func _on_pockets_inventory_changed(inventory) -> void:

@@ -38,7 +38,7 @@ func set_quest(value: Quest) -> void:
 		elif quest.expiration_day == today + 1:
 			_expiration_label.text = tr("ui_quest_expire_tomorrow")
 		else:
-			_expiration_label.text = tr("ui_quest_expire") % quest.expiration_day
+			_expiration_label.text = tr("ui_quest_expire") % SaveManager.data.get_formatted_date(quest.expiration_day)
 		_item_icon.modulate = quest.get_product().traits[0].item_trait.color
 		if not is_accepted():
 			_accept_button.icon = ICON_ACCEPT
@@ -86,4 +86,12 @@ func _on_date_changed(_old, today) -> void:
 	elif quest.expiration_day == today + 1:
 		_expiration_label.text = tr("ui_quest_expire_tomorrow")
 	else:
-		_expiration_label.text = tr("ui_quest_expire") % quest.expiration_day
+		_expiration_label.text = tr("ui_quest_expire") % SaveManager.data.get_formatted_date(quest.expiration_day)
+
+
+func _on_accept_button_focus_entered() -> void:
+	highlighted.emit()
+
+
+func _on_dismiss_button_focus_entered() -> void:
+	highlighted.emit()

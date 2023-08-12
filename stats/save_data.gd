@@ -113,7 +113,11 @@ func set_date(value: int) -> void:
 	date_changed.emit(old, date)
 
 
-func get_formatted_date() -> String:
+func get_formatted_current_date() -> String:
+	return get_formatted_date(date)
+
+
+func get_formatted_date(date: int) -> String:
 	return tr("ui_date") % [date, tr(WEEKDAYS[date % WEEKDAYS.size()])]
 
 

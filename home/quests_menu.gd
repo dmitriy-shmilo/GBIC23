@@ -40,3 +40,8 @@ func _on_quest_grid_cell_dismissed(cell: QuestCell) -> void:
 func _on_quest_grid_cell_completed(cell: QuestCell) -> void:
 	complete_quest_menu.quest = cell.quest
 	owner.push_menu(complete_quest_menu)
+
+
+func _on_quest_grid_cell_highlighted(cell: QuestCell) -> void:
+	_scroll_container.scroll_vertical = cell.position.y
+

@@ -96,5 +96,7 @@ offset_right = 20.0
 offset_bottom = 95.0
 texture = ExtResource("6_1b1qn")
 
+[connection signal="focus_entered" from="AcceptButton" to="." method="_on_accept_button_focus_entered"]
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="focus_entered" from="DismissButton" to="." method="_on_dismiss_button_focus_entered"]
 [connection signal="pressed" from="DismissButton" to="." method="_on_dismiss_button_pressed"]

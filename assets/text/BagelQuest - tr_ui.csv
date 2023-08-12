@@ -75,7 +75,7 @@ ui_no_quests,No special orders. Come back later.,Нет заказов. Возв
 ui_quest_complete,Complete,Выполнить,Виконати
 ui_quest_expire_today,Expires today!,Истекает сегодня!,Спливає сьогодні!
 ui_quest_expire_tomorrow,Expires tomorrow.,Истекает завтра.,Спливає завтра.
-ui_quest_expire,Expires on %s.,Истекает %s.,Спливає %d-го числа.
+ui_quest_expire,Expires on %s.,Истекает в %s.,Спливає в %s.
 ui_sell_item,Sell %s for %d[img]res://home/icons/icon_coin.tres[/img].,Продать %s за %d[img]res://home/icons/icon_coin.tres[/img].,Продати %s за %d[img]res://home/icons/icon_coin.tres[/img].
 ui_buy_item,Buy %s for %d[img]res://home/icons/icon_coin.tres[/img].,Купить %s за %d[img]res://home/icons/icon_coin.tres[/img].,Купити %s за %d[img]res://home/icons/icon_coin.tres[/img].
 ui_credits_by,%s by [url=%s]%s[/url],"%s, автор [url=%s]%s[/url]","%s, автор [url=%s]%s[/url]"

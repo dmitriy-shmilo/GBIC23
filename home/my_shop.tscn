@@ -454,7 +454,6 @@ script = ExtResource("15_7tl1x")
 inventory = SubResource("Resource_v23ep")
 
 [node name="QuestsMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("complete_quest_menu", "back_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -620,6 +619,7 @@ size_flags_vertical = 3
 [connection signal="cell_accepted" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_accepted"]
 [connection signal="cell_completed" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_completed"]
 [connection signal="cell_dismissed" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_dismissed"]
+[connection signal="cell_highlighted" from="QuestsMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/QuestGrid" to="QuestsMenu" method="_on_quest_grid_cell_highlighted"]
 [connection signal="cell_highlighted" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CompleteQuestMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CompleteQuestMenu" method="_on_storage_inventory_grid_cell_selected"]
 [connection signal="cell_highlighted" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CompleteQuestMenu" method="_on_inventory_grid_cell_highlighted"]
