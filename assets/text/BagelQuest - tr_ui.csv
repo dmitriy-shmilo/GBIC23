@@ -82,5 +82,6 @@ ui_credits_by,%s by [url=%s]%s[/url],"%s, автор [url=%s]%s[/url]","%s, ав
 ui_credits_art,Art,Арт,Арт
 ui_credits_sound,Sound,Звук,Звук
 ui_credits_font,Font,Шрифт,Шрифт
-ui_credits_famicase,Famicase,,
-ui_credits_other,Other,,
+ui_credits_famicase,Famicase,Famicase,Famicase
+ui_credits_other,Other,Другое,Інше
+ui_quest_without,Without,Без вкуса,

@@ -150,7 +150,7 @@ func refresh_quests() -> void:
 	for i in range(offset, new_quests):
 		var index = offset + i
 		var quest = Quest.generate(5 + randi() % 5,
-			index > 2,
+			index > 1,
 			min(14, (index + 1) * 2),
 			null)
 		available_quests.push_back(quest)
