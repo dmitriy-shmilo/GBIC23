@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://bc67r0dmlug82"]
+[gd_scene load_steps=84 format=3 uid="uid://bc67r0dmlug82"]
 
 [ext_resource type="Script" path="res://home/hub.gd" id="1_ngyb1"]
 [ext_resource type="Texture2D" uid="uid://e4rpucgi0vyy" path="res://assets/img/portal.png" id="2_3logs"]
@@ -17,7 +17,6 @@
 [ext_resource type="SpriteFrames" uid="uid://bgfs8bx3xdlff" path="res://npc/frames/trader_frames.tres" id="10_msqro"]
 [ext_resource type="Texture2D" uid="uid://02x053cvxmgs" path="res://assets/img/npc_mage.png" id="11_lj3or"]
 [ext_resource type="Texture2D" uid="uid://djt8t60scoafq" path="res://home/icons/icon_portal_1.tres" id="11_wujk4"]
-[ext_resource type="Texture2D" uid="uid://cs1c3vdsy7a28" path="res://home/icons/icon_quest.tres" id="12_bf3n1"]
 [ext_resource type="Texture2D" uid="uid://bxons8u10oqwj" path="res://assets/img/carpenter.png" id="12_fbr8j"]
 [ext_resource type="Texture2D" uid="uid://8m6p0fpu3pjw" path="res://home/icons/icon_calendar.tres" id="12_is8xb"]
 [ext_resource type="Texture2D" uid="uid://csnv0kxaacwpj" path="res://home/icons/icon_market.tres" id="12_mpwd7"]
@@ -756,18 +755,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="QuestsIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("12_bf3n1")
-stretch_mode = 2
-
-[node name="QuestsLabel" type="Label" parent="StatsPanel/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0/0"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="StorageIcon" type="TextureRect" parent="StatsPanel/HBoxContainer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_18bjk")
@@ -958,3 +945,5 @@ max_items = 5
 
 [connection signal="pressed" from="MainScreen/PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="changed" from="StorageInventory" to="." method="_on_storage_inventory_changed"]
+[connection signal="changed" from="CounterInventory" to="." method="_on_inventory_changed"]
+[connection signal="changed" from="PocketsInventory" to="." method="_on_inventory_changed"]

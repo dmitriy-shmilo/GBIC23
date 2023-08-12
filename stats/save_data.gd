@@ -1,8 +1,10 @@
 class_name SaveData
 extends Resource
 
+const BASE_COUNTER_SPACE = 2
 const BASE_STORAGE_SPACE = 8
 const BASE_MONEY_SPACE = 500
+const BASE_MAX_QUESTS = 1
 
 const MIN_MARKET_CONSUMABLES = 2
 const MAX_MARKET_CONSUMABLES = 5
@@ -60,6 +62,34 @@ signal date_changed(old, new)
 
 @export var max_storage_space = BASE_STORAGE_SPACE
 @export var max_money_space = BASE_MONEY_SPACE
+@export var max_counter_space = BASE_COUNTER_SPACE
+@export var max_quests = BASE_MAX_QUESTS
+
+var _money_space_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/up_money_storage_1.tres"),
+	preload("res://items/upgrades/up_money_storage_2.tres"),
+	preload("res://items/upgrades/up_money_storage_3.tres"),
+	preload("res://items/upgrades/up_money_storage_4.tres"),
+]
+
+var _storage_space_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/storage_1.tres"),
+	preload("res://items/upgrades/storage_2.tres"),
+	preload("res://items/upgrades/storage_3.tres"),
+	preload("res://items/upgrades/storage_4.tres"),
+]
+
+var _counter_space_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/counter_1.tres"),
+	preload("res://items/upgrades/counter_2.tres"),
+	preload("res://items/upgrades/counter_3.tres")
+]
+
+var _quest_space_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/up_quest_board_1.tres"),
+	preload("res://items/upgrades/up_quest_board_2.tres"),
+	preload("res://items/upgrades/up_quest_board_3.tres")
+]
 
 func set_money(value: int) -> void:
 	var old = money
@@ -89,8 +119,7 @@ func remove_quest(quest: Quest) -> void:
 
 
 func refresh_quests() -> void:
-	# TODO: base on upgrades
-	var total_quests = 5
+	var total_quests = max_quests
 
 	for i in range(available_quests.size(), 0, -1):
 		var quest = available_quests[i - 1]
@@ -127,7 +156,19 @@ func refresh_market() -> void:
 
 
 func refresh_space() -> void:
-	# TODO: scan purchased upgrades and update max storage
+	max_money_space = _rollup_upgrades(BASE_MONEY_SPACE, _money_space_upgrades)
+	max_storage_space = _rollup_upgrades(BASE_STORAGE_SPACE, _storage_space_upgrades)
+	max_counter_space = _rollup_upgrades(BASE_COUNTER_SPACE, _counter_space_upgrades)
+	max_quests = _rollup_upgrades(BASE_MAX_QUESTS, _quest_space_upgrades)
+
 	money_changed.emit(money, money)
 	storage_inventory.changed.emit()
-	return
+	counter_inventory.changed.emit()
+
+
+func _rollup_upgrades(starting: int, needed_upgrades: Array[ShopUpgrade]) -> int:
+	var result = starting
+	for up in needed_upgrades:
+		if upgrades.has(up):
+			result += up.strength
+	return result

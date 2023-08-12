@@ -38,3 +38,7 @@ market_inventory = SubResource("Resource_222p8")
 upgrades = Array[Resource("res://items/shop_upgrade.gd")]([ExtResource("5_fxdqy")])
 available_quests = Array[Resource("res://items/quest.gd")]([])
 accepted_quests = Array[Resource("res://items/quest.gd")]([])
+max_storage_space = 8
+max_money_space = 500
+max_counter_space = 2
+max_quests = 1

@@ -9,7 +9,6 @@ extends Control
 @onready var _money_icon: TextureRect = %"MoneyIcon"
 @onready var _storage_label: Label = %"StorageLabel"
 @onready var _storage_icon: TextureRect = %"StorageIcon"
-@onready var _quests_label: Label = %"QuestsLabel"
 
 # inventories
 @onready var _storage_inventory: InventoryComponent = %"StorageInventory"
@@ -99,13 +98,22 @@ func _on_save_data_money_changed(_old: int, new: int) -> void:
 
 
 func _on_storage_inventory_changed(inventory) -> void:
+	inventory.set_block_signals(true)
 	var max_items = SaveManager.data.max_storage_space
+	_storage_inventory.max_items = max_items
 	_storage_label.text = "%d/%d" % [inventory.items.size(), max_items]
 	if inventory.items.size() > max_items:
 		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 1.0)
 	else:
 		(_storage_icon.material as ShaderMaterial).set_shader_parameter("max_phase", 0.0)
+	inventory.set_block_signals(false)
 
 
 func _on_save_data_date_changed(_old: int, _new: int) -> void:
 	_date_label.text = SaveManager.data.get_formatted_date()
+
+
+func _on_inventory_changed(inventory) -> void:
+	inventory.set_block_signals(true)
+	inventory.max_items = SaveManager.data.max_counter_space
+	inventory.set_block_signals(false)

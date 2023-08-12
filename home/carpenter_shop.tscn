@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bauhl7bmwjifh"]
+[gd_scene load_steps=48 format=3 uid="uid://bauhl7bmwjifh"]
 
 [ext_resource type="Script" path="res://home/carpenter_shop.gd" id="1_utg4w"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_7rvjy"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://mrc8xjf8hoof" path="res://home/icons/icon_quit.tres" id="9_utn7i"]
 [ext_resource type="Shortcut" uid="uid://cgpkcv81pi8cm" path="res://gui/cancel_shortcut.tres" id="11_rlwi6"]
 [ext_resource type="Texture2D" uid="uid://b276ur0sduhad" path="res://home/icons/icon_back.tres" id="12_veihn"]
+[ext_resource type="Script" path="res://home/carpenter_upgrade_menu.gd" id="13_iema8"]
+[ext_resource type="PackedScene" uid="uid://cf8d3mbwu8gtc" path="res://gui/upgrade_grid.tscn" id="14_oykgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x7dn4"]
 atlas = ExtResource("3_khk1s")
@@ -376,6 +378,7 @@ offset_left = 3.0
 offset_top = 23.0
 offset_right = 526.0
 offset_bottom = 93.0
+bbcode_enabled = true
 
 [node name="MainMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("initial_button", "back_button")]
 layout_mode = 1
@@ -416,11 +419,10 @@ loc_hint = "hint_carpenter_gossip"
 [node name="BuyUpgradesButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-disabled = true
 text = "ui_buy_upgrades"
 icon = ExtResource("7_tpvkb")
 script = ExtResource("8_awxge")
-submenu = NodePath("")
+submenu = NodePath("../../../../UpgradeMenu")
 loc_hint = "hint_carpenter_upgrade"
 
 [node name="SellUpgradesButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
@@ -441,3 +443,73 @@ text = "ui_back"
 icon = ExtResource("12_veihn")
 script = ExtResource("6_on453")
 loc_hint = "hint_my_back"
+
+[node name="UpgradeMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_iema8")
+back_button = NodePath("ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradeMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "ui_buy_upgrades"
+
+[node name="CenterContainer" type="CenterContainer" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UpgradeGrid" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("14_oykgy")]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+shortcut = ExtResource("11_rlwi6")
+text = "ui_back"
+icon = ExtResource("12_veihn")
+script = ExtResource("6_on453")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="cell_highlighted" from="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/UpgradeGrid" to="UpgradeMenu" method="_on_upgrade_grid_cell_highlighted"]
+[connection signal="upgrade_purchased" from="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/UpgradeGrid" to="UpgradeMenu" method="_on_upgrade_grid_upgrade_purchased"]
