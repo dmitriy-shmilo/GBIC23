@@ -37,7 +37,11 @@ func refresh_grid() -> void:
 			add_child(cell)
 	else:
 		for i in range(item_count, existing_count):
-			get_child(i).visible = false
+			var cell = get_child(i) as QuestCell
+			if cell.is_highlighted and item_count > 0:
+				get_child(item_count - 1).is_highlighted = true
+			cell.visible = false
+
 
 	for i in range(item_count):
 		var quest = quests[i]
@@ -52,6 +56,7 @@ func _on_cell_accepted(cell: QuestCell) -> void:
 
 func _on_cell_dismissed(cell: QuestCell) -> void:
 	cell_dismissed.emit(cell)
+
 
 
 func _on_cell_completed(cell: QuestCell) -> void:

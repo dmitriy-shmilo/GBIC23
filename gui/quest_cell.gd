@@ -11,12 +11,21 @@ signal completed
 signal dismissed
 
 @export var quest: Quest = null: set = set_quest
+var is_highlighted: bool:
+	get:
+		return _accept_button != null and _accept_button.has_focus() \
+			or _dismiss_button != null and _dismiss_button.has_focus()
+	set(value):
+		if _accept_button != null and value:
+			_accept_button.grab_focus()
+
 
 @onready var _item_icon: TextureRect = $"ItemIcon"
 @onready var _description_label: Label = $"DescriptionLabel"
 @onready var _reward_label: Label = $"RewardLabel"
 @onready var _expiration_label: Label = $"ExpirationLabel"
 @onready var _accept_button: Button = $"AcceptButton"
+@onready var _dismiss_button: Button = $"DismissButton"
 
 
 func _ready() -> void:

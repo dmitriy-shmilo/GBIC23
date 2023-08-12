@@ -15,8 +15,11 @@ func enter() -> void:
 
 
 func _refresh() -> void:
-	_no_quests_label.visible = SaveManager.data.available_quests.size() == 0
+	var no_quests = SaveManager.data.available_quests.size() == 0
+	_no_quests_label.visible = no_quests
 	_quest_grid.refresh_grid()
+	if no_quests:
+		back_button.grab_focus()
 
 
 func _on_quest_grid_cell_accepted(cell: QuestCell) -> void:
