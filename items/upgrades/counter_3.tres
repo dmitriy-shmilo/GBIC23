@@ -18,3 +18,4 @@ loc_description = "up_desc_counter_3"
 icon = SubResource("AtlasTexture_lgt5k")
 base_price = 750
 prerequisites = Array[ExtResource("2_r538m")]([ExtResource("1_6ywq4"), ExtResource("2_f131b")])
+strength = 2

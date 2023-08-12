@@ -15,5 +15,6 @@ script = ExtResource("2_odan0")
 loc_name = "up_cannery_2"
 loc_description = "up_desc_cannery_2"
 icon = SubResource("AtlasTexture_2l7xb")
-base_price = 0
+base_price = 300
 prerequisites = Array[ExtResource("2_odan0")]([ExtResource("1_ungwv")])
+strength = 3

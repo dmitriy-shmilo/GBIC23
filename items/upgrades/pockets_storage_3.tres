@@ -11,3 +11,4 @@ loc_description = "up_desc_pockets_storage_3"
 icon = ExtResource("1_04v3g")
 base_price = 450
 prerequisites = Array[ExtResource("2_08ysc")]([ExtResource("2_7d5bv")])
+strength = 2

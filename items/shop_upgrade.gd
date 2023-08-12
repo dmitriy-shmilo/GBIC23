@@ -7,6 +7,7 @@ extends Resource
 @export var icon: Texture = null
 @export var base_price = 1
 @export var prerequisites: Array[ShopUpgrade] = []
+@export var strength: int = 0
 
 var _rich_description = ""
 

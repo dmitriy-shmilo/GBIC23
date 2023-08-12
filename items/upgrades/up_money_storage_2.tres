@@ -12,8 +12,9 @@ region = Rect2(16, 80, 16, 16)
 
 [resource]
 script = ExtResource("2_cdr65")
-loc_name = "up_money_storage_1"
-loc_description = "up_desc_money_storage_1"
+loc_name = "up_money_storage_2"
+loc_description = "up_desc_money_storage_2"
 icon = SubResource("AtlasTexture_5wkl4")
 base_price = 250
 prerequisites = Array[ExtResource("2_cdr65")]([ExtResource("1_cnk2t")])
+strength = 750

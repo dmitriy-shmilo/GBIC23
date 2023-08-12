@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=4 format=3 uid="uid://28uctnlokq4d"]
+[gd_resource type="Resource" script_class="ShopUpgrade" load_steps=5 format=3 uid="uid://28uctnlokq4d"]
 
+[ext_resource type="Resource" uid="uid://bal7i0uicig4r" path="res://items/upgrades/counter_1.tres" id="1_lm1li"]
 [ext_resource type="Script" path="res://items/shop_upgrade.gd" id="2_lbicp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7uu0d"]
@@ -15,4 +16,5 @@ loc_name = "up_quest_board_1"
 loc_description = "up_desc_quest_board_1"
 icon = SubResource("AtlasTexture_lby2v")
 base_price = 150
-prerequisites = Array[ExtResource("2_lbicp")]([])
+prerequisites = Array[ExtResource("2_lbicp")]([ExtResource("1_lm1li")])
+strength = 2

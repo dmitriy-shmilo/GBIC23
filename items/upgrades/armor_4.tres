@@ -11,3 +11,4 @@ loc_description = "up_desc_armor_4"
 icon = ExtResource("1_pvsjn")
 base_price = 2000
 prerequisites = Array[ExtResource("2_3f3ub")]([ExtResource("2_bpn0x")])
+strength = 4

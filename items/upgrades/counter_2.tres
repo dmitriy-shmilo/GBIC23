@@ -18,3 +18,4 @@ loc_description = "up_desc_counter_2"
 icon = SubResource("AtlasTexture_4gdue")
 base_price = 750
 prerequisites = Array[ExtResource("2_nh4fr")]([ExtResource("1_r308h"), ExtResource("2_8sgpu")])
+strength = 1

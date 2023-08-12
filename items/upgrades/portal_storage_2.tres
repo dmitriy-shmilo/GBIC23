@@ -11,3 +11,4 @@ loc_description = "up_desc_portal_storage_2"
 icon = ExtResource("1_ew4j8")
 base_price = 300
 prerequisites = Array[ExtResource("2_fhbow")]([ExtResource("2_f0jvu")])
+strength = 1

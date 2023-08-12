@@ -17,3 +17,4 @@ loc_description = "up_desc_money_storage_4"
 icon = SubResource("AtlasTexture_u8oui")
 base_price = 1500
 prerequisites = Array[ExtResource("2_puw1t")]([ExtResource("1_jt4ra")])
+strength = 1500

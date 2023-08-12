@@ -16,3 +16,4 @@ loc_description = "up_desc_cannery_1"
 icon = SubResource("AtlasTexture_hwbbi")
 base_price = 100
 prerequisites = Array[ExtResource("2_1nq1t")]([])
+strength = 4

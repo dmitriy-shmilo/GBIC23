@@ -7,7 +7,8 @@
 [resource]
 script = ExtResource("3_lucbq")
 loc_name = "up_storage_3"
-loc_description = "up_desc_torage_3"
+loc_description = "up_desc_storage_3"
 icon = ExtResource("1_ce5oj")
 base_price = 750
 prerequisites = Array[ExtResource("3_lucbq")]([ExtResource("2_6x0od")])
+strength = 14

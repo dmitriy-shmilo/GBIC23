@@ -11,3 +11,4 @@ loc_description = "up_desc_storage_2"
 icon = ExtResource("1_1xa8n")
 base_price = 300
 prerequisites = Array[ExtResource("3_mitve")]([ExtResource("2_pgnqo")])
+strength = 14
