@@ -3,6 +3,7 @@ extends State
 
 const SWOOSH_SFX: SfxCollection = preload("res://assets/sfx/swoosh.tres")
 
+@export var movement: MovementComponent = null
 @export var audio_player: AudioStreamPlayer2D = null
 @export var attack_duration = 1.0
 @export var hit_box: Area2D = null
@@ -14,9 +15,11 @@ func enter(_args: Dictionary = {}) -> void:
 	hit_box.set_deferred("monitorable", true)
 	hit_box.visible = true
 	_current_attack_duration = 0.0
+	movement.is_busy = true
 
 
 func exit() -> void:
+	movement.is_busy = false
 	hit_box.visible = false
 	hit_box.set_deferred("monitorable", false)
 

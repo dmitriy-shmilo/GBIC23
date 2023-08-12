@@ -29,6 +29,9 @@ func enter(args = {}) -> void:
 
 
 func physics_process(delta: float) -> void:
+	if movement.is_busy:
+		return
+
 	_time_since_snapshot += delta
 	if _time_since_snapshot >= position_snapshot_interval:
 		_time_since_snapshot = 0.0

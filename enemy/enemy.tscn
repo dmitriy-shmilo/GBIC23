@@ -190,13 +190,15 @@ initial_state = NodePath("Ready")
 script = ExtResource("11_00jjv")
 target_area = NodePath("../../Target")
 
-[node name="Telegraph" type="Node" parent="AttackMachine" node_paths=PackedStringArray("sprite")]
+[node name="Telegraph" type="Node" parent="AttackMachine" node_paths=PackedStringArray("movement", "sprite")]
 script = ExtResource("12_xjak5")
+movement = NodePath("../../MovementComponent")
 telegraph_time = 0.5
 sprite = NodePath("../../BodySprite")
 
-[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("audio_player", "hit_box")]
+[node name="Attack" type="Node" parent="AttackMachine" node_paths=PackedStringArray("movement", "audio_player", "hit_box")]
 script = ExtResource("13_t655m")
+movement = NodePath("../../MovementComponent")
 audio_player = NodePath("../../AudioPlayer")
 attack_duration = 0.2
 hit_box = NodePath("../../HitBox")
