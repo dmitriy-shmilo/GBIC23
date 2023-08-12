@@ -32,6 +32,7 @@ var _animation_root = "idle"
 
 func _ready() -> void:
 	_inventory.inventory = SaveManager.data.pockets_inventory
+	_inventory.max_items = SaveManager.data.max_pockets_space
 	_vitals.apply_upgrades(SaveManager.data.upgrades)
 	_tile_map_component.tilemap = tile_map
 

@@ -113,7 +113,13 @@ func _on_save_data_date_changed(_old: int, _new: int) -> void:
 	_date_label.text = SaveManager.data.get_formatted_date()
 
 
-func _on_inventory_changed(inventory) -> void:
+func _on_pockets_inventory_changed(inventory) -> void:
+	inventory.set_block_signals(true)
+	inventory.max_items = SaveManager.data.max_pockets_space
+	inventory.set_block_signals(false)
+
+
+func _on_counter_inventory_changed(inventory) -> void:
 	inventory.set_block_signals(true)
 	inventory.max_items = SaveManager.data.max_counter_space
 	inventory.set_block_signals(false)

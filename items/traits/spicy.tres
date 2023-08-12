@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_yo80g")
-loc_name = "trait_sweet"
+loc_name = "trait_spicy"
 color = Color(0.823529, 0.152941, 0.254902, 1)

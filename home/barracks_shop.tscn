@@ -513,3 +513,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="cell_highlighted" from="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/UpgradeGrid" to="UpgradeMenu" method="_on_upgrade_grid_cell_highlighted"]
+[connection signal="upgrade_purchased" from="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer/UpgradeGrid" to="UpgradeMenu" method="_on_upgrade_grid_upgrade_purchased"]

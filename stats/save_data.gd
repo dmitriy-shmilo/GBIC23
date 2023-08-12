@@ -5,6 +5,7 @@ const BASE_COUNTER_SPACE = 2
 const BASE_STORAGE_SPACE = 8
 const BASE_MONEY_SPACE = 500
 const BASE_MAX_QUESTS = 1
+const BASE_POCKETS_SPACE = 2
 
 const MIN_MARKET_CONSUMABLES = 2
 const MAX_MARKET_CONSUMABLES = 5
@@ -13,6 +14,7 @@ const MAX_MARKET_INGREDIENTS = 10
 
 const MARKET_CONSUMABLES_TABLE = preload("res://items/tables/market_consumables.tres")
 const MARKET_INGREDIENTS_TABLE = preload("res://items/tables/all_ingredients.tres")
+const MARKET_BASICS_TABLE = preload("res://items/tables/basic.tres")
 
 const WEEKDAYS = [
 	"ui_day_1",
@@ -64,12 +66,20 @@ signal date_changed(old, new)
 @export var max_money_space = BASE_MONEY_SPACE
 @export var max_counter_space = BASE_COUNTER_SPACE
 @export var max_quests = BASE_MAX_QUESTS
+@export var max_pockets_space = BASE_POCKETS_SPACE
 
 var _money_space_upgrades: Array[ShopUpgrade] = [
 	preload("res://items/upgrades/up_money_storage_1.tres"),
 	preload("res://items/upgrades/up_money_storage_2.tres"),
 	preload("res://items/upgrades/up_money_storage_3.tres"),
 	preload("res://items/upgrades/up_money_storage_4.tres"),
+]
+
+var _pockets_space_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/pockets_storage_1.tres"),
+	preload("res://items/upgrades/pockets_storage_2.tres"),
+	preload("res://items/upgrades/pockets_storage_3.tres"),
+	preload("res://items/upgrades/pockets_storage_4.tres"),
 ]
 
 var _storage_space_upgrades: Array[ShopUpgrade] = [
@@ -145,6 +155,11 @@ func refresh_quests() -> void:
 func refresh_market() -> void:
 	market_inventory.begin_updates()
 	market_inventory.clear()
+
+	for i in range(MIN_MARKET_INGREDIENTS):
+		var item = MARKET_BASICS_TABLE.pick_weighted()
+		market_inventory.add_item(item)
+
 	for i in range(randi_range(MIN_MARKET_CONSUMABLES, MAX_MARKET_CONSUMABLES)):
 		var item = MARKET_CONSUMABLES_TABLE.pick_weighted()
 		market_inventory.add_item(item)
@@ -152,6 +167,7 @@ func refresh_market() -> void:
 	for i in range(randi_range(MIN_MARKET_INGREDIENTS, MAX_MARKET_INGREDIENTS)):
 		var item = MARKET_INGREDIENTS_TABLE.pick_weighted()
 		market_inventory.add_item(item)
+
 	market_inventory.end_updates()
 
 
@@ -160,10 +176,12 @@ func refresh_space() -> void:
 	max_storage_space = _rollup_upgrades(BASE_STORAGE_SPACE, _storage_space_upgrades)
 	max_counter_space = _rollup_upgrades(BASE_COUNTER_SPACE, _counter_space_upgrades)
 	max_quests = _rollup_upgrades(BASE_MAX_QUESTS, _quest_space_upgrades)
+	max_pockets_space = _rollup_upgrades(BASE_POCKETS_SPACE, _pockets_space_upgrades)
 
 	money_changed.emit(money, money)
 	storage_inventory.changed.emit()
 	counter_inventory.changed.emit()
+	pockets_inventory.changed.emit()
 
 
 func _rollup_upgrades(starting: int, needed_upgrades: Array[ShopUpgrade]) -> int:

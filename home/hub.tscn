@@ -945,5 +945,5 @@ max_items = 5
 
 [connection signal="pressed" from="MainScreen/PanelContainer/MarginContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="changed" from="StorageInventory" to="." method="_on_storage_inventory_changed"]
-[connection signal="changed" from="CounterInventory" to="." method="_on_inventory_changed"]
-[connection signal="changed" from="PocketsInventory" to="." method="_on_inventory_changed"]
+[connection signal="changed" from="CounterInventory" to="." method="_on_counter_inventory_changed"]
+[connection signal="changed" from="PocketsInventory" to="." method="_on_pockets_inventory_changed"]
