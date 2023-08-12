@@ -42,3 +42,4 @@ max_storage_space = 8
 max_money_space = 500
 max_counter_space = 2
 max_quests = 1
+max_pockets_space = 2

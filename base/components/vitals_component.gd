@@ -1,6 +1,8 @@
 class_name VitalsComponent
 extends Node
 
+const BASE_ATTACK_COST = 8.0
+const BASE_ATTACK_COOLDOWN = 1.0
 
 signal health_changed(vitals, is_positive)
 signal food_changed(vitals, is_positive)
@@ -11,7 +13,8 @@ signal food_changed(vitals, is_positive)
 @export var current_food = 100.0 : set = _set_current_food
 @export var food_consumption_rate = 0.5
 @export var needs_food = false
-
+@export var attack_stamina_cost = BASE_ATTACK_COST
+@export var attack_cooldown = BASE_ATTACK_COOLDOWN
 
 var _max_hp_upgrades: Array[ShopUpgrade] = [
 	preload("res://items/upgrades/armor_1.tres"),
@@ -39,6 +42,17 @@ var _max_food_values: Array[int] = [
 	25
 ]
 
+var _cooldown_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/dexterity_1.tres"),
+	preload("res://items/upgrades/dexterity_3.tres"),
+	preload("res://items/upgrades/dexterity_4.tres"),
+]
+
+var _attack_stamina_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/dexterity_2.tres"),
+	preload("res://items/upgrades/dexterity_4.tres"),
+]
+
 func apply_consumable(item: Consumable) -> void:
 	match item.type:
 		Consumable.ConsumableType.HEALTH:
@@ -57,6 +71,16 @@ func apply_upgrades(upgrades: Array[ShopUpgrade]) -> void:
 		if upgrades.has(_max_food_upgrades[i]):
 			max_food += _max_food_values[i]
 	current_food = max_food
+
+	attack_stamina_cost = BASE_ATTACK_COST
+	for up in _attack_stamina_upgrades:
+		if upgrades.has(up):
+			attack_stamina_cost /= 3.0
+
+	attack_cooldown = BASE_ATTACK_COOLDOWN
+	for up in _cooldown_upgrades:
+		if upgrades.has(up):
+			attack_cooldown -= 0.25
 
 
 func _set_max_health(h):

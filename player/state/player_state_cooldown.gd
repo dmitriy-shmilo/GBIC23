@@ -6,10 +6,11 @@ extends StateCooldown
 
 func enter(args = {}) -> void:
 	super.enter(args)
+	time = args.time
 	if vitals.current_food < vitals.max_food / 4:
-		total_time *= 2
-	elif vitals.current_food < vitals.max_food / 2:
 		total_time *= 1.5
+	elif vitals.current_food < vitals.max_food / 2:
+		total_time *= 1.2
 
 
 func physics_process(delta: float) -> void:
