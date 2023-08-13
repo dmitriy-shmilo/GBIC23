@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://4pxfhj6u3mhj"]
+[gd_scene load_steps=16 format=3 uid="uid://4pxfhj6u3mhj"]
 
 [ext_resource type="Script" path="res://gui/summary_menu.gd" id="1_eks57"]
-[ext_resource type="Texture2D" uid="uid://wvp7lxnivpne" path="res://gui/hud_money.tres" id="1_lioub"]
 [ext_resource type="PackedScene" uid="uid://cfy8gj4feks7d" path="res://gui/inventory_grid.tscn" id="2_rra5b"]
 [ext_resource type="Texture2D" uid="uid://mrc8xjf8hoof" path="res://home/icons/icon_quit.tres" id="4_se6p1"]
 [ext_resource type="Script" path="res://base/components/inventory_component.gd" id="6_8rvgq"]
@@ -22,6 +21,17 @@ items = Array[Resource("res://items/item.gd")]([])
 [sub_resource type="Resource" id="Resource_3yo83"]
 script = ExtResource("7_2ekur")
 items = Array[Resource("res://items/item.gd")]([])
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7sv2e"]
+load_path = "res://.godot/imported/gui.png-c848c9b1c924e53be63802a0b30cae91.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfday"]
+atlas = SubResource("CompressedTexture2D_7sv2e")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrmsp"]
+atlas = SubResource("CompressedTexture2D_7sv2e")
+region = Rect2(160, 16, 16, 16)
 
 [node name="SummaryMenu" type="Control"]
 process_mode = 2
@@ -87,111 +97,118 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 follow_focus = true
 
-[node name="Container" type="VBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "ui_summary_return"
 
-[node name="SalesHeader" type="HBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="StorageLoss" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/ScrollContainer/Container/SalesHeader"]
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/StorageLoss"]
 layout_mode = 2
-texture = ExtResource("1_lioub")
+texture = SubResource("AtlasTexture_nfday")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container/SalesHeader"]
+[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/StorageLoss"]
 layout_mode = 2
-text = "ui_today_sales_empty"
+size_flags_horizontal = 3
 
-[node name="SalesText" type="RichTextLabel" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="MoneyLoss" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/MoneyLoss"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_qrmsp")
+
+[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/MoneyLoss"]
+layout_mode = 2
+size_flags_horizontal = 3
 bbcode_enabled = true
-text = "ui_today_sales_empty"
-fit_content = true
 
-[node name="SalesGrid" parent="PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
-layout_mode = 2
-selectable = false
-inventory = NodePath("../../../../../SaleInventoryComponent")
-
-[node name="LootHeader" type="HBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="LootHeader" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/ScrollContainer/Container/LootHeader"]
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LootHeader"]
 layout_mode = 2
 texture = ExtResource("6_onnij")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container/LootHeader"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LootHeader"]
 layout_mode = 2
 text = "ui_gained_loot"
+vertical_alignment = 2
 
-[node name="LootText" type="RichTextLabel" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="LootText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 layout_mode = 2
 bbcode_enabled = true
 text = "ui_gained_loot_nothing"
 fit_content = true
 
-[node name="LootGrid" parent="PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
+[node name="LootGrid" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
 layout_mode = 2
 selectable = false
-inventory = NodePath("../../../../../LootInventoryComponent")
+inventory = NodePath("../../../../../../LootInventoryComponent")
 
-[node name="LostHeader" type="HBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="LostHeader" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/ScrollContainer/Container/LostHeader"]
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LostHeader"]
 layout_mode = 2
 texture = ExtResource("4_se6p1")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container/LostHeader"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LostHeader"]
 layout_mode = 2
 text = "ui_lost_loot"
+vertical_alignment = 2
 
-[node name="LostText" type="RichTextLabel" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="LostText" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 visible = false
 layout_mode = 2
 bbcode_enabled = true
 text = "ui_gained_loot_nothing"
 fit_content = true
 
-[node name="LostGrid" parent="PanelContainer/MarginContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
+[node name="LostGrid" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container" node_paths=PackedStringArray("inventory") instance=ExtResource("2_rra5b")]
 layout_mode = 2
 selectable = false
-inventory = NodePath("../../../../../LostInventoryComponent")
+inventory = NodePath("../../../../../../LostInventoryComponent")
 
-[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ItemNameLabel" type="Label" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="ItemNameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 text = "Item Name"
 
-[node name="ItemDescriptionLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="ItemDescriptionLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 8
 bbcode_enabled = true
 text = "Item Description"
 
-[node name="Actions" type="HBoxContainer" parent="PanelContainer/MarginContainer/ScrollContainer/Container"]
+[node name="Actions" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/ScrollContainer/Container/Actions"]
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Actions"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
@@ -200,8 +217,7 @@ text = "ui_summary_continue"
 icon = ExtResource("6_025ld")
 script = ExtResource("6_bbifw")
 
-[connection signal="cell_highlighted" from="PanelContainer/MarginContainer/ScrollContainer/Container/SalesGrid" to="." method="_on_grid_cell_highlighted"]
-[connection signal="cell_highlighted" from="PanelContainer/MarginContainer/ScrollContainer/Container/LootGrid" to="." method="_on_grid_cell_highlighted"]
-[connection signal="cell_highlighted" from="PanelContainer/MarginContainer/ScrollContainer/Container/LostGrid" to="." method="_on_grid_cell_highlighted"]
-[connection signal="focus_entered" from="PanelContainer/MarginContainer/ScrollContainer/Container/Actions/ContinueButton" to="." method="_on_continue_button_focus_entered"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/ScrollContainer/Container/Actions/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="cell_highlighted" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LootGrid" to="." method="_on_grid_cell_highlighted"]
+[connection signal="cell_highlighted" from="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Container/LostGrid" to="." method="_on_grid_cell_highlighted"]
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/VBoxContainer/Actions/ContinueButton" to="." method="_on_continue_button_focus_entered"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Actions/ContinueButton" to="." method="_on_continue_pressed"]

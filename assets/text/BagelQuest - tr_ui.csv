@@ -87,3 +87,5 @@ ui_credits_other,Other,Другое,Інше
 ui_quest_without,Without,Без вкуса,Без смаку
 ui_cannery_inventory,Packing Table,Упаковочная,Пакувальня
 ui_cannery_cook,Pack,Упаковать,Упакувати
+ui_money_loss,Lost %d [img]res://home/icons/icon_coin.tres[/img] to thieves!,Воры украли %d [img]res://home/icons/icon_coin.tres[/img]!,Злодії вкрали %d [img]res://home/icons/icon_coin.tres[/img]!
+ui_storage_loss,%d items were stolen from the storage!,Воры украли %d вещей из хранилища!,

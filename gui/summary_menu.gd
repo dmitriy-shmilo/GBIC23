@@ -6,18 +6,14 @@ extends Control
 
 @onready var _loot_inventory: InventoryComponent = $"LootInventoryComponent"
 @onready var _lost_inventory: InventoryComponent = $"LostInventoryComponent"
-@onready var _sale_inventory: InventoryComponent = $"SaleInventoryComponent"
 @onready var _pockets_inventory: InventoryComponent = $"PocketsInventoryComponent"
 @onready var _portal_inventory: InventoryComponent = $"PortalInventoryComponent"
 @onready var _storage_inventory: InventoryComponent = $"StorageInventoryComponent"
 @onready var _counter_inventory: InventoryComponent = $"CounterInventoryComponent"
 
 @onready var _title_label: Label = $"%Title"
-@onready var _sales_header: HBoxContainer = $"%Container/SalesHeader"
 @onready var _loot_header: HBoxContainer = $"%Container/LootHeader"
 @onready var _lost_header: HBoxContainer = $"%Container/LostHeader"
-@onready var _sales_text: RichTextLabel = $"%Container/SalesText"
-@onready var _sales_grid: InventoryGrid = $"%Container/SalesGrid"
 @onready var _loot_text: RichTextLabel = $"%Container/LootText"
 @onready var _loot_grid: InventoryGrid = $"%Container/LootGrid"
 @onready var _lost_text: RichTextLabel = $"%Container/LostText"
@@ -25,6 +21,11 @@ extends Control
 @onready var _continue_button: BetterButton = %"ContinueButton"
 @onready var _item_name_label: Label = %"ItemNameLabel"
 @onready var _item_description_label: RichTextLabel = %"ItemDescriptionLabel"
+@onready var _money_loss: Control = %"Container/MoneyLoss"
+@onready var _money_loss_label: RichTextLabel = %"Container/MoneyLoss/Label"
+@onready var _storage_loss: Control = %"Container/StorageLoss"
+@onready var _storage_loss_label: RichTextLabel = %"Container/StorageLoss/Label"
+
 
 func _ready() -> void:
 	_portal_inventory.inventory = SaveManager.data.portal_inventory
@@ -43,9 +44,6 @@ func enter() -> void:
 
 
 func _enter_return() -> void:
-	_sales_header.visible = false
-	_sales_text.visible = false
-	_sales_grid.visible = false
 	_loot_header.visible = true
 
 	_loot_inventory.set_block_signals(true)
@@ -100,23 +98,28 @@ func _enter_return() -> void:
 	var max_storage = SaveManager.data.max_storage_space
 	if SaveManager.data.money > max_money:
 		var money_lost = randi_range(0, SaveManager.data.money - max_money)
+		_money_loss.visible = money_lost > 0
+		_money_loss_label.text = tr("ui_money_loss") % money_lost
 		SaveManager.data.money -= money_lost
+	else:
+		_money_loss.visible = false
 
 	if _storage_inventory.items.size() > max_storage:
 		var items_lost = randi_range(0, _storage_inventory.items.size() - max_storage)
+		_storage_loss.visible = items_lost > 0
+		_storage_loss_label.text = tr("ui_storage_loss") % items_lost
 		for i in range(items_lost):
 			var index = randi_range(0, _storage_inventory.items.size() - 1)
 			var item = _storage_inventory.remove_item(index)
-			print(item)
+	else:
+		_storage_loss.visible = false
 
 	SaveManager.data.refresh_quests()
 	SaveManager.data.refresh_market()
 
 
 func _enter_focus() -> void:
-	if _sales_grid.visible:
-		_sales_grid.focus_first_cell()
-	elif _loot_grid.visible:
+	if _loot_grid.visible:
 		_loot_grid.focus_first_cell()
 	elif _lost_grid.visible:
 		_lost_grid.focus_first_cell()
