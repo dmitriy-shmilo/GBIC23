@@ -24,9 +24,10 @@ hint_portal_embark_empty,Embark without any supplies.,Отправиться в 
 hint_embark_storage_full,Your storage is full! You might lose some items.,Ваше хранилище переполнено! Вы можете потерять некоторые вещи.,Ваше сховище переповнене! Ви можете втратити деякі речі.
 hint_embark_money_full,Your money safe is full! Some extra money might be lost!,Ваш сейф переполнен! Вы можете потерять часть непоместившихся денег!,"Ваш сейф переповнений! Ви можете втратити частину грошей, що не помістилися!"
 hint_cook,Cook a %s,Приготовить %s,Приготувати %s
-hint_sold_product,Sold a %s for %d[img]res://home/icons/icon_coin.tres[/img]..,%s продан за %d[img]res://home/icons/icon_coin.tres[/img].,%s проданий за %d[img]res://home/icons/icon_coin.tres[/img].
+hint_sold_product,Sold a %s for %d[img]res://home/icons/icon_coin.tres[/img].,%s продан за %d[img]res://home/icons/icon_coin.tres[/img].,%s проданий за %d[img]res://home/icons/icon_coin.tres[/img].
 hint_carpenter_sell,I'll buy back some of your shop's furniture if you're short on cash.,"Я выкуплю свою продукцию обратно, если у вас проблемы с деньгами.","Я викуплю свою продукцію, якщо у вас проблеми з грошима."
 hint_carpenter_upgrade,I sell the best custom made shop furniture!,Я продаю лучшую мебель и инвентарь для магазинов.,Я продаю найкращі меблі та інвентар для магазинів.
 hint_barracks_upgrade,Spend some time with our trainers. They'll surely teach you how to be more effective in the field.,Проведите немного времени с нашими тренерами. Они однозначно научат вас как быть эффективнее в поле.,Проведіть трохи часу із нашими тренерами. Вони однозначно навчать вас як бути ефективнішою у полі.
 hint_carpenter_gossip,Let me tell you about my wares.,Позвольте рассказать вам о моих товарах.,Дозвольте розповісти вам про мої товари.
 hint_barracks_gossip,"Our training services cost money, but the advice is free.","Тренировки с нами стоят денег, но советы бесплатны.","Тренування з нами коштують грошей, але поради безкоштовні."
+hint_make_ration,Pack these ingredients into a ration.,Упаковать эти ингредиенты в рацион.,Запакувати ці інгредієнти в раціон.

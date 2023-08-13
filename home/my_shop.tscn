@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://xpppcroatuff"]
+[gd_scene load_steps=28 format=3 uid="uid://xpppcroatuff"]
 
 [ext_resource type="Script" path="res://home/my_shop.gd" id="1_6y1ov"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_qvyim"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" path="res://home/quests_menu.gd" id="22_p6bx7"]
 [ext_resource type="PackedScene" uid="uid://c3oll3ljjjr7q" path="res://gui/quest_grid.tscn" id="23_usrik"]
 [ext_resource type="Script" path="res://home/complete_quest_menu.gd" id="24_mbyt6"]
+[ext_resource type="Script" path="res://home/packing_table_menu.gd" id="25_mh6t0"]
+[ext_resource type="Texture2D" uid="uid://3j5fifek5qu3" path="res://items/icons/icon_ration_1.tres" id="26_ukwgf"]
 
 [sub_resource type="Resource" id="Resource_v23ep"]
 script = ExtResource("19_y1vb5")
@@ -157,7 +159,7 @@ disabled = true
 text = "ui_my_packing_table"
 icon = ExtResource("10_yi8qa")
 script = ExtResource("8_mjvgj")
-submenu = NodePath("")
+submenu = NodePath("../../../../CanneryMenu")
 loc_hint = "hint_my_packing_table"
 
 [node name="QuestsButton" type="Button" parent="MainMenu/MarginContainer/Menu" node_paths=PackedStringArray("submenu")]
@@ -604,6 +606,104 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="CanneryMenu" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -95.0
+offset_right = 175.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("25_mh6t0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanneryMenu"]
+layout_mode = 2
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanneryMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanneryMenu/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="StorageInventoryLabel" type="Label" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_storage_inventory"
+
+[node name="StorageInventoryGrid" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = false
+layout_mode = 2
+hide_empty_extras = true
+
+[node name="Spacer" type="Control" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CanneryLabel" type="Label" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.439216, 0.231373, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+text = "ui_cannery_inventory"
+
+[node name="CanneryInventoryGrid" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mgysl")]
+unique_name_in_owner = false
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_right = NodePath("../CookButton")
+focus_next = NodePath("../CookButton")
+shortcut = ExtResource("15_4r0qd")
+text = "ui_back"
+icon = ExtResource("10_nmuhl")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_my_back"
+
+[node name="Spacer" type="Control" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CookButton" type="Button" parent="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+focus_neighbor_left = NodePath("../BackButton")
+focus_previous = NodePath("../BackButton")
+shortcut = ExtResource("16_vva48")
+text = "ui_cannery_cook"
+icon = ExtResource("26_ukwgf")
+script = ExtResource("6_jga7i")
+loc_hint = "hint_make_ration"
+
+[node name="CanneryInventoryComponent" type="Node" parent="CanneryMenu"]
+script = ExtResource("15_7tl1x")
+max_items = 3
+
 [connection signal="cell_highlighted" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CounterMenu" method="_on_storage_inventory_grid_cell_selected"]
 [connection signal="cell_highlighted" from="CounterMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CounterMenu" method="_on_inventory_grid_cell_highlighted"]
@@ -624,3 +724,9 @@ size_flags_vertical = 3
 [connection signal="cell_selected" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CompleteQuestMenu" method="_on_storage_inventory_grid_cell_selected"]
 [connection signal="cell_highlighted" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CompleteQuestMenu" method="_on_inventory_grid_cell_highlighted"]
 [connection signal="cell_selected" from="CompleteQuestMenu/ScrollContainer/MarginContainer/VBoxContainer/CounterInventoryGrid" to="CompleteQuestMenu" method="_on_counter_inventory_grid_cell_selected"]
+[connection signal="cell_highlighted" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CanneryMenu" method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/StorageInventoryGrid" to="CanneryMenu" method="_on_storage_inventory_grid_cell_selected"]
+[connection signal="cell_highlighted" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/CanneryInventoryGrid" to="CanneryMenu" method="_on_inventory_grid_cell_highlighted"]
+[connection signal="cell_selected" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/CanneryInventoryGrid" to="CanneryMenu" method="_on_kitchen_inventory_grid_cell_selected"]
+[connection signal="pressed" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="CanneryMenu" method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanneryMenu/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer/CookButton" to="CanneryMenu" method="_on_cook_button_pressed"]

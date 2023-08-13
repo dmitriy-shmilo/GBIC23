@@ -84,4 +84,6 @@ ui_credits_sound,Sound,Звук,Звук
 ui_credits_font,Font,Шрифт,Шрифт
 ui_credits_famicase,Famicase,Famicase,Famicase
 ui_credits_other,Other,Другое,Інше
-ui_quest_without,Without,Без вкуса,
+ui_quest_without,Without,Без вкуса,Без смаку
+ui_cannery_inventory,Packing Table,Упаковочная,Пакувальня
+ui_cannery_cook,Pack,Упаковать,Упакувати
