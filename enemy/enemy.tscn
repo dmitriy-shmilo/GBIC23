@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://5dkaog5aw2nb"]
+[gd_scene load_steps=34 format=3 uid="uid://5dkaog5aw2nb"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_mjvj0"]
 [ext_resource type="Script" path="res://base/components/vitals_component.gd" id="2_vqokq"]
 [ext_resource type="SpriteFrames" uid="uid://g22xgyi1ntkt" path="res://enemy/frames/grunt_frames_1.tres" id="3_cptjr"]
 [ext_resource type="Script" path="res://base/components/movement_component.gd" id="3_e6jfp"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="4_cggsa"]
+[ext_resource type="Texture2D" uid="uid://bis3n0ohihkih" path="res://assets/img/splash.png" id="4_wmskj"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_idle.gd" id="5_gwmtk"]
 [ext_resource type="Texture2D" uid="uid://kc7u06kqw6pu" path="res://assets/img/slash.png" id="5_mgq8o"]
 [ext_resource type="Script" path="res://enemy/state/enemy_state_knocked_back.gd" id="6_28jua"]
@@ -26,6 +27,35 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmlcq"]
 radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls2v5"]
+atlas = ExtResource("4_wmskj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it60y"]
+atlas = ExtResource("4_wmskj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1le7a"]
+atlas = ExtResource("4_wmskj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gcbcg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls2v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it60y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1le7a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k4koq"]
 radius = 7.0
@@ -74,6 +104,12 @@ position = Vector2(0, -7)
 sprite_frames = ExtResource("3_cptjr")
 animation = &"attack_up"
 autoplay = "idle_down"
+
+[node name="SplashSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_gcbcg")
+autoplay = "default"
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -7)
@@ -242,6 +278,10 @@ hurt_box = NodePath("../../HurtBox")
 
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_movement_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Chase" to="." method="_on_move_direction_changed"]
+[connection signal="terrain_changed" from="MovementMachine/Chase" to="." method="_on_move_terrain_changed"]
 [connection signal="direction_changed" from="MovementMachine/Wonder" to="." method="_on_move_direction_changed"]
+[connection signal="terrain_changed" from="MovementMachine/Wonder" to="." method="_on_move_terrain_changed"]
+[connection signal="direction_changed" from="MovementMachine/Return" to="." method="_on_move_direction_changed"]
+[connection signal="terrain_changed" from="MovementMachine/Return" to="." method="_on_move_terrain_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
 [connection signal="transitioned" from="VitalsMachine" to="." method="_on_vitals_machine_transitioned"]

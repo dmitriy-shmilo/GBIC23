@@ -5,6 +5,7 @@ const DISTANCE_THRESHOLD = 64.0
 const MOVEMENT_THRESHOLD = 64.0
 
 signal direction_changed(direction)
+signal terrain_changed(is_in_water: bool)
 
 ## State to transition to when the movement is considered complete.
 @export var next_state: State = null
@@ -22,6 +23,12 @@ var _target: Vector2 = Vector2.ZERO
 var _direction: Vector2 = Vector2.ZERO
 var _time_since_snapshot = 0.0
 var _last_position_snapshot = Vector2.ZERO
+var _is_in_water := false:
+	set(value):
+		if _is_in_water != value:
+			_is_in_water = value
+			terrain_changed.emit(value)
+
 
 func enter(args = {}) -> void:
 	_time_since_snapshot = 0.0
@@ -61,6 +68,7 @@ func physics_process(delta: float) -> void:
 func _get_max_speed() -> float:
 	var result = movement.max_speed
 	var depth = tile_map.current_tile_depth()
+	_is_in_water = depth > 0
 	if depth == 1:
 		result *= 0.6
 	elif depth == 2:

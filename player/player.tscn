@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://btailb80t6j47"]
+[gd_scene load_steps=41 format=3 uid="uid://btailb80t6j47"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_pkpuu"]
 [ext_resource type="SpriteFrames" uid="uid://iamryrxh3ysn" path="res://player/player_frames.tres" id="2_660pc"]
+[ext_resource type="Texture2D" uid="uid://bis3n0ohihkih" path="res://assets/img/splash.png" id="3_0ca70"]
 [ext_resource type="Script" path="res://base/state/state_machine.gd" id="3_1gawu"]
 [ext_resource type="Script" path="res://player/state/player_state_idle.gd" id="4_xumsq"]
 [ext_resource type="Texture2D" uid="uid://kc7u06kqw6pu" path="res://assets/img/slash.png" id="5_adw38"]
@@ -26,6 +27,35 @@
 [ext_resource type="Script" path="res://player/state/state_player_dead.gd" id="22_8yoa6"]
 [ext_resource type="Texture2D" uid="uid://2u0ysnh8j1p4" path="res://assets/img/gui/gui.png" id="25_mwb32"]
 [ext_resource type="Script" path="res://base/components/tilemap_component.gd" id="26_ampvh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls2v5"]
+atlas = ExtResource("3_0ca70")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it60y"]
+atlas = ExtResource("3_0ca70")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1le7a"]
+atlas = ExtResource("3_0ca70")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_abhc7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ls2v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it60y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1le7a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dnrgw"]
 radius = 5.09902
@@ -82,8 +112,15 @@ position = Vector2(0, -6)
 [node name="BodySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
 sprite_frames = ExtResource("2_660pc")
-animation = &"idle_down"
+animation = &"move_right"
 autoplay = "idle_down"
+
+[node name="SplashSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_abhc7")
+autoplay = "default"
+frame_progress = 0.0113067
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
@@ -293,6 +330,7 @@ randomness = 0.1
 
 [connection signal="transitioned" from="MovementMachine" to="." method="_on_state_machine_transitioned"]
 [connection signal="direction_changed" from="MovementMachine/Move" to="." method="_on_move_direction_changed"]
+[connection signal="terrain_changed" from="MovementMachine/Move" to="." method="_on_move_terrain_changed"]
 [connection signal="transitioned" from="AttackMachine" to="." method="_on_attack_machine_transitioned"]
 [connection signal="progress" from="AttackMachine/Loot" to="." method="_on_loot_progress"]
 [connection signal="transitioned" from="VitalsMachine" to="." method="_on_vitals_machine_transitioned"]

@@ -26,6 +26,7 @@ const PICKUP_SCENE := preload("res://map/pickup.tscn")
 @onready var _inventory: InventoryComponent = $"InventoryComponent"
 @onready var _busy_indicator: TextureProgressBar = $"BusyIndicator"
 @onready var _tile_map_component: TileMapComponent = $"TileMapComponent"
+@onready var _splash_sprite: AnimatedSprite2D = $"SplashSprite"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -118,3 +119,7 @@ func _on_vitals_machine_transitioned(state_name) -> void:
 
 func _on_loot_progress(value) -> void:
 	_busy_indicator.value = value * 100
+
+
+func _on_move_terrain_changed(is_in_water) -> void:
+	_splash_sprite.visible = is_in_water

@@ -2,6 +2,7 @@ class_name PlayerStateMove
 extends State
 
 signal direction_changed(direction: Vector2)
+signal terrain_changed(is_in_water: bool)
 
 @export var tile_map: TileMapComponent = null
 @export var body: CharacterBody2D = null
@@ -9,6 +10,12 @@ signal direction_changed(direction: Vector2)
 @export var vitals: VitalsComponent = null
 
 var _direction := Vector2.ZERO
+var _is_in_water := false:
+	set(value):
+		if _is_in_water != value:
+			_is_in_water = value
+			terrain_changed.emit(value)
+
 
 func enter(_args = {}) -> void:
 	vitals.food_consumption_rate = 1.0
@@ -24,6 +31,8 @@ func _get_max_speed() -> float:
 		result *= 0.75
 
 	var depth = tile_map.current_tile_depth()
+
+	_is_in_water = depth > 0
 	if depth == 1:
 		result *= 0.75
 	elif depth == 2:

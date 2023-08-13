@@ -17,6 +17,7 @@ signal died
 @onready var _vitals: VitalsComponent = $"VitalsComponent"
 @onready var _movement: MovementComponent = $"MovementComponent"
 @onready var _tile_map_component: TileMapComponent = $"TileMapComponent"
+@onready var _splash_sprite: AnimatedSprite2D = $"SplashSprite"
 
 var _direction_suffix = "down"
 var _animation_root = "idle"
@@ -83,3 +84,7 @@ func _on_move_direction_changed(direction) -> void:
 		_hit_box.rotation_degrees = 180
 
 	_play_animation()
+
+
+func _on_move_terrain_changed(is_in_water: bool) -> void:
+	_splash_sprite.visible = is_in_water
