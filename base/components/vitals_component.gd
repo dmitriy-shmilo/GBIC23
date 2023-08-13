@@ -9,9 +9,10 @@ signal food_changed(vitals, is_positive)
 
 @export var max_health = 100.0 : set = _set_max_health
 @export var current_health = 100.0 : set = _set_current_health
-@export var max_food = 100.0 : set = _set_max_food
-@export var current_food = 100.0 : set = _set_current_food
+@export var max_food = 160.0 : set = _set_max_food
+@export var current_food = 160.0 : set = _set_current_food
 @export var food_consumption_rate = 0.5
+@export var food_efficiency = 0.33
 @export var needs_food = false
 @export var attack_stamina_cost = BASE_ATTACK_COST
 @export var attack_cooldown = BASE_ATTACK_COOLDOWN
@@ -37,9 +38,21 @@ var _max_food_upgrades: Array[ShopUpgrade] = [
 ]
 
 var _max_food_values: Array[int] = [
-	50,
-	25,
-	25
+	80,
+	40,
+	40
+]
+
+var _food_efficiency_upgrades: Array[ShopUpgrade] = [
+	preload("res://items/upgrades/max_food_1.tres"),
+	preload("res://items/upgrades/max_food_3.tres"),
+	preload("res://items/upgrades/max_food_4.tres"),
+]
+
+var _food_efficiencies = [
+	0.5,
+	0.75,
+	0.9
 ]
 
 var _cooldown_upgrades: Array[ShopUpgrade] = [
@@ -58,7 +71,7 @@ func apply_consumable(item: Consumable) -> void:
 		Consumable.ConsumableType.HEALTH:
 			current_health = clamp(current_health + item.strength, 0, max_health)
 		Consumable.ConsumableType.FOOD:
-			current_food = clamp(current_food + item.strength * max_food, 0, max_food)
+			current_food = clamp(current_food + food_efficiency * max_food, 0, max_food)
 
 
 func apply_upgrades(upgrades: Array[ShopUpgrade]) -> void:
@@ -81,6 +94,10 @@ func apply_upgrades(upgrades: Array[ShopUpgrade]) -> void:
 	for up in _cooldown_upgrades:
 		if upgrades.has(up):
 			attack_cooldown -= 0.25
+
+	for i in range(_food_efficiency_upgrades.size()):
+		if upgrades.has(_food_efficiency_upgrades[i]):
+			food_efficiency = _food_efficiencies[i]
 
 
 func _set_max_health(h):

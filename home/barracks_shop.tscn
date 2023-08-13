@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c6tms0a2bxhko"]
+[gd_scene load_steps=63 format=3 uid="uid://c6tms0a2bxhko"]
 
 [ext_resource type="Script" path="res://home/barracks_shop.gd" id="1_ifub6"]
 [ext_resource type="TileSet" uid="uid://cpam5jme5qfxi" path="res://map/tileset.tres" id="2_842fn"]
@@ -25,6 +25,10 @@
 [ext_resource type="Resource" uid="uid://bgqx5s32lcf6m" path="res://items/upgrades/pockets_storage_2.tres" id="23_wdm7r"]
 [ext_resource type="Resource" uid="uid://bwen67ckfvwit" path="res://items/upgrades/pockets_storage_3.tres" id="24_xk4ry"]
 [ext_resource type="Resource" uid="uid://c5n8wso3hjl1o" path="res://items/upgrades/pockets_storage_4.tres" id="25_y73ey"]
+[ext_resource type="Resource" uid="uid://cvusp6ctku5g2" path="res://items/upgrades/max_food_1.tres" id="26_00rhm"]
+[ext_resource type="Resource" uid="uid://dkxytih2eksdx" path="res://items/upgrades/max_food_2.tres" id="27_uhtew"]
+[ext_resource type="Resource" uid="uid://dqqpcpk8qjxb5" path="res://items/upgrades/max_food_3.tres" id="28_he51i"]
+[ext_resource type="Resource" uid="uid://ckqmj4fd8qaom" path="res://items/upgrades/max_food_4.tres" id="29_ks2p7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x7dn4"]
 atlas = ExtResource("3_t0w27")
@@ -488,7 +492,7 @@ layout_mode = 2
 
 [node name="UpgradeGrid" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("13_o4jen")]
 layout_mode = 2
-upgrades = Array[Resource("res://items/shop_upgrade.gd")]([ExtResource("14_jmsql"), ExtResource("15_xvvue"), ExtResource("16_55gv3"), ExtResource("17_m13bj"), ExtResource("18_0t6h0"), ExtResource("19_qwe8m"), ExtResource("20_wr5d0"), ExtResource("21_o06m1"), ExtResource("22_v2d6w"), ExtResource("23_wdm7r"), ExtResource("24_xk4ry"), ExtResource("25_y73ey")])
+upgrades = Array[Resource("res://items/shop_upgrade.gd")]([ExtResource("14_jmsql"), ExtResource("15_xvvue"), ExtResource("16_55gv3"), ExtResource("17_m13bj"), ExtResource("18_0t6h0"), ExtResource("19_qwe8m"), ExtResource("20_wr5d0"), ExtResource("21_o06m1"), ExtResource("22_v2d6w"), ExtResource("23_wdm7r"), ExtResource("24_xk4ry"), ExtResource("25_y73ey"), ExtResource("26_00rhm"), ExtResource("27_uhtew"), ExtResource("28_he51i"), ExtResource("29_ks2p7")])
 
 [node name="Spacer" type="Control" parent="UpgradeMenu/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

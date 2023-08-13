@@ -191,11 +191,13 @@ func _place_chest(x, y, is_rare, table: LootTable) -> void:
 			if randi() % 2 > 0:
 				_tilemap.erase_cell(1, pos + Vector2(cx, cy))
 	_objects.add_child(chest)
-	_place_guards(pos)
+	_place_guards(pos, is_rare)
 
 
-func _place_guards(center: Vector2i) -> void:
+func _place_guards(center: Vector2i, is_rare: bool = false) -> void:
 	var guard_count = randi_range(options.min_guard_count, options.max_guard_count)
+	if is_rare:
+		guard_count = max(guard_count + 1, 3)
 	var positions = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 	for i in range(guard_count):
